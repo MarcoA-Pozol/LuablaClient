@@ -11,25 +11,29 @@ import hiTranslation from "./locales/hi.json";
 import koTranslation from "./locales/ko.json";
 import itTranslation from "./locales/it.json";
 import ruTranslation from "./locales/ru.json";
+import LanguageDetector from 'i18next-browser-languagedetector';
+import Backend from 'i18next-http-backend';
 
-
-i18n.use(initReactI18next).init({
-  resources: {
-    en: { translation: enTranslation },
-    es: { translation: esTranslation },
-    fr: { translation: frTranslation },
-    pt: { translation: ptTranslation },
-    cn: { translation: cnTranslation },
-    jp: { translation: jpTranslation },
-    de: { translation: deTranslation },
-    ko: { translation: koTranslation },
-    ru: { translation: ruTranslation },
-    it: { translation: itTranslation },
-    hi: { translation: hiTranslation },
-  },
-  lng: "en", // Default language
-  fallbackLng: "en",
-  interpolation: { escapeValue: false },
-});
+i18n
+  .use(Backend) // Load translations via AJAX
+  .use(LanguageDetector) // Detect browser language
+  .use(initReactI18next).init({
+    resources: {
+      en: { translation: enTranslation },
+      es: { translation: esTranslation },
+      fr: { translation: frTranslation },
+      pt: { translation: ptTranslation },
+      cn: { translation: cnTranslation },
+      jp: { translation: jpTranslation },
+      de: { translation: deTranslation },
+      ko: { translation: koTranslation },
+      ru: { translation: ruTranslation },
+      it: { translation: itTranslation },
+      hi: { translation: hiTranslation },
+    },
+    fallbackLng: "en",
+    lng: "en", // Default language
+    interpolation: { escapeValue: false },
+  });
 
 export default i18n;
