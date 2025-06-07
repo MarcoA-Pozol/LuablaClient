@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import AppRoutes from './AppRoutes';
 import './App.css'
+import { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+import type { AuthContextType } from './types/AuthView/authContext';
+
+// CHECK authenticated user
+export const AuthContext = createContext<AuthContextType>({ authUser: null, setAuthUser: () => null });
+export const useAuth = () => useContext(AuthContext);
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [authUser, setAuthUser] = useState<any | null>(null);
+
+  useEffect(() => {
+
+    const checkAuth = async () => {
+      try{
+        const response = await axios.get("http://localhost:8600/api/auth/checkAuth", {
+          withCredentials: true
+        });
+    
+        if (response.status === 200) {
+          console.log("Auth user data:", response.data);
+          setAuthUser(response.data)
+        }
+      } catch (error) {
+        console.error("User is not authenticated or server failed:", error);
+        setAuthUser(null);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <AuthContext.Provider value={{ authUser, setAuthUser }}>
+          <AppRoutes/>
+      </AuthContext.Provider>
+  );
+};
 
-export default App
+export default App;

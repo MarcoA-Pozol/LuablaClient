@@ -1,0 +1,308 @@
+/* Estilos base */
+.audio-recorder {
+  margin-top: 10px;
+  position: relative;
+}
+
+/* Versión compacta (para formularios de una línea) */
+.audio-recorder.compact {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.audio-recorder.compact .record-button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.audio-recorder.compact .record-button:hover {
+  background: #e5e7eb;
+  color: #4f46e5;
+}
+
+.audio-recorder.compact .record-button.recording {
+  background: #ef4444;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+.audio-recorder.compact .record-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Indicador de tiempo compacto */
+.compact-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #ef4444;
+  font-weight: 500;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.compact-timer .recording-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+/* Reproductor de audio compacto */
+.compact-audio-player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f3f4f6;
+  padding: 4px 8px;
+  border-radius: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.compact-audio-player .compact-audio {
+  height: 24px;
+  width: 120px;
+  min-width: 120px;
+}
+
+.compact-audio-player .compact-audio::-webkit-media-controls-panel {
+  background: transparent;
+  padding: 0;
+}
+
+.compact-audio-player .compact-audio::-webkit-media-controls-current-time-display,
+.compact-audio-player .compact-audio::-webkit-media-controls-time-remaining-display {
+  display: none;
+}
+
+.compact-audio-player .clear-audio {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.compact-audio-player .clear-audio:hover {
+  background: #e5e7eb;
+  color: #ef4444;
+}
+
+.compact-audio-player .clear-audio svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Versión completa (por defecto) */
+.audio-recorder:not(.compact) .controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.audio-recorder:not(.compact) .record-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.audio-recorder:not(.compact) .record-button:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+.audio-recorder:not(.compact) .record-button.recording {
+  background: #ef4444;
+}
+
+.audio-recorder:not(.compact) .record-button.recording:hover {
+  background: #dc2626;
+}
+
+.audio-recorder:not(.compact) .mic-icon::before {
+  content: "🎤";
+}
+
+.audio-recorder:not(.compact) .stop-icon::before {
+  content: "⏹";
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.recording-indicator .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+/* Botones de acción para audio grabado */
+.audio-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.record-again,
+.clear-audio {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.record-again {
+  background: #4f46e5;
+  color: white;
+}
+
+.record-again:hover {
+  background: #4338ca;
+}
+
+.clear-audio {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #e5e7eb;
+}
+
+.clear-audio:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* Reproductor de audio */
+.playback {
+  margin-top: 12px;
+}
+
+.audio-player {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.audio-player audio {
+  width: 100%;
+  height: 40px;
+}
+
+/* Responsive para móvil */
+@media (max-width: 640px) {
+  .audio-recorder:not(.compact) .controls {
+    flex-wrap: wrap;
+  }
+  
+  .audio-recorder:not(.compact) .record-button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .compact-audio-player .compact-audio {
+    width: 100px;
+    min-width: 100px;
+  }
+  
+  .audio-recorder.compact .record-button {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .audio-recorder.compact .record-button svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Estados para el formulario de comentarios */
+.add-comment .audio-recorder.compact.has-audio ~ .comment-button {
+  background: linear-gradient(135deg, #10b981 0%, #4f46e5 100%);
+}
+
+.add-comment .audio-recorder.compact.has-audio .record-button {
+  background: #10b981;
+  color: white;
+}
+
+.add-comment .audio-recorder.compact.has-audio .record-button:hover {
+  background: #0da271;
+}

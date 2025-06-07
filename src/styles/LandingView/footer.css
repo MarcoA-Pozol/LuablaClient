@@ -1,0 +1,82 @@
+.footer-container {
+    background-color: #111111;
+    color: white; /* White text for contrast */
+    padding: 20px 0; /* Less padding to match header's cleaner look */
+    font-family: sans-serif;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.social-media-links{
+    margin-top: 0;
+    background-color: rgb(36, 25, 97);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.social-media-links h3{
+    text-align: center;
+}
+.social-media-links ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    padding: 0; 
+}
+.social-media-links ul li{
+    list-style: none;
+}
+.social-media-links ul li a img {
+    width: 30px;
+    height: 30px;
+    transition: filter 0.3s ease;
+}
+
+.another-links{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+.another-links div{
+    margin-inline: 100px;
+    width: 33%;
+}
+.another-links div h4{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    color: rgb(140, 150, 180);
+    margin-bottom: 5px;
+}
+.another-links div li{
+    font-family: 'Times New Roman', Times, serif;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+.dev-rights-container {
+    padding-top: 20px;
+    font-size: 16px;
+    color: white;
+}
+
+.dev-rights {
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+}
+.dev-rights .developer b{
+    color: rgb(179, 179, 179);
+    text-align: center;
+}
+
+@media (width < 768px){
+    .social-media-links{
+        font-size: 0.8rem;
+    }
+}

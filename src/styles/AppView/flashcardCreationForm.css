@@ -1,0 +1,268 @@
+/* FlashcardCreationForm.css */
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(66,133,244,0.16); }
+  70% { box-shadow: 0 0 0 8px rgba(66,133,244,0); }
+  100% { box-shadow: 0 0 0 0 rgba(66,133,244,0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== Container ===== */
+.flashcard-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(15, 23, 42);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 90;
+  animation: fadeIn 400ms ease forwards;
+  padding: 20px;
+}
+
+/* ===== Form ===== */
+.flashcard-form {
+  width: 480px; /* fallback for responsive */
+  max-width: 100%;
+  background: linear-gradient(145deg, rgba(126,146,211,0.92), rgba(134,134,204,0.98));
+  border-radius: 22px;
+  padding: 32px 20px; /* top/bottom responsive */
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.15) inset;
+  border: 1px solid rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: floaty 7s ease-in-out infinite;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+/* ===== Headings ===== */
+.flashcard-heading {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0b3a8a;
+  letter-spacing: 0.3px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.flashcard-subheading {
+  font-size: 1rem;
+  color: #475569;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ===== Inputs ===== */
+.flashcard-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.flashcard-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,0.08);
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 120ms ease;
+}
+
+.flashcard-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15);
+  transform: translateY(-1px);
+}
+
+.flashcard-textarea {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,0.08);
+  background: #fff;
+  font-size: 1rem;
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+  transition: box-shadow 220ms ease, border-color 220ms ease;
+}
+
+/* ===== Examples ===== */
+.examples-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.example-card {
+  background: linear-gradient(90deg, #ecfdf5, #f0fdfa, #ecfdf5);
+  background-size: 200% 100%;
+  animation: shimmer 6s linear infinite;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(16,185,129,0.15);
+  color: #065f46;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(6,95,70,0.06);
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 200ms ease;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  width: 100%;
+}
+
+.example-card:focus {
+  outline: none;
+  border-color: rgba(16,185,129,0.4);
+  transform: translateY(-2px);
+}
+
+.example-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 8px 28px rgba(6,95,70,0.15);
+  border-color: rgba(16,185,129,0.25);
+}
+
+.example-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #047857;
+  opacity: 0.85;
+}
+
+.badge {
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#eff6ff,#dbeafe,#eff6ff);
+  font-weight: 700;
+  font-size: 0.75rem;
+  border: 1px solid rgba(59,130,246,0.1);
+  color: #1e3a8a;
+}
+
+/* ===== Buttons ===== */
+.btn-ai-autocompletion {
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  background-size: 200% 100%;
+  animation: gradientShift 6s ease infinite;
+  box-shadow: 0 6px 18px rgba(99,102,241,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-ai-autocompletion:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(99,102,241,0.35);
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg,#2563eb,#1d4ed8);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  box-shadow: 0 10px 24px rgba(37,99,235,0.22);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(37,99,235,0.3);
+}
+
+.btn-ghost {
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,0.1);
+  background: rgba(255,255,255,0.65);
+  color: #0f172a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 180ms ease, transform 140ms ease;
+}
+
+/* ===== Icon Button ===== */
+.icon-button {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,0.08);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.icon-button:active {
+  transform: scale(0.96);
+  box-shadow: 0 8px 26px rgba(2,6,23,0.08);
+}
+
+/* ===== Heading Accent ===== */
+.heading-accent {
+  height: 4px;
+  width: 90px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#3b82f6,#60a5fa,#93c5fd);
+  box-shadow: 0 4px 14px rgba(96,165,250,0.3);
+  margin: 6px auto;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+/* ===== Spacers ===== */
+.spacer {
+  height: 12px; /* fallback, adjust with media queries if needed */
+}

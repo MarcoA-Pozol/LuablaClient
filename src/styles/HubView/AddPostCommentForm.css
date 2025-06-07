@@ -1,0 +1,291 @@
+.add-comment {
+  border-top: 1px solid #e0e0e0;
+  padding: 0.5rem 0;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+/* Contenedor principal de entrada */
+.comment-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #f0f2f5;
+  border-radius: 20px;
+  padding: 0.25rem 0.25rem 0.25rem 0.75rem;
+  min-height: 40px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.comment-input-wrapper:focus-within {
+  background: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+}
+
+/* Textarea como input de una línea */
+.comment-textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  resize: none;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  min-height: 1.5em;
+  max-height: 3em;
+  overflow-y: auto;
+  outline: none;
+  color: #1f2937;
+}
+
+.comment-textarea::placeholder {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+/* Contenedor para acciones (audio, archivo) */
+.comment-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+/* Botones de acción pequeños */
+.action-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.action-button:hover {
+  background: #e5e7eb;
+  color: #4f46e5;
+}
+
+.action-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Input de archivo oculto con icono personalizado */
+.file-input-wrapper {
+  position: relative;
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.file-input-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-input-label:hover {
+  background: #e5e7eb;
+  color: #4f46e5;
+}
+
+.file-input-label svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Estilos para AudioRecorder compacto */
+.add-comment :global(.audio-recorder-container) {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.add-comment :global(.record-button) {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.add-comment :global(.record-button):hover {
+  background: #e5e7eb;
+  color: #4f46e5;
+}
+
+.add-comment :global(.record-button.recording) {
+  background: #ef4444;
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.add-comment :global(.audio-player) {
+  margin: 0;
+  padding: 0 0.5rem;
+  max-width: 120px;
+  height: 24px;
+}
+
+.add-comment :global(.audio-controls) {
+  gap: 0.25rem;
+}
+
+/* Botón de enviar */
+.comment-button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.comment-button:hover {
+  background: #4338ca;
+  transform: translateY(-1px);
+}
+
+.comment-button:active {
+  transform: translateY(0);
+}
+
+.comment-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Modal para vista expandida en móviles (opcional) */
+.comment-expanded-view {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .add-comment {
+    gap: 0.375rem;
+    padding: 0.375rem 0;
+  }
+  
+  .comment-input-wrapper {
+    min-height: 36px;
+    padding-left: 0.625rem;
+  }
+  
+  .comment-textarea {
+    font-size: 0.85rem;
+  }
+  
+  .comment-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    min-height: 36px;
+  }
+  
+  .action-button,
+  .file-input-label,
+  .add-comment :global(.record-button) {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .action-button svg,
+  .file-input-label svg,
+  .add-comment :global(.record-button) svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Indicadores de estado */
+.comment-input-wrapper.has-content {
+  background: #ffffff;
+  border-color: #d1d5db;
+}
+
+.comment-button.has-audio {
+  background: linear-gradient(135deg, #10b981 0%, #4f46e5 100%);
+}
+
+/* Tooltips para iconos */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #374151;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  margin-bottom: 4px;
+  z-index: 1000;
+}
+
+/* Para el botón de audio grabado */
+.add-comment :global(.audio-recorded) {
+  background: #10b981 !important;
+  color: white !important;
+}

@@ -1,0 +1,290 @@
+/* Contenedor principal de comentarios */
+.comments-container {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              margin-top 0.3s ease,
+              opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.comments-container.open {
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 0.75rem;
+}
+
+/* Lista de comentarios */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+}
+
+.comments-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Item de comentario individual */
+.comment-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.625rem;
+  position: relative;
+  transition: all 0.2s ease;
+  margin-right: 0.25rem;
+}
+
+.comment-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* Encabezado del comentario (usuario y tiempo) */
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
+  gap: 0.5rem;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+}
+
+.comment-user-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.comment-created-at {
+  font-size: 0.7rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.125rem 0.5rem;
+  border-radius: 10px;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Contenido del comentario */
+.comment-content {
+  font-size: 0.875rem;
+  color: #334155;
+  line-height: 1.4;
+  margin: 0 0 0.5rem 0;
+  word-break: break-word;
+}
+
+/* Media container para audio/imagen */
+.comment-media-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Audio player compacto */
+.comment-item audio {
+  width: 100%;
+  height: 32px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.comment-item audio::-webkit-media-controls-panel {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.comment-item audio::-webkit-media-controls-play-button,
+.comment-item audio::-webkit-media-controls-current-time-display,
+.comment-item audio::-webkit-media-controls-time-remaining-display {
+  font-size: 0.75rem;
+}
+
+/* Imagen en comentario */
+.comment-image-container {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  max-width: 200px;
+}
+
+.comment-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.comment-image:hover {
+  transform: scale(1.02);
+}
+
+/* Badge para indicar tipo de contenido */
+.comment-type-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 0.65rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 10px;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.comment-type-badge svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* Layout para comentarios con múltiples elementos */
+.comment-with-media {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.comment-with-audio-image {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Indicador visual para comentarios nuevos o destacados */
+.comment-item.new-comment {
+  animation: highlightComment 0.6s ease;
+  border-left: 3px solid #4f46e5;
+}
+
+@keyframes highlightComment {
+  0% {
+    background: rgba(79, 70, 229, 0.1);
+    transform: translateX(-5px);
+  }
+  100% {
+    background: #f8fafc;
+    transform: translateX(0);
+  }
+}
+
+/* Empty state */
+.comments-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px dashed #cbd5e1;
+}
+
+.comments-empty svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .comments-container.open {
+    max-height: 350px;
+  }
+  
+  .comments-list {
+    max-height: 240px;
+    gap: 0.375rem;
+  }
+  
+  .comment-item {
+    padding: 0.5rem;
+    border-radius: 10px;
+  }
+  
+  .comment-user {
+    font-size: 0.8125rem;
+  }
+  
+  .comment-content {
+    font-size: 0.8125rem;
+  }
+  
+  .comment-created-at {
+    font-size: 0.65rem;
+    padding: 0.125rem 0.375rem;
+  }
+  
+  .comment-image-container {
+    max-width: 160px;
+  }
+  
+  .comment-item audio {
+    height: 28px;
+  }
+}
+
+/* Animación de entrada para nuevos comentarios */
+@keyframes slideInComment {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comment-item:last-child {
+  animation: slideInComment 0.3s ease;
+}
+
+/* Mejora para el formulario dentro del contenedor */
+.comments-container .add-comment {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e2e8f0;
+}

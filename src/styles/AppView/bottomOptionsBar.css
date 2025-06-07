@@ -1,0 +1,37 @@
+.bottom-options-bar {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    height: 30px;
+    align-items: center;
+    padding: 10px 0;    
+    background-color: #222;
+    color: white;
+    position: sticky;
+    bottom: 0;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-options-bar a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.bottom-options-bar li {
+    list-style: none;
+    font-size: 1rem;
+}
+
+.bottom-options-bar a:hover {
+    transform: scale(1.1);
+}
+
+/* Responsiveness */
+@media (max-width:768px) {
+    .bottom-options-bar {
+        gap: 50px;
+    }
+}
