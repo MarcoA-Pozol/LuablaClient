@@ -21,7 +21,8 @@ export const LandingView = () => {
 
     return (
         <>
-            <TopNavBar/>
+            <TopNavBar isUserAuthenticated={isUserAuthenticated}/>
+            
             {isUserAuthenticated ? (
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
