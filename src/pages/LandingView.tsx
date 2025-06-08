@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../styles/landingView.css";
 // Components
 import Testimonials from "../components/LandingView/Testimonials";
+import { TopNavBar } from "../components/LandingView/TopNavBar";
+import { Footer } from "../components/LandingView/Footer";
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";
@@ -19,6 +21,7 @@ export const LandingView = () => {
 
     return (
         <>
+            <TopNavBar/>
             {isUserAuthenticated ? (
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
@@ -69,6 +72,8 @@ export const LandingView = () => {
             </div>
 
             <Testimonials/>
+
+            <Footer/>
         </>
     );
 }
