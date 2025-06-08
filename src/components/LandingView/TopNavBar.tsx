@@ -1,9 +1,6 @@
 import "../../styles/LandingView/topNavBar.css";
 import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
-
-interface TopNavBarProps {
-    isUserAuthenticated: boolean;
-}
+import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
 
 export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
     return (
