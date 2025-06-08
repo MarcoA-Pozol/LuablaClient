@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/landingView.css";
+import "../styles/LandingView/landingView.css";
 // Components
 import Testimonials from "../components/LandingView/Testimonials";
 import { TopNavBar } from "../components/LandingView/TopNavBar";
@@ -22,7 +22,7 @@ export const LandingView = () => {
     return (
         <>
             <TopNavBar isUserAuthenticated={isUserAuthenticated}/>
-            
+
             {isUserAuthenticated ? (
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
