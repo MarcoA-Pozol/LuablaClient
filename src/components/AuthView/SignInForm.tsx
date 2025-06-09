@@ -1,9 +1,17 @@
-export const SignInForm = () => {
+import type { ReactNode } from "react";
+
+interface SignInFormProps {
+    children?: ReactNode; 
+    onClick: () => void; 
+}
+
+export const SignInForm = ({children, onClick}:SignInFormProps) => {
     return (
-        <>
-            <p>
-                SignIn form
-            </p>
-        </>
+        <p>
+            SignIn form
+            <div onClick={onClick}>
+                {children}
+            </div>
+        </p>
     );
 }
