@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/LandingView/landingView.css";
+import { useNavigate } from "react-router-dom";
 // Components
 import Testimonials from "../components/LandingView/Testimonials";
 import { TopNavBar } from "../components/LandingView/TopNavBar";
@@ -13,11 +14,14 @@ export const LandingView = () => {
     // States and variables
     const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
     const [authUser, setAuthUser] = useState<any>(null);
+    const navigate = useNavigate();
 
     // Functions
-    const redirectToRegister = () => {
-        console.log("Here you can register a new user");
+    const navigateToSignUp = () => {
+        navigate('/auth');
     }
+
+    
 
     return (
         <>
@@ -27,13 +31,13 @@ export const LandingView = () => {
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
                     <p>Its time to practice!</p>
-                    <a><button className="explore-btn">Let´s Go!</button></a>
+                    <a onClick={navigateToSignUp}><button className="explore-btn">Let´s Go!</button></a>
                 </div>
             ) : (
                 <div className="hero-section">
                     <h1>Master a <span className="highlight-text">Language</span></h1>
                     <p>Your gateway to mastering languages with ease, using engaging and inovative learning tools!</p>
-                    <a><button className="explore-btn">Explore Now</button></a>
+                    <a onClick={navigateToSignUp}><button className="explore-btn">Explore Now</button></a>
                 </div>
             )}
 
@@ -47,7 +51,7 @@ export const LandingView = () => {
                     <li><i className="fas fa-check-circle">»</i> Progress tracking and feedback</li>
                     <li><i className="fas fa-check-circle">»</i> Learn anytime, anywhere</li>
                 </ul>
-                <button onClick={redirectToRegister} className="try-now-btn">Try Now</button>
+                <button onClick={navigateToSignUp} className="try-now-btn">Try Now</button>
                 </div>
             </section>
 
