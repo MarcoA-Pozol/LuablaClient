@@ -2,10 +2,13 @@ import { useState } from "react";
 import { SignInForm } from "../components/AuthView/SignInForm";
 import { SignUpForm } from "../components/AuthView/SignUpForm";
 import { TopNavBar } from "../components/LandingView/TopNavBar";
+import { useLocation } from "react-router-dom";
 
 export const AuthView = () => {
+    const location = useLocation();
+    const showLoginState = location.state as {isLoginVisible?:boolean};
     const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
-    const [isLoginVisible, setIsLoginVisible] = useState<boolean>(false); // Display SignUp form first
+    const [isLoginVisible, setIsLoginVisible] = useState<boolean>(showLoginState?.isLoginVisible ?? false); // Display SignUp form first
 
     const toggleSignInUpForms = () => {
         setIsLoginVisible((prev) => !prev);

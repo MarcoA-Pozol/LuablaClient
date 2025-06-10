@@ -6,17 +6,10 @@ import { useNavigate } from 'react-router-dom';
 export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
     const navigate = useNavigate();
 
-    const navToLandingPage = () => {
-        navigate('/');
+    const navigateToAuth = (isLoginVisible: boolean) => {
+        navigate('/auth', {state:{isLoginVisible}});
     }
 
-    const navToSignIn = () => {
-        navigate('/auth');
-    };
-
-    const navToSignUp = () => {
-        navigate('/auth');
-    };
 
     const logoutUser = () => {
         navigate('/');
@@ -25,16 +18,16 @@ export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
     return (
         <>
             <header className="header-top-bar">
-                <a onClick={navToLandingPage} id="luabla-logo">
+                <a onClick={() => navigate('/')} id="luabla-logo">
                     <img src={PandaLogoIMG} alt="Panda Logo"/>
                     <h2>Luabla</h2>
                 </a>
                 <div id="sign-up-options">
-                    <a onClick={navToSignUp} id="sign_up"><li>Sign-Up</li></a>
+                    <a onClick={() => navigateToAuth(false)} id="sign_up"><li>Sign-Up</li></a>
                     {isUserAuthenticated ? (
                         <a onClick={logoutUser} id="close_session"><li>Logout</li></a>
                     ) : (
-                        <a onClick={navToSignIn} id="start_session"><li>Login</li></a>
+                        <a onClick={() => navigateToAuth(true)} id="start_session"><li>Login</li></a>
                     )}
                 </div>
             </header>

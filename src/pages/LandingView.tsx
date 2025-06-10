@@ -17,8 +17,8 @@ export const LandingView = () => {
     const navigate = useNavigate();
 
     // Functions
-    const navigateToSignUp = () => {
-        navigate('/auth');
+    const navigateToAuth = (isLoginVisible: boolean) => {
+        navigate('/auth', {state:{isLoginVisible}});
     }
 
     
@@ -31,13 +31,13 @@ export const LandingView = () => {
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
                     <p>Its time to practice!</p>
-                    <a onClick={navigateToSignUp}><button className="explore-btn">Let´s Go!</button></a>
+                    <a onClick={() => navigateToAuth(false)}><button className="explore-btn">Let´s Go!</button></a>
                 </div>
             ) : (
                 <div className="hero-section">
                     <h1>Master a <span className="highlight-text">Language</span></h1>
                     <p>Your gateway to mastering languages with ease, using engaging and inovative learning tools!</p>
-                    <a onClick={navigateToSignUp}><button className="explore-btn">Explore Now</button></a>
+                    <a onClick={() => navigateToAuth(false)}><button className="explore-btn">Explore Now</button></a>
                 </div>
             )}
 
@@ -51,7 +51,7 @@ export const LandingView = () => {
                     <li><i className="fas fa-check-circle">»</i> Progress tracking and feedback</li>
                     <li><i className="fas fa-check-circle">»</i> Learn anytime, anywhere</li>
                 </ul>
-                <button onClick={navigateToSignUp} className="try-now-btn">Try Now</button>
+                <button onClick={() => navigateToAuth(false)} className="try-now-btn">Try Now</button>
                 </div>
             </section>
 
