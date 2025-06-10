@@ -1,5 +1,6 @@
 /*
     This code ensures that API requests automatically handle expired tokens by refreshing them and retrying failed requests, making authentication seamless for the user.
+    Handle automatic token refresh for expired access tokens.
 */
 
 import axios from 'axios';
