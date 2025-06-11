@@ -24,14 +24,14 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                 password
             }); // ,{ withCredentials: true }); if server uses cookies
             
-            if (response.status !== 200) {
-                alert(`Login failed: ${response.data}`);
+            if (response.status != 200) {
+                alert(`SignIn failed: ${response.data}`);
             }
 
-            console.log("Login was successfull");
+            console.log("SignIn was successfull");
             navigate("/app");
         } catch (error) {
-            alert(`Login failed: ${error}`);
+            alert(`SignIn failed: ${error}`);
         }
     }
 
