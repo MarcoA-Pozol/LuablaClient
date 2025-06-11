@@ -93,6 +93,12 @@ body {
     outline: none;
 }
 
+.input-icon-su {
+    margin-right: 10px;
+    color: #666;
+    font-size: 1.2rem;
+}
+
 .register-form button {
     width: 100%;
     padding: 10px;

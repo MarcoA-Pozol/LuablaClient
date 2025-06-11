@@ -4,6 +4,8 @@ import SignUpFormIMG from "../../assets/AuthView/login_image.png";
 import { countriesList } from "../../utils/CountriesList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+// Icons
+import { FaUser, FaEnvelope, FaLock, FaGlobeAmericas, FaCamera } from "react-icons/fa";
 
 interface SignUpFormProps {
     children?: ReactNode; 
@@ -60,27 +62,27 @@ export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
                     <h2>Create Your Account</h2>
 
                     <label style={{display:"inline-flex"}}>
-                        Username
+                        <FaUser className="input-icon-su"/>
                         <input name="username" placeholder="Username" type="text" required/>
                     </label>
 
                     <label style={{display:"inline-flex"}}>
-                        Email
+                        <FaEnvelope className="input-icon-su"/>
                         <input name="email" placeholder="Email" type="email" required/>
                     </label>
 
                     <label style={{display:"inline-flex"}}>
-                        Password
+                        <FaLock className="input-icon-su"/>
                         <input name="password" placeholder="Password" type="password" required/>
                     </label>
 
                     <label style={{display:"inline-flex"}}>
-                        Repeat password
+                        <FaLock className="input-icon-su"/>
                         <input name="repeatPassword" placeholder="Repeat password" type="password" required/>
                     </label>
 
                     <label style={{display:"inline-flex"}}>
-                        Country
+                        <FaGlobeAmericas className="input-icon-su"/>
                         <select name="country" required={false}>
                             <option disabled={true}>Select</option>
                             {countriesList.map((country, index) => (
@@ -92,7 +94,7 @@ export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
                     </label>
 
                     <label style={{display:"inline-flex"}}>
-                        Profile Picture
+                        <FaCamera className="input-icon-su"/>
                         <input name="profilePicture" placeholder="Profile Picture" type="file" required={false}/>
                     </label>
 

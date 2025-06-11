@@ -4,6 +4,8 @@ import "../../styles/AuthView/signInForm.css";
 import SignInFormIMG from "../../assets/AuthView/register_image.png";
 import type React from "react";
 import { useNavigate } from "react-router-dom";
+// Icons
+import { FaUser, FaLock } from "react-icons/fa";
 
 interface SignInFormProps {
     children?: ReactNode; 
@@ -48,12 +50,12 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                     <form onSubmit={handleSignIn} className="login-form" method="post">
                         <h2>SignIn to Your Account</h2>
                         <label style={{display:"inline-flex"}}>
-                            Username | Email
+                            <FaUser className="input-icon-si"/>
                             <input name="input" type="text" placeholder="Username | Email" required/>
                         </label>
 
                         <label style={{display:"inline-flex"}}>
-                            Password
+                            <FaLock className="input-icon-si"/>
                             <input name="password" type="password" placeholder="Password" required/>
                         </label>
 
