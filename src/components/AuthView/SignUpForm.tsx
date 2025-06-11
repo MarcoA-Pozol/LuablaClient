@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import "../../styles/AuthView/signUpForm.css";
-import SignUpFormIMG from "../../assets/AuthView/register_image.png";
+import SignUpFormIMG from "../../assets/AuthView/login_image.png";
 import { countriesList } from "../../utils/CountriesList";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -14,13 +14,21 @@ export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
     const navigate = useNavigate();
     
     const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
         // Get form data
         const formData = new FormData(event.currentTarget);
         const username = formData.get("username") as string;
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
+        const repeatPassword = formData.get("repeatPassword") as string;
         const country = formData.get("country") as string;
-        const profilePicture = formData.get("profilePicture") as string;
+        const profilePicture = formData.get("profilePicture") as File;
+
+        if (password !== repeatPassword) {
+            alert("Passwords must coincide");
+            return;
+        }
 
         try {
             const response = await axios.post("http://localhost:8600/auth/signUp", {
@@ -31,7 +39,7 @@ export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
                 profilePicture
             });
 
-            if (response.status != 201) {
+            if (response.status !== 201) {
                 alert(`SignUp failed: ${response.data}`);
             }
 
@@ -51,36 +59,41 @@ export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
                 <form onSubmit={handleSignUp} className="register-form" method="post">
                     <h2>Create Your Account</h2>
 
-                    <label>
-                            Username
-                            <input name="username" placeholder="Username" type="text"/>
+                    <label style={{display:"inline-flex"}}>
+                        Username
+                        <input name="username" placeholder="Username" type="text" required/>
                     </label>
 
-                    <label>
-                            Email
-                            <input name="emal" placeholder="Email" type="email"/>
+                    <label style={{display:"inline-flex"}}>
+                        Email
+                        <input name="email" placeholder="Email" type="email" required/>
                     </label>
 
-                    <label>
-                            Password
-                            <input name="password" placeholder="Password" type="password"/>
+                    <label style={{display:"inline-flex"}}>
+                        Password
+                        <input name="password" placeholder="Password" type="password" required/>
                     </label>
 
-                    <label>
-                            Country
-                            <select name="country">
-                                <option disabled={true}>Select</option>
-                                {countriesList.map((country, index) => (
-                                    <option key={index} value={country}>
-                                        {country}
-                                    </option>
-                                ))}
-                            </select>
+                    <label style={{display:"inline-flex"}}>
+                        Repeat password
+                        <input name="repeatPassword" placeholder="Repeat password" type="password" required/>
                     </label>
 
-                    <label>
-                            Profile Picture
-                            <input name="profilePicture" placeholder="Profile Picture" type="file"/>
+                    <label style={{display:"inline-flex"}}>
+                        Country
+                        <select name="country" required={false}>
+                            <option disabled={true}>Select</option>
+                            {countriesList.map((country, index) => (
+                                <option key={index} value={country}>
+                                    {country}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label style={{display:"inline-flex"}}>
+                        Profile Picture
+                        <input name="profilePicture" placeholder="Profile Picture" type="file" required={false}/>
                     </label>
 
                     <button type="submit">Register</button>

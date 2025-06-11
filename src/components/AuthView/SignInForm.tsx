@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import axios from "axios";
 import "../../styles/AuthView/signInForm.css";
-import SignInFormIMG from "../../assets/AuthView/login_image.png";
+import SignInFormIMG from "../../assets/AuthView/register_image.png";
 import type React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,8 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
     const navigate = useNavigate();
 
     const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
         const formData = new FormData(event.currentTarget);
         const input = formData.get("input") as string;
         const password = formData.get("password") as string;
@@ -24,7 +26,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                 password
             }); // ,{ withCredentials: true }); if server uses cookies
             
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 alert(`SignIn failed: ${response.data}`);
             }
 
@@ -45,12 +47,12 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
 
                     <form onSubmit={handleSignIn} className="login-form" method="post">
                         <h2>SignIn to Your Account</h2>
-                        <label>
+                        <label style={{display:"inline-flex"}}>
                             Username | Email
                             <input name="input" type="text" placeholder="Username | Email" required/>
                         </label>
 
-                        <label>
+                        <label style={{display:"inline-flex"}}>
                             Password
                             <input name="password" type="password" placeholder="Password" required/>
                         </label>
