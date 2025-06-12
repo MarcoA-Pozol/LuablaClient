@@ -25,7 +25,7 @@ export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) =
     }
 
     try {
-        const response = await axios.post("http://localhost:8600/auth/signUp", {
+        const response = await axios.post("http://localhost:8600/api/auth/signUp", {
             username,
             email, 
             password,

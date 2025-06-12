@@ -23,7 +23,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
         const password = formData.get("password") as string;
 
         try {
-            const response = await axios.post("http://localhost:8600/auth/signIn", {
+            const response = await axios.post("http://localhost:8600/api/auth/signIn", {
                 input,
                 password
             }); // ,{ withCredentials: true }); if server uses cookies
