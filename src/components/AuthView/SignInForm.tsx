@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import axios from "axios";
 import "../../styles/AuthView/signInForm.css";
 import SignInFormIMG from "../../assets/AuthView/register_image.png";
-import type React from "react";
+import { handleSignIn } from "../../utils/AuthView/Authentication";
 import { useNavigate } from "react-router-dom";
 // Icons
 import { FaUser, FaLock } from "react-icons/fa";
@@ -15,30 +15,6 @@ interface SignInFormProps {
 export const SignInForm = ({children, onClick}:SignInFormProps) => {
     const navigate = useNavigate();
 
-    const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const formData = new FormData(event.currentTarget);
-        const input = formData.get("input") as string;
-        const password = formData.get("password") as string;
-
-        try {
-            const response = await axios.post("http://localhost:8600/api/auth/signIn", {
-                input,
-                password
-            }); // ,{ withCredentials: true }); if server uses cookies
-            
-            if (response.status !== 200) {
-                alert(`SignIn failed: ${response.data}`);
-            }
-
-            console.log("SignIn was successfull");
-            navigate("/app");
-        } catch (error) {
-            alert(`SignIn failed: ${error}`);
-        }
-    }
-
     return (
         <>
             <div className="login-page">
@@ -47,7 +23,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                         <img src={SignInFormIMG} alt="Learn Languages"/>
                     </div>
 
-                    <form onSubmit={handleSignIn} className="login-form" method="post">
+                    <form onSubmit={(event) => handleSignIn({event, navigate, axios})} className="login-form" method="post">
                         <h2>SignIn to Your Account</h2>
                         <label style={{display:"inline-flex"}}>
                             <FaUser className="input-icon-si"/>

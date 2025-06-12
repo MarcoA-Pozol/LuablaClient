@@ -1,11 +1,4 @@
-import type { AxiosInstance } from "axios";
-import type { NavigateFunction } from "react-router-dom";
-
-interface handleSignUpProps {
-    event: React.FormEvent<HTMLFormElement>;
-    navigate: NavigateFunction;
-    axios: AxiosInstance;
-}
+import type { handleSignInProps,handleSignUpProps } from "../../types/AuthView/AuthenticationForms";
 
 export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) => {
     event.preventDefault();
@@ -45,3 +38,28 @@ export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) =
         alert(`SignUp failed: ${error}`)
     }
 };
+
+export const handleSignIn = async({event, navigate, axios}:handleSignInProps) => {
+    event.preventDefault();
+
+    // Get form data
+    const formData = new FormData(event.currentTarget);
+    const input = formData.get("input") as string;
+    const password = formData.get("password") as string;
+
+    try {
+        const response = await axios.post("http://localhost:8600/api/auth/signIn", {
+            input,
+            password
+        }); // ,{ withCredentials: true }); if server uses cookies
+        
+        if (response.status !== 200) {
+            alert(`SignIn failed: ${response.data}`);
+        }
+
+        console.log("SignIn was successfull");
+        navigate("/app");
+    } catch (error) {
+        alert(`SignIn failed: ${error}`);
+    }
+}
