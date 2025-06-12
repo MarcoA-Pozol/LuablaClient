@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import "../../styles/AuthView/signUpForm.css";
 import SignUpFormIMG from "../../assets/AuthView/login_image.png";
 import { countriesList } from "../../utils/CountriesList";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { handleSignUp } from "../../utils/AuthView/Authentication";
 // Icons
 import { FaUser, FaEnvelope, FaLock, FaGlobeAmericas, FaCamera } from "react-icons/fa";
@@ -12,14 +14,15 @@ interface SignUpFormProps {
 }
 
 export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
-    
+    const navigate = useNavigate();
+
     return (
         <div className="register-page">
             <div className="register-container">
                 <div className="register-image">
                     <img src={SignUpFormIMG} alt="Join Us"/>
                 </div>
-                <form onSubmit={handleSignUp} className="register-form" method="POST" encType="multipart/form-data">
+                <form onSubmit={(event) => handleSignUp({event, navigate, axios})} className="register-form" method="POST" encType="multipart/form-data">
                     <h2>Create Your Account</h2>
 
                     <label style={{display:"inline-flex"}}>

@@ -1,8 +1,13 @@
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import type { AxiosInstance } from "axios";
+import type { NavigateFunction } from "react-router-dom";
 
-export const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
-    const navigate = useNavigate();
+interface handleSignUpProps {
+    event: React.FormEvent<HTMLFormElement>;
+    navigate: NavigateFunction;
+    axios: AxiosInstance;
+}
+
+export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) => {
     event.preventDefault();
 
     // Get form data
