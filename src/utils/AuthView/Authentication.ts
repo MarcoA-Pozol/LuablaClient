@@ -1,4 +1,4 @@
-import type { handleSignInProps,handleSignUpProps } from "../../types/AuthView/AuthenticationForms";
+import type { handleSignInProps, handleSignUpProps } from "../../types/AuthView/AuthenticationForms";
 
 export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) => {
     event.preventDefault();
@@ -26,12 +26,14 @@ export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) =
             profilePicture
         });
 
+        const data = response.data;
+
         if (response.status !== 201) {
-            console.error(`SignUp failed: ${response.data}`);
-            alert(`SignUp failed: ${response.data}`);
+            console.error(`SignUp failed: ${data.error}`);
+            alert(`SignUp failed: ${data.error}`);
         }
 
-        console.log("SignUp was successfull");
+        console.log(`SignUp was successfull: ${data.message}`);
         navigate("/app");
     } catch (error) {
         console.error(`SignUp failed: ${error}`)
