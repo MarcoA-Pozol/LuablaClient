@@ -53,6 +53,11 @@ export const handleSignIn = async({event, navigate, axios}:handleSignInProps) =>
         const response = await axios.post("http://localhost:8600/api/auth/signIn", {
             input,
             password
+        }, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
         }); // ,{ withCredentials: true }); if server uses cookies
         
         if (response.status !== 200) {
