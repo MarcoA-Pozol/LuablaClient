@@ -2,9 +2,11 @@ import "../../styles/LandingView/topNavBar.css";
 import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
 import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../App";
 
 export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
     const navigate = useNavigate();
+    const { authUser, setAuthUser } = useAuth();
 
     const navigateToAuth = (isLoginVisible: boolean) => {
         navigate('/auth', {state:{isLoginVisible}});
@@ -24,7 +26,7 @@ export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
                 </a>
                 <div id="sign-up-options">
                     <a onClick={() => navigateToAuth(false)} id="sign_up"><li>Sign-Up</li></a>
-                    {isUserAuthenticated ? (
+                    {authUser ? (
                         <a onClick={logoutUser} id="close_session"><li>Logout</li></a>
                     ) : (
                         <a onClick={() => navigateToAuth(true)} id="start_session"><li>Login</li></a>

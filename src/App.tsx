@@ -20,7 +20,7 @@ function App() {
 
     const checkAuth = async () => {
       try{
-        const response = await axios.get("http://localhost:8600/api/auth/check", {
+        const response = await axios.get("http://localhost:8600/api/auth/checkAuth", {
           withCredentials: true
         });
     
