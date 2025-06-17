@@ -3,6 +3,8 @@ import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
 import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../App";
+// Icons
+import { BiLogOut } from "react-icons/bi";
 
 export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
     const navigate = useNavigate();
@@ -14,6 +16,7 @@ export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
 
 
     const logoutUser = () => {
+        setAuthUser(null);
         navigate('/');
     };
 
@@ -25,11 +28,16 @@ export const TopNavBar = ({isUserAuthenticated}:TopNavBarProps) => {
                     <h2>Luabla</h2>
                 </a>
                 <div id="sign-up-options">
-                    <a onClick={() => navigateToAuth(false)} id="sign_up"><li>Sign-Up</li></a>
                     {authUser ? (
-                        <a onClick={logoutUser} id="close_session"><li>Logout</li></a>
+                        <>
+                            <a>{authUser}</a>
+                            <BiLogOut onClick={logoutUser} id="close-session" style={{ color: "red", fontSize: "2.2rem", cursor:"pointer"}}/>
+                        </>
                     ) : (
-                        <a onClick={() => navigateToAuth(true)} id="start_session"><li>Login</li></a>
+                        <>
+                            <a onClick={() => navigateToAuth(false)} id="sign_up"><li>Sign-Up</li></a>
+                            <a onClick={() => navigateToAuth(true)} id="start_session"><li>SignIn</li></a>
+                        </>
                     )}
                 </div>
             </header>
