@@ -58,7 +58,7 @@ export const handleSignIn = async({event, navigate, axios}:handleSignInProps) =>
             headers: {
                 "Content-Type": "application/json"
             }
-        }); // ,{ withCredentials: true }); if server uses cookies
+        }); 
         
         if (response.status !== 200) {
             alert(`SignIn failed: ${response.data}`);
