@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Testimonials from "../components/LandingView/Testimonials";
 import { TopNavBar } from "../components/LandingView/TopNavBar";
 import { Footer } from "../components/LandingView/Footer";
+import { PickLanguageForm } from "../components/AuthView/PickLanguageForm";
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";
@@ -27,6 +28,8 @@ export const LandingView = () => {
         <>
             <TopNavBar isUserAuthenticated={isUserAuthenticated}/>
 
+            <PickLanguageForm/>
+            
             {isUserAuthenticated ? (
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
