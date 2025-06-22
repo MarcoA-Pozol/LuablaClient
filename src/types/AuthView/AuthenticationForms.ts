@@ -11,4 +11,5 @@ export interface handleSignInProps {
     event: React.FormEvent<HTMLFormElement>;
     navigate: NavigateFunction;
     axios: AxiosInstance;
+    setAuthUser: React.Dispatch<React.SetStateAction<any>>;
 }

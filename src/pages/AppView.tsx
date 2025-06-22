@@ -10,16 +10,22 @@ export const AppView = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!authUser) navigate("/");
-    
-    }, [authUser, navigate]);
+        if (!authUser) {
+            console.log("Auth user:", authUser);
+            navigate("/auth");
+        } else {
+            console.log("User is authenticated", authUser);
+        }
+    }, [authUser, navigate]); // Dependencies
 
     return (
         <>
             { userHasPickedLanguage ? (
                 <GetCardsData/>
             ): (
-                <PickLanguageForm/>
+                <div>
+                    <PickLanguageForm/>
+                </div>
             )}
         </>
     );

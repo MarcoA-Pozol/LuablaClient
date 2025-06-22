@@ -41,7 +41,7 @@ export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) =
     }
 };
 
-export const handleSignIn = async({event, navigate, axios}:handleSignInProps) => {
+export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSignInProps) => {
     event.preventDefault();
 
     // Get form data
@@ -65,7 +65,14 @@ export const handleSignIn = async({event, navigate, axios}:handleSignInProps) =>
         }
 
         console.log("SignIn was successfull");
-        navigate("/app");
+        const user = await response.data;
+        setAuthUser(user.username);
+
+        const timer = setTimeout(() => {
+            navigate("/app");
+        }, 1000);
+
+        return () => clearTimeout(timer);
     } catch (error) {
         alert(`SignIn failed: ${error}`);
     }

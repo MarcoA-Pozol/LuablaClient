@@ -4,6 +4,7 @@ import "../../styles/AuthView/signInForm.css";
 import SignInFormIMG from "../../assets/AuthView/register_image.png";
 import { handleSignIn } from "../../utils/AuthView/Authentication";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../App";
 // Icons
 import { FaUser, FaLock } from "react-icons/fa";
 
@@ -14,6 +15,7 @@ interface SignInFormProps {
 
 export const SignInForm = ({children, onClick}:SignInFormProps) => {
     const navigate = useNavigate();
+    const { setAuthUser } = useAuth();
 
     return (
         <>
@@ -23,7 +25,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                         <img src={SignInFormIMG} alt="Learn Languages"/>
                     </div>
 
-                    <form onSubmit={(event) => handleSignIn({event, navigate, axios})} className="login-form" method="post">
+                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser})} className="login-form" method="post">
                         <h2>SignIn to Your Account</h2>
                         <label style={{display:"inline-flex"}}>
                             <FaUser className="input-icon-si"/>
