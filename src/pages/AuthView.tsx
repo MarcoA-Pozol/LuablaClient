@@ -7,7 +7,6 @@ import { useLocation } from "react-router-dom";
 export const AuthView = () => {
     const location = useLocation();
     const showLoginState = location.state as {isLoginVisible?:boolean};
-    const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
     const [isLoginVisible, setIsLoginVisible] = useState<boolean>(showLoginState?.isLoginVisible ?? false); // Display SignUp form first
 
     const toggleSignInUpForms = () => {
@@ -16,10 +15,8 @@ export const AuthView = () => {
 
     return (
         <>
-            <TopNavBar isUserAuthenticated={isUserAuthenticated}/>
-            {isUserAuthenticated ? (
-                <p>Welcome to the app</p>
-            ) : isLoginVisible ? (
+            <TopNavBar/>
+            {isLoginVisible ? (
                 <SignInForm onClick={toggleSignInUpForms}>
                     <span className='toggle-forms-button'>I do not have an account yet</span>
                 </SignInForm>

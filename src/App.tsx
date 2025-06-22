@@ -9,12 +9,24 @@ type AuthContextType = {
   setAuthUser: React.Dispatch<React.SetStateAction<any>>;
 };
 
+type UserHasPickedLanguageContextType = {
+  userHasPickedLanguage: boolean;
+  setUserHasPickedLanguage: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+// CHECK authenticated user
 export const AuthContext = createContext<AuthContextType>({ authUser: null, setAuthUser: () => {} });
 export const useAuth = () => useContext(AuthContext);
 
+// CHECK user has picked a language
+export const UserHasPickedLanguageContext = createContext<UserHasPickedLanguageContextType>({ userHasPickedLanguage: false, setUserHasPickedLanguage: () => {}});
+export const useCheckUserHasPickedLanguage = () => useContext(UserHasPickedLanguageContext);
+
+// CHECK is email verified
 
 function App() {
   const [authUser, setAuthUser] = useState<any>(null);
+  const [userHasPickedLanguage, setUserHasPickedLanguage] = useState<boolean>(false);
 
   useEffect(() => {
 
@@ -33,12 +45,41 @@ function App() {
       }
     };
 
+    const checkIsEmailVerified = async () => {
+      try {
+        console.log("Email is verified");
+      } catch (error) {
+        console.log("Email is not verified");
+      }
+    }
+
+    const checkUserHasPickedLanguage = async () => {
+      try {
+        const response = await axios.get("http://localhost:8600/api/auth/checkUserHasPickedLanguage", {withCredentials:true})
+        if (response.status === 200) {
+          const data = await response.data;
+          if (data.userHasPickedLanguage === true) {
+            setUserHasPickedLanguage(true);
+          } else {
+            setUserHasPickedLanguage(false);
+          }
+
+        }
+      } catch (error) {
+
+      }
+    }
+
     checkAuth();
+    checkIsEmailVerified();
+    checkUserHasPickedLanguage();
   }, []);
 
   return (
       <AuthContext.Provider value={{ authUser, setAuthUser }}>
-        <AppRoutes/>
+        <UserHasPickedLanguageContext.Provider value={{ userHasPickedLanguage, setUserHasPickedLanguage }}>
+          <AppRoutes/>
+        </UserHasPickedLanguageContext.Provider>
       </AuthContext.Provider>
   );
 };

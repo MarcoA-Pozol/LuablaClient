@@ -45,7 +45,7 @@ export const PickLanguageForm = () => {
                 return;
             }
             
-            navigate('/');
+            navigate('/app');
         } catch (error) {
             alert(`Selecting a language failed: ${error}`);
         }
