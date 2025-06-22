@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../styles/AuthView/pickLanguageForm.css";
 // Images
 import EnglishFlagIMG from "../../assets/AuthView/english_flag.png";
@@ -24,7 +23,6 @@ const languages = [
 
 export const PickLanguageForm = () => {
     const [pickedLanguage, setPickedLanguage] = useState<string | null>(null);
-    const navigate = useNavigate();
     
     // Derive disabled state from pickedLanguage
     const isButtonDisabled = !pickedLanguage;
@@ -45,7 +43,7 @@ export const PickLanguageForm = () => {
                 return;
             }
             
-            navigate('/app');
+            window.location.reload();
         } catch (error) {
             alert(`Selecting a language failed: ${error}`);
         }

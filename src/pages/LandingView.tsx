@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Testimonials from "../components/LandingView/Testimonials";
 import { TopNavBar } from "../components/LandingView/TopNavBar";
 import { Footer } from "../components/LandingView/Footer";
-import { PickLanguageForm } from "../components/AuthView/PickLanguageForm";
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";
@@ -14,7 +13,6 @@ import ScheduleIMG from "../assets/LandingView/schedule.jpg";
 export const LandingView = () => {
     // States and variables
     const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
-    const [authUser, setAuthUser] = useState<any>(null);
     const navigate = useNavigate();
 
     // Functions
@@ -26,10 +24,8 @@ export const LandingView = () => {
 
     return (
         <>
-            <TopNavBar isUserAuthenticated={isUserAuthenticated}/>
+            <TopNavBar/>
 
-            <PickLanguageForm/>
-            
             {isUserAuthenticated ? (
                 <div className="hero-section">
                     <h1>Welcome again <span className="highlight-text">User</span></h1>
