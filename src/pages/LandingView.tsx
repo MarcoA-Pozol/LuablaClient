@@ -12,7 +12,7 @@ import { useAuth } from "../App";
 
 export const LandingView = () => {
     // States and variables
-    const { authUser } = useAuth();
+    const { authUser, setAuthUser } = useAuth();
     const navigate = useNavigate();
 
     // Functions
@@ -22,7 +22,7 @@ export const LandingView = () => {
 
     return (
         <>
-            <TopNavBar/>
+            <TopNavBar authUser={authUser} setAuthUser={setAuthUser}/>
 
             {authUser ? (
                 <div className="hero-section">

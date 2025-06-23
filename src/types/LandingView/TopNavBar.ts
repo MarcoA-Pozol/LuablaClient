@@ -1,3 +1,6 @@
+import type { SetStateAction } from "react";
+
 export interface TopNavBarProps {
-    isUserAuthenticated: boolean;
+    authUser: string | null;
+    setAuthUser: React.Dispatch<SetStateAction<string | null>>
 }

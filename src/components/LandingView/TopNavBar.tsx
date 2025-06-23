@@ -1,14 +1,13 @@
 import "../../styles/LandingView/topNavBar.css";
 import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from "../../App";
 import axios from "axios";
 // Icons
 import { BiLogOut } from "react-icons/bi";
+import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
 
-export const TopNavBar = () => {
+export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
     const navigate = useNavigate();
-    const { authUser, setAuthUser } = useAuth();
 
     const navigateToAuth = (isLoginVisible: boolean) => {
         navigate('/auth', {state:{isLoginVisible}});
