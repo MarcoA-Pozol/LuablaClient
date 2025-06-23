@@ -6,7 +6,7 @@ import axios from 'axios';
 // Manage authUser globally with a wrapper to send props without explicity defining them
 type AuthContextType = {
   authUser: any;
-  setAuthUser: React.Dispatch<React.SetStateAction<any>>;
+  setAuthUser: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 type UserHasPickedLanguageContextType = {
@@ -15,7 +15,7 @@ type UserHasPickedLanguageContextType = {
 }
 
 // CHECK authenticated user
-export const AuthContext = createContext<AuthContextType>({ authUser: null, setAuthUser: () => {} });
+export const AuthContext = createContext<AuthContextType>({ authUser: null, setAuthUser: () => null });
 export const useAuth = () => useContext(AuthContext);
 
 // CHECK user has picked a language
@@ -25,7 +25,7 @@ export const useCheckUserHasPickedLanguage = () => useContext(UserHasPickedLangu
 // CHECK is email verified
 
 function App() {
-  const [authUser, setAuthUser] = useState<any>(null);
+  const [authUser, setAuthUser] = useState<string | null>(null);
   const [userHasPickedLanguage, setUserHasPickedLanguage] = useState<boolean>(false);
 
   useEffect(() => {

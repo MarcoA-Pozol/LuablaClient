@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../styles/LandingView/landingView.css";
 import { useNavigate } from "react-router-dom";
 // Components
@@ -9,10 +8,11 @@ import { Footer } from "../components/LandingView/Footer";
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";
 import ScheduleIMG from "../assets/LandingView/schedule.jpg";
+import { useAuth } from "../App";
 
 export const LandingView = () => {
     // States and variables
-    const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean>(false);
+    const { authUser } = useAuth();
     const navigate = useNavigate();
 
     // Functions
@@ -20,15 +20,13 @@ export const LandingView = () => {
         navigate('/auth', {state:{isLoginVisible}});
     }
 
-    
-
     return (
         <>
             <TopNavBar/>
 
-            {isUserAuthenticated ? (
+            {authUser ? (
                 <div className="hero-section">
-                    <h1>Welcome again <span className="highlight-text">User</span></h1>
+                    <h1>Welcome again <span className="highlight-text">{authUser}</span></h1>
                     <p>Its time to practice!</p>
                     <a onClick={() => navigateToAuth(false)}><button className="explore-btn">Let´s Go!</button></a>
                 </div>

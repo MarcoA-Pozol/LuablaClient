@@ -60,19 +60,15 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSi
             }
         }); 
         
-        if (response.status !== 200) {
-            alert(`SignIn failed: ${response.data}`);
-        }
-
-        console.log("SignIn was successfull");
-        const user = await response.data;
-        setAuthUser(user.username);
-
-        const timer = setTimeout(() => {
+        if (response.status === 200) {
+            const { username } = response.data;
+            setAuthUser(username);
             navigate("/app");
-        }, 1000);
-
-        return () => clearTimeout(timer);
+            window.location.reload();
+            return;
+        }
+        
+        alert(`SignIn failed: ${response.data}`);
     } catch (error) {
         alert(`SignIn failed: ${error}`);
     }
