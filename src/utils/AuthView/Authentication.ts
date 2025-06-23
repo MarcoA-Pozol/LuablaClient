@@ -41,7 +41,7 @@ export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) =
     }
 };
 
-export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSignInProps) => {
+export const handleSignIn = async({event, navigate, axios, authUser, setAuthUser}:handleSignInProps) => {
     event.preventDefault();
 
     // Get form data
@@ -64,7 +64,6 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSi
             const { username } = response.data;
             setAuthUser(username);
             navigate("/app");
-            window.location.reload();
             return;
         }
         

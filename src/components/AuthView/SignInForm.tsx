@@ -15,7 +15,7 @@ interface SignInFormProps {
 
 export const SignInForm = ({children, onClick}:SignInFormProps) => {
     const navigate = useNavigate();
-    const { setAuthUser } = useAuth();
+    const { authUser, setAuthUser } = useAuth();
 
     return (
         <>
@@ -25,7 +25,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                         <img src={SignInFormIMG} alt="Learn Languages"/>
                     </div>
 
-                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser})} className="login-form" method="post">
+                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, authUser, setAuthUser})} className="login-form" method="post">
                         <h2>SignIn to Your Account</h2>
                         <label style={{display:"inline-flex"}}>
                             <FaUser className="input-icon-si"/>
