@@ -1,10 +1,11 @@
 import type { handleSignInProps, handleSignUpProps } from "../../types/AuthView/AuthenticationForms";
 
-export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) => {
+export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleSignUpProps) => {
     event.preventDefault();
 
     // Get form data
     const formData = new FormData(event.currentTarget);
+    const input = formData.get("username") as string;
     const password = formData.get("password") as string;
     const repeatPassword = formData.get("repeatPassword") as string;
 
@@ -29,10 +30,25 @@ export const handleSignUp = async ({event, navigate, axios}:handleSignUpProps) =
             alert(`SignUp failed: ${data.error}`);
         }
 
-        console.log(`SignUp was successfull: ${data.message}`);
-        navigate("/app");
+        // SignIn after SignUp
+        const signInResponse = await axios.post("http://localhost:8600/api/auth/signIn", {
+            input,
+            password
+        }, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }); 
+        
+        if (signInResponse.status === 200) {
+            setAuthUser(input);
+            navigate("/app");
+            return;
+        }
+
+        navigate("/auth");
     } catch (error) {
-        console.error(`SignUp failed: ${error}`)
         alert(`SignUp failed: ${error}`)
     }
 };

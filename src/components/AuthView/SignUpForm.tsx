@@ -7,6 +7,7 @@ import axios from "axios";
 import { handleSignUp } from "../../utils/AuthView/Authentication";
 // Icons
 import { FaUser, FaEnvelope, FaLock, FaGlobeAmericas, FaCamera } from "react-icons/fa";
+import { useAuth } from "../../App";
 
 interface SignUpFormProps {
     children?: ReactNode; 
@@ -15,6 +16,7 @@ interface SignUpFormProps {
 
 export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
     const navigate = useNavigate();
+    const { setAuthUser } = useAuth();
 
     return (
         <div className="register-page">
@@ -22,7 +24,7 @@ export const SignUpForm = ({children, onClick}:SignUpFormProps) => {
                 <div className="register-image">
                     <img src={SignUpFormIMG} alt="Join Us"/>
                 </div>
-                <form onSubmit={(event) => handleSignUp({event, navigate, axios})} className="register-form" method="POST" encType="multipart/form-data">
+                <form onSubmit={(event) => handleSignUp({event, navigate, axios, setAuthUser})} className="register-form" method="POST" encType="multipart/form-data">
                     <h2>Create Your Account</h2>
 
                     <label style={{display:"inline-flex"}}>

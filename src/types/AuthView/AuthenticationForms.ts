@@ -5,6 +5,7 @@ export interface handleSignUpProps {
     event: React.FormEvent<HTMLFormElement>;
     navigate: NavigateFunction;
     axios: AxiosInstance;
+    setAuthUser: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export interface handleSignInProps {
