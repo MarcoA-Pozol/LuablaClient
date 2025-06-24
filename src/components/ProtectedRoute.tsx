@@ -17,7 +17,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     }, []);
 
     if (isCheckingAuth) {
-        return <div>Cargando...</div>; // 👈 This
+        return <div>Loading...</div>; // 👈 This
     }
 
     return authUser ? <>{children}</> : <Navigate to="/auth" replace />;
