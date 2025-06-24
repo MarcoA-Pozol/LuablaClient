@@ -36,7 +36,7 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
                 <div id="sign-up-options">
                     {authUser ? (
                         <>
-                            <a>{authUser}</a>
+                            <a>{authUser.username}</a>
                             <BiLogOut onClick={logoutUser} id="close-session" style={{ color: "red", fontSize: "2.2rem", cursor:"pointer"}}/>
                         </>
                     ) : (

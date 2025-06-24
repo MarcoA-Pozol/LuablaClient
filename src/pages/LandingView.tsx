@@ -26,7 +26,7 @@ export const LandingView = () => {
 
             {authUser ? (
                 <div className="hero-section">
-                    <h1>Welcome again <span className="highlight-text">{authUser}</span></h1>
+                    <h1>Welcome again <span className="highlight-text">{authUser.username}</span></h1>
                     <p>Its time to practice!</p>
                     <a onClick={() => navigateToAuth(false)}><button className="explore-btn">Let´s Go!</button></a>
                 </div>

@@ -4,7 +4,7 @@ import "../../styles/AppView/topNavBarApp.css";
 import { useState } from "react";
 
 interface TopNavBarAppProps {
-    authUser: string|null;
+    authUser: any|null;
 }
 
 export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
@@ -56,11 +56,7 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
 
             <div className="profile_container">
                 <a onClick={() => {navigate("/")}}>
-                    {authUser ? (
-                        <img src={PandaLogo} alt="User's profile picture"/>  
-                    ): (
-                        <img src={PandaLogo} alt="Default profile picture"/>
-                    )}
+                    <img src={`http://localhost:8600/${authUser.profile_picture}`} alt={authUser.profile_picture}/>  
                 </a>
             </div>
 
