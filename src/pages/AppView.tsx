@@ -10,7 +10,6 @@ export const AppView = () => {
     return (
         <>
             <TopNavBarApp authUser={authUser}/>
-            <h2>{authUser.username}</h2>
             { userHasPickedLanguage ? (
                 <GetCardsData/>
             ): (

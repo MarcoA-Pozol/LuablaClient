@@ -52,7 +52,7 @@ export const PickLanguageForm = () => {
     return (
         <div className="languages-selection-container">
             <h2>Choose a Language</h2>
-            <p>These are the most popular ones, but you can choose others later</p>
+            <p>These are the most popular ones, but you can choose many more</p>
 
             <form id="language-form" onSubmit={handleSetPickedLanguage}>
                 <div className="language-options">
