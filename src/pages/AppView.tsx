@@ -1,16 +1,15 @@
 import { GetCardsData } from "../components/LandingView/GetCardsData";
-import { useAuth, useCheckUserHasPickedLanguage } from "../App";
 import { PickLanguageForm } from "../components/AuthView/PickLanguageForm";
 import { TopNavBarApp } from "../components/AppView/TopNavBarApp";
+import { useAuth } from "../App";
 
 export const AppView = () => {
-    const { userHasPickedLanguage } = useCheckUserHasPickedLanguage();
     const { authUser } = useAuth();
     
     return (
         <>
             <TopNavBarApp authUser={authUser}/>
-            { userHasPickedLanguage ? (
+            { authUser.has_picked_language ? (
                 <GetCardsData/>
             ): (
                 <div>
