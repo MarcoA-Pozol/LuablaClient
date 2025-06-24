@@ -42,7 +42,7 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleS
         }); 
         
         if (signInResponse.status === 200) {
-            setAuthUser(input);
+            setAuthUser(response.data);
             navigate("/app");
             return;
         }
@@ -73,8 +73,7 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSi
         }); 
         
         if (response.status === 200) {
-            const { username } = response.data;
-            setAuthUser(username);
+            setAuthUser(response.data);
             navigate("/app");
             return;
         }
