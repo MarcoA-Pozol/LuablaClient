@@ -5,9 +5,16 @@ import "../../styles/AppView/topNavBarApp.css";
 import { useState } from "react";
 // Languages IMGs
 import EnglishFlag from "../../assets/AppView/english_flag.png";
+import JapaneseFlag from "../../assets/AppView/japanese_flag.png";
 import FrenchFlag from "../../assets/AppView/french_flag.png";
 import ItalianFlag from "../../assets/AppView/italian_flag.png";
-import JapaneseFlag from "../../assets/AppView/japanese_flag.png";
+import GermanFlag from "../../assets/AppView/german_flag.png";
+import ChineseFlag from "../../assets/AppView/chinese_flag.png";
+import SpanishFlag from "../../assets/AppView/spanish_flag.png";
+import KoreanFlag from "../../assets/AppView/korean_flag.png";
+import PortugueseFlag from "../../assets/AppView/portuguese_flag.png";
+
+import RussianFlag from "../../assets/AppView/russian_flag.png";
 
 
 interface TopNavBarAppProps {
@@ -35,26 +42,26 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
             <div id="language_container">
                 <form method="post" onSubmit={handleLanguageSelection}>
                     {selectedLanguage === "English" ? (
-                        <img src={PandaLogo}/>
+                        <img src={EnglishFlag}/>
                     ): selectedLanguage === "French" ? (
-                        <img src={PandaLogo}/>
+                        <img src={FrenchFlag}/>
                     ): selectedLanguage === "Italian" ? (
-                        <img src={PandaLogo}/>
+                        <img src={ItalianFlag}/>
                     ): selectedLanguage === "Spanish" ? (
-                        <img src={PandaLogo}/>
+                        <img src={SpanishFlag}/>
                     ): selectedLanguage === "German" ? (
-                        <img src={PandaLogo}/>
+                        <img src={GermanFlag}/>
                     ): selectedLanguage === "Japanese" ? (
-                        <img src={PandaLogo}/>
+                        <img src={JapaneseFlag}/>
                     ): selectedLanguage === "Chinese" ? (
-                        <img src={PandaLogo}/>
+                        <img src={ChineseFlag}/>
                     ): selectedLanguage === "Korean" ? (
-                        <img src={PandaLogo}/>
+                        <img src={KoreanFlag}/>
                     ): selectedLanguage === "Portuguese" ? (
-                        <img src={PandaLogo}/>
+                        <img src={PortugueseFlag}/>
                     ): selectedLanguage === "Russian" ? (
-                        <img src={PandaLogo}/>
-                    ): (<img src={PandaLogo}/>)}
+                        <img src={RussianFlag}/>
+                    ): (<img src={EnglishFlag}/>)}
 
                     <select name="language" id="language" value={selectedLanguage}>
                         <option value="English" selected={selectedLanguage === "English"}>English</option>
