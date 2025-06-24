@@ -1,6 +1,7 @@
 import { GetCardsData } from "../components/LandingView/GetCardsData";
 import { PickLanguageForm } from "../components/AuthView/PickLanguageForm";
 import { TopNavBarApp } from "../components/AppView/TopNavBarApp";
+import { AppContentContainer } from "../components/AppView/AppContentContainer";
 import { BottomOptionsBar } from "../components/AppView/BottomOptionsBar";
 import { useAuth } from "../App";
 
@@ -12,7 +13,9 @@ export const AppView = () => {
             { authUser.has_picked_language ? (
                 <div>
                     <TopNavBarApp authUser={authUser}/>
-                    <GetCardsData/>
+                    <AppContentContainer>
+                        <GetCardsData/>
+                    </AppContentContainer>
                     <BottomOptionsBar/>
                 </div>
             ): (
