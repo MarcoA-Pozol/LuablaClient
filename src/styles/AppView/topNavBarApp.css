@@ -52,24 +52,24 @@
     cursor: pointer;
 }
 
-.notifications_messages_container {
+.notifications-container {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.notifications_messages_container a {
+.notifications-container a {
     text-decoration: none;
     color: white;
     position: relative;
 }
 
-.notifications_messages_container img {
+.notifications-container img {
     width: 24px;
     height: 24px;
 }
 
-.notifications_messages_container h5 {
+.notifications-container h5 {
     position: absolute;
     top: -5px;
     right: -10px;
