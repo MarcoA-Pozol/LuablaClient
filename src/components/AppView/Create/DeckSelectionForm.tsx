@@ -22,20 +22,6 @@ export const DeckSelectionForm = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [language] = useState("english"); // Change as needed
 
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    cefrLevel: "",
-    hskLevel: "",
-    isShareable: false,
-    image: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    setFormData(prev => ({ ...prev, [name]: type === "checkbox" ? true : value }));
-  };
-
   const handleDeckCreation = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -93,23 +79,30 @@ export const DeckSelectionForm = () => {
 
             <label style={styles.label}>
               Title:
-              <input type="text" name="title" value={formData.title} onChange={handleChange} style={styles.input} />
+              <input type="text" name="title" style={styles.input} required={true} placeholder="Example: ''Words for Beginners''"/>
             </label>
 
             <label style={styles.label}>
               Description:
-              <textarea name="description" value={formData.description} onChange={handleChange} style={styles.textarea} />
+              <textarea name="description" style={styles.textarea} required={true} placeholder="Example: ''These words are ideal if you are starting with learning this language from scratch.''"/>
             </label>
 
             {language === "chinese" || language === "japanese" ? (
               <label style={styles.label}>
                 HSK Level:
-                <input type="text" name="hskLevel" value={formData.hskLevel} onChange={handleChange} style={styles.input} />
+                <select name="hskLevel" required={true}>
+                  <option disabled={true}>Select</option>
+                  { cefrLevelsList.map((hskLevel, index) => (
+                    <option key={index}value={hskLevel}>
+                      { hskLevel }
+                    </option>
+                  ))}
+                </select>
               </label>
             ) : (
               <label style={styles.label}>
                 CEFR Level:
-                <select name="cefrLevel" required={true}>
+                <select name="cefrLevel" required={false}>
                   <option disabled={true}>Select</option>
                   { cefrLevelsList.map((cefrLevel, index) => (
                     <option key={index}value={cefrLevel}>
@@ -117,18 +110,17 @@ export const DeckSelectionForm = () => {
                     </option>
                   ))}
                 </select>
-                <input type="text" name="cefrLevel" value={formData.cefrLevel} onChange={handleChange} style={styles.input} />
               </label>
             )}
 
             <label style={styles.label}>
-              Shareable:
-              <input type="checkbox" name="isShareable" checked={formData.isShareable} onChange={handleChange} />
+              Shareable Deck:
+              <input type="checkbox" name="isShareable" required={false}/>
             </label>
 
             <label style={styles.label}>
-              Image URL:
-              <input type="text" name="image" value={formData.image} onChange={handleChange} style={styles.input} />
+              Background Image:
+              <input type="file" name="image" style={styles.input} required={false}/>
             </label>
 
             <div style={styles.formButtons}>
