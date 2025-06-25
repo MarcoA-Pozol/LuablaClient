@@ -79,7 +79,7 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
             </div>
 
             <div className="notifications-container">
-                <a onClick={() => {navigate("/")}}>
+                <a onClick={() => {navigate("/notifications")}}>
                     <div id="notifications">
                         <img src={NotificationsIcon} alt="Notifications icon"/>
                         { notificationsCount === 0 ? (
@@ -92,7 +92,7 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
             </div>
 
             <div className="profile_container">
-                <a onClick={() => {navigate("/")}}>
+                <a onClick={() => {navigate("/profile")}}>
                     <img src={`http://localhost:8600/${authUser.profile_picture}`} alt={authUser.profile_picture}/>  
                 </a>
             </div>

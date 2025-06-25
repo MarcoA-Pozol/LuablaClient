@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
 import "../../styles/AppView/bottomOptionsBar.css";
 import { FaEye, FaBook, FaPencilAlt } from 'react-icons/fa';
 
 export const BottomOptionsBar = ({setDisplayedContainer}:any) => {
-    const navigate = useNavigate();
 
     return (
         <div className="bottom-options-bar">
