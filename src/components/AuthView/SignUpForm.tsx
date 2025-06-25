@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import "../../styles/AuthView/signUpForm.css";
 import SignUpFormIMG from "../../assets/AuthView/login_image.png";
-import { countriesList } from "../../utils/CountriesList";
+import { countriesList } from "../../datasets/AuthView";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { handleSignUp } from "../../utils/AuthView/Authentication";

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
+import { cefrLevelsList } from "../../../datasets/AppView";
 import ChineseFlag from "../../../assets/AppView/chinese_flag.png";
 import EnglishFlag from "../../../assets/AppView/english_flag.png";
 import FrenchFlag from "../../../assets/AppView/french_flag.png";
@@ -18,7 +20,7 @@ const mockDecks: Deck[] = [
 export const DeckSelectionForm = () => {
   const decks = mockDecks;
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [language, setLanguage] = useState("english"); // Change as needed
+  const [language] = useState("english"); // Change as needed
 
   const [formData, setFormData] = useState({
     title: "",
@@ -34,17 +36,26 @@ export const DeckSelectionForm = () => {
     setFormData(prev => ({ ...prev, [name]: type === "checkbox" ? true : value }));
   };
 
-  const handleCreate = () => {
-    console.log("Creating Deck:", formData);
+  const handleDeckCreation = async (event:React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      const response = await axios.post("http://localhost:8600/api/flashcards/createDeck", formData, {withCredentials:true, headers:{"Content-Type": "application/json"}});
+      const responseData = response.data;
+
+      if (response.status !== 201) {
+        alert(`Error while trying to create a deck: ${responseData.error}`);
+      } 
+
+      alert("Deck created!");
+    } catch (error) {
+      alert(`Creating deck failed: ${error}`);
+    }
+
+
     setShowCreateForm(false);
-    setFormData({
-      title: "",
-      description: "",
-      cefrLevel: "",
-      hskLevel: "",
-      isShareable: false,
-      image: "",
-    });
   };
 
   return (
@@ -77,7 +88,7 @@ export const DeckSelectionForm = () => {
       {/* Floating Create Deck Form */}
       {showCreateForm && (
         <div style={styles.overlay}>
-          <div style={styles.floatingForm}>
+          <form onSubmit={(event) => handleDeckCreation(event)} style={styles.floatingForm} method="POST" encType="multipart/form-data">
             <h3 style={styles.heading}>Create New Deck</h3>
 
             <label style={styles.label}>
@@ -98,6 +109,14 @@ export const DeckSelectionForm = () => {
             ) : (
               <label style={styles.label}>
                 CEFR Level:
+                <select name="cefrLevel" required={true}>
+                  <option disabled={true}>Select</option>
+                  { cefrLevelsList.map((cefrLevel, index) => (
+                    <option key={index}value={cefrLevel}>
+                      { cefrLevel }
+                    </option>
+                  ))}
+                </select>
                 <input type="text" name="cefrLevel" value={formData.cefrLevel} onChange={handleChange} style={styles.input} />
               </label>
             )}
@@ -114,9 +133,9 @@ export const DeckSelectionForm = () => {
 
             <div style={styles.formButtons}>
               <button style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={() => setShowCreateForm(false)}>Cancel</button>
-              <button style={styles.button} onClick={handleCreate}>Create</button>
+              <button type="submit" style={styles.button}>Create</button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </div>
