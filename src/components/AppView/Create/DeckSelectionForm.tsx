@@ -28,7 +28,7 @@ export const DeckSelectionForm = () => {
     const formData = new FormData(event.currentTarget);
 
     try {
-      const response = await axios.post("http://localhost:8600/api/flashcards/createDeck", formData, {withCredentials:true, headers:{"Content-Type": "application/json"}});
+      const response = await axios.post("http://localhost:8600/api/flashcards/deck", formData, {withCredentials:true, headers:{"Content-Type": "application/json"}});
       const responseData = response.data;
 
       if (response.status !== 201) {
