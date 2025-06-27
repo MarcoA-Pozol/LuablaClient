@@ -11,13 +11,14 @@ import { useState } from "react";
 export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
+    const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
     
     return (
         <>
             { authUser.has_picked_language ? (
                 <div>
-                    <TopNavBarApp authUser={authUser}/>
-                    <AppContentContainer>
+                    <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
+                    <AppContentContainer languageToStudy={languageToStudy}>
                         {displayedContainer === "learning" && (<LearningContainer/>)}
                         {displayedContainer === "library" && (<LibraryContainer/>)}
                         {displayedContainer === "creation" && (<CreationContainer/>)}

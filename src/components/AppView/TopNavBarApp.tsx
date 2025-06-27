@@ -19,15 +19,17 @@ import RussianFlag from "../../assets/AppView/russian_flag.png";
 
 interface TopNavBarAppProps {
     authUser: any|null;
+    languageToStudy: string;
+    setLanguageToStudy: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
+export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:TopNavBarAppProps) => {
     const navigate = useNavigate();
-    const [selectedLanguage,setSelectedLanguage] = useState<string>("English"); 
     const [notificationsCount] = useState<number>(12);
 
-    const handleLanguageSelection = () => {
-        setSelectedLanguage("Chinese");
+    const handleLanguageSelection = (event:React.ChangeEvent<HTMLSelectElement>) => {
+        setLanguageToStudy(event.target.value || "EN");
+        localStorage.setItem("languageToStudy", event.target.value || "EN");
     }
 
     return (
@@ -40,42 +42,40 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
             </div>
 
             <div id="language_container">
-                <form method="post" onSubmit={handleLanguageSelection}>
-                    {selectedLanguage === "English" ? (
-                        <img src={EnglishFlag}/>
-                    ): selectedLanguage === "French" ? (
-                        <img src={FrenchFlag}/>
-                    ): selectedLanguage === "Italian" ? (
-                        <img src={ItalianFlag}/>
-                    ): selectedLanguage === "Spanish" ? (
-                        <img src={SpanishFlag}/>
-                    ): selectedLanguage === "German" ? (
-                        <img src={GermanFlag}/>
-                    ): selectedLanguage === "Japanese" ? (
-                        <img src={JapaneseFlag}/>
-                    ): selectedLanguage === "Chinese" ? (
-                        <img src={ChineseFlag}/>
-                    ): selectedLanguage === "Korean" ? (
-                        <img src={KoreanFlag}/>
-                    ): selectedLanguage === "Portuguese" ? (
-                        <img src={PortugueseFlag}/>
-                    ): selectedLanguage === "Russian" ? (
-                        <img src={RussianFlag}/>
-                    ): (<img src={EnglishFlag}/>)}
+                {languageToStudy === "EN" ? (
+                    <img src={EnglishFlag}/>
+                ): languageToStudy === "FR" ? (
+                    <img src={FrenchFlag}/>
+                ): languageToStudy === "IT" ? (
+                    <img src={ItalianFlag}/>
+                ): languageToStudy === "ES" ? (
+                    <img src={SpanishFlag}/>
+                ): languageToStudy === "DE" ? (
+                    <img src={GermanFlag}/>
+                ): languageToStudy === "JP" ? (
+                    <img src={JapaneseFlag}/>
+                ): languageToStudy === "ZH" ? (
+                    <img src={ChineseFlag}/>
+                ): languageToStudy === "KO" ? (
+                    <img src={KoreanFlag}/>
+                ): languageToStudy === "PT" ? (
+                    <img src={PortugueseFlag}/>
+                ): languageToStudy === "RU" ? (
+                    <img src={RussianFlag}/>
+                ): (<img src={EnglishFlag}/>)}
 
-                    <select name="language" id="language" value={selectedLanguage}>
-                        <option value="English" selected={selectedLanguage === "English"}>English</option>
-                        <option value="Chinese" selected={selectedLanguage === "Chinese"}>Chinese</option>
-                        <option value="German" selected={selectedLanguage === "German"}>German</option>
-                        <option value="Japanese" selected={selectedLanguage === "Japanese"}>Japanese</option>
-                        <option value="Spanish" selected={selectedLanguage === "Spanish"}>Spanish</option>
-                        <option value="Korean" selected={selectedLanguage === "Korean"}>Korean</option>
-                        <option value="French" selected={selectedLanguage === "French"}>French</option>
-                        <option value="Italian" selected={selectedLanguage === "Italian"}>Italian</option>
-                        <option value="Portuguese" selected={selectedLanguage === "Portuguese"}>Portuguese</option>
-                        <option value="Russian" selected={selectedLanguage === "Russian"}>Russian</option>
-                    </select>
-                </form>  
+                <select name="languageToStudy" id="language" value={languageToStudy} onChange={handleLanguageSelection}>
+                    <option value="EN">English</option>
+                    <option value="ZH">Chinese</option>
+                    <option value="DE">German</option>
+                    <option value="JP">Japanese</option>
+                    <option value="ES">Spanish</option>
+                    <option value="KO">Korean</option>
+                    <option value="FR">French</option>
+                    <option value="IT">Italian</option>
+                    <option value="PT">Portuguese</option>
+                    <option value="RU">Russian</option>
+                </select>
             </div>
 
             <div className="notifications-container">
