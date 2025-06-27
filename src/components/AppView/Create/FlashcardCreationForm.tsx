@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-
-export const FlashcardCreationForm = () => {
+interface FlashcardCreationFormProps {
+  languageToStudy: string;
+}
+export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormProps) => {
     const [language] = useState<string>("english");
     const [formData, setFormData] = useState({
         word: "",

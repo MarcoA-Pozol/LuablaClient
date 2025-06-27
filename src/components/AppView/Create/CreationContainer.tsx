@@ -1,12 +1,16 @@
 import { DeckSelectionForm } from "./DeckSelectionForm";
 import { FlashcardCreationForm } from "./FlashcardCreationForm";
 
-export const CreationContainer = () => {
+interface CreationContainerProps {
+    languageToStudy: string;
+}
+
+export const CreationContainer = ({languageToStudy}:CreationContainerProps) => {
 
     return (
         <div style={{display:"inline-flex"}}>
-            <FlashcardCreationForm/>
-            <DeckSelectionForm/>
+            <FlashcardCreationForm languageToStudy={languageToStudy}/>
+            <DeckSelectionForm languageToStudy={languageToStudy}/>
         </div>
     );
 }

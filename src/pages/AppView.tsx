@@ -18,10 +18,10 @@ export const AppView = () => {
             { authUser.has_picked_language ? (
                 <div>
                     <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
-                    <AppContentContainer languageToStudy={languageToStudy}>
-                        {displayedContainer === "learning" && (<LearningContainer/>)}
-                        {displayedContainer === "library" && (<LibraryContainer/>)}
-                        {displayedContainer === "creation" && (<CreationContainer/>)}
+                    <AppContentContainer>
+                        {displayedContainer === "learning" && (<LearningContainer languageToStudy={languageToStudy}/>)}
+                        {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy}/>)}
+                        {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy}/>)}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
                 </div>

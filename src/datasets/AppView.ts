@@ -6,3 +6,11 @@ export const cefrLevelsList: string[] = [
     "C1",
     "C2",
 ];
+
+export const jlptLevelsList: string[] = [
+    "N5",
+    "N4",
+    "N3",
+    "N2",
+    "N1",
+];

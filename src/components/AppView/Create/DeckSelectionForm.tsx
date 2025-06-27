@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { cefrLevelsList } from "../../../datasets/AppView";
+import { cefrLevelsList, jlptLevelsList } from "../../../datasets/AppView";
 import ChineseFlag from "../../../assets/AppView/chinese_flag.png";
 import EnglishFlag from "../../../assets/AppView/english_flag.png";
 import FrenchFlag from "../../../assets/AppView/french_flag.png";
@@ -17,10 +17,13 @@ const mockDecks: Deck[] = [
   { id: 3, name: "German Phrases", image: FrenchFlag },
 ];
 
-export const DeckSelectionForm = () => {
+
+interface DeckSelectionFormProps {
+  languageToStudy: string;
+}
+export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
   const decks = mockDecks;
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [language] = useState("english"); // Change as needed
 
   const handleDeckCreation = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -87,7 +90,7 @@ export const DeckSelectionForm = () => {
               <textarea name="description" style={styles.textarea} required={true} placeholder="Example: ''These words are ideal if you are starting with learning this language from scratch.''"/>
             </label>
 
-            {language === "chinese" || language === "japanese" ? (
+            {languageToStudy === "ZH" ? (
               <label style={styles.label}>
                 HSK Level:
                 <select name="hskLevel" required={true}>
@@ -95,6 +98,18 @@ export const DeckSelectionForm = () => {
                   { cefrLevelsList.map((hskLevel, index) => (
                     <option key={index}value={hskLevel}>
                       { hskLevel }
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : languageToStudy === "JP" ? (
+              <label style={styles.label}>
+                JLPT Level:
+                <select name="hskLevel" required={true}>
+                  <option disabled={true}>Select</option>
+                  { jlptLevelsList.map((jlptLevel, index) => (
+                    <option key={index}value={jlptLevel}>
+                      { jlptLevel }
                     </option>
                   ))}
                 </select>

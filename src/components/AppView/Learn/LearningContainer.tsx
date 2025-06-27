@@ -1,8 +1,12 @@
-export const LearningContainer= () => {
+interface LearningContainerProps {
+    languageToStudy: string;
+}
+
+export const LearningContainer= ({languageToStudy}:LearningContainerProps) => {
 
     return (
         <>
-            <h2>Here you can learn new words</h2>
+            <h2>Here you can learn new words: {languageToStudy}</h2>
         </>
     );
 }
