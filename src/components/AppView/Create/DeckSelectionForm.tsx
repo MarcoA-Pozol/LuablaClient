@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { cefrLevelsList, jlptLevelsList } from "../../../datasets/AppView";
+import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
 import ChineseFlag from "../../../assets/AppView/chinese_flag.png";
 import EnglishFlag from "../../../assets/AppView/english_flag.png";
 import FrenchFlag from "../../../assets/AppView/french_flag.png";
@@ -24,6 +24,15 @@ interface DeckSelectionFormProps {
 export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
   const decks = mockDecks;
   const [showCreateForm, setShowCreateForm] = useState(false);
+
+  const levelList =
+  languageToStudy === "JP"
+    ? jlptLevelsList
+    : languageToStudy === "ZH"
+    ? hskLevelsList: 
+    languageToStudy === "KO"
+    ? topikLevelsList
+    : cefrLevelsList;
 
   const handleDeckCreation = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -90,43 +99,17 @@ export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
               <textarea name="description" style={styles.textarea} required={true} placeholder="Example: ''These words are ideal if you are starting with learning this language from scratch.''"/>
             </label>
 
-            {languageToStudy === "ZH" ? (
-              <label style={styles.label}>
-                HSK Level:
-                <select name="hskLevel" required={true}>
-                  <option disabled={true}>Select</option>
-                  { cefrLevelsList.map((hskLevel, index) => (
-                    <option key={index}value={hskLevel}>
-                      { hskLevel }
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : languageToStudy === "JP" ? (
-              <label style={styles.label}>
-                JLPT Level:
-                <select name="hskLevel" required={true}>
-                  <option disabled={true}>Select</option>
-                  { jlptLevelsList.map((jlptLevel, index) => (
-                    <option key={index}value={jlptLevel}>
-                      { jlptLevel }
-                    </option>
-                  ))}
-                </select>
-              </label>
-            ) : (
-              <label style={styles.label}>
-                CEFR Level:
-                <select name="cefrLevel" required={false}>
-                  <option disabled={true}>Select</option>
-                  { cefrLevelsList.map((cefrLevel, index) => (
-                    <option key={index}value={cefrLevel}>
-                      { cefrLevel }
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
+            <label style={styles.label}>
+              {languageToStudy === "JP" ? ("JLPT Level") : languageToStudy === "ZH" ? ("HSK Level") : languageToStudy === "KO" ? ("TOPIK Level") : ("CEFR Level")}
+              <select name={languageToStudy === "JP" ? ("jlptLevel") : languageToStudy === "ZH" ? ("hskLevel") : languageToStudy === "KO" ? ("topikLevel") : ("cefrLevel")} required={true}>
+                <option disabled={true}>Select</option>
+                { levelList.map((level, index) => (
+                  <option key={index}value={level}>
+                    { level }
+                  </option>
+                ))}
+              </select>
+            </label>
 
             <label style={styles.label}>
               Shareable Deck:
