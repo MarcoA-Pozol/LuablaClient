@@ -9,10 +9,10 @@ import JapaneseFlagIMG from "../../assets/AuthView/japanese_flag.png";
 
 
 const languages = [
-    { name: "English", image: EnglishFlagIMG },
-    { name: "French", image: FrenchFlagIMG },
-    { name: "Italian", image: ItalianFlagIMG },
-    { name: "Japanese", image: JapaneseFlagIMG },
+    { languageVal: "EN", name: "English", image: EnglishFlagIMG },
+    { languageVal: "FR", name: "French", image: FrenchFlagIMG },
+    { languageVal: "IT", name: "Italian", image: ItalianFlagIMG },
+    { languageVal: "JP", name: "Japanese", image: JapaneseFlagIMG },
     // { name: "German", image: SignInFormIMG },
     // { name: "Chinese", image: SignInFormIMG },
     // { name: "Spanish", image: SignInFormIMG },
@@ -29,7 +29,7 @@ export const PickLanguageForm = () => {
 
     const handleSetPickedLanguage = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!pickedLanguage) return;
+        if (!pickedLanguage) return; 
 
         try {
             const response = await axios.put("http://localhost:8600/api/app/setLanguagePicked", {
@@ -43,6 +43,7 @@ export const PickLanguageForm = () => {
                 return;
             }
             
+            localStorage.setItem("languageToStudy", pickedLanguage || "EN");
             window.location.reload();
         } catch (error) {
             alert(`Selecting a language failed: ${error}`);
@@ -61,7 +62,7 @@ export const PickLanguageForm = () => {
                             key={lang.name}
                             className={`language-card ${pickedLanguage === lang.name ? 'active' : ''}`}
                             onClick={() => {
-                                setPickedLanguage(lang.name);
+                                setPickedLanguage(lang.languageVal);
                             }} 
                         >
                             <img src={lang.image} alt={lang.name}/>
