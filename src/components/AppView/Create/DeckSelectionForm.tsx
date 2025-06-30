@@ -40,7 +40,7 @@ export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
     const formData = new FormData(event.currentTarget);
 
     try {
-      const response = await axios.post("http://localhost:8600/api/flashcards/deck", formData, {withCredentials:true, headers:{"Content-Type": "application/json"}});
+      const response = await axios.post("http://localhost:8600/api/app/deck", formData, {withCredentials:true, headers:{"Content-Type": "multipart/form-data"}});
       const responseData = response.data;
 
       if (response.status !== 201) {
@@ -104,7 +104,7 @@ export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
               <select name={languageToStudy === "JP" ? ("jlptLevel") : languageToStudy === "ZH" ? ("hskLevel") : languageToStudy === "KO" ? ("topikLevel") : ("cefrLevel")} required={true}>
                 <option disabled={true}>Select</option>
                 { levelList.map((level, index) => (
-                  <option key={index}value={level}>
+                  <option key={index} value={level}>
                     { level }
                   </option>
                 ))}
