@@ -13,7 +13,6 @@ import ChineseFlag from "../../assets/AppView/chinese_flag.png";
 import SpanishFlag from "../../assets/AppView/spanish_flag.png";
 import KoreanFlag from "../../assets/AppView/korean_flag.png";
 import PortugueseFlag from "../../assets/AppView/portuguese_flag.png";
-
 import RussianFlag from "../../assets/AppView/russian_flag.png";
 
 

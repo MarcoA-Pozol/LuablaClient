@@ -8,7 +8,7 @@ export const LearningContainer= ({languageToStudy}:LearningContainerProps) => {
 
     return (
         <>
-            <GetUserDecks/>
+            <GetUserDecks languageToStudy={languageToStudy}/>
             <h2>Here you can learn new words: {languageToStudy}</h2>
         </>
     );
