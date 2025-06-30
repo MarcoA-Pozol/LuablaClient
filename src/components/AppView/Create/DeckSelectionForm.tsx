@@ -89,6 +89,8 @@ export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
           <form onSubmit={(event) => handleDeckCreation(event)} style={styles.floatingForm} method="POST" encType="multipart/form-data">
             <h3 style={styles.heading}>Create New Deck</h3>
 
+            <input type="hidden" name="language" value={languageToStudy}/>
+
             <label style={styles.label}>
               Title:
               <input type="text" name="title" style={styles.input} required={true} placeholder="Example: ''Words for Beginners''"/>
