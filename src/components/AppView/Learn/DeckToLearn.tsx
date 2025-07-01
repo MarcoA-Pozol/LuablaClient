@@ -1,5 +1,6 @@
 import type React from "react";
 import { useState } from "react";
+import { useAuth } from "../../../App";
 
 interface DeckToLearnProps {
     index:string|number;
@@ -14,6 +15,7 @@ interface DeckToLearnProps {
 
 export const DeckToLearn = ({index, title, description, image, author, level, cardsQuantity}:DeckToLearnProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
+    const {authUser} = useAuth();
 
     // Style
     const styles: {[key:string]: React.CSSProperties} = {
@@ -103,9 +105,34 @@ export const DeckToLearn = ({index, title, description, image, author, level, ca
             fontSize: "0.8em",
             color: "white",
             backgroundColor: "rgb(18, 138, 68)"
+        },
+        addCardsButton: {
+            width: "100%",
+            color: "#999",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            fontSize: "1rem",
+            cursor: "pointer",
+            transition: "background-color 0.3s ease"
+        },
+        studyButton: {
+            width: "100%",
+            paddingBlock: "5px",
+            paddingInline: "120px",
+            textAlign: "center",
+            alignContent: "center",
+            backgroundColor: "rgb(35, 10, 90)",
+            color: "white",
+            cursor: "pointer",
+            fontSize: "1.2rem",
+            borderRadius: "5px",
+            border: "none"
         }
     }
-    
+
+    console.log(authUser);
+
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
             <h3 style={styles.title}>{title}</h3>
@@ -116,6 +143,8 @@ export const DeckToLearn = ({index, title, description, image, author, level, ca
                 <h4 style={styles.level}>{level}</h4>
                 <h4 style={styles.cardsQuantity}>{cardsQuantity}</h4>
             </div>
+            {author === authUser.id && (<button style={styles.addCardsButton}>Add +</button>)}
+            <button style={styles.studyButton}>Study</button>
         </div>
     );
 }
