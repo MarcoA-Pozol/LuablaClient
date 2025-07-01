@@ -1,28 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
-import ChineseFlag from "../../../assets/AppView/chinese_flag.png";
-import EnglishFlag from "../../../assets/AppView/english_flag.png";
-import FrenchFlag from "../../../assets/AppView/french_flag.png";
-
-type Deck = {
-  id: number;
-  name: string;
-  image: string;
-};
-
-const mockDecks: Deck[] = [
-  { id: 1, name: "Spanish Basics", image: ChineseFlag },
-  { id: 2, name: "French Verbs", image: EnglishFlag },
-  { id: 3, name: "German Phrases", image: FrenchFlag },
-];
-
 
 interface DeckSelectionFormProps {
   languageToStudy: string;
+  userDecksList:any[];
 }
-export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
-  const decks = mockDecks;
+export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelectionFormProps) => {
+  const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   const levelList =
@@ -70,8 +55,8 @@ export const DeckSelectionForm = ({languageToStudy}:DeckSelectionFormProps) => {
           <div style={styles.decksList}>
             {decks.map((deck) => (
               <div key={deck.id} style={styles.deckItem}>
-                <img src={deck.image} alt={deck.name} style={styles.deckImage} />
-                <span style={styles.deckName}>{deck.name}</span>
+                <img src={deck.image ? (`http://localhost:8600${deck.image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")} alt={deck.title} style={styles.deckImage} />
+                <span style={styles.deckName}>{deck.title}</span>
               </div>
             ))}
           </div>
