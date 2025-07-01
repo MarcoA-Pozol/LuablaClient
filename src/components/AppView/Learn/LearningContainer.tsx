@@ -1,14 +1,16 @@
 import { GetUserDecks } from "./GetUserDecks";
 
 interface LearningContainerProps {
+    authUser: string;
+    userDecksList:any[];
     languageToStudy: string;
 }
 
-export const LearningContainer= ({languageToStudy}:LearningContainerProps) => {
+export const LearningContainer= ({authUser, userDecksList, languageToStudy}:LearningContainerProps) => {
 
     return (
         <>
-            <GetUserDecks languageToStudy={languageToStudy}/>
+            <GetUserDecks authUser={authUser} userDecksList={userDecksList} languageToStudy={languageToStudy}/>
         </>
     );
 }
