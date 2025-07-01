@@ -5,19 +5,22 @@ interface DeckToLearnProps {
     title:string;
     description:string;
     image:string;
+    author:string;
     level:string;
-    languageToStudy:string;
+    cardsQuantity:string;
 }
 
-export const DeckToLearn = ({index, title, description, image, level, languageToStudy}:DeckToLearnProps) => {
+export const DeckToLearn = ({index, title, description, image, author, level, cardsQuantity}:DeckToLearnProps) => {
 
     return (
         <div key={index} style={styles.deck}>
             <h3>{title}</h3>
-            <p>{description}</p>
             <img style={styles.deckImage} src={image ? (`http://localhost:8600${image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")}/>
-            <div style={styles.inlineTags}>
-                <span>{languageToStudy === "ZH" ? ("HSK") : languageToStudy === "JP" ? ("JLPT") : languageToStudy === "KO" ? ("TOPIK") : ("CEFR")}{level}</span>
+            <p>{description}</p>
+            <div style={styles.deckTags}>
+                <h4 style={styles.deckAuthor}>{author}</h4>
+                <h4 style={styles.deckLevel}>{level}</h4>
+                <h4 style={styles.deckCardsQuantity}>{cardsQuantity}</h4>
             </div>
         </div>
     );
@@ -39,10 +42,39 @@ const styles: {[key:string]: React.CSSProperties} = {
         objectFit: "cover",
         borderRadius: "4px"
     },
-    inlineTags: {
+    deckTags: {
         display: "inline-flex",
         justifyContent: "center",
-        alignContent: "center",
-        textAlign: "center"
+        alignItems: "center",
+        gap: "10px",
+        width: "100%",
+        marginBottom: "10px"
+    },
+    deckAuthor: {
+        borderRadius: "5px",
+        paddingInline: "5px",
+        paddingBlock: "2px",
+        border: "none",
+        fontSize: "0.8em",
+        color: "white",
+        backgroundColor: "rgb(95, 30, 179)"
+    },
+    deckLevel: {
+        borderRadius: "5px",
+        paddingInline: "5px",
+        paddingBlock: "2px",
+        border: "none",
+        fontSize: "0.8em",
+        color: "white",
+        backgroundColor: "rgb(224, 72, 45)"
+    },
+    deckCardsQuantity: {
+        borderRadius: "5px",
+        paddingInline: "5px",
+        paddingBlock: "2px",
+        border: "none",
+        fontSize: "0.8em",
+        color: "white",
+        backgroundColor: "rgb(18, 138, 68)"
     }
 }
