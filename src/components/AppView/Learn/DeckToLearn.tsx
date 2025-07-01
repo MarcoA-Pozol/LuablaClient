@@ -1,9 +1,9 @@
 import type React from "react";
 import { useState } from "react";
-import { useAuth } from "../../../App";
 import { FaUser, FaCertificate } from "react-icons/fa";
 
 interface DeckToLearnProps {
+    authUser:any;
     index:string|number;
     title:string;
     description:string;
@@ -14,9 +14,8 @@ interface DeckToLearnProps {
 }
 
 
-export const DeckToLearn = ({index, title, description, image, author, level, cardsQuantity}:DeckToLearnProps) => {
+export const DeckToLearn = ({authUser, index, title, description, image, author, level, cardsQuantity}:DeckToLearnProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
-    const {authUser} = useAuth();
 
     // Style
     const styles: {[key:string]: React.CSSProperties} = {
@@ -131,8 +130,6 @@ export const DeckToLearn = ({index, title, description, image, author, level, ca
             border: "none"
         }
     }
-
-    console.log(authUser);
 
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
