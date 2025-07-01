@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { DeckToLearn } from "./DeckToLearn";
 
 interface GetUserDecksProps {
     languageToStudy:string;
@@ -37,11 +38,7 @@ export const GetUserDecks = ({languageToStudy}:GetUserDecksProps) => {
         <div style={styles.container}>
             {decksList.length > 0 && typeof decksList[0] === "object" ? (
             decksList.map((deck: any, index) => (
-                <div key={index} style={styles.card}>
-                <h3>{deck.title}</h3>
-                {deck.description && <p>{deck.description}</p>}
-                {deck.image && <img src={`http://localhost:8600/${deck.image}`} alt={deck.title} style={styles.image} />}
-                </div>
+                <DeckToLearn index={index} title={deck.title} description={deck.description} image={deck.image} level={deck.level} languageToStudy={languageToStudy}/>
             ))
             ) : (
             <p>No decks found</p>
@@ -58,18 +55,4 @@ const styles: { [key: string]: React.CSSProperties } = {
     gap: "20px",
     padding: "20px"
   },
-  card: {
-    border: "1px solid royalblue",
-    borderRadius: "8px",
-    padding: "16px",
-    width: "200px",
-    backgroundColor: "#fff",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-  },
-  image: {
-    width: "100%",
-    height: "100px",
-    objectFit: "cover",
-    borderRadius: "4px"
-  }
 };
