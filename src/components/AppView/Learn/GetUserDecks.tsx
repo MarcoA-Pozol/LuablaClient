@@ -34,6 +34,8 @@ export const GetUserDecks = ({languageToStudy}:GetUserDecksProps) => {
         fetchDecks();
     }, [languageToStudy])
 
+    console.log(decksList)
+
     return (
         <div style={styles.decksContainer}>
             {decksList.length > 0 && typeof decksList[0] === "object" ? (
