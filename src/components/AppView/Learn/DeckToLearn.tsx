@@ -1,6 +1,7 @@
 import type React from "react";
 import { useState } from "react";
 import { useAuth } from "../../../App";
+import { FaUser, FaCertificate } from "react-icons/fa";
 
 interface DeckToLearnProps {
     index:string|number;
@@ -139,11 +140,11 @@ export const DeckToLearn = ({index, title, description, image, author, level, ca
             <img style={styles.image} src={image ? (`http://localhost:8600${image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")}/>
             <p style={styles.description}>{description}</p>
             <div style={styles.tags}>
-                <h4 style={styles.author}>{author}</h4>
-                <h4 style={styles.level}>{level}</h4>
-                <h4 style={styles.cardsQuantity}>{cardsQuantity}</h4>
+                <h4 style={styles.author}><FaUser/> {author}</h4>
+                <h4 style={styles.level}><FaCertificate/> {level}</h4>
+                <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
-            {author === authUser.id && (<button style={styles.addCardsButton}>Add +</button>)}
+            {author === authUser.username && (<button style={styles.addCardsButton}>Add +</button>)}
             <button style={styles.studyButton}>Study</button>
         </div>
     );

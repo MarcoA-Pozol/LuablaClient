@@ -38,7 +38,7 @@ export const GetUserDecks = ({languageToStudy}:GetUserDecksProps) => {
         <div style={styles.decksContainer}>
             {decksList.length > 0 && typeof decksList[0] === "object" ? (
             decksList.map((deck: any, index) => (
-                <DeckToLearn index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={deck.cefr_level} cardsQuantity={deck.cards_quantity}/>
+                <DeckToLearn index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={languageToStudy === "ZH" ? (deck.hsk_level) : languageToStudy === "JP" ? (deck.jlpt_level) : languageToStudy === "KO" ? (deck.topik_level) : (deck.cefr_level)} cardsQuantity={deck.cards_quantity}/>
             ))
             ) : (
             <p>No decks found</p>
