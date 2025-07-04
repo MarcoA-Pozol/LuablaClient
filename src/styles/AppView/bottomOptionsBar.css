@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     gap: 100px;
+    height: 30px;
     align-items: center;
     padding: 10px 0;    
     background-color: #222;
@@ -26,4 +27,11 @@
 
 .bottom-options-bar a:hover {
     transform: scale(1.1);
+}
+
+/* Responsiveness */
+@media (max-width:768px) {
+    .bottom-options-bar {
+        gap: 50px;
+    }
 }
