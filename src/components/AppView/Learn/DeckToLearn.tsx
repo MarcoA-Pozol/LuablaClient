@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
 
 interface DeckToLearnProps {
@@ -16,6 +16,13 @@ interface DeckToLearnProps {
 
 export const DeckToLearn = ({authUser, index, title, description, image, author, level, cardsQuantity}:DeckToLearnProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     // Style
     const styles: {[key:string]: React.CSSProperties} = {
@@ -26,16 +33,15 @@ export const DeckToLearn = ({authUser, index, title, description, image, author,
             ? "5px 6px 6px 4px rgba(66, 64, 64, 0.6)" 
             : "3px 4px 2px 3px rgb(66, 64, 64)",
             paddingBlock: "10px",
-            paddingInline: "20px",
+            paddingInline: "10px",
             justifyContent: "center",
             justifyItems: "center",
             textAlign: "center",
             alignItems: "center",
             borderRadius: "10px",
             backgroundColor: "#ffffff",
-            width: "28%",
-            marginLeft: "5%",
-            marginBottom: "120px",
+            marginBottom: "50px",
+            width: screenWidth < 768 ? "70vw" : "25vw"
         },
         title: {
             width: "100%",

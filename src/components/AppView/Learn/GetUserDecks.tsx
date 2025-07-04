@@ -23,10 +23,11 @@ export const GetUserDecks = ({authUser, userDecksList, languageToStudy}:GetUserD
 
 const styles: { [key: string]: React.CSSProperties } = {
   decksContainer: {
+    paddingTop: "20px",
     display: "flex",
+    justifyContent: "center",
     flexWrap: "wrap",
     width: "100%",
-    gap: "20px",
-    padding: "20px"
+    gap: "50px",
   },
 };
