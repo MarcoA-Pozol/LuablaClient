@@ -66,7 +66,7 @@ export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:Top
                 <select name="languageToStudy" id="language" value={languageToStudy} onChange={handleLanguageSelection}>
                     <option value="EN">English</option>
                     <option value="ZH">Chinese</option>
-                    <option value="DE">German</option>
+                    <option value="DE">Deutsch</option>
                     <option value="JP">Japanese</option>
                     <option value="ES">Spanish</option>
                     <option value="KO">Korean</option>
@@ -90,10 +90,8 @@ export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:Top
                 </a>
             </div>
 
-            <div className="profile_container">
-                <a onClick={() => {navigate("/profile")}}>
+            <div onClick={() => {navigate("/profile")}} className="profile_container">
                     <img src={`http://localhost:8600/${authUser.profile_picture}`} alt={authUser.profile_picture}/>  
-                </a>
             </div>
 
         </div>
