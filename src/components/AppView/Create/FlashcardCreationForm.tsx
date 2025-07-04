@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
@@ -14,6 +14,13 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         kanji: "",
         kana: "",
     });
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    
+    useEffect(() => {
+        const handleResize = () => setScreenWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -36,6 +43,63 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         e.preventDefault();
         console.log("Flashcard Data:", formData);
     };
+
+    // Style
+    const styles: { [key: string]: React.CSSProperties } = {
+      form: {
+        backgroundColor: "white",
+        padding: "20px",
+        borderRadius: "10px",
+        maxWidth: "500px",
+        border: "1px solid royalblue",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+        height: screenWidth < 768 ? "200px" : "400px"
+      },
+      heading: {
+        color: "royalblue",
+        fontSize: "22px",
+        textAlign: "center",
+        marginBottom: "20px",
+      },
+      label: {
+        display: "block",
+        color: "#333",
+        marginBottom: "12px",
+      },
+      input: {
+        width: "100%",
+        padding: "8px",
+        borderRadius: "5px",
+        border: "1px solid #ccc",
+        marginTop: "4px",
+      },
+      textarea: {
+        width: "100%",
+        padding: "8px",
+        borderRadius: "5px",
+        border: "1px solid #ccc",
+        marginTop: "4px",
+        resize: "vertical",
+        minHeight: "60px",
+      },
+      buttonContainer: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "20px",
+      },
+      button: {
+        padding: "10px 18px",
+        backgroundColor: "royalblue",
+        color: "white",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer",
+        fontWeight: "bold",
+        flex: 1,
+        marginLeft: "10px",
+      },
+    };
+
 
     return (
         <form onSubmit={handleSubmit} style={styles.form}>
@@ -128,62 +192,4 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
       </div>
     </form>
     );
-};
-
-// -------------------
-// Styles
-// -------------------
-const styles: { [key: string]: React.CSSProperties } = {
-  form: {
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "10px",
-    maxWidth: "500px",
-    margin: "30px auto",
-    border: "1px solid royalblue",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-  },
-  heading: {
-    color: "royalblue",
-    fontSize: "22px",
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  label: {
-    display: "block",
-    color: "#333",
-    marginBottom: "12px",
-  },
-  input: {
-    width: "100%",
-    padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    marginTop: "4px",
-  },
-  textarea: {
-    width: "100%",
-    padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    marginTop: "4px",
-    resize: "vertical",
-    minHeight: "60px",
-  },
-  buttonContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "20px",
-  },
-  button: {
-    padding: "10px 18px",
-    backgroundColor: "royalblue",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    flex: 1,
-    marginLeft: "10px",
-  },
 };

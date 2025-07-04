@@ -19,9 +19,9 @@ export const DeckToLearn = ({authUser, index, title, description, image, author,
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+        const handleResize = () => setScreenWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     // Style

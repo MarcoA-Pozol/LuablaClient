@@ -9,7 +9,7 @@ interface CreationContainerProps {
 export const CreationContainer = ({languageToStudy, userDecksList}:CreationContainerProps) => {
 
     return (
-        <div style={{display:"inline-flex"}}>
+        <div style={{paddingTop: "10px", display: "flex", justifyContent: "center", flexWrap: "wrap", width: "100%", gap: "50px",}}>
             <FlashcardCreationForm languageToStudy={languageToStudy}/>
             <DeckSelectionForm languageToStudy={languageToStudy} userDecksList={userDecksList}/>
         </div>

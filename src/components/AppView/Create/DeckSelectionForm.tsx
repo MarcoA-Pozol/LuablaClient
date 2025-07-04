@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
 
@@ -9,6 +9,13 @@ interface DeckSelectionFormProps {
 export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelectionFormProps) => {
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    
+  useEffect(() => {
+      const handleResize = () => setScreenWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const levelList =
   languageToStudy === "JP"
@@ -41,6 +48,120 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
     setShowCreateForm(false);
   };
 
+
+  // Style
+  const styles: { [key: string]: React.CSSProperties } = {
+    container: {
+      padding: "20px",
+      border: "1px solid royalblue",
+      borderRadius: "10px",
+      maxWidth: "500px",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+      height: screenWidth < 768 ? "200px" : "400px"
+    },
+    heading: {
+      color: "royalblue",
+      fontSize: "24px",
+      marginBottom: "20px",
+      textAlign: "center",
+    },
+    noDecksContainer: {
+      textAlign: "center",
+    },
+    decksList: {
+      borderRadius: "5px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "5px",
+      marginBottom: "20px",
+      height:"250px",
+      overflowY: "scroll"
+    },
+    deckItem: {
+      backgroundColor: "white",
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      padding: "10px",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
+      cursor: "pointer",
+      transition: "0.3s ease",
+    },
+    deckImage: {
+      width: "60px",
+      height: "60px",
+      borderRadius: "6px",
+      objectFit: "cover",
+    },
+    deckName: {
+      fontSize: "18px",
+      color: "#333",
+    },
+    text: {
+      color: "#333",
+      marginBottom: "10px",
+    },
+    button: {
+      backgroundColor: "royalblue",
+      color: "white",
+      border: "none",
+      padding: "10px 16px",
+      fontSize: "16px",
+      borderRadius: "6px",
+      cursor: "pointer",
+      margin: "5px",
+    },
+    createMore: {
+      textAlign: "center",
+    },
+    // Floating form
+    overlay: {
+      position: "fixed",
+      top: 0, left: 0, right: 0, bottom: 0,
+      backgroundColor: "rgba(0,0,0,0.5)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 1000,
+    },
+    floatingForm: {
+      backgroundColor: "white",
+      padding: "25px",
+      borderRadius: "10px",
+      maxWidth: "500px",
+      width: "90%",
+      boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
+    },
+    label: {
+      display: "block",
+      marginBottom: "12px",
+      color: "#333",
+    },
+    input: {
+      width: "100%",
+      padding: "8px",
+      marginTop: "4px",
+      borderRadius: "5px",
+      border: "1px solid #ccc",
+    },
+    textarea: {
+      width: "100%",
+      padding: "8px",
+      marginTop: "4px",
+      borderRadius: "5px",
+      border: "1px solid #ccc",
+      resize: "vertical",
+      minHeight: "60px",
+    },
+    formButtons: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginTop: "20px",
+    },
+  };
+
+
   return (
     <div style={styles.container}>
       <h2 style={styles.heading}>Choose a Deck</h2>
@@ -62,7 +183,6 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
           </div>
 
           <div style={styles.createMore}>
-            <p style={styles.text}>Want to organize more cards?</p>
             <button style={styles.button} onClick={() => setShowCreateForm(true)}>+ Create Another Deck</button>
           </div>
         </>
@@ -117,115 +237,4 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       )}
     </div>
   );
-};
-
-// -------------------
-// Styles
-// -------------------
-const styles: { [key: string]: React.CSSProperties } = {
-  container: {
-    padding: "20px",
-    backgroundColor: "white",
-    border: "1px solid royalblue",
-    borderRadius: "10px",
-    maxWidth: "500px",
-    margin: "30px auto",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-  },
-  heading: {
-    color: "royalblue",
-    fontSize: "24px",
-    marginBottom: "20px",
-    textAlign: "center",
-  },
-  noDecksContainer: {
-    textAlign: "center",
-  },
-  decksList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-    marginBottom: "20px",
-  },
-  deckItem: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    padding: "10px",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    cursor: "pointer",
-    transition: "0.3s ease",
-  },
-  deckImage: {
-    width: "60px",
-    height: "60px",
-    borderRadius: "6px",
-    objectFit: "cover",
-  },
-  deckName: {
-    fontSize: "18px",
-    color: "#333",
-  },
-  text: {
-    color: "#333",
-    marginBottom: "10px",
-  },
-  button: {
-    backgroundColor: "royalblue",
-    color: "white",
-    border: "none",
-    padding: "10px 16px",
-    fontSize: "16px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    margin: "5px",
-  },
-  createMore: {
-    textAlign: "center",
-  },
-  // Floating form
-  overlay: {
-    position: "fixed",
-    top: 0, left: 0, right: 0, bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 1000,
-  },
-  floatingForm: {
-    backgroundColor: "white",
-    padding: "25px",
-    borderRadius: "10px",
-    maxWidth: "500px",
-    width: "90%",
-    boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
-  },
-  label: {
-    display: "block",
-    marginBottom: "12px",
-    color: "#333",
-  },
-  input: {
-    width: "100%",
-    padding: "8px",
-    marginTop: "4px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  },
-  textarea: {
-    width: "100%",
-    padding: "8px",
-    marginTop: "4px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-    resize: "vertical",
-    minHeight: "60px",
-  },
-  formButtons: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginTop: "20px",
-  },
 };
