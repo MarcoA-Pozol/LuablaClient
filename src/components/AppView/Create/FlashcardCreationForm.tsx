@@ -4,6 +4,8 @@ interface FlashcardCreationFormProps {
   languageToStudy: string;
 }
 export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormProps) => {
+    const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
+
 
     const [formData, setFormData] = useState({
         word: "",
@@ -108,7 +110,7 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
 
     return (
         <form onSubmit={handleSubmit} style={styles.form}>
-      <h2 style={styles.heading}>Create a Flashcard</h2>
+      <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
 
       {languageToStudy !== "JP" && languageToStudy !== "ZH" && languageToStudy !== "KO" && (
         <label style={styles.label}>
