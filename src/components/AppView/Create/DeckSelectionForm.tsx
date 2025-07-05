@@ -55,9 +55,9 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       padding: "20px",
       border: "1px solid royalblue",
       borderRadius: "10px",
-      maxWidth: "500px",
+      width: "300px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-      height: screenWidth < 768 ? "200px" : "400px"
+      height: screenWidth < 768 ? "200px" : "340px"
     },
     heading: {
       color: "royalblue",

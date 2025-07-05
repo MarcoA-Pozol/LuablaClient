@@ -57,12 +57,13 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         padding: "20px",
         paddingBlock: screenWidth < 768 ? "5px" : "20px",
         borderRadius: "10px",
-        maxWidth: "500px",
+        width: "300px",
         border: "1px solid royalblue",
         boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-        height: screenWidth < 768 ? "280px" : "400px",
+        height: screenWidth < 768 ? "280px" : "340px",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        justifyContent: "center"
       },
       heading: {
         color: "royalblue",
@@ -75,6 +76,7 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         display: "inline-flex",
         color: "#333",
         marginBottom: "12px",
+        justifyContent: "center"
       },
       input: {
         padding: "8px",
@@ -91,11 +93,14 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         width: "200px"
       },
       buttonContainer: {
-        display: "flex",
-        justifyContent: "space-between",
+        display: "inline-flex",
+        justifyContent:"center",
+        gap: "10px",
+        width: "230px",
+        margin: "0 auto"
       },
       button: {
-        padding: "10px 18px",
+        padding: "8px 0px",
         backgroundColor: "royalblue",
         color: "white",
         border: "none",
@@ -103,7 +108,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         cursor: "pointer",
         fontWeight: "bold",
         flex: 1,
-        marginLeft: "10px",
       },
     };
 
