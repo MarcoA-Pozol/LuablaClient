@@ -10,7 +10,11 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    
+  const responsiveValue = function<T>(smallScreenValue: T, largeScreenValue: T, screenWidth: number): T {
+    return screenWidth < 768 ? smallScreenValue : largeScreenValue;
+  };
+
+
   useEffect(() => {
       const handleResize = () => setScreenWidth(window.innerWidth);
       window.addEventListener("resize", handleResize);
@@ -93,8 +97,8 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       transition: "0.3s ease",
     },
     deckImage: {
-      width: "60px",
-      height: "60px",
+      width: responsiveValue("20px", "60px", screenWidth),
+      height: responsiveValue("20px", "60px", screenWidth),
       borderRadius: "6px",
       objectFit: "cover",
     },
