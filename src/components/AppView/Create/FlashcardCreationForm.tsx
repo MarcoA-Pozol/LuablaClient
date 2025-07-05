@@ -4,7 +4,7 @@ interface FlashcardCreationFormProps {
   languageToStudy: string;
 }
 export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormProps) => {
-    const [language] = useState<string>("english");
+
     const [formData, setFormData] = useState({
         word: "",
         meaning: "",
@@ -13,6 +13,8 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         pinyin: "",
         kanji: "",
         kana: "",
+        romaji: "",
+        hangul: ""
     });
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     
@@ -36,6 +38,8 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         pinyin: "",
         kanji: "",
         kana: "",
+        romaji: "",
+        hangul: ""
         });
     };
 
@@ -49,43 +53,44 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
       form: {
         backgroundColor: "white",
         padding: "20px",
+        paddingBlock: screenWidth < 768 ? "5px" : "20px",
         borderRadius: "10px",
         maxWidth: "500px",
         border: "1px solid royalblue",
         boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-        height: screenWidth < 768 ? "200px" : "400px"
+        height: screenWidth < 768 ? "280px" : "400px",
+        display: "flex",
+        flexDirection: "column"
       },
       heading: {
         color: "royalblue",
         fontSize: "22px",
         textAlign: "center",
-        marginBottom: "20px",
+        marginBottom: screenWidth < 768 ? "0" : "20px",
+        marginTop: screenWidth < 768 ? "0" : "20px",
       },
       label: {
-        display: "block",
+        display: "inline-flex",
         color: "#333",
         marginBottom: "12px",
       },
       input: {
-        width: "100%",
         padding: "8px",
         borderRadius: "5px",
         border: "1px solid #ccc",
-        marginTop: "4px",
+        height: "10px",
+        width: "200px"
       },
       textarea: {
-        width: "100%",
         padding: "8px",
         borderRadius: "5px",
         border: "1px solid #ccc",
-        marginTop: "4px",
-        resize: "vertical",
-        minHeight: "60px",
+        height: screenWidth < 768 ? "10px" : "60px",
+        width: "200px"
       },
       buttonContainer: {
         display: "flex",
         justifyContent: "space-between",
-        marginTop: "20px",
       },
       button: {
         padding: "10px 18px",
@@ -105,82 +110,119 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         <form onSubmit={handleSubmit} style={styles.form}>
       <h2 style={styles.heading}>Create a Flashcard</h2>
 
-      <label style={styles.label}>
-        Word:
-        <input
-          name="word"
-          value={formData.word}
-          onChange={handleChange}
-          style={styles.input}
-        />
-      </label>
+      {languageToStudy !== "JP" && languageToStudy !== "ZH" && languageToStudy !== "KO" && (
+        <label style={styles.label}>
+          🏷️
+          <input
+            name="word"
+            value={formData.word}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Word"
+          />
+        </label>
+      )}
 
-      <label style={styles.label}>
-        Meaning:
-        <input
-          name="meaning"
-          value={formData.meaning}
-          onChange={handleChange}
-          style={styles.input}
-        />
-      </label>
-
-      <label style={styles.label}>
-        Example Phrase:
-        <textarea
-          name="examplePhrase"
-          value={formData.examplePhrase}
-          onChange={handleChange}
-          style={styles.textarea}
-        />
-      </label>
 
       {/* Conditional fields */}
-      {language === "chinese" && (
+      {languageToStudy === "ZH" && (
         <>
           <label style={styles.label}>
-            Hanzi:
+            汉
             <input
               name="hanzi"
               value={formData.hanzi}
               onChange={handleChange}
               style={styles.input}
+              placeholder="Hanzi"
             />
           </label>
           <label style={styles.label}>
-            Pinyin:
+            📣
             <input
               name="pinyin"
               value={formData.pinyin}
               onChange={handleChange}
               style={styles.input}
+              placeholder="Pinyin"
             />
           </label>
         </>
       )}
 
-      {language === "japanese" && (
-        <>
-          <label style={styles.label}>
-            Kanji:
-            <input
-              name="kanji"
-              value={formData.kanji}
-              onChange={handleChange}
-              style={styles.input}
-            />
-          </label>
-          <label style={styles.label}>
-            Kana:
-            <input
-              name="kana"
-              value={formData.kana}
-              onChange={handleChange}
-              style={styles.input}
-            />
-          </label>
-        </>
+      {languageToStudy === "JP" && (
+        <label style={styles.label}>
+          🉐
+          <input
+            name="kana"
+            value={formData.kana}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Kana"
+          />
+        </label>
       )}
+
+      {languageToStudy === "KO" && (
+        <label style={styles.label}>
+          한
+          <input
+            name="hangul"
+            value={formData.hangul}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Hangul"
+          />
+        </label>
+      )}
+
+      {(languageToStudy === "JP" || languageToStudy === "KO") && (
+        <label style={styles.label}>
+          🔤
+          <input
+            name="romaji"
+            value={formData.romaji}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Romaji"
+          />
+        </label>
+      )}
+
+      {languageToStudy === "JP" && (
+        <label style={styles.label}>
+          漢
+          <input
+            name="kanji"
+            value={formData.kanji}
+            onChange={handleChange}
+            style={styles.input}
+            placeholder="Kanji (optional)"
+          />
+        </label>
+    )}
+
+      <label style={styles.label}>
+        💡
+        <input
+          name="meaning"
+          value={formData.meaning}
+          onChange={handleChange}
+          style={styles.input}
+          placeholder="Meaning"
+        />
+      </label>
+
+      <label style={styles.label}>
+        💬
+        <textarea
+          name="examplePhrase"
+          value={formData.examplePhrase}
+          onChange={handleChange}
+          style={styles.textarea}
+          placeholder="Example phrase"
+        />
+      </label>
 
       <div style={styles.buttonContainer}>
         <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleReset}>
