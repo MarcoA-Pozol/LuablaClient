@@ -53,16 +53,20 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
       padding: "20px",
+      paddingBlock: screenWidth < 768 ? "0px" : "20px",
       border: "1px solid royalblue",
       borderRadius: "10px",
       width: "300px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-      height: screenWidth < 768 ? "200px" : "340px"
+      height: screenWidth < 768 ? "180px" : "340px",
+      position: screenWidth < 768 ? "sticky" : "sticky",
+      bottom: "60px",
+      backgroundColor: "white"
     },
     heading: {
       color: "royalblue",
-      fontSize: "24px",
-      marginBottom: "20px",
+      fontSize: screenWidth < 768 ? "1rem" : "1.5rem",
+      marginBottom: screenWidth < 768 ? "0" : "20px",
       textAlign: "center",
     },
     noDecksContainer: {
@@ -72,9 +76,9 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       borderRadius: "5px",
       display: "flex",
       flexDirection: "column",
-      gap: "5px",
-      marginBottom: "20px",
-      height:"250px",
+      gap: screenWidth < 768 ? "1px" : "5px",
+      marginBottom: screenWidth < 768 ? "0" : "20px",
+      height: screenWidth < 768 ? "80px" : "200px",
       overflowY: "scroll"
     },
     deckItem: {
@@ -82,7 +86,7 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       display: "flex",
       alignItems: "center",
       gap: "10px",
-      padding: "10px",
+      padding: screenWidth < 768 ? "1px" : "10px",
       border: "1px solid #ccc",
       borderRadius: "8px",
       cursor: "pointer",

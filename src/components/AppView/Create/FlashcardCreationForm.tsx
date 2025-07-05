@@ -63,7 +63,7 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         height: screenWidth < 768 ? "280px" : "340px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
       },
       heading: {
         color: "royalblue",
