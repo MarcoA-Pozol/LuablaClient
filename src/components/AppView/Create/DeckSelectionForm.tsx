@@ -86,7 +86,6 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       overflowY: "scroll"
     },
     deckItem: {
-      backgroundColor: "white",
       display: "flex",
       alignItems: "center",
       gap: "10px",
@@ -95,19 +94,23 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
       borderRadius: "8px",
       cursor: "pointer",
       transition: "0.3s ease",
+      width: "250px",
+      margin: "0px auto"
     },
     deckImage: {
-      width: responsiveValue("25px", "60px", screenWidth),
-      height: responsiveValue("25px", "60px", screenWidth),
+      width: responsiveValue("25px", "40px", screenWidth),
+      height: responsiveValue("25px", "40px", screenWidth),
       borderRadius: "6px",
       objectFit: "cover",
     },
     deckName: {
-      fontSize: responsiveValue("1rem", "1.3rem", screenWidth),
+      fontSize: responsiveValue("1rem", "1.2rem", screenWidth),
       color: "#333",
+      width: "100%",
+      textAlign: "center"
     },
     text: {
-      color: "#333",
+      color: "red",
       marginBottom: "10px",
     },
     button: {
