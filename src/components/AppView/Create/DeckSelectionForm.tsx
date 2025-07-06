@@ -57,20 +57,20 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
       padding: "20px",
-      paddingBlock: screenWidth < 768 ? "0px" : "20px",
+      paddingBlock: responsiveValue("0px", "20px", screenWidth),
       border: "1px solid royalblue",
       borderRadius: "10px",
       width: "300px",
       boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-      height: screenWidth < 768 ? "180px" : "340px",
-      position: screenWidth < 768 ? "sticky" : "sticky",
+      height: responsiveValue("180px", "340px", screenWidth),
+      position: responsiveValue("sticky", "sticky", screenWidth),
       bottom: "60px",
       backgroundColor: "white"
     },
     heading: {
       color: "royalblue",
-      fontSize: screenWidth < 768 ? "1rem" : "1.5rem",
-      marginBottom: screenWidth < 768 ? "0" : "20px",
+      fontSize: responsiveValue("1rem", "1.5rem", screenWidth),
+      marginBottom: responsiveValue("0", "20px", screenWidth),
       textAlign: "center",
     },
     noDecksContainer: {
