@@ -21,7 +21,7 @@ export const AppView = () => {
 
         const fetchUserDecks = async () => {
             try {
-                const response = await axios.get("http://localhost:8600/api/app/deck", {
+                const response = await axios.get("http://localhost:8600/api/decks/deck", {
                     params: {language:languageToStudy},
                     withCredentials: true,
                     headers: {

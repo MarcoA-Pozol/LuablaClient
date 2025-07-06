@@ -33,7 +33,7 @@ export const DeckCreationForm = ({
     const formData = new FormData(event.currentTarget);
 
     try {
-      const response = await axios.post("http://localhost:8600/api/app/deck", formData, {
+      const response = await axios.post("http://localhost:8600/api/decks/deck", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       });
