@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { handleObjectCreationWithQueryParams } from "../../../functions/handleObjectCreation";
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
@@ -26,28 +26,10 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const handleFlashcardCreation = async (event: React.FormEvent<HTMLFormElement>, queryParams:object={deckId:1, language:languageToStudy}) => {
-      event.preventDefault();
-
-      const formData = new FormData(event.currentTarget);
-      
-      try {
-        const response = await axios.post("http://localhost:8600/api/flashcards/flashcard", formData, {
-          params: queryParams,
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        const responseData = response.data;
-
-        if (response.status !== 201) {
-          alert(`Error while trying to create a flashcard: ${responseData.error}`);
-        }
-
-        alert("Flashcard created")
-      } catch(error) {
-        alert('Creating flashcard failed: ${error}');
-      }
-    }
+    const handleFlashcardCreation = (event:React.FormEvent<HTMLFormElement>) => {
+      handleObjectCreationWithQueryParams(event=event, requestUrl="http://localhost:8600/api/flashcards/flashcard", queryParams={deckId:1, language:languageToStudy}, requestHeaders={"Content-Type":"multipart/form-data"}, objectToCreateName="flashcard");
+      handleReset();
+    };
 
     const handleReset = () => {
         setFormData({
