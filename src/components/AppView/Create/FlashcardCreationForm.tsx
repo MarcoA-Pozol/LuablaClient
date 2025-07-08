@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
 }
 export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormProps) => {
     const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
-
 
     const [formData, setFormData] = useState({
         word: "",
@@ -26,10 +26,30 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
+    const handleFlashcardCreation = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+
+      const formData = new FormData(event.currentTarget);
+
+      const deckId = 1;
+      
+      try {
+        const response = await axios.post("http://localhost:8600/api/flashcards/flashcard", formData, {
+          params: {deckId:deckId,language:languageToStudy},
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        const responseData = response.data;
+
+        if (response.status !== 201) {
+          alert(`Error while trying to create a flashcard: ${responseData.error}`);
+        }
+
+        alert("Flashcard created")
+      } catch(error) {
+        alert('Creating flashcard failed: ${error}');
+      }
+    }
 
     const handleReset = () => {
         setFormData({
@@ -43,11 +63,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         romaji: "",
         hangul: ""
         });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Flashcard Data:", formData);
     };
 
     // Style
@@ -113,7 +128,7 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
 
 
     return (
-        <form onSubmit={handleSubmit} style={styles.form}>
+        <form onSubmit={handleFlashcardCreation} style={styles.form}>
       <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
 
       {languageToStudy !== "JP" && languageToStudy !== "ZH" && languageToStudy !== "KO" && (
@@ -122,7 +137,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
           <input
             name="word"
             value={formData.word}
-            onChange={handleChange}
             style={styles.input}
             placeholder="Word"
           />
@@ -138,7 +152,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
             <input
               name="hanzi"
               value={formData.hanzi}
-              onChange={handleChange}
               style={styles.input}
               placeholder="Hanzi"
             />
@@ -148,7 +161,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
             <input
               name="pinyin"
               value={formData.pinyin}
-              onChange={handleChange}
               style={styles.input}
               placeholder="Pinyin"
             />
@@ -162,7 +174,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
           <input
             name="kana"
             value={formData.kana}
-            onChange={handleChange}
             style={styles.input}
             placeholder="Kana"
           />
@@ -175,7 +186,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
           <input
             name="hangul"
             value={formData.hangul}
-            onChange={handleChange}
             style={styles.input}
             placeholder="Hangul"
           />
@@ -188,7 +198,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
           <input
             name="romaji"
             value={formData.romaji}
-            onChange={handleChange}
             style={styles.input}
             placeholder="Romaji"
           />
@@ -201,7 +210,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
           <input
             name="kanji"
             value={formData.kanji}
-            onChange={handleChange}
             style={styles.input}
             placeholder="Kanji (optional)"
           />
@@ -213,7 +221,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         <input
           name="meaning"
           value={formData.meaning}
-          onChange={handleChange}
           style={styles.input}
           placeholder="Meaning"
         />
@@ -224,7 +231,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         <textarea
           name="examplePhrase"
           value={formData.examplePhrase}
-          onChange={handleChange}
           style={styles.textarea}
           placeholder="Example phrase"
         />

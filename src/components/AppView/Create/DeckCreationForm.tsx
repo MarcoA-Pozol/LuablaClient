@@ -47,8 +47,6 @@ export const DeckCreationForm = ({
     } catch (error) {
       alert(`Creating deck failed: ${error}`);
     }
-
-    setShowCreateForm(false);
   };
 
   // Styles
@@ -87,14 +85,14 @@ export const DeckCreationForm = ({
       fontWeight: "bold",
     },
     input: {
-      width: "100%",
+      width: "95%",
       padding: "8px",
       marginTop: "4px",
       borderRadius: "5px",
       border: "1px solid #ccc",
     },
     textarea: {
-      width: "100%",
+      width: "95%",
       padding: "8px",
       marginTop: "4px",
       borderRadius: "5px",
@@ -103,7 +101,7 @@ export const DeckCreationForm = ({
       minHeight: "60px",
     },
     select: {
-      width: "100%",
+      width: "99%",
       padding: "8px",
       marginTop: "4px",
       borderRadius: "5px",
