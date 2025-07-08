@@ -26,16 +26,14 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const handleFlashcardCreation = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleFlashcardCreation = async (event: React.FormEvent<HTMLFormElement>, queryParams:object={deckId:1, language:languageToStudy}) => {
       event.preventDefault();
 
       const formData = new FormData(event.currentTarget);
-
-      const deckId = 1;
       
       try {
         const response = await axios.post("http://localhost:8600/api/flashcards/flashcard", formData, {
-          params: {deckId:deckId,language:languageToStudy},
+          params: queryParams,
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         });
