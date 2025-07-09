@@ -24,3 +24,20 @@ export const handleObjectCreation = async (event:React.FormEvent<HTMLFormElement
     }
 
 }
+
+export const clearFormFields = (form: HTMLFormElement) => {
+    Array.from(form.elements).forEach((element) => {
+      const field = element as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+      if (field.name) {
+        if (field instanceof HTMLInputElement) {
+          if (field.type === "checkbox" || field.type === "radio") {
+            field.checked = false;
+          } else if (field.type !== "file") {
+            field.value = "";
+          }
+        } else if (field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+          field.value = "";
+        }
+      }
+    });
+  };

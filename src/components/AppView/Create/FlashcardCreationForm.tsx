@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { handleObjectCreation } from "../../../functions/handleObjectCreation";
+import React, { useState, useEffect, useRef } from "react";
+import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
 }
 export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormProps) => {
     const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
-
-    const [formData, setFormData] = useState({
-        word: "",
-        meaning: "",
-        examplePhrase: "",
-        hanzi: "",
-        pinyin: "",
-        kanji: "",
-        kana: "",
-        romaji: "",
-        hangul: ""
-    });
+  const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     
     useEffect(() => {
@@ -26,7 +15,16 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    const handleClearForm = () => {
+    if (formRef.current) {
+      clearFormFields(formRef.current);
+      }
+    };
+
     const handleFlashcardCreation = (event:React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      clearFormFields(form);
       handleObjectCreation(
         event,
         "http://localhost:8600/api/flashcards/flashcard",
@@ -34,21 +32,6 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         { "Content-Type": "multipart/form-data" },
         "flashcard"
       );
-      handleReset();
-    };
-
-    const handleReset = () => {
-        setFormData({
-        word: "",
-        meaning: "",
-        examplePhrase: "",
-        hanzi: "",
-        pinyin: "",
-        kanji: "",
-        kana: "",
-        romaji: "",
-        hangul: ""
-        });
     };
 
     // Style
@@ -114,122 +97,121 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
 
 
     return (
-        <form onSubmit={handleFlashcardCreation} style={styles.form}>
-      <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
+      <form ref={formRef} onSubmit={handleFlashcardCreation} style={styles.form} method="POST" encType="multipart/form-data">
+        <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
 
-      {languageToStudy !== "JP" && languageToStudy !== "ZH" && languageToStudy !== "KO" && (
-        <label style={styles.label}>
-          🏷️
-          <input
-            name="word"
-            value={formData.word}
-            style={styles.input}
-            placeholder="Word"
-          />
-        </label>
-      )}
-
-
-      {/* Conditional fields */}
-      {languageToStudy === "ZH" && (
-        <>
+        {languageToStudy !== "JP" && languageToStudy !== "ZH" && languageToStudy !== "KO" && (
           <label style={styles.label}>
-            汉
+            🏷️
             <input
-              name="hanzi"
-              value={formData.hanzi}
+              name="word"
+              type="text"
               style={styles.input}
-              placeholder="Hanzi"
+              placeholder="Word"
             />
           </label>
+        )}
+
+
+        {/* Conditional fields */}
+        {languageToStudy === "ZH" && (
+          <>
+            <label style={styles.label}>
+              汉
+              <input
+                name="hanzi"
+                type="text"
+                style={styles.input}
+                placeholder="Hanzi"
+              />
+            </label>
+            <label style={styles.label}>
+              📣
+              <input
+                name="pinyin"
+                type="text"
+                style={styles.input}
+                placeholder="Pinyin"
+              />
+            </label>
+          </>
+        )}
+
+        {languageToStudy === "JP" && (
           <label style={styles.label}>
-            📣
+            🉐
             <input
-              name="pinyin"
-              value={formData.pinyin}
+              name="kana"
+              type="text"
               style={styles.input}
-              placeholder="Pinyin"
+              placeholder="Kana"
             />
           </label>
-        </>
-      )}
+        )}
 
-      {languageToStudy === "JP" && (
+        {languageToStudy === "KO" && (
+          <label style={styles.label}>
+            한
+            <input
+              name="hangul"
+              type="text"
+              style={styles.input}
+              placeholder="Hangul"
+            />
+          </label>
+        )}
+
+        {(languageToStudy === "JP" || languageToStudy === "KO") && (
+          <label style={styles.label}>
+            🔤
+            <input
+              name="romaji"
+              type="text"
+              style={styles.input}
+              placeholder="Romaji"
+            />
+          </label>
+        )}
+
+        {languageToStudy === "JP" && (
+          <label style={styles.label}>
+            漢
+            <input
+              name="kanji"
+              type="text"
+              style={styles.input}
+              placeholder="Kanji (optional)"
+            />
+          </label>
+        )}
+
         <label style={styles.label}>
-          🉐
+          💡
           <input
-            name="kana"
-            value={formData.kana}
+            name="meaning"
+            type="text"
             style={styles.input}
-            placeholder="Kana"
+            placeholder="Meaning"
           />
         </label>
-      )}
 
-      {languageToStudy === "KO" && (
         <label style={styles.label}>
-          한
-          <input
-            name="hangul"
-            value={formData.hangul}
-            style={styles.input}
-            placeholder="Hangul"
+          💬
+          <textarea
+            name="examplePhrase"
+            style={styles.textarea}
+            placeholder="Example phrase"
           />
         </label>
-      )}
 
-      {(languageToStudy === "JP" || languageToStudy === "KO") && (
-        <label style={styles.label}>
-          🔤
-          <input
-            name="romaji"
-            value={formData.romaji}
-            style={styles.input}
-            placeholder="Romaji"
-          />
-        </label>
-      )}
-
-      {languageToStudy === "JP" && (
-        <label style={styles.label}>
-          漢
-          <input
-            name="kanji"
-            value={formData.kanji}
-            style={styles.input}
-            placeholder="Kanji (optional)"
-          />
-        </label>
-    )}
-
-      <label style={styles.label}>
-        💡
-        <input
-          name="meaning"
-          value={formData.meaning}
-          style={styles.input}
-          placeholder="Meaning"
-        />
-      </label>
-
-      <label style={styles.label}>
-        💬
-        <textarea
-          name="examplePhrase"
-          value={formData.examplePhrase}
-          style={styles.textarea}
-          placeholder="Example phrase"
-        />
-      </label>
-
-      <div style={styles.buttonContainer}>
-        <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleReset}>
-          Clean
-        </button>
-        <button type="submit" style={styles.button}>
-          Add
-        </button>
-      </div>
-    </form>
+        <div style={styles.buttonContainer}>
+          <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleClearForm}>
+            Clean
+          </button>
+          <button type="submit" style={styles.button}>
+            Add
+          </button>
+        </div>
+      </form>
     );
 };

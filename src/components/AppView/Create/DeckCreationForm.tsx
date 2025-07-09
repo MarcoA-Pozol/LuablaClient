@@ -1,7 +1,7 @@
 import type { SetStateAction } from "react";
 import type React from "react";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
-import { handleObjectCreation } from "../../../functions/handleObjectCreation";
+import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
 
 interface DeckCreationFormProps {
   languageToStudy: string;
@@ -28,6 +28,9 @@ export const DeckCreationForm = ({
       : cefrLevelsList;
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    clearFormFields(form); 
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
   };
 
