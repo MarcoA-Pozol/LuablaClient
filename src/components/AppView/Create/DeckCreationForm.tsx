@@ -162,9 +162,6 @@ export const DeckCreationForm = ({
                 style={styles.select}
                 required
               >
-                <option disabled selected>
-                  Select
-                </option>
                 {levelList.map((level, idx) => (
                   <option key={idx} value={level}>
                     {level}
