@@ -33,7 +33,7 @@ export const DeckCreationForm = ({
     event.preventDefault();
     const form = event.currentTarget;
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
-    clearFormFields(form); 
+    clearFormFields(form, languageToStudy); 
     const timeoutId = setTimeout(() => {
       refreshDecks();
     }, 1000); 
