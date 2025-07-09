@@ -11,7 +11,7 @@ export const CreationContainer = ({languageToStudy, userDecksList, refreshDecks}
 
     return (
         <div style={{paddingTop: "10px", display: "flex", justifyContent: "center", flexWrap: "wrap", width: "100%", gap: "50px",}}>
-            <FlashcardCreationForm languageToStudy={languageToStudy}/>
+            <FlashcardCreationForm languageToStudy={languageToStudy} refreshDecks={refreshDecks}/>
             <DeckSelectionForm languageToStudy={languageToStudy} userDecksList={userDecksList} refreshDecks={refreshDecks}/>
         </div>
     );

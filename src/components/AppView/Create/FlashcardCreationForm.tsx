@@ -3,8 +3,9 @@ import { handleObjectCreation, clearFormFields } from "../../../functions/handle
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
+  refreshDecks:()=>void;
 }
-export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormProps) => {
+export const FlashcardCreationForm = ({languageToStudy, refreshDecks}:FlashcardCreationFormProps) => {
     const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
   const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -32,6 +33,11 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
         { "Content-Type": "multipart/form-data" },
         "flashcard"
       );
+    const timeoutId = setTimeout(() => {
+      refreshDecks();
+    }, 1000); 
+
+    return () => clearTimeout(timeoutId); 
     };
 
     // Style
