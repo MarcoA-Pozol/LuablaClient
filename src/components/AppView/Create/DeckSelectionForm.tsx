@@ -4,8 +4,9 @@ import { DeckCreationForm } from "./DeckCreationForm";
 interface DeckSelectionFormProps {
   languageToStudy: string;
   userDecksList:any[];
+  refreshDecks:()=>void;
 }
-export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelectionFormProps) => {
+export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks}:DeckSelectionFormProps) => {
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -124,7 +125,7 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList}:DeckSelection
         </>
       )}
 
-      <DeckCreationForm languageToStudy={languageToStudy} screenWidth={screenWidth} responsiveValue={responsiveValue} showCreateForm={showCreateForm} setShowCreateForm={setShowCreateForm}/>
+      <DeckCreationForm languageToStudy={languageToStudy} screenWidth={screenWidth} responsiveValue={responsiveValue} showCreateForm={showCreateForm} setShowCreateForm={setShowCreateForm} refreshDecks={refreshDecks}/>
     </div>
   );
 };

@@ -4,14 +4,15 @@ import { FlashcardCreationForm } from "./FlashcardCreationForm";
 interface CreationContainerProps {
     languageToStudy: string;
     userDecksList:any[];
+    refreshDecks:()=>void;
 }
 
-export const CreationContainer = ({languageToStudy, userDecksList}:CreationContainerProps) => {
+export const CreationContainer = ({languageToStudy, userDecksList, refreshDecks}:CreationContainerProps) => {
 
     return (
         <div style={{paddingTop: "10px", display: "flex", justifyContent: "center", flexWrap: "wrap", width: "100%", gap: "50px",}}>
             <FlashcardCreationForm languageToStudy={languageToStudy}/>
-            <DeckSelectionForm languageToStudy={languageToStudy} userDecksList={userDecksList}/>
+            <DeckSelectionForm languageToStudy={languageToStudy} userDecksList={userDecksList} refreshDecks={refreshDecks}/>
         </div>
     );
 }

@@ -9,6 +9,7 @@ interface DeckCreationFormProps {
   responsiveValue: <T>(small: T, large: T, width: number) => T;
   showCreateForm: boolean;
   setShowCreateForm: React.Dispatch<SetStateAction<boolean>>;
+  refreshDecks:()=>void;
 }
 
 export const DeckCreationForm = ({
@@ -17,6 +18,7 @@ export const DeckCreationForm = ({
   responsiveValue,
   showCreateForm,
   setShowCreateForm,
+  refreshDecks
 }: DeckCreationFormProps) => {
   const levelList =
     languageToStudy === "JP"
@@ -30,8 +32,9 @@ export const DeckCreationForm = ({
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    clearFormFields(form); 
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
+    clearFormFields(form); 
+    refreshDecks();
   };
 
   // Styles
