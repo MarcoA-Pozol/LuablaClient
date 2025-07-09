@@ -1,7 +1,7 @@
 import type { SetStateAction } from "react";
 import type React from "react";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
-import axios from "axios";
+import { handleObjectCreation } from "../../../functions/handleObjectCreation";
 
 interface DeckCreationFormProps {
   languageToStudy: string;
@@ -28,25 +28,7 @@ export const DeckCreationForm = ({
       : cefrLevelsList;
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    try {
-      const response = await axios.post("http://localhost:8600/api/decks/deck", formData, {
-        withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      const responseData = response.data;
-
-      if (response.status !== 201) {
-        alert(`Error while trying to create a deck: ${responseData.error}`);
-      }
-
-      alert("Deck created!");
-    } catch (error) {
-      alert(`Creating deck failed: ${error}`);
-    }
+    handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
   };
 
   // Styles

@@ -1,7 +1,7 @@
 import type React from "react"
 import axios from "axios";
 
-export const handleObjectCreationWithQueryParams = async (event:React.FormEvent<HTMLFormElement>, requestURL:string, queryParams:object, requestHeaders:object={"Content-Type":"multipart/form-data"}, objectToCreateName:string="object") => {
+export const handleObjectCreation = async (event:React.FormEvent<HTMLFormElement>, requestURL:string, queryParams:object={}, requestHeaders:object={"Content-Type":"multipart/form-data"}, objectToCreateName:string="object") => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);

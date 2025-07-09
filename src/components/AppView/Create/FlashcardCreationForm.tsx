@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { handleObjectCreationWithQueryParams } from "../../../functions/handleObjectCreation";
+import { handleObjectCreation } from "../../../functions/handleObjectCreation";
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
@@ -27,7 +27,13 @@ export const FlashcardCreationForm = ({languageToStudy}:FlashcardCreationFormPro
     }, []);
 
     const handleFlashcardCreation = (event:React.FormEvent<HTMLFormElement>) => {
-      handleObjectCreationWithQueryParams(event=event, requestUrl="http://localhost:8600/api/flashcards/flashcard", queryParams={deckId:1, language:languageToStudy}, requestHeaders={"Content-Type":"multipart/form-data"}, objectToCreateName="flashcard");
+      handleObjectCreation(
+        event,
+        "http://localhost:8600/api/flashcards/flashcard",
+        { deckId: 1, language: languageToStudy },
+        { "Content-Type": "multipart/form-data" },
+        "flashcard"
+      );
       handleReset();
     };
 
