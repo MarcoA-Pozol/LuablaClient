@@ -36,20 +36,21 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
         header: {
             backgroundColor: "rgb(36, 25, 97)",
             color: "white",
-            display: "flex",
+            display: "inline-flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: responsiveValue("8px", "12px", screenWidth),
+            padding: responsiveValue("5px", "5px", screenWidth),
             width: "100vw",
             flexWrap: "wrap",
         },
         logoLink: {
             display: "inline-flex",
             alignItems: "center",
+            justifyContent: responsiveValue("center", "left", screenWidth),
             textDecoration: "none",
             color: "white",
             cursor: "pointer",
-            width: responsiveValue("50%", "20%", screenWidth),
+            width: responsiveValue("30vw", "50vw", screenWidth),
         },
         logoImage: {
             width: "45px",
@@ -63,9 +64,9 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
         signUpOptions: {
             display: "inline-flex",
             gap: "10px",
-            justifyContent: "flex-end",
-            width: responsiveValue("100%", "60%", screenWidth),
-            marginTop: responsiveValue("10px", "0", screenWidth),
+            paddingInline: "5px",
+            justifyContent: "center",
+            width: responsiveValue("60vw", "45vw", screenWidth),
         },
         linkBase: {
             paddingInline: "20px",
