@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { LibraryDeck } from "./LibraryDeck";
-import { useAuth } from "../../../App";
 
 interface LibraryContainerProps {
     languageToStudy: string;
@@ -9,7 +8,6 @@ interface LibraryContainerProps {
 
 export const LibraryContainer= ({languageToStudy}:LibraryContainerProps) => {
     const [libraryDecksList, setLibraryDecksList] = useState<string[]>([]);
-    const {authUser} = useAuth();
 
     const fetchLibraryDecks = async () => {
         try {
