@@ -5,14 +5,21 @@ import axios from "axios";
 // Icons
 import { BiLogOut } from "react-icons/bi";
 import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
+import { useEffect, useState } from "react";
 
 export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
     const navigate = useNavigate();
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const responsiveValue = function<T>(smallScreenValue: T, largeScreenValue: T, screenWidth: number): T {
+        return screenWidth < 768 ? smallScreenValue : largeScreenValue;
+    };
 
-    const navigateToAuth = (isLoginVisible: boolean) => {
-        navigate('/auth', {state:{isLoginVisible}});
-    }
 
+    useEffect(() => {
+        const handleResize = () => setScreenWidth(window.innerWidth);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const logoutUser = async () => {
         try {
@@ -26,27 +33,99 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
         }
     };
 
+     const styles: { [key: string]: React.CSSProperties } = {
+        header: {
+            backgroundColor: "rgb(36, 25, 97)",
+            color: "white",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: responsiveValue("8px", "12px", screenWidth),
+            width: "100vw",
+            flexWrap: "wrap",
+        },
+        logoLink: {
+            display: "inline-flex",
+            alignItems: "center",
+            textDecoration: "none",
+            color: "white",
+            cursor: "pointer",
+            width: responsiveValue("50%", "20%", screenWidth),
+        },
+        logoImage: {
+            width: "45px",
+            height: "40px",
+            marginLeft: "20px",
+        },
+        logoText: {
+            margin: 0,
+            fontSize: responsiveValue("1.5rem", "2rem", screenWidth),
+        },
+        signUpOptions: {
+            display: "inline-flex",
+            gap: "10px",
+            justifyContent: "flex-end",
+            width: responsiveValue("100%", "60%", screenWidth),
+            marginTop: responsiveValue("10px", "0", screenWidth),
+        },
+        linkBase: {
+            paddingInline: "20px",
+            fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+            fontSize: "1.2rem",
+            borderRadius: "15px",
+            textAlign: "center",
+            whiteSpace: "nowrap",
+            textDecoration: "none",
+            color: "white",
+            cursor: "pointer",
+            border: "2px solid rgb(179, 179, 179)",
+        },
+        signUp: {
+            backgroundColor: "rgb(21, 78, 202)",
+        },
+        signIn: {
+            backgroundColor: "rgb(77, 57, 151)",
+        },
+        logoutIcon: {
+            color: "red",
+            fontSize: "2.2rem",
+            cursor: "pointer",
+        },
+    };
+
+
     return (
-        <>
-            <header className="header-top-bar">
-                <a onClick={() => navigate('/')} id="luabla-logo">
-                    <img src={PandaLogoIMG} alt="Panda Logo"/>
-                    <h2>Luabla</h2>
-                </a>
-                <div id="sign-up-options">
-                    {authUser ? (
-                        <>
-                            <a>{authUser.username}</a>
-                            <BiLogOut onClick={logoutUser} id="close-session" style={{ color: "red", fontSize: "2.2rem", cursor:"pointer"}}/>
-                        </>
-                    ) : (
-                        <>
-                            <a onClick={() => navigateToAuth(false)} id="sign_up"><li>Sign-Up</li></a>
-                            <a onClick={() => navigateToAuth(true)} id="start_session"><li>SignIn</li></a>
-                        </>
-                    )}
-                </div>
-            </header>
-        </>
+        <header style={styles.header}>
+            <div onClick={() => navigate('/')} style={styles.logoLink}>
+                <img src={PandaLogoIMG} alt="Panda Logo" style={styles.logoImage} />
+                <h2 style={styles.logoText}>Luabla</h2>
+            </div>
+
+            <div style={styles.signUpOptions}>
+                {authUser ? (
+                    <>
+                        <div style={{ ...styles.linkBase, backgroundColor: "transparent", border: "none" }}>
+                            {authUser.username}
+                        </div>
+                        <BiLogOut onClick={logoutUser} style={styles.logoutIcon} />
+                    </>
+                ) : (
+                    <>
+                        <div
+                            onClick={() => navigate('/auth', { state: { isLoginVisible: false } })}
+                            style={{ ...styles.linkBase, ...styles.signUp }}
+                        >
+                            Sign-Up
+                        </div>
+                        <div
+                            onClick={() => navigate('/auth', { state: { isLoginVisible: true } })}
+                            style={{ ...styles.linkBase, ...styles.signIn }}
+                        >
+                            SignIn
+                        </div>
+                    </>
+                )}
+            </div>
+        </header>
     );
 }

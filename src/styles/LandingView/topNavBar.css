@@ -11,6 +11,7 @@ a{
     justify-content: center;
     padding-block: 10px;
     margin-bottom: 0;
+    width: 100vw;
 }
 
 .header-top-bar #luabla-logo{
