@@ -1,4 +1,3 @@
-import "../../styles/LandingView/topNavBar.css";
 import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
