@@ -103,7 +103,7 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks}
     <div style={styles.container}>
       <h2 style={styles.heading}>Choose a Deck</h2>
 
-      {decks.length === 0 ? (
+      {decks.length < 1 ? (
         <div style={styles.noDecksContainer}>
           <p style={styles.text}>You don't have any decks yet.</p>
           <button style={styles.button} onClick={() => setShowCreateForm(true)}>+ Create New Deck</button>

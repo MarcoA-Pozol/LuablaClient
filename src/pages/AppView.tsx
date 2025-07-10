@@ -31,9 +31,9 @@ export const AppView = () => {
             : response.data.decks);
         } catch (error: any) {
             if (error.response) {
-                setUserDecksList(["No decks were found"]);
+                setUserDecksList([]);
             } else {
-                setUserDecksList(["Error with server"]);
+                setUserDecksList([]);
             }
         }
     }
