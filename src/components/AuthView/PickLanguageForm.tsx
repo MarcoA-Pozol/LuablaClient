@@ -9,21 +9,73 @@ import JapaneseFlagIMG from "../../assets/AuthView/japanese_flag.png";
 
 
 const languages = [
-    { languageVal: "EN", name: "English", image: EnglishFlagIMG },
-    { languageVal: "FR", name: "French", image: FrenchFlagIMG },
-    { languageVal: "IT", name: "Italian", image: ItalianFlagIMG },
-    { languageVal: "JP", name: "Japanese", image: JapaneseFlagIMG },
-    // { name: "German", image: SignInFormIMG },
-    // { name: "Chinese", image: SignInFormIMG },
-    // { name: "Spanish", image: SignInFormIMG },
-    // { name: "Korean", image: SignInFormIMG },
-    // { name: "Portuguese", image: SignInFormIMG },
-    // { name: "Russian", image: SignInFormIMG },
+  {
+    languageVal: "EN",
+    name: "EN",
+    image: EnglishFlagIMG,
+    description: "The global language of business, science, and the internet — spoken by over 1.5 billion people worldwide.",
+  },
+  {
+    languageVal: "FR",
+    name: "FR",
+    image: FrenchFlagIMG,
+    description: "The language of love, diplomacy, and culture — spoken on five continents and official in 29 countries.",
+  },
+  {
+    languageVal: "IT",
+    name: "IT",
+    image: ItalianFlagIMG,
+    description: "Dive into the world of art, fashion, and culinary excellence — Italian brings the beauty of history to life.",
+  },
+  {
+    languageVal: "JP",
+    name: "JP",
+    image: JapaneseFlagIMG,
+    description: "Master the language of anime, innovation, and tradition — spoken by over 125 million and key to unlocking Japan’s unique culture.",
+  },
+//   {
+//     languageVal: "DE",
+//     name: "DE",
+//     image: JapaneseFlagIMG,
+//     description: "Germany is Europe’s economic powerhouse — learn German to access opportunities in science, engineering, and global business.",
+//   },
+//   {
+//     languageVal: "ZH",
+//     name: "ZH",
+//     image: JapaneseFlagIMG,
+//     description: "Mandarin Chinese is the most spoken native language in the world — essential for connecting with over a billion people.",
+//   },
+//   {
+//     languageVal: "ES",
+//     name: "ES",
+//     image: JapaneseFlagIMG,
+//     description: "With over 500 million speakers, Spanish opens doors to vibrant cultures across Latin America, Spain, and the U.S.",
+//   },
+//   {
+//     languageVal: "KO",
+//     name: "KO",
+//     image: JapaneseFlagIMG,
+//     description: "Join the Korean wave! Learn Korean to explore K-pop, K-dramas, and a high-tech society with deep traditions.",
+//   },
+//   {
+//     languageVal: "PT",
+//     name: "PT",
+//     image: JapaneseFlagIMG,
+//     description: "From Brazil to Portugal, Portuguese connects you to diverse cultures, music, and booming global markets.",
+//   },
+//   {
+//     languageVal: "RU",
+//     name: "RU",
+//     image: JapaneseFlagIMG,
+//     description: "Spoken across Russia and Eastern Europe, Russian is a gateway to rich literature, science, and global affairs.",
+//   },
 ];
+
 
 export const PickLanguageForm = () => {
     const [pickedLanguage, setPickedLanguage] = useState<string | null>(null);
-    
+    const [languageDescription, setLanguageDescription] = useState<string>("These are the most popular ones, but you can choose from many more options");
+
     // Derive disabled state from pickedLanguage
     const isButtonDisabled = !pickedLanguage;
 
@@ -53,7 +105,7 @@ export const PickLanguageForm = () => {
     return (
         <div className="languages-selection-container">
             <h2>Choose a Language</h2>
-            <p>These are the most popular ones, but you can choose many more</p>
+            <p>{languageDescription}</p>
 
             <form id="language-form" onSubmit={handleSetPickedLanguage}>
                 <div className="language-options">
@@ -63,6 +115,7 @@ export const PickLanguageForm = () => {
                             className={`language-card ${pickedLanguage === lang.name ? 'active' : ''}`}
                             onClick={() => {
                                 setPickedLanguage(lang.languageVal);
+                                setLanguageDescription(lang.description);
                             }} 
                         >
                             <img src={lang.image} alt={lang.name}/>
