@@ -4,9 +4,8 @@ import "../../styles/AuthView/pickLanguageForm.css";
 // Images
 import EnglishFlagIMG from "../../assets/AuthView/english_flag.png";
 import FrenchFlagIMG from "../../assets/AuthView/french_flag.png";
-import ItalianFlagIMG from "../../assets/AuthView/italian_flag.png";
 import JapaneseFlagIMG from "../../assets/AuthView/japanese_flag.png";
-
+import ChineseFlagIMG from "../../assets/AuthView/chinese_flag.png";
 
 const languages = [
   {
@@ -21,12 +20,12 @@ const languages = [
     image: FrenchFlagIMG,
     description: "The language of love, diplomacy, and culture — spoken on five continents and official in 29 countries.",
   },
-  {
-    languageVal: "IT",
-    name: "IT",
-    image: ItalianFlagIMG,
-    description: "Dive into the world of art, fashion, and culinary excellence — Italian brings the beauty of history to life.",
-  },
+//   {
+//     languageVal: "IT",
+//     name: "IT",
+//     image: ItalianFlagIMG,
+//     description: "Dive into the world of art, fashion, and culinary excellence — Italian brings the beauty of history to life.",
+//   },
   {
     languageVal: "JP",
     name: "JP",
@@ -39,12 +38,12 @@ const languages = [
 //     image: JapaneseFlagIMG,
 //     description: "Germany is Europe’s economic powerhouse — learn German to access opportunities in science, engineering, and global business.",
 //   },
-//   {
-//     languageVal: "ZH",
-//     name: "ZH",
-//     image: JapaneseFlagIMG,
-//     description: "Mandarin Chinese is the most spoken native language in the world — essential for connecting with over a billion people.",
-//   },
+  {
+    languageVal: "ZH",
+    name: "ZH",
+    image: ChineseFlagIMG,
+    description: "Mandarin Chinese is the most spoken native language in the world — essential for connecting with over a billion people.",
+  },
 //   {
 //     languageVal: "ES",
 //     name: "ES",
