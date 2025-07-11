@@ -42,8 +42,8 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                         <button style={styles.formButton} type="submit">Login</button>
 
                         <div style={styles.linkOptions}>
-                            <a style={styles.forgotPasswordLink}>Forgot Password?</a>
-                            <a onClick={onClick} style={styles.noAccountLink}>
+                            <a style={styles.extraLink}>Forgot Password?</a>
+                            <a onClick={onClick} style={styles.extraLink}>
                                 {children}
                             </a>
                         </div>
