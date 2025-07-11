@@ -4,9 +4,10 @@ import SignInFormIMG from "../../assets/AuthView/register_image.png";
 import { handleSignIn } from "../../utils/AuthView/Authentication";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../App";
-import { useResponsiveCssValue } from "../../hooks/useResponsiveCssValue";
 // Icons
 import { FaUser, FaLock } from "react-icons/fa";
+// Style
+import { useSignInFormStyles } from "../../styles/AuthView/signInForm";
 
 interface SignInFormProps {
     children?: ReactNode; 
@@ -15,21 +16,8 @@ interface SignInFormProps {
 
 export const SignInForm = ({children, onClick}:SignInFormProps) => {
     const navigate = useNavigate();
-    const responsiveCssValue = useResponsiveCssValue();
     const { setAuthUser } = useAuth();
-
-    const styles: { [key: string]: React.CSSProperties } = {
-        header: {
-            backgroundColor: responsiveCssValue("red", "rgb(36, 25, 97)"),
-            color: "white",
-            display: "inline-flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: responsiveCssValue("5px", "5px"),
-            width: "100vw",
-            flexWrap: "wrap",
-        },
-    }
+    const styles = useSignInFormStyles();
 
     return (
         <>
