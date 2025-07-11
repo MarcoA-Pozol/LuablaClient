@@ -21,10 +21,10 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
 
     return (
         <>
-            <div className="login-page">
-                <div className="login-container">
-                    <div className="login-image">
-                        <img src={SignInFormIMG} alt="Learn Languages"/>
+            <div style={styles.loginPage}>
+                <div style={styles.loginContainer}>
+                    <div style={styles.loginImageContainer}>
+                        <img src={SignInFormIMG} alt="Learn Languages" style={styles.loginImage}/>
                     </div>
 
                     <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser})} style={styles.header} className="login-form" method="post">
