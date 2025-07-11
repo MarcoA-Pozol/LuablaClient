@@ -38,13 +38,6 @@ body {
     margin-bottom: 20px;
 }
 
-.login-image p {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #444;
-    margin-top: 10px;
-}
-
 .login-form {
     width: 50%;
     padding: 30px;

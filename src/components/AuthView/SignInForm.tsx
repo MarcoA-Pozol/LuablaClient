@@ -21,29 +21,29 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
 
     return (
         <>
-            <div style={styles.loginPage}>
-                <div style={styles.loginContainer}>
-                    <div style={styles.loginImageContainer}>
-                        <img src={SignInFormIMG} alt="Learn Languages" style={styles.loginImage}/>
+            <div style={styles.page}>
+                <div style={styles.container}>
+                    <div style={styles.imageContainer}>
+                        <img src={SignInFormIMG} alt="Learn Languages" style={styles.image}/>
                     </div>
 
-                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser})} style={styles.header} className="login-form" method="post">
-                        <h2>SignIn to Your Account</h2>
-                        <label style={{display:"inline-flex"}}>
-                            <FaUser className="input-icon-si"/>
-                            <input name="input" type="text" placeholder="Username | Email" required/>
+                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser})} style={styles.form} method="post">
+                        <h2 style={styles.formTitle}>SignIn to Your Account</h2>
+                        <label style={styles.formLabel}>
+                            <FaUser style={styles.inputIcon}/>
+                            <input name="input" type="text" placeholder="Username | Email" required style={styles.formInput}/>
                         </label>
 
-                        <label style={{display:"inline-flex"}}>
-                            <FaLock className="input-icon-si"/>
-                            <input name="password" type="password" placeholder="Password" required/>
+                        <label style={styles.formLabel}>
+                            <FaLock style={styles.inputIcon}/>
+                            <input name="password" type="password" placeholder="Password" required style={styles.formInput}/>
                         </label>
 
-                        <button type="submit">Login</button>
+                        <button style={styles.formButton} type="submit">Login</button>
 
-                        <div className="extra-options">
-                            <a>Forgot Password?</a>
-                            <a onClick={onClick} className="register-link">
+                        <div style={styles.linkOptions}>
+                            <a style={styles.forgotPasswordLink}>Forgot Password?</a>
+                            <a onClick={onClick} style={styles.noAccountLink}>
                                 {children}
                             </a>
                         </div>
