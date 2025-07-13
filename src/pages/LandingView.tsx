@@ -40,8 +40,8 @@ export const LandingView = () => {
 
             <section id="why-luabla" className="why-luabla-section">
                 <div className="why-luabla-content">
-                <h2>Why Choose <span>Luabla?</span></h2>
-                <p>Luabla is your ultimate language-learning partner. With engaging exercises, tailored lessons, and real-world practice, you'll achieve fluency faster than ever.</p>
+                <h2>Level your <span>skills</span> 🆙</h2>
+                <p>Luabla is your ultimate language-learning partner. You'll achieve fluency faster than ever.</p>
                 <ul className="features-list">
                     <li><i className="fas fa-check-circle">»</i> Personalized learning paths</li>
                     <li><i className="fas fa-check-circle">»</i> Interactive and fun exercises</li>
