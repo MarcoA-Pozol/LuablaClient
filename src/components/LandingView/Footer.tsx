@@ -8,38 +8,14 @@ export const Footer = () => {
         <>
             <footer className="footer-container">
                 <div className="social-media-links">
-                    <h3>Get connected with us on social networks</h3>
+                    <h3>Connect with us</h3>
                     <ul>
                         <li><a href="#"><img src={FacebookIMG}alt="Facebook"/></a></li>
                         <li><a href="#"><img src={TwitterIMG}alt="Twitter"/></a></li>
                         <li><a href="#"><img src={InstagramIMG} alt="Instagram"/></a></li>
                     </ul>
                 </div>
-
-                <div className="another-links">
-                    <div>
-                        <h4>Support</h4>
-                        <li>Frequent QA</li>
-                        <li>Need support</li>
-                        <li>Report something</li>
-                    </div>
-
-                    <div>
-                        <h4>Contributions</h4>
-                        <li>For Developers</li>
-                        <li>How to improve Luabla</li>
-                        <li>Have any suggestion</li>
-                    </div>
-
-                    <div>
-                        <h4>Contact with us</h4>
-                        <li>Cellphone: +001 800-161-04-91</li>
-                        <li>Email: luabla.org@gmail.com</li>
-                        <li>www.luabla.org.com</li>
-                    </div>
-                </div>
-                <hr/>
-
+                
                 <div className="dev-rights-container">
                     <span className="dev-rights developer">Developed by <b>Luabla-Dev Team</b></span>
                     <span className="dev-rights copyright">© Luabla - All rights reserved 2024</span>
