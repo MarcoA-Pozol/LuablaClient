@@ -45,13 +45,16 @@ const Testimonials = () => {
       <h2 className="testimonials-title">What Our Users Say</h2>
       <div className="testimonials-carousel">
         {testimonials.map((testimonial, index) => (
-          <div 
-            key={index}
-            className={`testimonial ${index === currentIndex ? 'active' : ''}`}
-          >
-            <img src={testimonial.image} alt={testimonial.author} className="testimonial-image"/>
-            <p className="testimonial-text">{testimonial.text}</p>
-            <h4 className="testimonial-author">- {testimonial.author}</h4>
+          <div key={index} className={`testimonial ${index === currentIndex ? 'active' : ''}`}>
+            <div className="testimonial active">
+              <div className="testimonial-image-container">
+                <img src={testimonial.image} alt={testimonial.author} className="testimonial-image"/>
+              </div>
+              <div className="testimonial-content">
+                <p className="testimonial-text">{testimonial.text}</p>
+                <h4 className="testimonial-author">{testimonial.author}</h4>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -60,6 +63,7 @@ const Testimonials = () => {
         <button className="next-btn" onClick={goToNext}>❯</button>
       </div>
     </div>
+
   );
 };
 
