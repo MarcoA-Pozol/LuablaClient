@@ -26,14 +26,14 @@ export const LandingView = () => {
 
             {authUser ? (
                 <div className="hero-section">
-                    <h1>Welcome again <span className="highlight-text">{authUser.username}</span></h1>
-                    <p>Its time to practice!</p>
+                    <h1>Welcome back <span className="highlight-text">{authUser.username}</span>!</h1>
+                    <h2>Its time to practice!</h2>
                     <a onClick={() => navigateToAuth(false)}><button className="explore-btn">Let´s Go!</button></a>
                 </div>
             ) : (
                 <div className="hero-section">
                     <h1>Master a <span className="highlight-text">Language</span></h1>
-                    <p>Your gateway to mastering languages with ease, using engaging and inovative learning tools!</p>
+                    <h2>Your gateway to mastering languages with ease, using engaging and inovative learning tools!</h2>
                     <a onClick={() => navigateToAuth(false)}><button className="explore-btn">Explore Now</button></a>
                 </div>
             )}

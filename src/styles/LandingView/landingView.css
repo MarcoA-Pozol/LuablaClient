@@ -1,19 +1,19 @@
 /* Hero Section */
-
 .hero-section {
     background: linear-gradient(to right, #312363, #050036);
     color: white;
-    padding-top: 180px;
+    padding-top: 100px;
     padding-bottom: 220px;
     text-align: center;
     position: relative;
+    font-size: 1.8rem;
 }
 
-.hero-section p{
-    color: white;
-    padding-inline: 30%;
-    font-size: 1.8rem;
-    font-family: sans-serif;
+.hero-section h2{
+    font-size: 1.6rem;
+    width: 50%;
+    margin-inline: auto;
+    margin-bottom: 40px;
 }
 
 .hero-section h1 {
@@ -40,14 +40,14 @@
     font-family: sans-serif;
     background-color: #FF7F50;
     color: white;
-    padding: 15px 30px;
-    font-size: 2.2rem;
+    padding: 15px 120px;
     border-radius: 25px;
     border: none;
     cursor: pointer;
-    position: relative; /* For positioning the LED effect */
+    position: relative; 
     z-index: 1;
-    overflow: hidden; /* Prevent the LED effect from overflowing */
+    overflow: hidden;
+    font-size: 1.6rem;
 }
 
 /* Container for the LED effect */
@@ -508,4 +508,23 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin-top: 10px;
     border-bottom: 1px solid rgb(240, 240, 240);
     list-style: none;
+}
+
+
+@media (width < 768px) {
+    .hero-section h1{
+        font-size: 2.4rem;
+        width: 80%;
+        margin-inline: auto;
+    }
+    .hero-section h2{
+        font-size: 1.4rem;
+        width: 86%;
+        margin-inline: auto;
+    }
+    .explore-btn{
+        font-size: 1.6rem;
+        padding-block: 18px;
+        padding-inline: 120px;
+    }
 }
