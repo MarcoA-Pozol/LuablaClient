@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type SetStateAction } from "react";
 import { DeckCreationForm } from "./DeckCreationForm";
+import "../../../styles/AppView/deckSelectionForm.css";
 
 interface DeckSelectionFormProps {
   languageToStudy: string;
   userDecksList:any[];
   refreshDecks:()=>void;
+  selectedDeck:any;
+  setSelectedDeck:React.Dispatch<SetStateAction<any>>;
 }
-export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks}:DeckSelectionFormProps) => {
+export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks, selectedDeck, setSelectedDeck}:DeckSelectionFormProps) => {
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -20,7 +23,6 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks}
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
   }, []);
-
 
 
   // Styles
@@ -112,7 +114,7 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks}
         <>
           <div style={styles.decksList}>
             {decks.map((deck) => (
-              <div key={deck.id} style={styles.deckItem}>
+              <div onClick={() => {setSelectedDeck(deck.id)}} key={deck.id} style={styles.deckItem} className={selectedDeck === deck.id ? "selected-deck" : ""}>
                 <img src={deck.image ? (`http://localhost:8600${deck.image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")} alt={deck.title} style={styles.deckImage} />
                 <span style={styles.deckName}>{deck.title}</span>
               </div>

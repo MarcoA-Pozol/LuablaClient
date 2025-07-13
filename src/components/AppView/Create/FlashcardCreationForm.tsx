@@ -4,12 +4,13 @@ import { handleObjectCreation, clearFormFields } from "../../../functions/handle
 interface FlashcardCreationFormProps {
   languageToStudy: string;
   refreshDecks:()=>void;
+  selectedDeck:any;
 }
-export const FlashcardCreationForm = ({languageToStudy, refreshDecks}:FlashcardCreationFormProps) => {
+export const FlashcardCreationForm = ({languageToStudy, refreshDecks, selectedDeck}:FlashcardCreationFormProps) => {
     const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
-  const formRef = useRef<HTMLFormElement | null>(null);
+    const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    
+
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);
         window.addEventListener("resize", handleResize);
@@ -18,18 +19,18 @@ export const FlashcardCreationForm = ({languageToStudy, refreshDecks}:FlashcardC
 
     const handleClearForm = () => {
     if (formRef.current) {
-      clearFormFields(formRef.current);
+      clearFormFields(formRef.current, languageToStudy);
       }
     };
 
     const handleFlashcardCreation = (event:React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const form = event.currentTarget;
-      clearFormFields(form);
+      clearFormFields(form, languageToStudy);
       handleObjectCreation(
         event,
         "http://localhost:8600/api/flashcards/flashcard",
-        { deckId: 1, language: languageToStudy },
+        { deckId: selectedDeck, language: languageToStudy },
         { "Content-Type": "multipart/form-data" },
         "flashcard"
       );

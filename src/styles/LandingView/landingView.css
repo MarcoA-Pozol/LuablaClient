@@ -376,7 +376,7 @@ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     position: relative;
-    box-shadow: 10px 10px 5px orangered;
+    box-shadow: 10px 10px 5px #FF5C5C;
 }
 
 .testimonial-image {
