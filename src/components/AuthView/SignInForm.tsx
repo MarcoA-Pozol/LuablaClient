@@ -2,11 +2,13 @@ import type { ReactNode } from "react";
 import axios from "axios";
 import SignInFormIMG from "../../assets/AuthView/register_image.png";
 import { handleSignIn } from "../../utils/AuthView/Authentication";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../App";
+import { TemporaryMessage } from "../TemporaryMessage";
 // Icons
 import { FaUser, FaLock } from "react-icons/fa";
-// Style
+// Hooks
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../App";
+import { useTemporaryMessage } from "../../hooks/useTemporaryMessage";
 import { useSignInFormStyles } from "../../styles/AuthView/signInForm";
 
 interface SignInFormProps {
@@ -18,6 +20,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
     const navigate = useNavigate();
     const { setAuthUser } = useAuth();
     const styles = useSignInFormStyles();
+    const temporaryMessage = useTemporaryMessage(); 
 
     return (
         <>
@@ -27,7 +30,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                         <img src={SignInFormIMG} alt="Learn Languages" style={styles.image}/>
                     </div>
 
-                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser})} style={styles.form} method="post">
+                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser, temporaryMessage})} style={styles.form} method="post">
                         <h2 style={styles.formTitle}>SignIn to Your Account</h2>
                         <label style={styles.formLabel}>
                             <FaUser style={styles.inputIcon}/>
@@ -51,6 +54,8 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
 
                 </div>
             </div>
+
+            {temporaryMessage.show && <TemporaryMessage message={temporaryMessage.text} color={temporaryMessage.color}/>}
         </>
     );
 }

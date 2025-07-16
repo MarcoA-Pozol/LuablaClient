@@ -13,4 +13,5 @@ export interface handleSignInProps {
     navigate: NavigateFunction;
     axios: AxiosInstance;
     setAuthUser: React.Dispatch<React.SetStateAction<any>>;
+    temporaryMessage: any;
 }

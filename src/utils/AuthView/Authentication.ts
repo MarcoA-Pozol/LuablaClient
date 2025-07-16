@@ -53,7 +53,7 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleS
     }
 };
 
-export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSignInProps) => {
+export const handleSignIn = async({event, navigate, axios, setAuthUser, temporaryMessage}:handleSignInProps) => {
     event.preventDefault();
 
     // Get form data
@@ -73,13 +73,14 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser}:handleSi
         }); 
         
         if (response.status === 200) {
-            setAuthUser(response.data);
-            navigate("/app");
-            return;
+            temporaryMessage.display("Welcome back!", "green");
+            setTimeout(() => {setAuthUser(response.data);navigate("/app");}, 800); 
+        } else if (response.status === 404) {
+            temporaryMessage.display("This user was not found.", "orangered");
+        } else {
+            temporaryMessage.display(`SignIn failed: ${response.data}`, "orangered");
         }
-        
-        alert(`SignIn failed: ${response.data}`);
     } catch (error) {
-        alert(`SignIn failed: ${error}`);
+        temporaryMessage.display(`Unexpected error: ${error}`, "red");
     }
 }

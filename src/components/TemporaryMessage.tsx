@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import "../styles/temporaryMessage.css";
 
 interface temporaryMessageProps {
     message: string;
