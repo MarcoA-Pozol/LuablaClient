@@ -61,6 +61,7 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser, temporar
     const input = formData.get("input") as string;
     const password = formData.get("password") as string;
 
+    
     try {
         const response = await axios.post("http://localhost:8600/api/auth/signIn", {
             input,
@@ -71,16 +72,20 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser, temporar
                 "Content-Type": "application/json"
             }
         }); 
-        
+
         if (response.status === 200) {
             temporaryMessage.display("Welcome back!", "green");
             setTimeout(() => {setAuthUser(response.data);navigate("/app");}, 800); 
-        } else if (response.status === 404) {
-            temporaryMessage.display("This user was not found.", "orangered");
         } else {
             temporaryMessage.display(`SignIn failed: ${response.data}`, "orangered");
         }
-    } catch (error) {
-        temporaryMessage.display(`Unexpected error: ${error}`, "red");
+    } catch (error:any) {
+        if (error.status === 404) {
+            temporaryMessage.display("User not found.", "orangered");
+        } else if (error.status === 401) {
+            temporaryMessage.display("Invalid password.", "orangered");
+        } else {
+            temporaryMessage.display(`Unexpected error: ${error}`, "red");
+        }
     }
 }
