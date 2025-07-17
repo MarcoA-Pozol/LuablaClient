@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
+import { handleAcquireDeck } from "../../../functions/handleAcquireDeck";
+import { useAuth } from "../../../App";
+import { useTemporaryMessage } from "../../../hooks/useTemporaryMessage";
+import { TemporaryMessage } from "../../TemporaryMessage";
 
 interface LibraryDeckProps {
+    deckId:number;
     index:string|number;
     title:string;
     description:string;
@@ -10,10 +15,12 @@ interface LibraryDeckProps {
     level:string;
     cardsQuantity:string;
 }
-export const LibraryDeck = ({index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
+export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    
+    const authUser = useAuth();
+    const temporaryMessage = useTemporaryMessage();
+
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);
         window.addEventListener("resize", handleResize);
@@ -133,7 +140,8 @@ export const LibraryDeck = ({index, title, description, image, author, level, ca
                 <h4 style={styles.level}><FaCertificate/> {level}</h4>
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
-            <button style={styles.getDeckButton}>Get</button>
+            <button style={styles.getDeckButton} onClick={() => handleAcquireDeck(deckId, authUser, temporaryMessage)}>Get</button>
+            {temporaryMessage.show && <TemporaryMessage message={temporaryMessage.text} color={temporaryMessage.color}/>}
         </div>
     );
 }
