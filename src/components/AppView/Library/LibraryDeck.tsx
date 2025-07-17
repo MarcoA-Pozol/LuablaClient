@@ -14,8 +14,9 @@ interface LibraryDeckProps {
     level:string;
     cardsQuantity:string;
     language:string;
+    refreshLibraryDecksList:(deckId:number)=>void;
 }
-export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language}:LibraryDeckProps) => {
+export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language, refreshLibraryDecksList}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const temporaryMessage = useTemporaryMessage();
@@ -139,7 +140,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                 <h4 style={styles.level}><FaCertificate/> {level}</h4>
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
-            <button style={styles.getDeckButton} onClick={() => handleAcquireDeck(deckId, language, temporaryMessage)}>Get</button>
+            <button style={styles.getDeckButton} onClick={() => {refreshLibraryDecksList(deckId);handleAcquireDeck(deckId, language, temporaryMessage)}}>Get</button>
             {temporaryMessage.show && <TemporaryMessage message={temporaryMessage.text} color={temporaryMessage.color}/>}
         </div>
     );

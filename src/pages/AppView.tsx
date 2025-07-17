@@ -10,12 +10,26 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 
+type Deck = {
+    id: number;
+    index:string|number;
+    title:string;
+    description:string;
+    image:string;
+    author:string;
+    level:string;
+    cardsQuantity:string|number;
+    language:string;
+    [key: string]: any;
+};
+
 export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
-    const [userDecksList, setUserDecksList] = useState<object[]>([]);
-    const [ownedDecksList, setOwnedDecksList] = useState<object[]>([]);
+    const [userDecksList, setUserDecksList] = useState<Deck[]>([]);
+    const [ownedDecksList, setOwnedDecksList] = useState<Deck[]>([]);
+    const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
 
     // Fetch user's decks
     const fetchUserDecks = async () => {
@@ -42,9 +56,38 @@ export const AppView = () => {
         }
     }
 
+     const fetchLibraryDecks = async () => {
+            try {
+                const response = await axios.get("http://localhost:8600/api/decks/libraryDeck", {
+                    params: {language:languageToStudy},
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+                setLibraryDecksList(typeof response.data.decks === "string"
+                ? JSON.parse(response.data.decks)
+                : response.data.decks);
+            } catch (error: any) {
+                if (error.response) {
+                    setLibraryDecksList([]);
+                } else {
+                    setLibraryDecksList([]);
+                }
+            }
+        }
+
+    useEffect(() => {
+        fetchLibraryDecks();
+    }, [languageToStudy, libraryDecksList])
+
     useEffect(() => {
         fetchUserDecks();
     }, [languageToStudy])
+
+    const removeFromLibraryDecks = (deckId:number) => {
+        setLibraryDecksList(libraryDecksList.filter(libraryDeck => libraryDeck.id !== deckId));
+    }
 
     return (
         <>
@@ -53,7 +96,7 @@ export const AppView = () => {
                     <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
                     <AppContentContainer>
                         {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}/>)}
-                        {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy}/>)}
+                        {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy} libraryDecksList={libraryDecksList} refreshLibraryDecksList={() => {removeFromLibraryDecks}}/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} refreshDecks={fetchUserDecks}/>)}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
