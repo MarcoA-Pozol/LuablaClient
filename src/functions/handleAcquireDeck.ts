@@ -1,7 +1,7 @@
 import axios from "axios"
 
-export const handleAcquireDeck = async (deckId:number, user:object, temporaryMessage:any) => {
-    const response = await axios.patch("http://localhost:8600/api/decks/acquireDeck", {"user":user, "deckId":deckId}, {withCredentials:true, headers:{"Content-Type":"application/json"}});  
+export const handleAcquireDeck = async (deckId:number, language:string, temporaryMessage:any) => {
+    const response = await axios.patch("http://localhost:8600/api/decks/acquireDeck", {"deckId":deckId, "language":language}, {withCredentials:true, headers:{"Content-Type":"application/json"}});  
 
     if (response.status === 200) {
         temporaryMessage.display("Added deck to study.", "purple");

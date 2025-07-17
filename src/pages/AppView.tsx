@@ -14,8 +14,9 @@ export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
-    const [userDecksList, setUserDecksList] = useState<any[]>([]);
-    
+    const [userDecksList, setUserDecksList] = useState<object[]>([]);
+    const [ownedDecksList, setOwnedDecksList] = useState<object[]>([]);
+
     // Fetch user's decks
     const fetchUserDecks = async () => {
         try {
@@ -26,6 +27,9 @@ export const AppView = () => {
                     "Content-Type": "application/json"
                 }
             });
+            setOwnedDecksList(typeof response.data.ownedDecks === "string"
+            ? JSON.parse(response.data.ownedDecks)
+            : response.data.ownedDecks);
             setUserDecksList(typeof response.data.decks === "string"
             ? JSON.parse(response.data.decks)
             : response.data.decks);
@@ -48,7 +52,7 @@ export const AppView = () => {
                 <div>
                     <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
                     <AppContentContainer>
-                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} languageToStudy={languageToStudy}/>)}
+                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}/>)}
                         {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy}/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} refreshDecks={fetchUserDecks}/>)}
                     </AppContentContainer>

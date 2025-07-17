@@ -40,7 +40,7 @@ export const LibraryContainer= ({languageToStudy}:LibraryContainerProps) => {
             <div style={styles.decksContainer}>
                 {libraryDecksList.length > 0 && typeof libraryDecksList[0] === "object" ? (
                     libraryDecksList.map((deck: any, index) => (
-                        <LibraryDeck index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={languageToStudy === "ZH" ? (deck.hsk_level) : languageToStudy === "JP" ? (deck.jlpt_level) : languageToStudy === "KO" ? (deck.topik_level) : (deck.cefr_level)} cardsQuantity={deck.cards_quantity}/>
+                        <LibraryDeck deckId={deck.id} index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={languageToStudy === "ZH" ? (deck.hsk_level) : languageToStudy === "JP" ? (deck.jlpt_level) : languageToStudy === "KO" ? (deck.topik_level) : (deck.cefr_level)} cardsQuantity={deck.cards_quantity} language={languageToStudy}/>
                     ))
                 ) : (
                     <p>No decks found</p>

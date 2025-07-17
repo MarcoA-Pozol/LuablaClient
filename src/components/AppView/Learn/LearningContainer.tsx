@@ -1,16 +1,17 @@
-import { GetUserDecks } from "./GetUserDecks";
+import { DecksToStudyContainer } from "./GetUserDecks";
 
 interface LearningContainerProps {
     authUser: string;
     userDecksList:any[];
+    ownedDecksList:any[];
     languageToStudy: string;
 }
 
-export const LearningContainer= ({authUser, userDecksList, languageToStudy}:LearningContainerProps) => {
+export const LearningContainer= ({authUser, userDecksList, ownedDecksList, languageToStudy}:LearningContainerProps) => {
 
     return (
         <>
-            <GetUserDecks authUser={authUser} userDecksList={userDecksList} languageToStudy={languageToStudy}/>
+            <DecksToStudyContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}/>
         </>
     );
 }
