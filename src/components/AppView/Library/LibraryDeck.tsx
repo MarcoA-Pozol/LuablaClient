@@ -140,7 +140,15 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                 <h4 style={styles.level}><FaCertificate/> {level}</h4>
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
-            <button style={styles.getDeckButton} onClick={() => {refreshLibraryDecksList(deckId);handleAcquireDeck(deckId, language, temporaryMessage)}}>Get</button>
+            <button
+                style={styles.getDeckButton}
+                onClick={() => {
+                    handleAcquireDeck(deckId, language, temporaryMessage);
+                    setTimeout(() => refreshLibraryDecksList(deckId), 1000);
+                }}
+            >
+                Get
+            </button>
             {temporaryMessage.show && <TemporaryMessage message={temporaryMessage.text} color={temporaryMessage.color}/>}
         </div>
     );
