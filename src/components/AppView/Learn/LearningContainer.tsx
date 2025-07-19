@@ -1,5 +1,5 @@
 import type { SetStateAction } from "react";
-import { DecksToStudyContainer } from "./GetUserDecks";
+import { DecksToStudyContainer } from "./DecksToStudyContainer.tsx";
 
 interface LearningContainerProps {
     authUser: string;
