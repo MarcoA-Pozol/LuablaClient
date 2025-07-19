@@ -148,7 +148,7 @@ export const DeckToLearn = ({authUser, index, title, description, image, author,
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
             {author === authUser.username && (<button style={styles.addCardsButton}>Add +</button>)}
-            <button style={styles.studyButton}>Study</button>
+            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton}>Study</button>)}
         </div>
     );
 }

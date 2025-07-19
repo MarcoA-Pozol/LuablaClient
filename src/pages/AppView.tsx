@@ -4,6 +4,7 @@ import { CreationContainer } from "../components/AppView/Create/CreationContaine
 import { PickLanguageForm } from "../components/AuthView/PickLanguageForm";
 import { TopNavBarApp } from "../components/AppView/TopNavBarApp";
 import { AppContentContainer } from "../components/AppView/AppContentContainer";
+import { DeckFlashcardsPracticeContainer } from "../components/AppView/Practice/DeckFlashcardsPracticeContainer";
 import { BottomOptionsBar } from "../components/AppView/BottomOptionsBar";
 import { useAuth } from "../App";
 import { useState } from "react";
@@ -30,6 +31,7 @@ export const AppView = () => {
     const [userDecksList, setUserDecksList] = useState<Deck[]>([]);
     const [ownedDecksList, setOwnedDecksList] = useState<Deck[]>([]);
     const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
+    const [deckToPracticeFlashcardsList, setDeckToPracticeFlashcardsList] = useState<object[]>([{}]);
 
     // Fetch user's decks
     const fetchUserDecks = async () => {
@@ -98,6 +100,7 @@ export const AppView = () => {
                         {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}/>)}
                         {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy} libraryDecksList={libraryDecksList} refreshLibraryDecksList={() => {removeFromLibraryDecks}}/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} refreshDecks={fetchUserDecks}/>)}
+                        {displayedContainer === "practiceDeckFlashcards" && (<DeckFlashcardsPracticeContainer deckToPracticeFlashcardsList={deckToPracticeFlashcardsList}/>)}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
                 </div>
