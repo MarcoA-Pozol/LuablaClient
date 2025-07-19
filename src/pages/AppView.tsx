@@ -97,7 +97,7 @@ export const AppView = () => {
                 <div>
                     <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
                     <AppContentContainer>
-                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}/>)}
+                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeFlashcardsList={setDeckToPracticeFlashcardsList}/>)}
                         {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy} libraryDecksList={libraryDecksList} refreshLibraryDecksList={() => {removeFromLibraryDecks}}/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} refreshDecks={fetchUserDecks}/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckFlashcardsPracticeContainer deckToPracticeFlashcardsList={deckToPracticeFlashcardsList}/>)}
