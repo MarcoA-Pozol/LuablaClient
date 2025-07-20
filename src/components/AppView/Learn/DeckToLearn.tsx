@@ -6,19 +6,19 @@ import { FaUser, FaCertificate } from "react-icons/fa";
 interface DeckToLearnProps {
     authUser:any;
     index:string|number;
+    deckId:number;
     title:string;
     description:string;
     image:string;
     author:string;
     level:string;
     cardsQuantity:string;
-    flashcardsList:object[];
     setDisplayedContainer: React.Dispatch<SetStateAction<string>>;
-    setDeckToPracticeFlashcardsList: React.Dispatch<SetStateAction<object[]|any[]>>;
+    setDeckToPracticeID: React.Dispatch<SetStateAction<number>>;
 }
 
 
-export const DeckToLearn = ({authUser, index, title, description, image, author, level, flashcardsList, cardsQuantity, setDisplayedContainer, setDeckToPracticeFlashcardsList}:DeckToLearnProps) => {
+export const DeckToLearn = ({authUser, index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:DeckToLearnProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -152,7 +152,7 @@ export const DeckToLearn = ({authUser, index, title, description, image, author,
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
             {author === authUser.username && (<button style={styles.addCardsButton}>Add +</button>)}
-            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton} onClick={() => {setDeckToPracticeFlashcardsList(flashcardsList); setDisplayedContainer("practiceDeckFlashcards"); }}>Study</button>)}
+            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton} onClick={() => { setDeckToPracticeID(deckId); setDisplayedContainer("practiceDeckFlashcards") }}>Study</button>)}
         </div>
     );
 }

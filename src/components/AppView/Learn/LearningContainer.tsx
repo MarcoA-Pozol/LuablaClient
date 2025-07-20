@@ -7,14 +7,14 @@ interface LearningContainerProps {
     ownedDecksList:any[];
     languageToStudy: string;
     setDisplayedContainer: React.Dispatch<SetStateAction<string>>;
-    setDeckToPracticeFlashcardsList: React.Dispatch<SetStateAction<object[]|any[]>>;
+    setDeckToPracticeID: React.Dispatch<SetStateAction<number>>;
 }
 
-export const LearningContainer= ({authUser, userDecksList, ownedDecksList, languageToStudy, setDisplayedContainer, setDeckToPracticeFlashcardsList}:LearningContainerProps) => {
+export const LearningContainer= ({authUser, userDecksList, ownedDecksList, languageToStudy, setDisplayedContainer, setDeckToPracticeID}:LearningContainerProps) => {
 
     return (
         <>
-            <DecksToStudyContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy} setDisplayedContainer={setDisplayedContainer} setDeckToPracticeFlashcardsList={setDeckToPracticeFlashcardsList}/>
+            <DecksToStudyContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy} setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>
         </>
     );
 }
