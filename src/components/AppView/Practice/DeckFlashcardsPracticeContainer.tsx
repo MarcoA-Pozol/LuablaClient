@@ -10,8 +10,11 @@ export const DeckFlashcardsPracticeContainer = ({deckId, language}:DeckFlashcard
     const [flashcardsList, setFlashcardsList] = useState<object[]>([]);
 
     useEffect(() => {
-        setFlashcardsList(fetchDeckFlashcards(deckId, language));
-        // You might want to do something with flashcards here
+        const fetchData = async () => {
+            const data = await fetchDeckFlashcards(deckId, language);
+            setFlashcardsList(data);
+        };
+        fetchData();
     }, [deckId]);
 
     return (
