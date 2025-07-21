@@ -10,6 +10,7 @@ import { useAuth } from "../App";
 import { useState } from "react";
 import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
+import { removeFromLibraryDecks } from "../utils/removeFromLibraryDecks";
 import type { Deck } from "../schemas/Deck";
 
 export const AppView = () => {
@@ -25,10 +26,6 @@ export const AppView = () => {
         fetchLibraryDecks(languageToStudy, setLibraryDecksList);
         fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
     }, [languageToStudy])
-
-    const removeFromLibraryDecks = (deckId:number) => {
-        setLibraryDecksList(libraryDecksList.filter(libraryDeck => libraryDeck.id !== deckId));
-    }
 
     return (
         <>
