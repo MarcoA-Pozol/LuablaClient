@@ -2,6 +2,8 @@ import type { SetStateAction } from "react";
 import type React from "react";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
 import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
+import { fetchUserDecks } from "../../../functions/fetchDecks";
+import type { Deck } from "../../../schemas/Deck";
 
 interface DeckCreationFormProps {
   languageToStudy: string;
@@ -9,7 +11,8 @@ interface DeckCreationFormProps {
   responsiveValue: <T>(small: T, large: T, width: number) => T;
   showCreateForm: boolean;
   setShowCreateForm: React.Dispatch<SetStateAction<boolean>>;
-  refreshDecks:()=>void;
+  setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
+  setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
 }
 
 export const DeckCreationForm = ({
@@ -18,7 +21,8 @@ export const DeckCreationForm = ({
   responsiveValue,
   showCreateForm,
   setShowCreateForm,
-  refreshDecks
+  setOwnedDecksList,
+  setUserDecksList
 }: DeckCreationFormProps) => {
   const levelList =
     languageToStudy === "JP"
@@ -35,7 +39,7 @@ export const DeckCreationForm = ({
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToStudy); 
     const timeoutId = setTimeout(() => {
-      refreshDecks();
+      fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
     }, 1000); 
 
     return () => clearTimeout(timeoutId); 

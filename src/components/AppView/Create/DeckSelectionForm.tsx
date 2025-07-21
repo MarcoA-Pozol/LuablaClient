@@ -1,15 +1,17 @@
 import { useState, useEffect, type SetStateAction } from "react";
 import { DeckCreationForm } from "./DeckCreationForm";
 import "../../../styles/AppView/deckSelectionForm.css";
+import type { Deck } from "../../../schemas/Deck";
 
 interface DeckSelectionFormProps {
   languageToStudy: string;
   userDecksList:any[];
-  refreshDecks:()=>void;
   selectedDeck:any;
   setSelectedDeck:React.Dispatch<SetStateAction<any>>;
+  setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
+  setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
 }
-export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks, selectedDeck, setSelectedDeck}:DeckSelectionFormProps) => {
+export const DeckSelectionForm = ({languageToStudy, userDecksList, selectedDeck, setSelectedDeck, setOwnedDecksList, setUserDecksList}:DeckSelectionFormProps) => {
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -127,7 +129,7 @@ export const DeckSelectionForm = ({languageToStudy, userDecksList, refreshDecks,
         </>
       )}
 
-      <DeckCreationForm languageToStudy={languageToStudy} screenWidth={screenWidth} responsiveValue={responsiveValue} showCreateForm={showCreateForm} setShowCreateForm={setShowCreateForm} refreshDecks={refreshDecks}/>
+      <DeckCreationForm languageToStudy={languageToStudy} screenWidth={screenWidth} responsiveValue={responsiveValue} showCreateForm={showCreateForm} setShowCreateForm={setShowCreateForm} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList}/>
     </div>
   );
 };
