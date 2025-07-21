@@ -10,19 +10,7 @@ import { useAuth } from "../App";
 import { useState } from "react";
 import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
-
-type Deck = {
-    id: number;
-    index:string|number;
-    title:string;
-    description:string;
-    image:string;
-    author:string;
-    level:string;
-    cardsQuantity:string|number;
-    language:string;
-    [key: string]: any;
-};
+import type { Deck } from "../schemas/Deck";
 
 export const AppView = () => {
     const { authUser } = useAuth();

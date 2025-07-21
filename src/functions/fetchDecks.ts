@@ -1,19 +1,7 @@
 import axios from "axios";
 import type React from "react";
 import type { SetStateAction } from "react";
-
-type Deck = {
-    id: number;
-    index:string|number;
-    title:string;
-    description:string;
-    image:string;
-    author:string;
-    level:string;
-    cardsQuantity:string|number;
-    language:string;
-    [key: string]: any;
-};
+import type { Deck } from "../schemas/Deck";
 
 export const fetchLibraryDecks = async (languageToStudy:string, setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
     try {
