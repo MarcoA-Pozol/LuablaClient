@@ -9,7 +9,7 @@ import { BottomOptionsBar } from "../components/AppView/BottomOptionsBar";
 import { useAuth } from "../App";
 import { useState } from "react";
 import { useEffect } from "react";
-import axios from "axios";
+import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 
 type Deck = {
     id: number;
@@ -33,55 +33,9 @@ export const AppView = () => {
     const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
-    // Fetch user's decks
-    const fetchUserDecks = async () => {
-        try {
-            const response = await axios.get("http://localhost:8600/api/decks/deck", {
-                params: {language:languageToStudy},
-                withCredentials: true,
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            setOwnedDecksList(typeof response.data.ownedDecks === "string"
-            ? JSON.parse(response.data.ownedDecks)
-            : response.data.ownedDecks);
-            setUserDecksList(typeof response.data.decks === "string"
-            ? JSON.parse(response.data.decks)
-            : response.data.decks);
-        } catch (error: any) {
-            if (error.response) {
-                setUserDecksList([]);
-            } else {
-                setUserDecksList([]);
-            }
-        }
-    }
-
-     const fetchLibraryDecks = async () => {
-            try {
-                const response = await axios.get("http://localhost:8600/api/decks/libraryDeck", {
-                    params: {language:languageToStudy},
-                    withCredentials: true,
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
-                setLibraryDecksList(typeof response.data.decks === "string"
-                ? JSON.parse(response.data.decks)
-                : response.data.decks);
-            } catch (error: any) {
-                if (error.response) {
-                    setLibraryDecksList([]);
-                } else {
-                    setLibraryDecksList([]);
-                }
-            }
-        }
-
     useEffect(() => {
-        fetchLibraryDecks();
-        fetchUserDecks();
+        fetchLibraryDecks(languageToStudy, setLibraryDecksList);
+        fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
     }, [languageToStudy])
 
     const removeFromLibraryDecks = (deckId:number) => {
