@@ -81,11 +81,8 @@ export const AppView = () => {
 
     useEffect(() => {
         fetchLibraryDecks();
-    }, [languageToStudy, libraryDecksList])
-
-    useEffect(() => {
         fetchUserDecks();
-    }, [languageToStudy, libraryDecksList])
+    }, [languageToStudy])
 
     const removeFromLibraryDecks = (deckId:number) => {
         setLibraryDecksList(libraryDecksList.filter(libraryDeck => libraryDeck.id !== deckId));

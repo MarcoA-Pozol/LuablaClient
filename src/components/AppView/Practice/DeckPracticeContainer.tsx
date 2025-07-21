@@ -16,7 +16,7 @@ export const DeckPracticeContainer = ({deckId}:DeckPracticeContainerProps) => {
             setFlashcardsList(data);
         };
         fetchData();
-    }, [deckId]);
+    }, []);
 
     return (
         <div>
