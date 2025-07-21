@@ -4,6 +4,7 @@ import { handleAcquireDeck } from "../../../functions/handleAcquireDeck";
 import { useTemporaryMessage } from "../../../hooks/useTemporaryMessage";
 import { TemporaryMessage } from "../../TemporaryMessage";
 import { removeFromLibraryDecks } from "../../../utils/removeFromLibraryDecks";
+import { fetchUserDecks } from "../../../functions/fetchDecks";
 import type { Deck } from "../../../schemas/Deck";
 
 interface LibraryDeckProps {
@@ -18,9 +19,11 @@ interface LibraryDeckProps {
     language:string;
     refreshLibraryDecksList:(deckId:number)=>void;
     setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>;
+    setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
+    setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
     libraryDecksList:Deck[];
 }
-export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language, refreshLibraryDecksList, setLibraryDecksList, libraryDecksList}:LibraryDeckProps) => {
+export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language, refreshLibraryDecksList, setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const temporaryMessage = useTemporaryMessage();
@@ -150,6 +153,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                     handleAcquireDeck(deckId, language, temporaryMessage);
                     setTimeout(() => refreshLibraryDecksList(deckId), 1000);
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
+                    fetchUserDecks(language, setOwnedDecksList, setUserDecksList);
                 }}
             >
                 Get

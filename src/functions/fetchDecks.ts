@@ -40,11 +40,8 @@ export const fetchUserDecks = async (languageToStudy:string, setOwnedDecksList:R
         ? JSON.parse(response.data.decks)
         : response.data.decks);
     } catch (error: any) {
-        if (error.response) {
-            setUserDecksList([]);
-        } else {
-            setUserDecksList([]);
-        }
+        setUserDecksList([]);
+        setOwnedDecksList([]);
     }
 }
 
