@@ -1,29 +1,13 @@
-import { useState, type SetStateAction } from "react";
+import { useState } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
 import { handleAcquireDeck } from "../../../functions/handleAcquireDeck";
 import { useTemporaryMessage } from "../../../hooks/useTemporaryMessage";
 import { TemporaryMessage } from "../../TemporaryMessage";
 import { removeFromLibraryDecks } from "../../../utils/removeFromLibraryDecks";
 import { fetchUserDecks } from "../../../functions/fetchDecks";
-import type { Deck } from "../../../schemas/Deck";
+import type { LibraryDeckProps } from "../../../types/AppView/LibraryDeckProps";
 import { useLibraryDeckStyles } from "../../../styles/AppView/libraryDeck";
 
-interface LibraryDeckProps {
-    deckId:number;
-    index:string|number;
-    title:string;
-    description:string;
-    image:string;
-    author:string;
-    level:string;
-    cardsQuantity:string;
-    language:string;
-    refreshLibraryDecksList:(deckId:number)=>void;
-    setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-    setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-    setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-    libraryDecksList:Deck[];
-}
 export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language, refreshLibraryDecksList, setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const temporaryMessage = useTemporaryMessage();
