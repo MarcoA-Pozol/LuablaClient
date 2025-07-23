@@ -12,13 +12,14 @@ import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import { removeFromLibraryDecks } from "../utils/removeFromLibraryDecks";
 import type { Deck } from "../schemas/Deck";
+import { useDecksLists } from "../hooks/useDecksLists";
 
 export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
     const [userDecksList, setUserDecksList] = useState<Deck[]>([]);
-    const [ownedDecksList, setOwnedDecksList] = useState<Deck[]>([]);
+    const {ownedDecksList, setOwnedDecksList} = useDecksLists();
     const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
