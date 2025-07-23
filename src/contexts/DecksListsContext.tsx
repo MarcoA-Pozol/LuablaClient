@@ -1,12 +1,15 @@
 import { createContext, useState, useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import type { Deck } from "../schemas/Deck";
-import type { ReactNode } from "react";
+import type { ReactNode, SetStateAction } from "react";
 
 type DecksListsContextType = {
     userDecksList: Deck[];
+    setUserDecksList: React.Dispatch<SetStateAction<Deck[]>>;
     ownedDecksList: Deck[];
+    setOwnedDecksList: React.Dispatch<SetStateAction<Deck[]>>;
     libraryDecksList: Deck[];
+    setLibraryDecksList: React.Dispatch<SetStateAction<Deck[]>>;
 };
 
 export const DecksListsContext = createContext<DecksListsContextType | undefined>(undefined);
@@ -33,7 +36,7 @@ export const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
     }, [languageToStudy]);
 
     return (
-        <DecksListsContext.Provider value={{ userDecksList, ownedDecksList, libraryDecksList }}>
+        <DecksListsContext.Provider value={{ userDecksList, setUserDecksList, ownedDecksList, setOwnedDecksList, libraryDecksList, setLibraryDecksList }}>
             {children}
         </DecksListsContext.Provider>
     );
