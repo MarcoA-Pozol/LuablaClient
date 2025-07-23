@@ -3,7 +3,7 @@ import type React from "react";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../../datasets/AppView";
 import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
 import { fetchUserDecks } from "../../../functions/fetchDecks";
-import type { Deck } from "../../../schemas/Deck";
+import { useDecksLists } from "../../../hooks/useDecksLists";
 
 interface DeckCreationFormProps {
   languageToStudy: string;
@@ -11,8 +11,6 @@ interface DeckCreationFormProps {
   responsiveValue: <T>(small: T, large: T, width: number) => T;
   showCreateForm: boolean;
   setShowCreateForm: React.Dispatch<SetStateAction<boolean>>;
-  setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-  setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
 }
 
 export const DeckCreationForm = ({
@@ -20,9 +18,7 @@ export const DeckCreationForm = ({
   screenWidth,
   responsiveValue,
   showCreateForm,
-  setShowCreateForm,
-  setOwnedDecksList,
-  setUserDecksList
+  setShowCreateForm
 }: DeckCreationFormProps) => {
   const levelList =
     languageToStudy === "JP"
@@ -32,6 +28,7 @@ export const DeckCreationForm = ({
       : languageToStudy === "KO"
       ? topikLevelsList
       : cefrLevelsList;
+  const {setUserDecksList, setOwnedDecksList} = useDecksLists();
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

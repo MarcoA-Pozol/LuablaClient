@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef, type SetStateAction } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
 import { fetchUserDecks } from "../../../functions/fetchDecks";
-import type { Deck } from "../../../schemas/Deck";
+import { useDecksLists } from "../../../hooks/useDecksLists";
 
 interface FlashcardCreationFormProps {
   languageToStudy: string;
   selectedDeck:any;
-  setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-  setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
 }
-export const FlashcardCreationForm = ({languageToStudy, selectedDeck, setOwnedDecksList, setUserDecksList}:FlashcardCreationFormProps) => {
+export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardCreationFormProps) => {
     const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
     const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const { setUserDecksList, setOwnedDecksList } = useDecksLists();
 
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);

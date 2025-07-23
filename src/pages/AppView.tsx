@@ -16,7 +16,7 @@ export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
-    const {userDecksList, setUserDecksList, libraryDecksList, setLibraryDecksList, ownedDecksList, setOwnedDecksList} = useDecksLists();
+    const {userDecksList, setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export const AppView = () => {
                     <AppContentContainer>
                         {displayedContainer === "learning" && (<LearningContainer authUser={authUser} languageToStudy={languageToStudy}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
                         {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy}/>)}
-                        {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList}/>)}
+                        {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy}/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckPracticeContainer deckId={deckToPracticeID}/>)}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
