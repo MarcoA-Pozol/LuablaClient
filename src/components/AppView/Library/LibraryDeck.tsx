@@ -41,11 +41,11 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
             </div>
             <button
                 style={styles.getDeckButton}
-                onClick={() => {
-                    handleAcquireDeck(deckId, language, temporaryMessage);
-                    setTimeout(() => refreshLibraryDecksList(deckId), 1000);
+                onClick={async () => {
+                    await handleAcquireDeck(deckId, language, temporaryMessage);
+                    refreshLibraryDecksList(deckId)
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
-                    fetchUserDecks(language, setOwnedDecksList, setUserDecksList);
+                    await fetchUserDecks(language, setOwnedDecksList, setUserDecksList);
                 }}
             >
                 Get
