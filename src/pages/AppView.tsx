@@ -33,7 +33,7 @@ export const AppView = () => {
                 <div>
                     <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
                     <AppContentContainer>
-                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
+                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} languageToStudy={languageToStudy}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
                         {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy} libraryDecksList={libraryDecksList} refreshLibraryDecksList={() => {removeFromLibraryDecks}} setLibraryDecksList={setLibraryDecksList} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList}/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList}/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckPracticeContainer deckId={deckToPracticeID}/>)}

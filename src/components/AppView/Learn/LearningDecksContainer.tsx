@@ -1,9 +1,11 @@
 import { DeckToLearn } from "./DeckToLearn";
 import { useLearningDecksContainerStyles } from "../../../styles/AppView/learningDecksContainer";
 import type { LearningDecksContainerProps } from "../../../types/AppView/LearningDecksContainerProps";
+import { useDecks } from "../../../hooks/useDecksLists";
 
-export const LearningDecksContainer = ({authUser, userDecksList, ownedDecksList, languageToStudy, setDisplayedContainer, setDeckToPracticeID}:LearningDecksContainerProps) => {
+export const LearningDecksContainer = ({authUser, languageToStudy, setDisplayedContainer, setDeckToPracticeID}:LearningDecksContainerProps) => {
     const styles = useLearningDecksContainerStyles();
+    const {userDecksList, ownedDecksList} = useDecks()
 
     return (
         <div style={styles.decksContainer}>
