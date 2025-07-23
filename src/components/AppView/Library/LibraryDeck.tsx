@@ -7,11 +7,13 @@ import { removeFromLibraryDecks } from "../../../utils/removeFromLibraryDecks";
 import { fetchUserDecks } from "../../../functions/fetchDecks";
 import type { LibraryDeckProps } from "../../../types/AppView/LibraryDeckProps";
 import { useLibraryDeckStyles } from "../../../styles/AppView/libraryDeck";
+import { useDecksLists } from "../../../hooks/useDecksLists";
 
-export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language, refreshLibraryDecksList, setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList}:LibraryDeckProps) => {
+export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const temporaryMessage = useTemporaryMessage();
     const styles = useLibraryDeckStyles(isDeckHovered);
+    const { setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList } = useDecksLists();
 
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
@@ -27,7 +29,6 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                 style={styles.getDeckButton}
                 onClick={async () => {
                     await handleAcquireDeck(deckId, language, temporaryMessage);
-                    refreshLibraryDecksList(deckId)
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
                     await fetchUserDecks(language, setOwnedDecksList, setUserDecksList);
                 }}

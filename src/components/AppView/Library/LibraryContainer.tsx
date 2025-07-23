@@ -1,24 +1,19 @@
+import { useDecksLists } from "../../../hooks/useDecksLists";
 import { LibraryDeck } from "./LibraryDeck";
-import React, { type SetStateAction } from "react";
-import type { Deck } from "../../../schemas/Deck";
 
 interface LibraryContainerProps {
     languageToStudy: string;
-    refreshLibraryDecksList:(deckId:number) => void;
-    setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-    setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-    setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>;
-    libraryDecksList:Deck[];
 }
 
-export const LibraryContainer= ({languageToStudy, libraryDecksList, refreshLibraryDecksList, setLibraryDecksList, setOwnedDecksList, setUserDecksList}:LibraryContainerProps) => {
+export const LibraryContainer= ({languageToStudy}:LibraryContainerProps) => {
+    const { libraryDecksList } = useDecksLists();
 
     return (
         <>
             <div style={styles.decksContainer}>
                 {libraryDecksList.length > 0 && typeof libraryDecksList[0] === "object" ? (
                     libraryDecksList.map((deck: any, index) => (
-                        <LibraryDeck deckId={deck.id} index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={languageToStudy === "ZH" ? (deck.hsk_level) : languageToStudy === "JP" ? (deck.jlpt_level) : languageToStudy === "KO" ? (deck.topik_level) : (deck.cefr_level)} cardsQuantity={deck.cards_quantity} language={languageToStudy} refreshLibraryDecksList={refreshLibraryDecksList} setLibraryDecksList={setLibraryDecksList} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList} libraryDecksList={libraryDecksList}/>
+                        <LibraryDeck deckId={deck.id} index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={languageToStudy === "ZH" ? (deck.hsk_level) : languageToStudy === "JP" ? (deck.jlpt_level) : languageToStudy === "KO" ? (deck.topik_level) : (deck.cefr_level)} cardsQuantity={deck.cards_quantity} language={languageToStudy}/>
                     ))
                 ) : (
                     <p>No decks found</p>

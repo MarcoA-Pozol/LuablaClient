@@ -10,17 +10,13 @@ import { useAuth } from "../App";
 import { useState } from "react";
 import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
-import { removeFromLibraryDecks } from "../utils/removeFromLibraryDecks";
-import type { Deck } from "../schemas/Deck";
 import { useDecksLists } from "../hooks/useDecksLists";
 
 export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
-    const [userDecksList, setUserDecksList] = useState<Deck[]>([]);
-    const {ownedDecksList, setOwnedDecksList} = useDecksLists();
-    const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
+    const {userDecksList, setUserDecksList, libraryDecksList, setLibraryDecksList, ownedDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
     useEffect(() => {
@@ -35,7 +31,7 @@ export const AppView = () => {
                     <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
                     <AppContentContainer>
                         {displayedContainer === "learning" && (<LearningContainer authUser={authUser} languageToStudy={languageToStudy}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
-                        {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy} libraryDecksList={libraryDecksList} refreshLibraryDecksList={() => {removeFromLibraryDecks}} setLibraryDecksList={setLibraryDecksList} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList}/>)}
+                        {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy}/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy} userDecksList={userDecksList} setOwnedDecksList={setOwnedDecksList} setUserDecksList={setUserDecksList}/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckPracticeContainer deckId={deckToPracticeID}/>)}
                     </AppContentContainer>
