@@ -1,5 +1,5 @@
 import type { SetStateAction } from "react";
-import { DecksToStudyContainer } from "./DecksToStudyContainer.tsx";
+import { LearningDecksContainer } from "./LearningDecksContainer.tsx";
 
 interface LearningContainerProps {
     authUser: string;
@@ -14,7 +14,7 @@ export const LearningContainer= ({authUser, userDecksList, ownedDecksList, langu
 
     return (
         <>
-            <DecksToStudyContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy} setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>
+            <LearningDecksContainer authUser={authUser} userDecksList={userDecksList} ownedDecksList={ownedDecksList} languageToStudy={languageToStudy} setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>
         </>
     );
 }
