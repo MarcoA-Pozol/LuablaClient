@@ -1,15 +1,9 @@
-import type { SetStateAction } from "react";
 import { DeckToLearn } from "./DeckToLearn";
+import { useLearningDecksContainerStyles } from "../../../styles/AppView/learningDecksContainer";
+import type { LearningDecksContainerProps } from "../../../types/AppView/LearningDecksContainerProps";
 
-interface GetUserDecksProps {
-    authUser:any;
-    userDecksList:any[];
-    ownedDecksList:any[];
-    languageToStudy:string;
-    setDisplayedContainer:React.Dispatch<SetStateAction<string>>;
-    setDeckToPracticeID:React.Dispatch<SetStateAction<number>>;
-}
-export const LearningDecksContainer = ({authUser, userDecksList, ownedDecksList, languageToStudy, setDisplayedContainer, setDeckToPracticeID}:GetUserDecksProps) => {
+export const LearningDecksContainer = ({authUser, userDecksList, ownedDecksList, languageToStudy, setDisplayedContainer, setDeckToPracticeID}:LearningDecksContainerProps) => {
+    const styles = useLearningDecksContainerStyles();
 
     return (
         <div style={styles.decksContainer}>
@@ -23,15 +17,3 @@ export const LearningDecksContainer = ({authUser, userDecksList, ownedDecksList,
         </div>
     );
 }
-
-
-const styles: { [key: string]: React.CSSProperties } = {
-  decksContainer: {
-    paddingTop: "20px",
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    width: "100%",
-    gap: "50px",
-  },
-};
