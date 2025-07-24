@@ -1,23 +1,7 @@
-import type React from "react";
-import type { SetStateAction } from "react";
 import { useState } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
 import { useLearningDeckStyles } from "../../../styles/AppView/learningDeck";
-
-interface LearningDeckProps {
-    authUser:any;
-    index:string|number;
-    deckId:number;
-    title:string;
-    description:string;
-    image:string;
-    author:string;
-    level:string;
-    cardsQuantity:string;
-    setDisplayedContainer: React.Dispatch<SetStateAction<string>>;
-    setDeckToPracticeID: React.Dispatch<SetStateAction<number>>;
-}
-
+import type { LearningDeckProps } from "../../../types/AppView/LearningDeckProps";
 
 export const LearningDeck = ({authUser, index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:LearningDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
