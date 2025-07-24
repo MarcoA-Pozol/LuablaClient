@@ -7,6 +7,8 @@ import { NotificationsView } from "./pages/NotificationsView.tsx";
 import { PageNotFoundView } from './pages/PageNotFoundView.tsx';
 import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
 import { DecksListsProvider } from "./contexts/DecksListsContext.tsx";
+import { LanguagesProvider } from "./contexts/LanguagesContext.tsx";
+import { SocialDataProvider } from "./contexts/SocialDataContext.tsx";
 
 const AppRoutes = () => {
     return (
@@ -16,9 +18,13 @@ const AppRoutes = () => {
                 <Route path="/auth" element={<AuthView/>}></Route>
                 <Route path="/app" element={
                     <ProtectedRoute>
-                        <DecksListsProvider>
-                            <AppView/>
-                        </DecksListsProvider>
+                        <LanguagesProvider>
+                            <SocialDataProvider>
+                                <DecksListsProvider>
+                                    <AppView/>
+                                </DecksListsProvider>
+                            </SocialDataProvider>
+                        </LanguagesProvider>
                     </ProtectedRoute>
                 }/>                
                 <Route path="/profile" element={<ProtectedRoute><ProfileView/></ProtectedRoute>}/>
