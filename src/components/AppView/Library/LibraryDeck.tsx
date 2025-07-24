@@ -8,13 +8,15 @@ import { fetchUserDecks } from "../../../functions/fetchDecks";
 import type { LibraryDeckProps } from "../../../types/AppView/LibraryDeckProps";
 import { useLibraryDeckStyles } from "../../../styles/AppView/libraryDeck";
 import { useDecksLists } from "../../../hooks/useDecksLists";
+import { useLanguages } from "../../../hooks/useLanguages";
 
-export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity, language}:LibraryDeckProps) => {
+export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const temporaryMessage = useTemporaryMessage();
     const styles = useLibraryDeckStyles(isDeckHovered);
     const { setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList } = useDecksLists();
-
+    const { languageToLearn } = useLanguages();
+ 
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
             <h3 style={styles.title}>{title}</h3>
@@ -28,9 +30,9 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
             <button
                 style={styles.getDeckButton}
                 onClick={async () => {
-                    await handleAcquireDeck(deckId, language, temporaryMessage);
+                    await handleAcquireDeck(deckId, languageToLearn, temporaryMessage);
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
-                    await fetchUserDecks(language, setOwnedDecksList, setUserDecksList);
+                    await fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
                 }}
             >
                 Get

@@ -7,5 +7,4 @@ export interface LibraryDeckProps {
     author:string;
     level:string;
     cardsQuantity:string;
-    language:string;
 }
