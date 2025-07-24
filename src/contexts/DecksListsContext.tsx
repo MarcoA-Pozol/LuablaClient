@@ -19,7 +19,7 @@ interface DecksListsProviderProps {
 }
 
 export const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
-    const languageToStudy = "FR";
+    const languageToStudy = "EN"; // Set this to get local stored language first, if not available, then use "EN" by default
     const [userDecksList, setUserDecksList] = useState<Deck[]>([]);
     const [ownedDecksList, setOwnedDecksList] = useState<Deck[]>([]);
     const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
