@@ -3,7 +3,7 @@ import type { SetStateAction } from "react";
 import { useState, useEffect } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
 
-interface DeckToLearnProps {
+interface LearningDeckProps {
     authUser:any;
     index:string|number;
     deckId:number;
@@ -18,7 +18,7 @@ interface DeckToLearnProps {
 }
 
 
-export const DeckToLearn = ({authUser, index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:DeckToLearnProps) => {
+export const LearningDeck = ({authUser, index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:LearningDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
