@@ -1,8 +1,8 @@
 import { createContext, useState, type ReactNode, type SetStateAction } from "react";
 
 type LanguagesContextType = {
-    languageToStudy:string;
-    setLanguageToStudy:React.Dispatch<SetStateAction<string>>;
+    languageToLearn:string;
+    setLanguageToLearn:React.Dispatch<SetStateAction<string>>;
     interfaceLanguage:string;
     setInterfaceLanguage:React.Dispatch<SetStateAction<string>>;
 }
@@ -14,11 +14,11 @@ interface LanguagesProviderProps {
 }
 
 export const LanguagesProvider = ({children}:LanguagesProviderProps) => {
-    const [languageToStudy, setLanguageToStudy] = useState<string>("EN");
+    const [languageToLearn, setLanguageToLearn] = useState<string>("EN");
     const [interfaceLanguage, setInterfaceLanguage] = useState<string>("EN");
 
     return (
-        <LanguagesContext.Provider value={{ languageToStudy, setLanguageToStudy, interfaceLanguage, setInterfaceLanguage }}>
+        <LanguagesContext.Provider value={{ languageToLearn, setLanguageToLearn, interfaceLanguage, setInterfaceLanguage }}>
             {children}
         </LanguagesContext.Provider>
     );

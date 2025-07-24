@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchDeckFlashcards } from "../../../functions/fetchDeckFlashcards";
-import { useLanguageToLearn } from "../../../hooks/useLanguageToLearn";
+import { useLanguages } from "../../../hooks/useLanguages";
 
 interface DeckPracticeContainerProps {
     deckId:number;
@@ -8,7 +8,7 @@ interface DeckPracticeContainerProps {
 
 export const DeckPracticeContainer = ({deckId}:DeckPracticeContainerProps) => {
     const [flashcardsList, setFlashcardsList] = useState<object[]>([]);
-    const languageToLearn = useLanguageToLearn();
+    const { languageToLearn } = useLanguages();
 
     useEffect(() => {
         const fetchData = async () => {
