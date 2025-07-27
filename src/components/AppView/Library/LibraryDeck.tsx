@@ -9,6 +9,8 @@ import type { LibraryDeckProps } from "../../../types/AppView/LibraryDeckProps";
 import { useLibraryDeckStyles } from "../../../styles/AppView/libraryDeck";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
+import { fetchNotificationsList } from "../../../functions/fetchNotificationsList";
+import { useSocialData } from "../../../hooks/useSocialData";
 
 export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
@@ -16,6 +18,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
     const styles = useLibraryDeckStyles(isDeckHovered);
     const { setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList } = useDecksLists();
     const { languageToLearn } = useLanguages();
+    const { setNotificationsCount, setNotificationsList, notificationsList } = useSocialData();
  
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
@@ -33,6 +36,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                     await handleAcquireDeck(deckId, languageToLearn, temporaryMessage);
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
                     await fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
+                    await fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
                 }}
             >
                 Get
