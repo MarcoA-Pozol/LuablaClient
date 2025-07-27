@@ -26,6 +26,9 @@ export const SocialDataProvider = ({children}:SocialDataProviderProps) => {
             if (response.status === 200) {
                 setNotificationsList(response.data.notifications);
                 setNotificationsCount(notificationsList.length);
+            } else if (response.status === 404) {
+                setNotificationsList([]);
+                setNotificationsCount(0);
             } else {
                 alert("Error during fetching notifications list");
             }

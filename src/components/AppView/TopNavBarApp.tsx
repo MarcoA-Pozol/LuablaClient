@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import PandaLogo from "../../assets/LandingView/panda-logo-1.png"
 import NotificationsIcon from "../../assets/AppView/notifications_icon.png";
 import "../../styles/AppView/topNavBarApp.css";
-import { useState } from "react";
+import { useSocialData } from "../../hooks/useSocialData";
 // Languages IMGs
 import EnglishFlag from "../../assets/AppView/english_flag.png";
 import JapaneseFlag from "../../assets/AppView/japanese_flag.png";
@@ -23,8 +23,8 @@ interface TopNavBarAppProps {
 }
 
 export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:TopNavBarAppProps) => {
+    const { notificationsCount } = useSocialData();
     const navigate = useNavigate();
-    const [notificationsCount] = useState<number>(12);
 
     const handleLanguageSelection = (event:React.ChangeEvent<HTMLSelectElement>) => {
         setLanguageToStudy(event.target.value || "EN");
