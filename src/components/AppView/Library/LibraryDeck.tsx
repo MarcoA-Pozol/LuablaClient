@@ -11,6 +11,7 @@ import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
 import { fetchNotificationsList } from "../../../functions/fetchNotificationsList";
 import { useSocialData } from "../../../hooks/useSocialData";
+import { createNotification } from "../../../functions/createNotification";
 
 export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
@@ -36,6 +37,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                     await handleAcquireDeck(deckId, languageToLearn, temporaryMessage);
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
                     await fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
+                    await createNotification("Deck acquired!", `New deck from the library is now available to practice (${title})`, "NEW_LIBRARY_DECK");
                     await fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
                 }}
             >
