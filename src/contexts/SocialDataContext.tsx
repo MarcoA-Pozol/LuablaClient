@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, type SetStateAction, type ReactNode } from "react";
-import axios from "axios";
+import { fetchNotificationsList } from "../functions/fetchNotificationsList";
 
 type SocialDataContextType = {
     notificationsList:object[];
@@ -19,21 +19,7 @@ export const SocialDataProvider = ({children}:SocialDataProviderProps) => {
     const [notificationsCount, setNotificationsCount] = useState<number>(0);
 
     useEffect(() => {
-        async function fetchNotificationsList() {
-            const response = await axios.get("http://localhost:8600/api/social/notifications", {headers:{
-                "Content-Type":"application/json"
-            }, withCredentials:true});
-            if (response.status === 200) {
-                setNotificationsList(response.data.notifications);
-                setNotificationsCount(notificationsList.length);
-            } else if (response.status === 404) {
-                setNotificationsList([]);
-                setNotificationsCount(0);
-            } else {
-                alert("Error during fetching notifications list");
-            }
-        }
-        fetchNotificationsList();
+        fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
     }, [])
 
     return (
