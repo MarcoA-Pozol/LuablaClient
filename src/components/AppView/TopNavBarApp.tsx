@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { NotificationsPopUpWindow } from "../SocialView/NotificationsPopUpWindow";
+import { useState } from "react";
 import PandaLogo from "../../assets/LandingView/panda-logo-1.png"
 import NotificationsIcon from "../../assets/AppView/notifications_icon.png";
 import "../../styles/AppView/topNavBarApp.css";
@@ -25,6 +27,7 @@ interface TopNavBarAppProps {
 export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:TopNavBarAppProps) => {
     const { notificationsCount } = useSocialData();
     const navigate = useNavigate();
+    const [showNotificationsPopUpWindow, setShowNotificationsPopUpWindow] = useState<boolean>(false);
 
     const handleLanguageSelection = (event:React.ChangeEvent<HTMLSelectElement>) => {
         setLanguageToStudy(event.target.value || "EN");
@@ -78,7 +81,7 @@ export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:Top
             </div>
 
             <div className="notifications-container">
-                <a onClick={() => {navigate("/notifications")}}>
+                <a onClick={() => {setShowNotificationsPopUpWindow(true);}}>
                     <div id="notifications">
                         <img src={NotificationsIcon} alt="Notifications icon"/>
                         { notificationsCount === 0 ? (
@@ -93,6 +96,8 @@ export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:Top
             <div onClick={() => {navigate("/profile")}} className="profile_container">
                     <img src={`http://localhost:8600/${authUser.profile_picture}`} alt={authUser.profile_picture}/>  
             </div>
+
+            <NotificationsPopUpWindow showNotificationsPopUpWindow={showNotificationsPopUpWindow} setShowNotificationsPopUpWindow={setShowNotificationsPopUpWindow}/>
 
         </div>
     );
