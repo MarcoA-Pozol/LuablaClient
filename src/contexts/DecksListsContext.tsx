@@ -26,13 +26,13 @@ export const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
 
     useEffect(() => {
         async function fetchUserOwnedDecks() {
-            fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
+            fetchUserDecks(setOwnedDecksList, setUserDecksList);
         }
         fetchUserOwnedDecks();
     }, [languageToStudy]);
 
     useEffect(() => {
-        fetchLibraryDecks(languageToStudy, setLibraryDecksList);
+        fetchLibraryDecks(setLibraryDecksList);
     }, [languageToStudy]);
 
     return (

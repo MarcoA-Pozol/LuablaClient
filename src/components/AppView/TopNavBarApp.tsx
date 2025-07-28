@@ -16,22 +16,22 @@ import SpanishFlag from "../../assets/AppView/spanish_flag.png";
 import KoreanFlag from "../../assets/AppView/korean_flag.png";
 import PortugueseFlag from "../../assets/AppView/portuguese_flag.png";
 import RussianFlag from "../../assets/AppView/russian_flag.png";
+import { useLanguages } from "../../hooks/useLanguages";
 
 
 interface TopNavBarAppProps {
     authUser: any|null;
-    languageToStudy: string;
-    setLanguageToStudy: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:TopNavBarAppProps) => {
+export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
     const { notificationsCount } = useSocialData();
     const navigate = useNavigate();
     const [showNotificationsPopUpWindow, setShowNotificationsPopUpWindow] = useState<boolean>(false);
+    const { languageToLearn, setLanguageToLearn } = useLanguages();
 
     const handleLanguageSelection = (event:React.ChangeEvent<HTMLSelectElement>) => {
-        setLanguageToStudy(event.target.value || "EN");
-        localStorage.setItem("languageToStudy", event.target.value || "EN");
+        setLanguageToLearn(event.target.value || "EN");
+        localStorage.setItem("languageToLearn", event.target.value || "EN");
     }
 
     return (
@@ -44,29 +44,29 @@ export const TopNavBarApp = ({authUser, languageToStudy, setLanguageToStudy}:Top
             </div>
 
             <div id="language_container">
-                {languageToStudy === "EN" ? (
+                {languageToLearn === "EN" ? (
                     <img src={EnglishFlag}/>
-                ): languageToStudy === "FR" ? (
+                ): languageToLearn === "FR" ? (
                     <img src={FrenchFlag}/>
-                ): languageToStudy === "IT" ? (
+                ): languageToLearn === "IT" ? (
                     <img src={ItalianFlag}/>
-                ): languageToStudy === "ES" ? (
+                ): languageToLearn === "ES" ? (
                     <img src={SpanishFlag}/>
-                ): languageToStudy === "DE" ? (
+                ): languageToLearn === "DE" ? (
                     <img src={GermanFlag}/>
-                ): languageToStudy === "JP" ? (
+                ): languageToLearn === "JP" ? (
                     <img src={JapaneseFlag}/>
-                ): languageToStudy === "ZH" ? (
+                ): languageToLearn === "ZH" ? (
                     <img src={ChineseFlag}/>
-                ): languageToStudy === "KO" ? (
+                ): languageToLearn === "KO" ? (
                     <img src={KoreanFlag}/>
-                ): languageToStudy === "PT" ? (
+                ): languageToLearn === "PT" ? (
                     <img src={PortugueseFlag}/>
-                ): languageToStudy === "RU" ? (
+                ): languageToLearn === "RU" ? (
                     <img src={RussianFlag}/>
                 ): (<img src={EnglishFlag}/>)}
 
-                <select name="languageToStudy" id="language" value={languageToStudy} onChange={handleLanguageSelection}>
+                <select name="languageToLearn" id="language" value={languageToLearn} onChange={handleLanguageSelection}>
                     <option value="EN">English</option>
                     <option value="ZH">Chinese</option>
                     <option value="DE">Deutsch</option>

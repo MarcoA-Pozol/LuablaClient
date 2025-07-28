@@ -11,28 +11,29 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import { useDecksLists } from "../hooks/useDecksLists";
+import { useLanguages } from "../hooks/useLanguages";
 
 export const AppView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
-    const [languageToStudy, setLanguageToStudy] = useState<string>(localStorage.getItem("languageToStudy") || "EN");
-    const {userDecksList, setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
+    const { languageToLearn } = useLanguages();
+    const { setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
     useEffect(() => {
-        fetchLibraryDecks(languageToStudy, setLibraryDecksList);
-        fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
-    }, [languageToStudy])
+        fetchLibraryDecks(setLibraryDecksList);
+        fetchUserDecks(setOwnedDecksList, setUserDecksList);
+    }, [languageToLearn])
 
     return (
         <>
             { authUser.has_picked_language ? (
                 <div>
-                    <TopNavBarApp  authUser={authUser} setLanguageToStudy={setLanguageToStudy} languageToStudy={languageToStudy}/>
+                    <TopNavBarApp authUser={authUser}/>
                     <AppContentContainer>
-                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} languageToStudy={languageToStudy}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
-                        {displayedContainer === "library" && (<LibraryContainer languageToStudy={languageToStudy}/>)}
-                        {displayedContainer === "creation" && (<CreationContainer languageToStudy={languageToStudy}/>)}
+                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} languageToLearn={languageToLearn}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
+                        {displayedContainer === "library" && (<LibraryContainer/>)}
+                        {displayedContainer === "creation" && (<CreationContainer languageToLearn={languageToLearn}/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckPracticeContainer deckId={deckToPracticeID}/>)}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
