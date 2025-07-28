@@ -2,10 +2,12 @@ import { useState } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
 import { useLearningDeckStyles } from "../../../styles/AppView/learningDeck";
 import type { LearningDeckProps } from "../../../types/AppView/LearningDeckProps";
+import { useAuth } from "../../../App";
 
-export const LearningDeck = ({authUser, index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:LearningDeckProps) => {
+export const LearningDeck = ({index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:LearningDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const styles = useLearningDeckStyles(isDeckHovered)
+    const { authUser } = useAuth();
 
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>

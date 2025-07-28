@@ -2,7 +2,6 @@ import type React from "react";
 import type { SetStateAction } from "react";
 
 export interface LearningDeckProps {
-    authUser:any;
     index:string|number;
     deckId:number;
     title:string;
