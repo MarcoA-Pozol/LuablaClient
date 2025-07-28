@@ -5,9 +5,9 @@ import { AuthView } from './pages/AuthView.tsx';
 import { ProfileView } from './pages/ProfileView.tsx';
 import { PageNotFoundView } from './pages/PageNotFoundView.tsx';
 import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
-import { DecksListsProvider } from "./contexts/DecksListsContext.tsx";
-import { LanguagesProvider } from "./contexts/LanguagesContext.tsx";
-import { SocialDataProvider } from "./contexts/SocialDataContext.tsx";
+import DecksListsProvider from "./contexts/DecksListsContext.tsx";
+import LanguagesProvider from "./contexts/LanguagesContext.tsx";
+import SocialDataProvider from "./contexts/SocialDataContext.tsx";
 
 const AppRoutes = () => {
     return (

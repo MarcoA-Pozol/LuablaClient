@@ -14,7 +14,7 @@ interface SocialDataProviderProps {
     children:ReactNode;
 }
 
-export const SocialDataProvider = ({children}:SocialDataProviderProps) => {
+const SocialDataProvider = ({children}:SocialDataProviderProps) => {
     const [notificationsList, setNotificationsList] = useState<object[]>([]);
     const [notificationsCount, setNotificationsCount] = useState<number>(0);
 
@@ -28,3 +28,5 @@ export const SocialDataProvider = ({children}:SocialDataProviderProps) => {
         </SocialDataContext.Provider>
     );
 }
+
+export default SocialDataProvider;

@@ -13,8 +13,9 @@ interface LanguagesProviderProps {
     children:ReactNode;
 }
 
-export const LanguagesProvider = ({children}:LanguagesProviderProps) => {
-    const [languageToLearn, setLanguageToLearn] = useState<string>("EN");
+const LanguagesProvider = ({children}:LanguagesProviderProps) => {
+    const currentLanguageToLearn = localStorage.getItem("languageToLearn");
+    const [languageToLearn, setLanguageToLearn] = useState<string>(currentLanguageToLearn || "EN");
     const [interfaceLanguage, setInterfaceLanguage] = useState<string>("EN");
 
     return (
@@ -23,3 +24,5 @@ export const LanguagesProvider = ({children}:LanguagesProviderProps) => {
         </LanguagesContext.Provider>
     );
 }
+
+export default LanguagesProvider;

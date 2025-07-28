@@ -18,7 +18,7 @@ interface DecksListsProviderProps {
     children: ReactNode;
 }
 
-export const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
+const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
     const languageToStudy = "EN"; // Set this to get local stored language first, if not available, then use "EN" by default
     const [userDecksList, setUserDecksList] = useState<Deck[]>([]);
     const [ownedDecksList, setOwnedDecksList] = useState<Deck[]>([]);
@@ -41,3 +41,5 @@ export const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
         </DecksListsContext.Provider>
     );
 }
+
+export default DecksListsProvider;
