@@ -4,39 +4,33 @@ import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "
 import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
 import { fetchUserDecks } from "../../../functions/fetchDecks";
 import { useDecksLists } from "../../../hooks/useDecksLists";
+import { useLanguages } from "../../../hooks/useLanguages";
 
 interface DeckCreationFormProps {
-  languageToStudy: string;
   screenWidth: number;
   responsiveValue: <T>(small: T, large: T, width: number) => T;
   showCreateForm: boolean;
   setShowCreateForm: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const DeckCreationForm = ({
-  languageToStudy,
-  screenWidth,
-  responsiveValue,
-  showCreateForm,
-  setShowCreateForm
-}: DeckCreationFormProps) => {
-  const levelList =
-    languageToStudy === "JP"
-      ? jlptLevelsList
-      : languageToStudy === "ZH"
-      ? hskLevelsList
-      : languageToStudy === "KO"
-      ? topikLevelsList
-      : cefrLevelsList;
+export const DeckCreationForm = ({screenWidth, responsiveValue, showCreateForm, setShowCreateForm}: DeckCreationFormProps) => {
+  const { languageToLearn } = useLanguages();
+  const levelList = languageToLearn === "JP"
+                  ? jlptLevelsList
+                  : languageToLearn === "ZH"
+                  ? hskLevelsList
+                  : languageToLearn === "KO"
+                  ? topikLevelsList
+                  : cefrLevelsList;
   const {setUserDecksList, setOwnedDecksList} = useDecksLists();
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
-    clearFormFields(form, languageToStudy); 
+    clearFormFields(form, languageToLearn); 
     const timeoutId = setTimeout(() => {
-      fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
+      fetchUserDecks(setOwnedDecksList, setUserDecksList);
     }, 1000); 
 
     return () => clearTimeout(timeoutId); 
@@ -126,7 +120,7 @@ export const DeckCreationForm = ({
           >
             <h3 style={styles.heading}>📚 Create New Deck</h3>
 
-            <input type="hidden" name="language" value={languageToStudy} />
+            <input type="hidden" name="language" value={languageToLearn} />
 
             <label style={styles.label}>
               🏷️ Title:
@@ -150,20 +144,20 @@ export const DeckCreationForm = ({
             </label>
 
             <label style={styles.label}>
-              🎯 {languageToStudy === "JP"
+              🎯 {languageToLearn === "JP"
                 ? "JLPT Level"
-                : languageToStudy === "ZH"
+                : languageToLearn === "ZH"
                 ? "HSK Level"
-                : languageToStudy === "KO"
+                : languageToLearn === "KO"
                 ? "TOPIK Level"
                 : "CEFR Level"}
               <select
                 name={
-                  languageToStudy === "JP"
+                  languageToLearn === "JP"
                     ? "jlptLevel"
-                    : languageToStudy === "ZH"
+                    : languageToLearn === "ZH"
                     ? "hskLevel"
-                    : languageToStudy === "KO"
+                    : languageToLearn === "KO"
                     ? "topikLevel"
                     : "cefrLevel"
                 }

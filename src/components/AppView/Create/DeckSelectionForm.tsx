@@ -4,11 +4,10 @@ import "../../../styles/AppView/deckSelectionForm.css";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 
 interface DeckSelectionFormProps {
-  languageToStudy: string;
   selectedDeck:any;
   setSelectedDeck:React.Dispatch<SetStateAction<any>>;
 }
-export const DeckSelectionForm = ({languageToStudy, selectedDeck, setSelectedDeck}:DeckSelectionFormProps) => {
+export const DeckSelectionForm = ({selectedDeck, setSelectedDeck}:DeckSelectionFormProps) => {
   const {userDecksList} = useDecksLists();
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -127,7 +126,7 @@ export const DeckSelectionForm = ({languageToStudy, selectedDeck, setSelectedDec
         </>
       )}
 
-      <DeckCreationForm languageToStudy={languageToStudy} screenWidth={screenWidth} responsiveValue={responsiveValue} showCreateForm={showCreateForm} setShowCreateForm={setShowCreateForm}/>
+      <DeckCreationForm screenWidth={screenWidth} responsiveValue={responsiveValue} showCreateForm={showCreateForm} setShowCreateForm={setShowCreateForm}/>
     </div>
   );
 };

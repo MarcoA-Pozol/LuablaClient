@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
 import { fetchUserDecks } from "../../../functions/fetchDecks";
 import { useDecksLists } from "../../../hooks/useDecksLists";
+import { useLanguages } from "../../../hooks/useLanguages";
 
 interface FlashcardCreationFormProps {
-  languageToStudy: string;
   selectedDeck:any;
 }
-export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardCreationFormProps) => {
-    const flashcardTypeName = languageToStudy === "EN" ? "English" : languageToStudy === "ES" ? "Spanish" : languageToStudy === "JP" ? "Japanese" : languageToStudy === "ZH" ? "Chinese" : languageToStudy === "KO" ? "Korean" : languageToStudy === "PT" ? "Portuguese" : languageToStudy === "DE" ? "German" : languageToStudy === "IT" ? "Italian" : languageToStudy === "FR" ? "French" : languageToStudy === "RU" ? "Russian" : "Unknown";
+export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps) => {
+    const { languageToLearn } = useLanguages();
+    const flashcardTypeName = languageToLearn === "EN" ? "English" : languageToLearn === "ES" ? "Spanish" : languageToLearn === "JP" ? "Japanese" : languageToLearn === "ZH" ? "Chinese" : languageToLearn === "KO" ? "Korean" : languageToLearn === "PT" ? "Portuguese" : languageToLearn === "DE" ? "German" : languageToLearn === "IT" ? "Italian" : languageToLearn === "FR" ? "French" : languageToLearn === "RU" ? "Russian" : "Unknown";
     const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const { setUserDecksList, setOwnedDecksList } = useDecksLists();
@@ -21,23 +22,23 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
 
     const handleClearForm = () => {
     if (formRef.current) {
-      clearFormFields(formRef.current, languageToStudy);
+      clearFormFields(formRef.current, languageToLearn);
       }
     };
 
     const handleFlashcardCreation = (event:React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const form = event.currentTarget;
-      clearFormFields(form, languageToStudy);
+      clearFormFields(form, languageToLearn);
       handleObjectCreation(
         event,
         "http://localhost:8600/api/flashcards/flashcard",
-        { deckId: selectedDeck, language: languageToStudy },
+        { deckId: selectedDeck, language: languageToLearn },
         { "Content-Type": "multipart/form-data" },
         "flashcard"
       );
     const timeoutId = setTimeout(() => {
-      fetchUserDecks(languageToStudy, setOwnedDecksList, setUserDecksList);
+      fetchUserDecks(setOwnedDecksList, setUserDecksList);
     }, 1000); 
 
     return () => clearTimeout(timeoutId); 
@@ -109,7 +110,7 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
       <form ref={formRef} onSubmit={handleFlashcardCreation} style={styles.form} method="POST" encType="multipart/form-data">
         <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
 
-        {languageToStudy !== "JP" && languageToStudy !== "ZH" && languageToStudy !== "KO" && (
+        {languageToLearn !== "JP" && languageToLearn !== "ZH" && languageToLearn !== "KO" && (
           <label style={styles.label}>
             🏷️
             <input
@@ -123,7 +124,7 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
 
 
         {/* Conditional fields */}
-        {languageToStudy === "ZH" && (
+        {languageToLearn === "ZH" && (
           <>
             <label style={styles.label}>
               汉
@@ -146,7 +147,7 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
           </>
         )}
 
-        {languageToStudy === "JP" && (
+        {languageToLearn === "JP" && (
           <label style={styles.label}>
             🉐
             <input
@@ -158,7 +159,7 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
           </label>
         )}
 
-        {languageToStudy === "KO" && (
+        {languageToLearn === "KO" && (
           <label style={styles.label}>
             한
             <input
@@ -170,7 +171,7 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
           </label>
         )}
 
-        {(languageToStudy === "JP" || languageToStudy === "KO") && (
+        {(languageToLearn === "JP" || languageToLearn === "KO") && (
           <label style={styles.label}>
             🔤
             <input
@@ -182,7 +183,7 @@ export const FlashcardCreationForm = ({languageToStudy, selectedDeck}:FlashcardC
           </label>
         )}
 
-        {languageToStudy === "JP" && (
+        {languageToLearn === "JP" && (
           <label style={styles.label}>
             漢
             <input

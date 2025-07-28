@@ -33,7 +33,7 @@ export const AppView = () => {
                     <AppContentContainer>
                         {displayedContainer === "learning" && (<LearningContainer setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
                         {displayedContainer === "library" && (<LibraryContainer/>)}
-                        {displayedContainer === "creation" && (<CreationContainer languageToLearn={languageToLearn}/>)}
+                        {displayedContainer === "creation" && (<CreationContainer/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckPracticeContainer deckId={deckToPracticeID}/>)}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
