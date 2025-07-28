@@ -31,7 +31,7 @@ export const AppView = () => {
                 <div>
                     <TopNavBarApp authUser={authUser}/>
                     <AppContentContainer>
-                        {displayedContainer === "learning" && (<LearningContainer authUser={authUser} languageToLearn={languageToLearn}  setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
+                        {displayedContainer === "learning" && (<LearningContainer setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
                         {displayedContainer === "library" && (<LibraryContainer/>)}
                         {displayedContainer === "creation" && (<CreationContainer languageToLearn={languageToLearn}/>)}
                         {displayedContainer === "practiceDeckFlashcards" && (<DeckPracticeContainer deckId={deckToPracticeID}/>)}
