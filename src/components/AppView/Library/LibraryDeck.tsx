@@ -36,7 +36,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                 onClick={async () => {
                     await handleAcquireDeck(deckId, languageToLearn, temporaryMessage);
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
-                    await fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
+                    await fetchUserDecks(setOwnedDecksList, setUserDecksList);
                     await createNotification("Deck acquired!", `New deck from the library is now available to practice (${title})`, "NEW_LIBRARY_DECK");
                     await fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
                 }}
