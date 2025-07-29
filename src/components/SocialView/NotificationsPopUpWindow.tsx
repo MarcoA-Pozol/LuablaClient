@@ -1,5 +1,6 @@
 import { useSocialData } from "../../hooks/useSocialData";
 import { type SetStateAction } from "react";
+import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notificationsPopUpWindow";
 
 type NotificationSchema = {
     title: string;
@@ -12,15 +13,16 @@ interface NotificationsPopUpWindowProps {
 }
 
 export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowNotificationsPopUpWindow}:NotificationsPopUpWindowProps) => {
+    const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
     const { notificationsList, notificationsCount } = useSocialData();
 
     return (
-        <div style={{ display: showNotificationsPopUpWindow ? "block" : "none" }}>
+        <div style={styles.notificationsContainer}>
             {notificationsCount > 0 ? (
                 (notificationsList as NotificationSchema[]).map((notification) => (
                     <div>
-                        <h2>{notification.title}</h2>
-                        <p>{notification.description}</p>
+                        <h2 style={styles.title}>{notification.title}</h2>
+                        <p style={styles.description}>{notification.description}</p>
                     </div>
                 ))
             ) : (

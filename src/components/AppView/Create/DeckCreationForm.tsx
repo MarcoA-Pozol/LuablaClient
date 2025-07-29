@@ -30,7 +30,7 @@ export const DeckCreationForm = ({screenWidth, responsiveValue, showCreateForm, 
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToLearn); 
     const timeoutId = setTimeout(() => {
-      fetchUserDecks(setOwnedDecksList, setUserDecksList);
+      fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
     }, 1000); 
 
     return () => clearTimeout(timeoutId); 
