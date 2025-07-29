@@ -3,9 +3,13 @@ import type { SetStateAction } from "react";
 import type React from "react";
 
 export async function fetchNotificationsList(setNotificationsCount:React.Dispatch<SetStateAction<number>>, setNotificationsList:React.Dispatch<SetStateAction<object[]>>, notificationsList:object[]) {
-    const response = await axios.get("http://localhost:8600/api/social/notifications", {headers:{
-        "Content-Type":"application/json"
-    }, withCredentials:true});
+    const response = await axios.get("http://localhost:8600/api/social/notifications", {
+        withCredentials:true,
+        headers:{
+            "Content-Type":"application/json"
+        }
+    });
+
     if (response.status === 200) {
         setNotificationsList(response.data.notifications);
         setNotificationsCount(notificationsList.length);
@@ -13,6 +17,5 @@ export async function fetchNotificationsList(setNotificationsCount:React.Dispatc
         setNotificationsList([]);
         setNotificationsCount(0);
     } else {
-        alert("Error during fetching notifications list");
     }
 }

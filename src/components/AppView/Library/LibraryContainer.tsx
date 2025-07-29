@@ -14,7 +14,7 @@ export const LibraryContainer= () => {
                         <LibraryDeck deckId={deck.id} index={index} title={deck.title} description={deck.description} image={deck.image} author={deck.author} level={languageToLearn === "ZH" ? (deck.hsk_level) : languageToLearn === "JP" ? (deck.jlpt_level) : languageToLearn === "KO" ? (deck.topik_level) : (deck.cefr_level)} cardsQuantity={deck.cards_quantity}/>
                     ))
                 ) : (
-                    <p>No decks found</p>
+                    <p>Library is empty</p>
                 )}
             </div>
         </>

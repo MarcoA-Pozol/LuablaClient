@@ -2,10 +2,8 @@ import axios from "axios";
 import type React from "react";
 import type { SetStateAction } from "react";
 import type { Deck } from "../schemas/Deck";
-import { useLanguages } from "../hooks/useLanguages";
 
-export const fetchLibraryDecks = async (setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
-    const { languageToLearn } = useLanguages();
+export const fetchLibraryDecks = async (languageToLearn:string, setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
 
     try {
         const response = await axios.get("http://localhost:8600/api/decks/libraryDeck", {
@@ -27,8 +25,7 @@ export const fetchLibraryDecks = async (setLibraryDecksList:React.Dispatch<SetSt
     }
 }
 
-export const fetchUserDecks = async (setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>, setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
-    const { languageToLearn } = useLanguages();
+export const fetchUserDecks = async (languageToLearn:string, setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>, setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
 
     try {
         const response = await axios.get("http://localhost:8600/api/decks/deck", {

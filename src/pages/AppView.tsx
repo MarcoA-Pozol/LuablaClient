@@ -15,14 +15,14 @@ import { useLanguages } from "../hooks/useLanguages";
 
 export const AppView = () => {
     const { authUser } = useAuth();
-    const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const { languageToLearn } = useLanguages();
+    const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
     const { setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
     useEffect(() => {
-        fetchLibraryDecks(setLibraryDecksList);
-        fetchUserDecks(setOwnedDecksList, setUserDecksList);
+        fetchLibraryDecks(languageToLearn, setLibraryDecksList);
+        fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
     }, [languageToLearn])
 
     return (

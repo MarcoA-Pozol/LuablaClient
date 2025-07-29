@@ -25,13 +25,7 @@ const DecksListsProvider = ({ children }: DecksListsProviderProps) => {
     const [libraryDecksList, setLibraryDecksList] = useState<Deck[]>([]);
 
     useEffect(() => {
-        async function fetchUserOwnedDecks() {
-            fetchUserDecks(setOwnedDecksList, setUserDecksList);
-        }
-        fetchUserOwnedDecks();
-    }, [languageToStudy]);
-
-    useEffect(() => {
+        fetchUserDecks(setOwnedDecksList, setUserDecksList);
         fetchLibraryDecks(setLibraryDecksList);
     }, [languageToStudy]);
 
