@@ -5,6 +5,7 @@ import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notif
 type NotificationSchema = {
     title: string;
     description: string;
+    created_at: string;
 };
 
 interface NotificationsPopUpWindowProps {
@@ -17,19 +18,41 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
     const { notificationsList, notificationsCount } = useSocialData();
 
     return (
-        <div style={styles.notificationsContainer}>
-            {notificationsCount > 0 ? (
-                (notificationsList as NotificationSchema[]).map((notification) => (
-                    <div>
-                        <h2 style={styles.title}>{notification.title}</h2>
-                        <p style={styles.description}>{notification.description}</p>
-                    </div>
-                ))
-            ) : (
-                <p>There are no notifications</p>
-            )}
+        <div style={styles.overlay}>
+            <div style={styles.notificationsContainer}>
+                <div style={styles.header}>
+                    <h2 style={styles.headerTitle}>Notifications</h2>
+                    {notificationsCount > 0 && (
+                        <span style={styles.notificationBadge}>{notificationsCount}</span>
+                    )}
+                </div>
+                
+                <div style={styles.notificationsList}>
+                    {notificationsCount > 0 ? (
+                        (notificationsList as NotificationSchema[]).map((notification, index) => (
+                            <div key={index} style={styles.notificationItem}>
+                                <div style={styles.notificationHeader}>
+                                    <h3 style={styles.title}>{notification.title}</h3>
+                                    <span style={styles.timestamp}>{notification.created_at}</span>
+                                </div>
+                                <p style={styles.description}>{notification.description}</p>
+                                <div style={styles.notificationDivider}></div>
+                            </div>
+                        ))
+                    ) : (
+                        <div style={styles.emptyState}>
+                            <p style={styles.emptyText}>You're all caught up!</p>
+                        </div>
+                    )}
+                </div>
 
-            <button onClick={() => {setShowNotificationsPopUpWindow(false);}}>Close</button>
+                <button 
+                    style={styles.hideWindowButton} 
+                    onClick={() => {setShowNotificationsPopUpWindow(false);}}
+                >
+                    Close
+                </button>
+            </div>
         </div>
     );
-}
+};
