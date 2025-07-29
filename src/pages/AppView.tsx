@@ -12,13 +12,20 @@ import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import { useDecksLists } from "../hooks/useDecksLists";
 import { useLanguages } from "../hooks/useLanguages";
+import { fetchNotificationsList } from "../functions/fetchNotificationsList";
+import { useSocialData } from "../hooks/useSocialData";
 
 export const AppView = () => {
     const { authUser } = useAuth();
     const { languageToLearn } = useLanguages();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
+    const { setNotificationsCount, setNotificationsList, notificationsList } = useSocialData();
     const { setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
+
+    useEffect(() => {
+        fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
+    })
 
     useEffect(() => {
         fetchLibraryDecks(languageToLearn, setLibraryDecksList);
