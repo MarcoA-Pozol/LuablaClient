@@ -2,6 +2,7 @@ import { useSocialData } from "../../hooks/useSocialData";
 import { type SetStateAction } from "react";
 import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notificationsPopUpWindow";
 import { format } from "date-fns";
+import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
 
 type NotificationSchema = {
     title: string;
@@ -16,7 +17,7 @@ interface NotificationsPopUpWindowProps {
 
 export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowNotificationsPopUpWindow}:NotificationsPopUpWindowProps) => {
     const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
-    const { notificationsList, notificationsCount } = useSocialData();
+    const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount } = useSocialData();
 
     return (
         <div style={styles.overlay}>
@@ -45,6 +46,8 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                             <p style={styles.emptyText}>You're all caught up!</p>
                         </div>
                     )}
+                    
+                    <button style={styles.hideWindowButton} onClick={() => {fetchAllNotifications(setNotificationsCount, setNotificationsList);}}>Show more</button>
                 </div>
 
                 <button 
