@@ -19,7 +19,7 @@ const SocialDataProvider = ({children}:SocialDataProviderProps) => {
     const [notificationsCount, setNotificationsCount] = useState<number>(0);
 
     useEffect(() => {
-        fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
+        fetchNotificationsList(setNotificationsCount, setNotificationsList);
     }, [])
 
     return (

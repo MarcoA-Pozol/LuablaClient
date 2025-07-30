@@ -2,7 +2,7 @@ import axios from "axios";
 import type { SetStateAction } from "react";
 import type React from "react";
 
-export async function fetchNotificationsList(setNotificationsCount:React.Dispatch<SetStateAction<number>>, setNotificationsList:React.Dispatch<SetStateAction<object[]>>, notificationsList:object[]) {
+export async function fetchNotificationsList(setNotificationsCount:React.Dispatch<SetStateAction<number>>, setNotificationsList:React.Dispatch<SetStateAction<object[]>>) {
     const response = await axios.get("http://localhost:8600/api/social/notifications", {
         withCredentials:true,
         headers:{
