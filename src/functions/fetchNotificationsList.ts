@@ -12,7 +12,7 @@ export async function fetchNotificationsList(setNotificationsCount:React.Dispatc
 
     if (response.status === 200) {
         setNotificationsList(response.data.notifications);
-        setNotificationsCount(notificationsList.length);
+        setNotificationsCount(response.data.notifications_count);
     } else if (response.status === 404) {
         setNotificationsList([]);
         setNotificationsCount(0);
