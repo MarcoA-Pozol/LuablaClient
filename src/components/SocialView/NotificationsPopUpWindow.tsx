@@ -3,6 +3,7 @@ import { type SetStateAction } from "react";
 import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notificationsPopUpWindow";
 import { format } from "date-fns";
 import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
+import { NotificationsFilter } from "./NotificationsFilter";
 
 type NotificationSchema = {
     title: string;
@@ -28,6 +29,8 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                         <span style={styles.notificationBadge}>{notificationsCount}</span>
                     )}
                 </div>
+                
+                <NotificationsFilter/>
                 
                 <div style={styles.notificationsList}>
                     {notificationsCount > 0 ? (
