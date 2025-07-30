@@ -47,7 +47,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                         </div>
                     )}
                     
-                    <button style={styles.hideWindowButton} onClick={() => {fetchAllNotifications(setNotificationsCount, setNotificationsList);}}>Show more</button>
+                    <button style={styles.hideWindowButton} onClick={() => {fetchAllNotifications(setNotificationsCount, setNotificationsList);}}>Show all</button>
                 </div>
 
                 <button 

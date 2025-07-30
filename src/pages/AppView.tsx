@@ -19,13 +19,13 @@ export const AppView = () => {
     const { authUser } = useAuth();
     const { languageToLearn } = useLanguages();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
-    const { setNotificationsCount, setNotificationsList, notificationsList } = useSocialData();
+    const { setNotificationsCount, setNotificationsList } = useSocialData();
     const { setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
     useEffect(() => {
-        fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
-    })
+        fetchNotificationsList(setNotificationsCount, setNotificationsList);
+    }, [])
 
     useEffect(() => {
         fetchLibraryDecks(languageToLearn, setLibraryDecksList);

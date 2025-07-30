@@ -17,5 +17,7 @@ export async function fetchAllNotifications(setNotificationsCount:React.Dispatch
         setNotificationsList([]);
         setNotificationsCount(0);
     } else {
+        setNotificationsList([]);
+        setNotificationsCount(0);
     }
 }
