@@ -14,7 +14,7 @@ interface NotificationsPopUpWindowProps {
 export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowNotificationsPopUpWindow}:NotificationsPopUpWindowProps) => {
     const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
     const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount } = useSocialData();
-    const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList as NotificationSchema[]);
+    const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList);
 
     return (
         <div style={styles.overlay}>
