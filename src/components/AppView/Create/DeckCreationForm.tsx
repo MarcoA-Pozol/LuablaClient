@@ -5,6 +5,9 @@ import { handleObjectCreation, clearFormFields } from "../../../functions/handle
 import { fetchUserDecks } from "../../../functions/fetchDecks";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
+import { createNotification } from "../../../functions/createNotification";
+import { fetchNotificationsList } from "../../../functions/fetchNotificationsList";
+import { useSocialData } from "../../../hooks/useSocialData";
 
 interface DeckCreationFormProps {
   screenWidth: number;
@@ -23,12 +26,16 @@ export const DeckCreationForm = ({screenWidth, responsiveValue, showCreateForm, 
                   ? topikLevelsList
                   : cefrLevelsList;
   const {setUserDecksList, setOwnedDecksList} = useDecksLists();
+  const { setNotificationsCount, setNotificationsList } = useSocialData();
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
+    const data = new FormData(form);
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToLearn); 
+    await createNotification("Deck created!", `You have created this deck (${data.get("title")}, for ${languageToLearn} language.)`, "CREATED_DECK"); 
+    await fetchNotificationsList(setNotificationsCount, setNotificationsList); 
     const timeoutId = setTimeout(() => {
       fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
     }, 1000); 

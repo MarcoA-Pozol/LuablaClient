@@ -19,7 +19,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
     const styles = useLibraryDeckStyles(isDeckHovered);
     const { setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList } = useDecksLists();
     const { languageToLearn } = useLanguages();
-    const { setNotificationsCount, setNotificationsList, notificationsList } = useSocialData();
+    const { setNotificationsCount, setNotificationsList } = useSocialData();
  
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
@@ -37,8 +37,8 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                     await handleAcquireDeck(deckId, languageToLearn, temporaryMessage);
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
                     await fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
-                    await createNotification("Deck acquired!", `New deck from the library is now available to practice (${title})`, "NEW_LIBRARY_DECK");
-                    await fetchNotificationsList(setNotificationsCount, setNotificationsList, notificationsList);
+                    await createNotification("Deck acquired!", `New deck from the library is now available to practice (${title})`, "OBTAINED_DECK");
+                    await fetchNotificationsList(setNotificationsCount, setNotificationsList);
                 }}
             >
                 Get
