@@ -1,16 +1,10 @@
 import { useSocialData } from "../../hooks/useSocialData";
-import { type SetStateAction } from "react";
+import { useState, type SetStateAction } from "react";
 import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notificationsPopUpWindow";
 import { format } from "date-fns";
 import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
 import { NotificationsFilter } from "./NotificationsFilter";
-
-type NotificationSchema = {
-    title: string;
-    description: string;
-    created_at: string;
-    category_label: string;
-};
+import type { NotificationSchema } from "../../schemas/Notification";
 
 interface NotificationsPopUpWindowProps {
     showNotificationsPopUpWindow:boolean;
@@ -20,6 +14,7 @@ interface NotificationsPopUpWindowProps {
 export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowNotificationsPopUpWindow}:NotificationsPopUpWindowProps) => {
     const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
     const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount } = useSocialData();
+    const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList as NotificationSchema[]);
 
     return (
         <div style={styles.overlay}>
@@ -31,11 +26,11 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                     )}
                 </div>
                 
-                <NotificationsFilter/>
+                <NotificationsFilter setFilteredNotifications={setFilteredNotifications} notificationsList={notificationsList}/>
                 
                 <div style={styles.notificationsList}>
                     {notificationsCount > 0 ? (
-                        (notificationsList as NotificationSchema[]).map((notification, index) => (
+                        (filteredNotifications).map((notification, index) => (
                             <div key={index} style={styles.notificationItem}>
                                 <div style={styles.notificationHeader}>
                                     <h3 style={styles.title}>{notification.title}</h3>

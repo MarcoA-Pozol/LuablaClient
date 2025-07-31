@@ -1,9 +1,10 @@
 import { createContext, useState, useEffect, type SetStateAction, type ReactNode } from "react";
 import { fetchNotificationsList } from "../functions/fetchNotificationsList";
+import type { NotificationSchema } from "../schemas/Notification";
 
 type SocialDataContextType = {
-    notificationsList:object[];
-    setNotificationsList:React.Dispatch<SetStateAction<object[]>>;
+    notificationsList:NotificationSchema[];
+    setNotificationsList:React.Dispatch<SetStateAction<NotificationSchema[]>>;
     notificationsCount:number;
     setNotificationsCount:React.Dispatch<SetStateAction<number>>;
 }
@@ -15,7 +16,7 @@ interface SocialDataProviderProps {
 }
 
 const SocialDataProvider = ({children}:SocialDataProviderProps) => {
-    const [notificationsList, setNotificationsList] = useState<object[]>([]);
+    const [notificationsList, setNotificationsList] = useState<NotificationSchema[]>([]);
     const [notificationsCount, setNotificationsCount] = useState<number>(0);
 
     useEffect(() => {

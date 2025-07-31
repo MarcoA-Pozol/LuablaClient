@@ -1,16 +1,24 @@
 import React, { useState, useEffect, type SetStateAction } from 'react';
 import axios from 'axios';
+import type { NotificationSchema } from "../../schemas/Notification";
 
-export const NotificationsFilter = () => {
+interface NotificationsFilterProps {
+    setFilteredNotifications:React.Dispatch<SetStateAction<NotificationSchema[]>>;
+    notificationsList:NotificationSchema[];
+}
+
+export const NotificationsFilter = ({setFilteredNotifications, notificationsList}:NotificationsFilterProps) => {
     const [filters, setFilters] = useState({
         category: '',
         dateOrder: 'latest',
         readStatus: 'all'
     });
 
-
     const [notificationCategories, setNotificationCategories] = useState<string[]>([]);
+    const [notificationCategoryFilter, setNotificationCategoryFilter] = useState<string|"all">("all");
+    const [notificationIsReadFilter, setNotificationIsReadFilter] = useState<true|false>(false);
 
+    // Fetch notification's categories
     useEffect(() => {
         const fetchNotificationsCategoriesList = async (setNotificationCategories:React.Dispatch<SetStateAction<string[]>>) => {
             const response = await axios.get("http://localhost:8600/api/social/notifications/categoriesList", {withCredentials:true});
@@ -21,6 +29,11 @@ export const NotificationsFilter = () => {
 
         fetchNotificationsCategoriesList(setNotificationCategories);
     }, [])
+
+    // Filter notifications
+    useEffect(() => {
+        setFilteredNotifications(notificationsList);
+    })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
