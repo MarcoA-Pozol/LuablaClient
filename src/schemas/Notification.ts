@@ -3,4 +3,5 @@ export type NotificationSchema = {
     description: string;
     created_at: string;
     category_label: string;
+    read_status: string;
 };

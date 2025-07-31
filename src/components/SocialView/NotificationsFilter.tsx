@@ -8,15 +8,10 @@ interface NotificationsFilterProps {
 }
 
 export const NotificationsFilter = ({setFilteredNotifications, notificationsList}:NotificationsFilterProps) => {
-    const [filters, setFilters] = useState({
-        category: '',
-        dateOrder: 'latest',
-        readStatus: 'all'
-    });
-
     const [notificationCategories, setNotificationCategories] = useState<string[]>([]);
     const [notificationCategoryFilter, setNotificationCategoryFilter] = useState<string|"all">("all");
-    const [notificationIsReadFilter, setNotificationIsReadFilter] = useState<true|false>(false);
+    const [notificationReadStatusFilter, setNotificationReadStatusFilter] = useState<string|"read"|"unread"|"all">("all");
+    const [dateOrderFilter, setDateOrderFilter] = useState<string|"oldest"|"latest">("latest");
 
     // Fetch notification's categories
     useEffect(() => {
@@ -32,16 +27,33 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
 
     // Filter notifications
     useEffect(() => {
-        setFilteredNotifications(notificationsList);
-    })
+        let result;
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        setFilters(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        result = notificationsList
+
+        if (notificationCategoryFilter !== "all") {
+            result.filter(notification => notification.category_label === notificationCategoryFilter);
+        }
+
+        if (notificationReadStatusFilter !== "all") {
+            result.filter(notification => notification.read_status === notificationReadStatusFilter);
+        }
+
+        setFilteredNotifications(result);
+    }, [notificationCategoryFilter, notificationReadStatusFilter])
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNotificationCategoryFilter(e.target.value);
     };
+
+    const handleReadStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setNotificationReadStatusFilter(e.target.value);
+    };
+
+    const handleDateOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setDateOrderFilter(e.target.value);
+    };
+
 
     return (
         <div style={{backgroundColor: '#f5f5f5', padding: '12px 16px', borderRadius: '8px', marginBottom: '16px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
@@ -50,7 +62,7 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
             {/* Category Filter */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <label style={{ fontSize: '12px', fontWeight: '500', color: '#555', whiteSpace: 'nowrap'}}>Category</label>
-                <select name="category" value={filters.category} onChange={handleInputChange} style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid #ddd', backgroundColor: 'white', fontSize: '12px', width: '80px'}}> 
+                <select name="category" value={notificationCategoryFilter} onChange={handleCategoryChange} style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid #ddd', backgroundColor: 'white', fontSize: '12px', width: '80px'}}> 
                     <option value="">All</option>
                     {notificationCategories.map(category => (
                         <option key={category} value={category}>{category}</option>
@@ -68,8 +80,8 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                 }}>Sort by</label>
                 <select
                     name="dateOrder"
-                    value={filters.dateOrder}
-                    onChange={handleInputChange}
+                    value={dateOrderFilter}
+                    onChange={handleDateOrderChange}
                     style={{
                         padding: '6px 8px',
                         borderRadius: '4px',
@@ -94,8 +106,8 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                 }}>Status</label>
                 <select
                     name="readStatus"
-                    value={filters.readStatus}
-                    onChange={handleInputChange}
+                    value={notificationReadStatusFilter}
+                    onChange={handleReadStatusChange}
                     style={{
                         padding: '6px 8px',
                         borderRadius: '4px',
