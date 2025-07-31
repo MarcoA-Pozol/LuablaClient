@@ -9,6 +9,7 @@ type NotificationSchema = {
     title: string;
     description: string;
     created_at: string;
+    category_label: string;
 };
 
 interface NotificationsPopUpWindowProps {
@@ -38,6 +39,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                             <div key={index} style={styles.notificationItem}>
                                 <div style={styles.notificationHeader}>
                                     <h3 style={styles.title}>{notification.title}</h3>
+                                    <span style={styles.timestamp}>{notification.category_label}</span>
                                     <span style={styles.timestamp}>{format(new Date(notification.created_at), "MMM dd, yyyy hh:mm a")}</span>
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
