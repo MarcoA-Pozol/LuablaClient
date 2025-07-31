@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, type SetStateAction } from 'react';
+import axios from 'axios';
 
 export const NotificationsFilter = () => {
-    const categories = ["juan", "pablo", "nemo"];
     const [filters, setFilters] = useState({
         category: '',
         dateOrder: 'latest',
         readStatus: 'all'
     });
+
+
+    const [notificationCategories, setNotificationCategories] = useState<string[]>([]);
+
+    useEffect(() => {
+        const fetchNotificationsCategoriesList = async (setNotificationCategories:React.Dispatch<SetStateAction<string[]>>) => {
+            const response = await axios.get("http://localhost:8600/api/social/notifications/categoriesList", {withCredentials:true});
+            const data = response.data;
+
+            setNotificationCategories(data.categories);
+        }
+
+        fetchNotificationsCategoriesList(setNotificationCategories);
+    }, [])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -25,7 +39,7 @@ export const NotificationsFilter = () => {
                 <label style={{ fontSize: '12px', fontWeight: '500', color: '#555', whiteSpace: 'nowrap'}}>Category</label>
                 <select name="category" value={filters.category} onChange={handleInputChange} style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid #ddd', backgroundColor: 'white', fontSize: '12px', width: '80px'}}> 
                     <option value="">All</option>
-                    {categories.map(category => (
+                    {notificationCategories.map(category => (
                         <option key={category} value={category}>{category}</option>
                     ))}
                 </select>
