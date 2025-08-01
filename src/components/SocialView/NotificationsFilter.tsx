@@ -31,7 +31,9 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
 
         result = notificationsList
 
-        if (notificationCategoryFilter !== "all") {
+        if (notificationCategoryFilter === "All") {
+            result = notificationsList
+        } else {
             result = result.filter(notification => notification.category_label === notificationCategoryFilter);
         }
 
@@ -63,7 +65,7 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <label style={{ fontSize: '12px', fontWeight: '500', color: '#555', whiteSpace: 'nowrap'}}>Category</label>
                 <select name="category" value={notificationCategoryFilter} onChange={handleCategoryChange} style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid #ddd', backgroundColor: 'white', fontSize: '12px', width: '80px'}}> 
-                    <option value="">All</option>
+                    <option value="All">All</option>
                     {notificationCategories.map(category => (
                         <option key={category} value={category}>{category}</option>
                     ))}
