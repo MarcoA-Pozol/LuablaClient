@@ -32,11 +32,11 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
         result = notificationsList
 
         if (notificationCategoryFilter !== "all") {
-            result.filter(notification => notification.category_label === notificationCategoryFilter);
+            result = result.filter(notification => notification.category_label === notificationCategoryFilter);
         }
 
         if (notificationReadStatusFilter !== "all") {
-            result.filter(notification => notification.read_status === notificationReadStatusFilter);
+            result = result.filter(notification => notification.read_status === notificationReadStatusFilter);
         }
 
         setFilteredNotifications(result);
