@@ -1,5 +1,5 @@
 import { useSocialData } from "../../hooks/useSocialData";
-import { useState, type SetStateAction } from "react";
+import { useState, type SetStateAction, useEffect } from "react";
 import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notificationsPopUpWindow";
 import { format } from "date-fns";
 import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
@@ -15,6 +15,10 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
     const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
     const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount } = useSocialData();
     const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList);
+
+    useEffect(() => {
+        setFilteredNotifications(notificationsList);
+    }, [notificationsList])
 
     return (
         <div style={styles.overlay}>
