@@ -9,9 +9,9 @@ interface NotificationsFilterProps {
 
 export const NotificationsFilter = ({setFilteredNotifications, notificationsList}:NotificationsFilterProps) => {
     const [notificationCategories, setNotificationCategories] = useState<string[]>([]);
-    const [notificationCategoryFilter, setNotificationCategoryFilter] = useState<string|"all">("all");
-    const [notificationReadStatusFilter, setNotificationReadStatusFilter] = useState<string|"read"|"unread"|"all">("all");
-    const [dateOrderFilter, setDateOrderFilter] = useState<string|"oldest"|"latest">("latest");
+    const [notificationCategoryFilter, setNotificationCategoryFilter] = useState<string|"All">("All");
+    const [notificationReadStatusFilter, setNotificationReadStatusFilter] = useState<string|"Read"|"Unread"|"All">("All");
+    const [dateOrderFilter, setDateOrderFilter] = useState<string|"Oldest First"|"Latest First">("Latest First");
 
     // Fetch notification's categories
     useEffect(() => {
@@ -29,17 +29,21 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
     useEffect(() => {
         let result;
 
-        result = notificationsList
+        result = [...notificationsList];
 
         if (notificationCategoryFilter === "All") {
-            result = notificationsList
+            result = [...notificationsList];
         } else {
             result = result.filter(notification => notification.category_label === notificationCategoryFilter);
         }
 
-        if (notificationReadStatusFilter !== "all") {
+        if (notificationReadStatusFilter === "All") {
+            result = result;
+        } else {
             result = result.filter(notification => notification.read_status === notificationReadStatusFilter);
         }
+
+        
 
         setFilteredNotifications(result);
     }, [notificationCategoryFilter, notificationReadStatusFilter])
@@ -93,8 +97,8 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                         width: '80px'
                     }}
                 >
-                    <option value="latest">Latest First</option>
-                    <option value="oldest">Oldest First</option>
+                    <option value="Latest First">Latest First</option>
+                    <option value="Oldest First">Oldest First</option>
                 </select>
             </div>
             
@@ -119,9 +123,9 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                         width: '80px'
                     }}
                 >
-                    <option value="all">All</option>
-                    <option value="read">Read</option>
-                    <option value="unread">Unread</option>
+                    <option value="All">All</option>
+                    <option value="Read">Read</option>
+                    <option value="Unread">Unread</option>
                 </select>
             </div>
         </div>
