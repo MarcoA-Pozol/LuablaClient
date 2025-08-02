@@ -43,10 +43,15 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
             result = result.filter(notification => notification.read_status === notificationReadStatusFilter);
         }
 
-        
+        result = [...result].sort((a, b) => {
+            const dateA = new Date(a.created_at).getTime();
+            const dateB = new Date(b.created_at).getTime();
+
+            return dateOrderFilter === "Latest First" ? dateB - dateA : dateA - dateB;
+        });
 
         setFilteredNotifications(result);
-    }, [notificationCategoryFilter, notificationReadStatusFilter])
+    }, [notificationCategoryFilter, notificationReadStatusFilter, dateOrderFilter])
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setNotificationCategoryFilter(e.target.value);
