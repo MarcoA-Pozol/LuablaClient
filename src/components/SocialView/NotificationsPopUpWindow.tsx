@@ -5,6 +5,8 @@ import { format } from "date-fns";
 import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
 import { NotificationsFilter } from "./NotificationsFilter";
 import type { NotificationSchema } from "../../schemas/Notification";
+import { toggleNotificationReadStatus } from "../../functions/toggleNotificationReadStatus";
+import { fetchNotificationsList } from "../../functions/fetchNotificationsList";
 
 interface NotificationsPopUpWindowProps {
     showNotificationsPopUpWindow:boolean;
@@ -43,11 +45,12 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
                                 <div style={styles.notificationDivider}></div>
+                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotificationsList(setNotificationsCount, setNotificationsList);}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? "Mark as read" : "Mark as unread"}</button>
                             </div>
                         ))
                     ) : (
                         <div style={styles.emptyState}>
-                            <p style={styles.emptyText}>You're all caught up!</p>
+                            <p style={styles.emptyText}>Nothing new to be aware about.</p>
                         </div>
                     )}
                     

@@ -2,7 +2,7 @@ import axios from "axios"
 import { useBaseApiUrl } from "../hooks/useBaseApiUrl"
 
 export const toggleNotificationReadStatus = async (notificationId:number) => {
-    const endpoint = useBaseApiUrl("/notifications/toggleNotificationReadState");
+    const endpoint = useBaseApiUrl("/social/notifications/toggleReadStatus");
 
     const response = await axios.patch(endpoint, {notificationId:notificationId}, {withCredentials:true});
 
