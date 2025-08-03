@@ -3,10 +3,15 @@ export type Flashcard = {
     word?:string;
     hanzi?:string;
     pinyin?:string;
-    romaji?:string;
+    kanji?:string;
     kana?:string;
     hangul?:string;
+    romaji?:string;
+    cyrillic?:string;
+    transliteration?:string;
     meaning:string;
     example_phrase:string;
-    deck_id:string;
+    author:number;
+    deck:number;
+    creation_date?:string;
 }
