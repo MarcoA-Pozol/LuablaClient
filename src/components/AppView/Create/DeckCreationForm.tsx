@@ -8,15 +8,15 @@ import { useLanguages } from "../../../hooks/useLanguages";
 import { createNotification } from "../../../functions/createNotification";
 import { fetchNotificationsList } from "../../../functions/fetchNotificationsList";
 import { useSocialData } from "../../../hooks/useSocialData";
+import { useDeckCreationFormStyles } from "../../../styles/AppView/deckCreationForm";
 
 interface DeckCreationFormProps {
-  screenWidth: number;
-  responsiveValue: <T>(small: T, large: T, width: number) => T;
   showCreateForm: boolean;
   setShowCreateForm: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export const DeckCreationForm = ({screenWidth, responsiveValue, showCreateForm, setShowCreateForm}: DeckCreationFormProps) => {
+export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreationFormProps) => {
+  const styles = useDeckCreationFormStyles();
   const { languageToLearn } = useLanguages();
   const levelList = languageToLearn === "JP"
                   ? jlptLevelsList
@@ -41,78 +41,6 @@ export const DeckCreationForm = ({screenWidth, responsiveValue, showCreateForm, 
     }, 1000); 
 
     return () => clearTimeout(timeoutId); 
-  };
-
-  // Styles
-  const styles: { [key: string]: React.CSSProperties } = {
-    overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0,0,0,0.6)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 1000,
-    },
-    floatingForm: {
-      backgroundColor: "white",
-      padding: responsiveValue("16px", "16px", screenWidth),
-      borderRadius: "10px",
-      height: "75vh",
-      width: responsiveValue("90%", "40%", screenWidth),
-      boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
-    },
-    heading: {
-      textAlign: "center",
-      fontSize: responsiveValue("20px", "22px", screenWidth),
-      color: "royalblue",
-      marginTop: "5px",
-      marginBottom: "10px",
-    },
-    label: {
-      display: "block",
-      marginBottom: "12px",
-      color: "#333",
-      fontWeight: "bold",
-    },
-    input: {
-      width: "95%",
-      padding: "8px",
-      marginTop: "4px",
-      borderRadius: "5px",
-      border: "1px solid #ccc",
-    },
-    textarea: {
-      width: "95%",
-      padding: "8px",
-      marginTop: "4px",
-      borderRadius: "5px",
-      border: "1px solid #ccc",
-      resize: "vertical",
-      minHeight: "60px",
-    },
-    select: {
-      width: "99%",
-      padding: "8px",
-      marginTop: "4px",
-      borderRadius: "5px",
-      border: "1px solid #ccc",
-    },
-    formButtons: {
-      display: "flex",
-      justifyContent: "space-between",
-      marginTop: "20px",
-    },
-    button: {
-      padding: "10px 16px",
-      borderRadius: "6px",
-      border: "none",
-      fontWeight: "bold",
-      cursor: "pointer",
-    },
   };
 
   return (
