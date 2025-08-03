@@ -29,7 +29,6 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     const handleFlashcardCreation = (event:React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const form = event.currentTarget;
-      clearFormFields(form, languageToLearn);
       handleObjectCreation(
         event,
         "http://localhost:8600/api/flashcards/flashcard",
@@ -37,8 +36,9 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
         { "Content-Type": "multipart/form-data" },
         "flashcard"
       );
+      clearFormFields(form, languageToLearn);
     const timeoutId = setTimeout(() => {
-      fetchUserDecks(setOwnedDecksList, setUserDecksList);
+      fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
     }, 1000); 
 
     return () => clearTimeout(timeoutId); 
