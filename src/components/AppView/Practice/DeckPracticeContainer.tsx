@@ -12,18 +12,22 @@ export const DeckPracticeContainer = ({deckId}:DeckPracticeContainerProps) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await fetchDeckFlashcards(deckId, languageToLearn);
-            setFlashcardsList(data);
+            try {
+                const data = await fetchDeckFlashcards(deckId, languageToLearn);
+                setFlashcardsList(data);
+            } catch {
+                console.log("Impossible to fetch flashcards");
+            }
         };
         fetchData();
-    }, []);
+    }, [languageToLearn, deckId]);
 
     return (
         <div>
             Here is where you can practice your words from your deck:
             <ul>
-                {flashcardsList.map((item, idx) => (
-                    <li key={idx}>{JSON.stringify(item)}</li>
+                {flashcardsList.map((flashcard, index) => (
+                    <li key={index}>{JSON.stringify(flashcard)}</li>
                 ))}
             </ul>
         </div>
