@@ -19,7 +19,7 @@ export const DeckPracticeContainer = ({ deckId }: DeckPracticeContainerProps) =>
   // Derived state for current card
   const currentCard = flashcardsQueue[currentIndex];
 
-  // Fetch flashcards on mount
+  // Fetch flashcards on component mount
   useEffect(() => {
     const loadFlashcards = async () => {
       try {
@@ -57,10 +57,9 @@ export const DeckPracticeContainer = ({ deckId }: DeckPracticeContainerProps) =>
       setFailedFlashcards([]);
       setCurrentIndex(0);
     } 
-    // Practice complete
+    // Practice complete management
     else {
-      alert("Practice complete! 🎉");
-      // Add your completion logic here
+      alert("Congratulatiosn!");
     }
     
     setIsMeaningRevealed(false);
