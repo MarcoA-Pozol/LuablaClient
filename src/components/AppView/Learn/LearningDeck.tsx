@@ -20,7 +20,7 @@ export const LearningDeck = ({index, deckId, title, description, image, author, 
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
             {author === authUser.username && (<button style={styles.addCardsButton}>Add +</button>)}
-            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton} onClick={() => { setDeckToPracticeID(deckId); setDisplayedContainer("practiceDeckFlashcards") }}>Study</button>)}
+            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton} onClick={() => { setDeckToPracticeID(deckId); setDisplayedContainer("practice") }}>Study</button>)}
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SetStateAction } from "react";
 import { fetchDeckFlashcards } from "../../../functions/fetchDeckFlashcards";
 import { useLanguages } from "../../../hooks/useLanguages";
 import type { Flashcard } from "../../../schemas/Flashcard";
@@ -6,9 +6,10 @@ import "../../../styles/AppView/deckPracticeContainer.css";
 
 interface DeckPracticeContainerProps {
   deckId: number;
+  setDisplayedContainer:React.Dispatch<SetStateAction<string>>;
 }
 
-export const DeckPracticeContainer = ({ deckId }: DeckPracticeContainerProps) => {
+export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPracticeContainerProps) => {
   const { languageToLearn } = useLanguages();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [flashcardsQueue, setFlashcardsQueue] = useState<Flashcard[]>([]);
@@ -59,7 +60,8 @@ export const DeckPracticeContainer = ({ deckId }: DeckPracticeContainerProps) =>
     } 
     // Practice complete management
     else {
-      alert("Congratulatiosn!");
+      alert("Congratulations!");
+      setDisplayedContainer("learning");
     }
     
     setIsMeaningRevealed(false);
