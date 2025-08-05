@@ -74,7 +74,6 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
 
   return (
     <div className="practice-container">
-      <h2>Practice Session</h2>
       
       <div className="flashcard">
         <h3 className="word-display">{languageToLearn === "ZH" ? currentCard.hanzi : languageToLearn === "JP" ? currentCard.kana : languageToLearn === "KO" ? currentCard.hangul : languageToLearn === "RU" ? currentCard.cyrillic : currentCard.word}</h3>
@@ -82,7 +81,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
         {/* Meaning Reveal */}
         {!isMeaningRevealed ? (
           <button onClick={handleReveal} className="reveal-button">
-            Show Meaning
+            Reveal
           </button>
         ) : (
           <div className="meaning-section">
@@ -118,7 +117,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
       </div>
       
       <div className="progress">
-        Card {currentIndex + 1} of {flashcardsQueue.length}
+        {currentIndex + 1} of {flashcardsQueue.length}
         {failedFlashcards.length > 0 && (
           <span> | Retry cards: {failedFlashcards.length}</span>
         )}
