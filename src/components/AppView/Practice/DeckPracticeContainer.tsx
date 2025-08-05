@@ -23,6 +23,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
 
   // Fetch flashcards on component mount
   useEffect(() => {
+    window.scrollTo({top:0, behavior:"instant"})
     const loadFlashcards = async () => {
       try {
         setIsLoading(true);

@@ -24,6 +24,10 @@ export const AppView = () => {
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
 
     useEffect(() => {
+        window.scrollTo({top:0, behavior: "smooth"});
+    }, [displayedContainer, deckToPracticeID]);
+
+    useEffect(() => {
         fetchNotificationsList(setNotificationsCount, setNotificationsList);
     }, [])
 
