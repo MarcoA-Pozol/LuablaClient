@@ -3,6 +3,7 @@ import { fetchDeckFlashcards } from "../../../functions/fetchDeckFlashcards";
 import { useLanguages } from "../../../hooks/useLanguages";
 import type { Flashcard } from "../../../schemas/Flashcard";
 import "../../../styles/AppView/deckPracticeContainer.css";
+import { shuffleArray } from "../../../utils/shuffleArray";
 
 interface DeckPracticeContainerProps {
   deckId: number;
@@ -26,7 +27,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
       try {
         setIsLoading(true);
         const data = await fetchDeckFlashcards(deckId, languageToLearn);
-        setFlashcardsQueue(data);
+        setFlashcardsQueue(shuffleArray(data));
       } catch (error) {
         console.error("Failed to fetch flashcards:", error);
       } finally {
@@ -57,7 +58,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
     } else if (failedFlashcards.length > 0 || !isCorrect) {
       // Include the current failed card if it's the last one
       const updatedFailed = !isCorrect ? [...failedFlashcards, failedCard] : failedFlashcards;
-      setFlashcardsQueue(updatedFailed);
+      setFlashcardsQueue(shuffleArray(updatedFailed));
       setFailedFlashcards([]);
       setCurrentIndex(0);
     } else {
