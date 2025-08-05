@@ -43,29 +43,31 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
 
   const handleAnswer = (isCorrect: boolean) => {
     if (!currentCard) return;
-    
-    if (!isCorrect) {
-      setFailedFlashcards(prev => [...prev, currentCard]);
+
+    const failedCard = currentCard; // Capture possible failedCard before currentCard state changes
+
+    if (!isCorrect) { // Push failedCard to the list in case of wrong answer
+      setFailedFlashcards(prev => [...prev, failedCard]);
     }
 
-    // Move to next card
-    if (currentIndex + 1 < flashcardsQueue.length) {
+    const isLastCard = currentIndex + 1 >= flashcardsQueue.length;
+
+    if (!isLastCard) {
       setCurrentIndex(prev => prev + 1);
-    } 
-    // Process failed cards at end
-    else if (failedFlashcards.length > 0) {
-      setFlashcardsQueue(failedFlashcards);
+    } else if (failedFlashcards.length > 0 || !isCorrect) {
+      // Include the current failed card if it's the last one
+      const updatedFailed = !isCorrect ? [...failedFlashcards, failedCard] : failedFlashcards;
+      setFlashcardsQueue(updatedFailed);
       setFailedFlashcards([]);
       setCurrentIndex(0);
-    } 
-    // Practice complete management
-    else {
+    } else {
       alert("Congratulations!");
       setDisplayedContainer("learning");
     }
-    
+
     setIsMeaningRevealed(false);
   };
+
 
   if (isLoading) return <div>Loading flashcards...</div>;
   if (!currentCard) return <div>No cards available</div>;
@@ -75,10 +77,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
       <h2>Practice Session</h2>
       
       <div className="flashcard">
-        {/* Word Display */}
-        <div className="word-display">
-          {languageToLearn === "ZH" ? currentCard.hanzi : languageToLearn === "JP" ? currentCard.kana : languageToLearn === "KO" ? currentCard.hangul : languageToLearn === "RU" ? currentCard.cyrillic : currentCard.word}
-        </div>
+        <h3 className="word-display">{languageToLearn === "ZH" ? currentCard.hanzi : languageToLearn === "JP" ? currentCard.kana : languageToLearn === "KO" ? currentCard.hangul : languageToLearn === "RU" ? currentCard.cyrillic : currentCard.word}</h3>
         
         {/* Meaning Reveal */}
         {!isMeaningRevealed ? (
