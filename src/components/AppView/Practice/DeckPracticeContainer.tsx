@@ -87,14 +87,14 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
           </button>
         ) : (
           <div className="meaning-section">
-            {languageToLearn === "ZH" && currentCard.pinyin !== "" && <p><strong>Pinyin:</strong> {currentCard.pinyin}</p>}
-            {languageToLearn === "JP" && currentCard.kanji !== "" && <p><strong>Kanji:</strong> {currentCard.kanji}</p>}
-            {languageToLearn === "JP" && currentCard.romaji !== "" && <p><strong>Romaji:</strong> {currentCard.romaji}</p>}
-            {languageToLearn === "KO" && currentCard.romaji !== "" && <p><strong>Romaji:</strong> {currentCard.romaji}</p>}
-            {languageToLearn === "RU" && currentCard.transliteration !== "" && <p><strong>Transliteration:</strong> {currentCard.transliteration}</p>}
-            <p><strong>Meaning:</strong> {currentCard.meaning}</p>
+            {languageToLearn === "ZH" && currentCard.pinyin !== "" && <p><strong>📣</strong> {currentCard.pinyin}</p>}
+            {languageToLearn === "JP" && currentCard.kanji !== "" && <p><strong>漢</strong> {currentCard.kanji}</p>}
+            {languageToLearn === "JP" && currentCard.romaji !== "" && <p><strong>🔤</strong> {currentCard.romaji}</p>}
+            {languageToLearn === "KO" && currentCard.romaji !== "" && <p><strong>🔤</strong> {currentCard.romaji}</p>}
+            {languageToLearn === "RU" && currentCard.transliteration !== "" && <p><strong>🔤</strong> {currentCard.transliteration}</p>}
+            <p><strong>💡</strong> {currentCard.meaning}</p>
             {currentCard.example_phrase && (
-              <p><strong>Example:</strong> {currentCard.example_phrase}</p>
+              <p style={{height:"100px", overflowY:"scroll"}}><strong>💬</strong> {currentCard.example_phrase}</p>
             )}
           </div>
         )}
