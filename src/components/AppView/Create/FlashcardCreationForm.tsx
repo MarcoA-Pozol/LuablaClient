@@ -110,7 +110,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
       <form ref={formRef} onSubmit={handleFlashcardCreation} style={styles.form} method="POST" encType="multipart/form-data">
         <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
 
-        {languageToLearn !== "JP" && languageToLearn !== "ZH" && languageToLearn !== "KO" && (
+        {languageToLearn !== "JP" && languageToLearn !== "ZH" && languageToLearn !== "KO" && languageToLearn !== "RU" && (
           <label style={styles.label}>
             🏷️
             <input
@@ -194,6 +194,31 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
             />
           </label>
         )}
+
+        {languageToLearn === "RU" && (
+          <>
+            <label style={styles.label}>
+              🪆
+              <input
+                name="cyrillic"
+                type="text"
+                style={styles.input}
+                placeholder="Cyrillic"
+                />
+            </label>
+
+            <label style={styles.label}>
+              🔤
+              <input
+                name="transliteration"
+                type="text"
+                style={styles.input}
+                placeholder="Transliteration"
+                />
+            </label>
+          </>
+        )}
+
 
         <label style={styles.label}>
           💡
