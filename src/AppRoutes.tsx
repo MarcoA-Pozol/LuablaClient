@@ -26,7 +26,17 @@ const AppRoutes = () => {
                         </LanguagesProvider>
                     </ProtectedRoute>
                 }/>                
-                <Route path="/profile" element={<ProtectedRoute><ProfileView/></ProtectedRoute>}/>
+                <Route path="/profile" element={
+                    <ProtectedRoute>
+                        <LanguagesProvider>
+                            <SocialDataProvider>
+                                <DecksListsProvider>
+                                    <ProfileView/>
+                                </DecksListsProvider>
+                            </SocialDataProvider>
+                        </LanguagesProvider>
+                    </ProtectedRoute>
+                }/>
                 <Route path="*" element={<PageNotFoundView/>} />
             </Routes>
         </Router>
