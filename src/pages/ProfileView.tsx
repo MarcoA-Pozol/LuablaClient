@@ -1,17 +1,13 @@
-import { TopNavBarApp } from "../components/AppView/TopNavBarApp";
-import { AppContentContainer } from "../components/AppView/AppContentContainer";
-import { useAuth } from "../App";
+import { useNavigate } from "react-router-dom";
 import { ProfileInfoSection } from "../components/ProfileView/ProfileInfoSection";
 
 export const ProfileView = () => {
-    const { authUser } = useAuth();
-    
+    const navigate = useNavigate();
+
     return (
-        <>  
-            <TopNavBarApp authUser={authUser}/>
-            <AppContentContainer>
-                <ProfileInfoSection/>
-            </AppContentContainer>
+        <> 
+            <p onClick={() => {navigate("/app")}} style={{color:"wheat", textAlign:"center", cursor:"pointer"}}>Back to app</p>
+            <ProfileInfoSection/>
         </>
     );
 }
