@@ -1,14 +1,16 @@
 import { useAuth } from "../../App";
+import { useProfileInfoSectionStyles } from "../../styles/ProfileView/profileInfoSection";
 
 export const ProfileInfoSection = () => {
     const {authUser} = useAuth();
-    
+    const styles = useProfileInfoSectionStyles();
+
     return (
-        <div>
-            <img src={`http://localhost:8600/${authUser.profile_picture}`}/>
-            <h3>👤 {authUser.username}</h3>
-            <h4>📩 {authUser.email}</h4>
-            <h4>🌐 {authUser.country}</h4>
+        <div style={styles.container}>
+            <img style={styles.image} src={`http://localhost:8600/${authUser.profile_picture}`}/>
+            <h3 style={styles.username}>👤 {authUser.username}</h3>
+            <h4 style={styles.username}>📩 {authUser.email}</h4>
+            <h4 style={styles.username}>🌐 {authUser.country}</h4>
         </div>
     );
 }
