@@ -7,6 +7,8 @@ type SocialDataContextType = {
     setNotificationsList:React.Dispatch<SetStateAction<NotificationSchema[]>>;
     notificationsCount:number;
     setNotificationsCount:React.Dispatch<SetStateAction<number>>;
+    newNotificationsCount:number;
+    setNewNotificationsCount:React.Dispatch<SetStateAction<number>>;
 }
 
 export const SocialDataContext = createContext<SocialDataContextType|undefined>(undefined);
@@ -18,13 +20,14 @@ interface SocialDataProviderProps {
 const SocialDataProvider = ({children}:SocialDataProviderProps) => {
     const [notificationsList, setNotificationsList] = useState<NotificationSchema[]>([]);
     const [notificationsCount, setNotificationsCount] = useState<number>(0);
+    const [newNotificationsCount, setNewNotificationsCount] = useState<number>(0);
 
     useEffect(() => {
-        fetchNotificationsList(setNotificationsCount, setNotificationsList);
+        fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount);
     }, [])
 
     return (
-        <SocialDataContext.Provider value={{ notificationsList, setNotificationsList, notificationsCount, setNotificationsCount }}>
+        <SocialDataContext.Provider value={{ notificationsList, setNotificationsList, notificationsCount, setNotificationsCount, newNotificationsCount, setNewNotificationsCount}}>
             {children}
         </SocialDataContext.Provider>
     );

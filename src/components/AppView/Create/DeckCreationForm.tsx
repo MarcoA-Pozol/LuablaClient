@@ -26,7 +26,7 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
                   ? topikLevelsList
                   : cefrLevelsList;
   const {setUserDecksList, setOwnedDecksList} = useDecksLists();
-  const { setNotificationsCount, setNotificationsList } = useSocialData();
+  const { setNotificationsCount, setNotificationsList, setNewNotificationsCount } = useSocialData();
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToLearn); 
     await createNotification("Deck created!", `You have created this deck (${data.get("title")}, for ${languageToLearn} language.)`, "CREATED_DECK"); 
-    await fetchNotificationsList(setNotificationsCount, setNotificationsList); 
+    await fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount); 
     const timeoutId = setTimeout(() => {
       fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
     }, 1000); 

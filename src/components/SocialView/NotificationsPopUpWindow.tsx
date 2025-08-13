@@ -15,7 +15,7 @@ interface NotificationsPopUpWindowProps {
 
 export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowNotificationsPopUpWindow}:NotificationsPopUpWindowProps) => {
     const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
-    const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount } = useSocialData();
+    const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount, newNotificationsCount, setNewNotificationsCount } = useSocialData();
     const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList);
 
     useEffect(() => {
@@ -27,9 +27,9 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
             <div style={styles.notificationsContainer}>
                 <div style={styles.header}>
                     <h2 style={styles.headerTitle}>Notifications</h2>
-                    {notificationsCount > 0 && (
-                        <span style={styles.notificationBadge}>{notificationsCount}</span>
-                    )}
+                    {newNotificationsCount > 0 ? (
+                        <span style={styles.notificationBadge}>{newNotificationsCount}</span>
+                    ) : 0}
                 </div>
                 
                 <NotificationsFilter setFilteredNotifications={setFilteredNotifications} notificationsList={notificationsList}/>
@@ -45,7 +45,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
                                 <div style={styles.notificationDivider}></div>
-                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotificationsList(setNotificationsCount, setNotificationsList);}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? "Mark as read" : "Mark as unread"}</button>
+                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount);}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? "Mark as read" : "Mark as unread"}</button>
                             </div>
                         ))
                     ) : (

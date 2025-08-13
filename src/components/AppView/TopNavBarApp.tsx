@@ -24,7 +24,7 @@ interface TopNavBarAppProps {
 }
 
 export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
-    const { notificationsCount } = useSocialData();
+    const { newNotificationsCount } = useSocialData();
     const navigate = useNavigate();
     const [showNotificationsPopUpWindow, setShowNotificationsPopUpWindow] = useState<boolean>(false);
     const { languageToLearn, setLanguageToLearn } = useLanguages();
@@ -84,10 +84,10 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
                 <a onClick={() => {setShowNotificationsPopUpWindow(true);}}>
                     <div id="notifications">
                         <img src={NotificationsIcon} alt="Notifications icon"/>
-                        { notificationsCount === 0 ? (
-                            <h5 style={{backgroundColor:"rgb(36, 25, 97)"}}>{notificationsCount}</h5>
+                        { newNotificationsCount === 0 ? (
+                            <h5 style={{backgroundColor:"rgb(36, 25, 97)"}}>{newNotificationsCount}</h5>
                         ) : (
-                            <h5>{notificationsCount}</h5>
+                            <h5>{newNotificationsCount}</h5>
                         )}
                     </div>
                 </a>
