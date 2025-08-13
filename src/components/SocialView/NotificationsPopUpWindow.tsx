@@ -6,7 +6,6 @@ import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
 import { NotificationsFilter } from "./NotificationsFilter";
 import type { NotificationSchema } from "../../schemas/Notification";
 import { toggleNotificationReadStatus } from "../../functions/toggleNotificationReadStatus";
-import { fetchNotificationsList } from "../../functions/fetchNotificationsList";
 
 interface NotificationsPopUpWindowProps {
     showNotificationsPopUpWindow:boolean;
@@ -15,8 +14,10 @@ interface NotificationsPopUpWindowProps {
 
 export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowNotificationsPopUpWindow}:NotificationsPopUpWindowProps) => {
     const styles = useNotificationsPopUpWindowStyles(showNotificationsPopUpWindow);
-    const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount, newNotificationsCount, setNewNotificationsCount } = useSocialData();
+    const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount, newNotificationsCount } = useSocialData();
     const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList);
+    const { fetchNotifications } = useSocialData();
+    
 
     useEffect(() => {
         setFilteredNotifications(notificationsList);
@@ -45,7 +46,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
                                 <div style={styles.notificationDivider}></div>
-                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount);}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? "Mark as read" : "Mark as unread"}</button>
+                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotifications();}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? "Mark as read" : "Mark as unread"}</button>
                             </div>
                         ))
                     ) : (

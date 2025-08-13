@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, type SetStateAction, type ReactNode } from "react";
-import { fetchNotificationsList } from "../functions/fetchNotificationsList";
+import axios from "axios";
 import type { NotificationSchema } from "../schemas/Notification";
 
 type SocialDataContextType = {
@@ -9,6 +9,7 @@ type SocialDataContextType = {
     setNotificationsCount:React.Dispatch<SetStateAction<number>>;
     newNotificationsCount:number;
     setNewNotificationsCount:React.Dispatch<SetStateAction<number>>;
+    fetchNotifications:() => void;
 }
 
 export const SocialDataContext = createContext<SocialDataContextType|undefined>(undefined);
@@ -22,12 +23,34 @@ const SocialDataProvider = ({children}:SocialDataProviderProps) => {
     const [notificationsCount, setNotificationsCount] = useState<number>(0);
     const [newNotificationsCount, setNewNotificationsCount] = useState<number>(0);
 
+    async function fetchNotifications() {
+        const response = await axios.get("http://localhost:8600/api/social/notifications", {
+            withCredentials:true,
+            headers:{
+                "Content-Type":"application/json"
+            }
+        });
+
+        if (response.status === 200) {
+            setNotificationsList(response.data.notifications);
+            setNotificationsCount(response.data.notifications_count);
+            setNewNotificationsCount(response.data.new_notifications_count);
+            console.log(response.data);
+        } else if (response.status === 404) {
+            setNotificationsList([]);
+            setNotificationsCount(0);
+        } else {
+            setNotificationsList([]);
+            setNotificationsCount(0);
+        }
+    }
+
     useEffect(() => {
-        fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount);
+        fetchNotifications();
     }, [])
 
     return (
-        <SocialDataContext.Provider value={{ notificationsList, setNotificationsList, notificationsCount, setNotificationsCount, newNotificationsCount, setNewNotificationsCount}}>
+        <SocialDataContext.Provider value={{ notificationsList, setNotificationsList, notificationsCount, setNotificationsCount, newNotificationsCount, setNewNotificationsCount, fetchNotifications}}>
             {children}
         </SocialDataContext.Provider>
     );

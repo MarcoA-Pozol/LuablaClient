@@ -9,7 +9,6 @@ import type { LibraryDeckProps } from "../../../types/AppView/LibraryDeckProps";
 import { useLibraryDeckStyles } from "../../../styles/AppView/libraryDeck";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
-import { fetchNotificationsList } from "../../../functions/fetchNotificationsList";
 import { useSocialData } from "../../../hooks/useSocialData";
 import { createNotification } from "../../../functions/createNotification";
 
@@ -19,8 +18,8 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
     const styles = useLibraryDeckStyles(isDeckHovered);
     const { setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList } = useDecksLists();
     const { languageToLearn } = useLanguages();
-    const { setNotificationsCount, setNotificationsList, setNewNotificationsCount } = useSocialData();
- 
+    const { fetchNotifications } = useSocialData();
+
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
             <h3 style={styles.title}>{title}</h3>
@@ -38,7 +37,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                     removeFromLibraryDecks(deckId, setLibraryDecksList, libraryDecksList);
                     await fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
                     await createNotification("Deck acquired!", `New deck from the library is now available to practice (${title})`, "OBTAINED_DECK");
-                    await fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount);
+                    await fetchNotifications();
                 }}
             >
                 Get

@@ -6,9 +6,8 @@ import { fetchUserDecks } from "../../../functions/fetchDecks";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
 import { createNotification } from "../../../functions/createNotification";
-import { fetchNotificationsList } from "../../../functions/fetchNotificationsList";
-import { useSocialData } from "../../../hooks/useSocialData";
 import { useDeckCreationFormStyles } from "../../../styles/AppView/deckCreationForm";
+import { useSocialData } from "../../../hooks/useSocialData";
 
 interface DeckCreationFormProps {
   showCreateForm: boolean;
@@ -26,7 +25,7 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
                   ? topikLevelsList
                   : cefrLevelsList;
   const {setUserDecksList, setOwnedDecksList} = useDecksLists();
-  const { setNotificationsCount, setNotificationsList, setNewNotificationsCount } = useSocialData();
+  const { fetchNotifications } = useSocialData();
 
   const handleDeckCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +34,7 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
     handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToLearn); 
     await createNotification("Deck created!", `You have created this deck (${data.get("title")}, for ${languageToLearn} language.)`, "CREATED_DECK"); 
-    await fetchNotificationsList(setNotificationsCount, setNotificationsList, setNewNotificationsCount); 
+    await fetchNotifications(); 
     const timeoutId = setTimeout(() => {
       fetchUserDecks(languageToLearn, setOwnedDecksList, setUserDecksList);
     }, 1000); 

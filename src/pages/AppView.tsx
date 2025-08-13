@@ -12,23 +12,22 @@ import { useEffect } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import { useDecksLists } from "../hooks/useDecksLists";
 import { useLanguages } from "../hooks/useLanguages";
-import { fetchNotificationsList } from "../functions/fetchNotificationsList";
 import { useSocialData } from "../hooks/useSocialData";
 
 export const AppView = () => {
     const { authUser } = useAuth();
     const { languageToLearn } = useLanguages();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
-    const { setNotificationsCount, setNotificationsList } = useSocialData();
     const { setUserDecksList, setLibraryDecksList, setOwnedDecksList} = useDecksLists();
     const [deckToPracticeID, setDeckToPracticeID] = useState<number>(0);
+    const { fetchNotifications } = useSocialData();
 
     useEffect(() => {
         window.scrollTo({top:0, behavior: "smooth"});
     }, [displayedContainer, deckToPracticeID]);
 
     useEffect(() => {
-        fetchNotificationsList(setNotificationsCount, setNotificationsList);
+        fetchNotifications();
     }, [])
 
     useEffect(() => {
