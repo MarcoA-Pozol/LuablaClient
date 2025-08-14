@@ -3,6 +3,7 @@ import { handleObjectCreation, clearFormFields } from "../../../functions/handle
 import { fetchUserDecks } from "../../../functions/fetchDecks";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
+import { useTranslation } from "react-i18next";
 
 interface FlashcardCreationFormProps {
   selectedDeck:any;
@@ -13,6 +14,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const { setUserDecksList, setOwnedDecksList } = useDecksLists();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const handleResize = () => setScreenWidth(window.innerWidth);
@@ -108,7 +110,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
 
     return (
       <form ref={formRef} onSubmit={handleFlashcardCreation} style={styles.form} method="POST" encType="multipart/form-data">
-        <h2 style={styles.heading}>{flashcardTypeName} Flashcard</h2>
+        <h2 style={styles.heading}>{t(flashcardTypeName)} {t("Flashcard")}</h2>
 
         {languageToLearn !== "JP" && languageToLearn !== "ZH" && languageToLearn !== "KO" && languageToLearn !== "RU" && (
           <label style={styles.label}>
@@ -117,7 +119,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
               name="word"
               type="text"
               style={styles.input}
-              placeholder="Word"
+              placeholder={t("Word")}
             />
           </label>
         )}
@@ -132,7 +134,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
                 name="hanzi"
                 type="text"
                 style={styles.input}
-                placeholder="Hanzi"
+                placeholder={t("Hanzi")}
               />
             </label>
             <label style={styles.label}>
@@ -141,7 +143,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
                 name="pinyin"
                 type="text"
                 style={styles.input}
-                placeholder="Pinyin"
+                placeholder={t("Pinyin")}
               />
             </label>
           </>
@@ -154,7 +156,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
               name="kana"
               type="text"
               style={styles.input}
-              placeholder="Kana"
+              placeholder={t("Kana")}
             />
           </label>
         )}
@@ -166,7 +168,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
               name="hangul"
               type="text"
               style={styles.input}
-              placeholder="Hangul"
+              placeholder={t("Hangul")}
             />
           </label>
         )}
@@ -178,7 +180,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
               name="romaji"
               type="text"
               style={styles.input}
-              placeholder="Romaji"
+              placeholder={t("Romaji")}
             />
           </label>
         )}
@@ -190,7 +192,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
               name="kanji"
               type="text"
               style={styles.input}
-              placeholder="Kanji (optional)"
+              placeholder={t("Kanji (optional)")}
             />
           </label>
         )}
@@ -203,7 +205,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
                 name="cyrillic"
                 type="text"
                 style={styles.input}
-                placeholder="Cyrillic"
+                placeholder={t("Cyrillic")}
                 />
             </label>
 
@@ -213,7 +215,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
                 name="transliteration"
                 type="text"
                 style={styles.input}
-                placeholder="Transliteration"
+                placeholder={t("Transliteration")}
                 />
             </label>
           </>
@@ -226,7 +228,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
             name="meaning"
             type="text"
             style={styles.input}
-            placeholder="Meaning"
+            placeholder={t("Meaning")}
           />
         </label>
 
@@ -235,16 +237,16 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
           <textarea
             name="examplePhrase"
             style={styles.textarea}
-            placeholder="Example phrase"
+            placeholder={t("Example phrase")}
           />
         </label>
 
         <div style={styles.buttonContainer}>
           <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleClearForm}>
-            Clean
+            {t("Clean")}
           </button>
           <button type="submit" style={styles.button}>
-            Add
+            {t("Add")}
           </button>
         </div>
       </form>
