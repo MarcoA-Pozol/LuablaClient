@@ -1,3 +1,18 @@
 {
-    "Update profile":"Profil aktualisieren"
+  "Update profile": "Aggiorna profilo",
+  "Select language": "Seleziona lingua",
+  "Return": "Ritorna",
+  "Go back": "Torna indietro",
+  "Filters": "Filtri",
+  "Category": "Categoria",
+  "All": "Tutti",
+  "Sort by": "Ordina per",
+  "Latest First": "Più recenti",
+  "Oldest First": "Più vecchi",
+  "Status": "Stato",
+  "Read": "Letto",
+  "Unread": "Non letto",
+  "Learn": "Impara",
+  "Library": "Libreria",
+  "Create": "Crea"
 }

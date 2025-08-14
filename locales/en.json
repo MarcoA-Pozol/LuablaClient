@@ -11,5 +11,8 @@
     "Oldest First":"Oldest First",
     "Status":"Status",
     "Read":"Read",
-    "Unread":"Unread"
+    "Unread":"Unread",
+    "Learn":"Learn",
+    "Library":"Library",
+    "Create":"Create"
 }

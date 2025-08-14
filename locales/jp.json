@@ -7,6 +7,12 @@
   "Category": "カテゴリー",
   "All": "すべて",
   "Sort by": "並び替え",
-  "Latest First": "最新順",
-  "Oldest First": "古い順"
+  "Latest First": "新しい順",
+  "Oldest First": "古い順",
+  "Status": "ステータス",
+  "Read": "既読",
+  "Unread": "未読",
+  "Learn": "学ぶ",
+  "Library": "ライブラリ",
+  "Create": "作成"
 }

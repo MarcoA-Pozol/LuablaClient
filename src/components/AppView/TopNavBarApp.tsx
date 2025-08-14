@@ -5,6 +5,7 @@ import PandaLogo from "../../assets/LandingView/panda-logo-1.png"
 import NotificationsIcon from "../../assets/AppView/notifications_icon.png";
 import "../../styles/AppView/topNavBarApp.css";
 import { useSocialData } from "../../hooks/useSocialData";
+import { InterfaceLanguageSelectionForm } from "../ProfileView/InterfaceLanguageSelectionForm";
 // Languages IMGs
 import EnglishFlag from "../../assets/AppView/english_flag.png";
 import JapaneseFlag from "../../assets/AppView/japanese_flag.png";
@@ -92,6 +93,8 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
                     </div>
                 </a>
             </div>
+
+            <InterfaceLanguageSelectionForm/>
 
             <div onClick={() => {navigate("/profile")}} className="profile_container">
                     <img src={`http://localhost:8600/${authUser.profile_picture}`} alt={authUser.profile_picture}/>  
