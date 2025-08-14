@@ -4,7 +4,7 @@ import enTranslation from "./locales/en.json";
 import esTranslation from "./locales/es.json";
 import frTranslation from "./locales/fr.json";
 import ptTranslation from "./locales/pt.json";
-import cnTranslation from "./locales/cn.json";
+import cnTranslation from "./locales/zh.json";
 import jpTranslation from "./locales/jp.json";
 import deTranslation from "./locales/de.json";
 import hiTranslation from "./locales/hi.json";
@@ -23,7 +23,7 @@ i18n
       es: { translation: esTranslation },
       fr: { translation: frTranslation },
       pt: { translation: ptTranslation },
-      cn: { translation: cnTranslation },
+      zh: { translation: cnTranslation },
       jp: { translation: jpTranslation },
       de: { translation: deTranslation },
       ko: { translation: koTranslation },
@@ -32,7 +32,7 @@ i18n
       hi: { translation: hiTranslation },
     },
     fallbackLng: "en",
-    lng: "en", // Default language
+    lng: localStorage.getItem("luablaInterfaceLanguage")||"en", // Default language
     interpolation: { escapeValue: false },
   });
 

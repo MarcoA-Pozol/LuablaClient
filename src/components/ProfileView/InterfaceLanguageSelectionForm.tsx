@@ -7,6 +7,7 @@ export const InterfaceLanguageSelectionForm = () => {
     const changeLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedLang = event.target.value;
         i18n.changeLanguage(selectedLang);
+        localStorage.setItem("luablaInterfaceLanguage", selectedLang);
     };
 
     return (
@@ -18,7 +19,7 @@ export const InterfaceLanguageSelectionForm = () => {
                     <option value="es">es</option>
                     <option value="fr">fr</option>
                     <option value="pt">pt</option>
-                    <option value="cn">cn</option>
+                    <option value="zh">zh</option>
                     <option value="jp">jp</option>
                     <option value="de">de</option>
                     <option value="ru">ru</option>
