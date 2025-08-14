@@ -17,7 +17,7 @@ const EmailVerificationForm = ({setIsEmailVerified}:EmailVerificationFormProps) 
     }, []);
 
     if (verificationCode === "" || !verificationCode) {
-        console.log("Insert a verification code")
+        alert("Insert a verification code");
     }
 
 
@@ -31,13 +31,13 @@ const EmailVerificationForm = ({setIsEmailVerified}:EmailVerificationFormProps) 
 
         .then(() => {
 
-            console.log("Email verified successfully");
+            alert("Email verified successfully");
             setIsEmailVerified(true);
             <Navigate to="/" />
         })
         .catch(() => {
 
-            console.error("Failed to verify email with this code", verificationCode);
+            alert(`Failed to verify email with this code: ${verificationCode}`);
             alert("Invalid or expired code");
             setVerificationCode("");
             return;
@@ -49,16 +49,16 @@ const EmailVerificationForm = ({setIsEmailVerified}:EmailVerificationFormProps) 
 
     return (
         <>
-            <h2>Email Verification</h2>
-            <p>Verify your email by entering the verification code down below</p>
+            <h2>{t("Email Verification")}</h2>
+            <p>{t("Insert the code we sent to your email adress")}</p>
             <form onSubmit={handleFormSubmission}>
                 <label>
-                    Code: 
+                    🛡️
                     <input type="text" placeholder={t("Verification Code")} ref={verificationCodeElementRef} value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)}></input>
                 </label>
                 <button type="submit">{t("Submit")}</button>
             </form>
-            <p>Didn't receive the code? <b onClick={sendEmailVerificationCode} style={{cursor:"pointer"}}>Resend code</b></p>
+            <p>{t("Didn't receive the code?")} <b onClick={sendEmailVerificationCode} style={{cursor:"pointer"}}>{t("Resend code")}</b></p>
         </>
     );
 }

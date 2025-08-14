@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import "../../styles/AuthView/pickLanguageForm.css";
+import { useTranslation } from "react-i18next";
 // Images
 import EnglishFlagIMG from "../../assets/AuthView/english_flag.png";
 import FrenchFlagIMG from "../../assets/AuthView/french_flag.png";
@@ -74,6 +75,7 @@ const languages = [
 export const PickLanguageForm = () => {
     const [pickedLanguage, setPickedLanguage] = useState<string | null>(null);
     const [languageDescription, setLanguageDescription] = useState<string>("These are the most popular ones, but you can choose from many more options");
+    const { t } = useTranslation();
 
     // Derive disabled state from pickedLanguage
     const isButtonDisabled = !pickedLanguage;
@@ -103,7 +105,7 @@ export const PickLanguageForm = () => {
 
     return (
         <div className="languages-selection-container">
-            <h2>Choose a Language</h2>
+            <h2>{t("Choose a Language")}</h2>
             <p>{languageDescription}</p>
 
             <form id="language-form" onSubmit={handleSetPickedLanguage}>
@@ -128,7 +130,7 @@ export const PickLanguageForm = () => {
                     type="submit" 
                     disabled={isButtonDisabled}
                 >
-                    Continue
+                    {t("Continue")}
                 </button>
             </form>
         </div>

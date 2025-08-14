@@ -7,6 +7,7 @@ import { handleSignUp } from "../../utils/AuthView/Authentication";
 import { FaUser, FaEnvelope, FaLock, FaGlobeAmericas, FaCamera } from "react-icons/fa";
 import { useAuth } from "../../App";
 import { useSignUpFormStyles } from "../../styles/AuthView/signUpForm";
+import { useTranslation } from "react-i18next";
 
 interface SignUpFormProps {
     children?: ReactNode;
@@ -17,6 +18,7 @@ export const SignUpForm = ({ children, onClick }: SignUpFormProps) => {
     const navigate = useNavigate();
     const { setAuthUser } = useAuth();
     const styles = useSignUpFormStyles();
+    const { t } = useTranslation();
 
     return (
         <div style={styles.page}>
@@ -30,37 +32,37 @@ export const SignUpForm = ({ children, onClick }: SignUpFormProps) => {
             encType="multipart/form-data"
             style={styles.form}
             >
-            <h2 style={styles.title}>Create Your Account</h2>
+            <h2 style={styles.title}>{t("Create Your Account")}</h2>
 
             <label style={styles.label}>
                 <FaUser style={styles.icon} />
-                <input name="username" type="text" placeholder="Username" required style={styles.input} />
+                <input name="username" type="text" placeholder={t("Username")} required style={styles.input} />
             </label>
 
             <label style={styles.label}>
                 <FaEnvelope style={styles.icon} />
-                <input name="email" type="email" placeholder="Email" required style={styles.input} />
+                <input name="email" type="email" placeholder={t("Email")} required style={styles.input} />
             </label>
 
             <label style={styles.label}>
                 <FaLock style={styles.icon} />
-                <input name="password" type="password" placeholder="Password" required style={styles.input} />
+                <input name="password" type="password" placeholder={t("Password")} required style={styles.input} />
             </label>
 
             <label style={styles.label}>
                 <FaLock style={styles.icon} />
-                <input name="repeatPassword" type="password" placeholder="Repeat Password" required style={styles.input} />
+                <input name="repeatPassword" type="password" placeholder={t("Repeat Password")} required style={styles.input} />
             </label>
 
             <label style={styles.label}>
                 <FaGlobeAmericas style={styles.icon} />
                 <select name="country" required={false} style={styles.select}>
                 <option disabled selected>
-                    Select
+                    {t("Select")}
                 </option>
                 {countriesList.map((country, index) => (
                     <option key={index} value={country}>
-                    {country}
+                    {t(country)}
                     </option>
                 ))}
                 </select>
@@ -72,7 +74,7 @@ export const SignUpForm = ({ children, onClick }: SignUpFormProps) => {
             </label>
 
             <button type="submit" style={styles.button}>
-                Register
+                {t("Submit")}
             </button>
 
             <div style={styles.extraOptions}>

@@ -1,7 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 export const PageNotFoundView = () => {
+    const { t } = useTranslation();
+
     return (
         <>
-            Page not found
+            404: {t("Page not found")} 
         </>
     );
 }
