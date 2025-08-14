@@ -8,6 +8,7 @@ import { useLanguages } from "../../../hooks/useLanguages";
 import { createNotification } from "../../../functions/createNotification";
 import { useDeckCreationFormStyles } from "../../../styles/AppView/deckCreationForm";
 import { useSocialData } from "../../../hooks/useSocialData";
+import { useTranslation } from "react-i18next";
 
 interface DeckCreationFormProps {
   showCreateForm: boolean;
@@ -16,6 +17,7 @@ interface DeckCreationFormProps {
 
 export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreationFormProps) => {
   const styles = useDeckCreationFormStyles();
+  const { t } = useTranslation();
   const { languageToLearn } = useLanguages();
   const levelList = languageToLearn === "JP"
                   ? jlptLevelsList
@@ -52,39 +54,39 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
             method="POST"
             encType="multipart/form-data"
           >
-            <h3 style={styles.heading}>📚 Create New Deck</h3>
+            <h3 style={styles.heading}>📚 {t("Create New Deck")}</h3>
 
             <input type="hidden" name="language" value={languageToLearn} />
 
             <label style={styles.label}>
-              🏷️ Title:
+              🏷️ {t("Title")}:
               <input
                 type="text"
                 name="title"
                 style={styles.input}
                 required
-                placeholder="Ex: Words for Beginners"
+                placeholder={t("Ex: Words for Beginners")}
               />
             </label>
 
             <label style={styles.label}>
-              📝 Description:
+              📝 {t("Description")}:
               <textarea
                 name="description"
                 style={styles.textarea}
                 required
-                placeholder="Describe this deck..."
+                placeholder={t("Describe this deck...")}
               />
             </label>
 
             <label style={styles.label}>
               🎯 {languageToLearn === "JP"
-                ? "JLPT Level"
+                ? t("JLPT Level")
                 : languageToLearn === "ZH"
-                ? "HSK Level"
+                ? t("HSK Level")
                 : languageToLearn === "KO"
-                ? "TOPIK Level"
-                : "CEFR Level"}
+                ? t("TOPIK Level")
+                : t("CEFR Level")}
               <select
                 name={
                   languageToLearn === "JP"
@@ -107,12 +109,12 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
             </label>
 
             <label style={styles.label}>
-              🌍 Shareable Deck:
+              🌍 {t("Shareable Deck")}:
               <input type="checkbox" name="isShareable" />
             </label>
 
             <label style={styles.label}>
-              🖼️ Background Image:
+              🖼️ {t("Background Image")}:
               <input type="file" name="image" style={styles.input} />
             </label>
 
@@ -122,10 +124,10 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
                 style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }}
                 onClick={() => setShowCreateForm(false)}
               >
-                Cancel
+                {t("Cancel")}
               </button>
               <button type="submit" style={{ ...styles.button, backgroundColor: "royalblue", color: "white" }}>
-                Create
+                {t("Create")}
               </button>
             </div>
           </form>

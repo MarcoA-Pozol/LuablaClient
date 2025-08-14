@@ -14,5 +14,17 @@
     "Unread":"Unread",
     "Learn":"Learn",
     "Library":"Library",
-    "Create":"Create"
+    "Create":"Create",
+    "Create New Deck":"Create New Deck",
+    "Title":"Title",
+    "Ex. Words for Beginners":"Ex. Words for Beginners",
+    "Description":"Description",
+    "Describe this deck...":"Describe this deck...",
+    "JLPT Level":"JLPT Level",
+    "HSK Level":"HSK Level",
+    "TOPIK Level":"TOPIK Level",
+    "CEFR Level":"CEFR Level",
+    "Shareable Deck":"Shareable Deck",
+    "Background Image":"Background Image",
+    "Cancel":"Cancel"
 }
