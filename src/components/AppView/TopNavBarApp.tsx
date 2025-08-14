@@ -6,6 +6,8 @@ import NotificationsIcon from "../../assets/AppView/notifications_icon.png";
 import "../../styles/AppView/topNavBarApp.css";
 import { useSocialData } from "../../hooks/useSocialData";
 import { InterfaceLanguageSelectionForm } from "../ProfileView/InterfaceLanguageSelectionForm";
+import { useLanguages } from "../../hooks/useLanguages";
+import { useTranslation } from "react-i18next";
 // Languages IMGs
 import EnglishFlag from "../../assets/AppView/english_flag.png";
 import JapaneseFlag from "../../assets/AppView/japanese_flag.png";
@@ -17,7 +19,6 @@ import SpanishFlag from "../../assets/AppView/spanish_flag.png";
 import KoreanFlag from "../../assets/AppView/korean_flag.png";
 import PortugueseFlag from "../../assets/AppView/portuguese_flag.png";
 import RussianFlag from "../../assets/AppView/russian_flag.png";
-import { useLanguages } from "../../hooks/useLanguages";
 
 
 interface TopNavBarAppProps {
@@ -29,6 +30,7 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
     const navigate = useNavigate();
     const [showNotificationsPopUpWindow, setShowNotificationsPopUpWindow] = useState<boolean>(false);
     const { languageToLearn, setLanguageToLearn } = useLanguages();
+    const { t } = useTranslation();
 
     const handleLanguageSelection = (event:React.ChangeEvent<HTMLSelectElement>) => {
         setLanguageToLearn(event.target.value || "EN");
@@ -68,16 +70,16 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
                 ): (<img src={EnglishFlag}/>)}
 
                 <select name="languageToLearn" id="language" value={languageToLearn} onChange={handleLanguageSelection}>
-                    <option value="EN">English</option>
-                    <option value="ZH">Chinese</option>
-                    <option value="DE">Deutsch</option>
-                    <option value="JP">Japanese</option>
-                    <option value="ES">Spanish</option>
-                    <option value="KO">Korean</option>
-                    <option value="FR">French</option>
-                    <option value="IT">Italian</option>
-                    <option value="PT">Portuguese</option>
-                    <option value="RU">Russian</option>
+                    <option value="EN">{t("English")}</option>
+                    <option value="ZH">{t("Chinese")}</option>
+                    <option value="DE">{t("Deutsch")}</option>
+                    <option value="JP">{t("Japanese")}</option>
+                    <option value="ES">{t("Spanish")}</option>
+                    <option value="KO">{t("Korean")}</option>
+                    <option value="FR">{t("French")}</option>
+                    <option value="IT">{t("Italian")}</option>
+                    <option value="PT">{t("Portuguese")}</option>
+                    <option value="RU">{t("Russian")}</option>
                 </select>
             </div>
 
@@ -101,7 +103,6 @@ export const TopNavBarApp = ({authUser}:TopNavBarAppProps) => {
             </div>
 
             <NotificationsPopUpWindow showNotificationsPopUpWindow={showNotificationsPopUpWindow} setShowNotificationsPopUpWindow={setShowNotificationsPopUpWindow}/>
-
         </div>
     );
 }
