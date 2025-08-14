@@ -26,5 +26,8 @@
     "CEFR Level":"CEFR Level",
     "Shareable Deck":"Shareable Deck",
     "Background Image":"Background Image",
-    "Cancel":"Cancel"
+    "Cancel":"Cancel",
+    "Choose a Deck":"Choose a Deck",
+    "You don´t have any decks yet":"You don´t have any decks yet",
+    "Create Another Deck":"Create Another Deck"
 }

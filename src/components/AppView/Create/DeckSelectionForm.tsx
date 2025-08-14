@@ -3,12 +3,14 @@ import { DeckCreationForm } from "./DeckCreationForm";
 import "../../../styles/AppView/deckSelectionForm.css";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useDeckSelectionFormStyles } from "../../../styles/AppView/deckSelectionForm";
+import { useTranslation } from "react-i18next";
 
 interface DeckSelectionFormProps {
   selectedDeck:any;
   setSelectedDeck:React.Dispatch<SetStateAction<any>>;
 }
 export const DeckSelectionForm = ({selectedDeck, setSelectedDeck}:DeckSelectionFormProps) => {
+  const { t } = useTranslation();
   const {userDecksList} = useDecksLists();
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -16,12 +18,12 @@ export const DeckSelectionForm = ({selectedDeck, setSelectedDeck}:DeckSelectionF
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.heading}>Choose a Deck</h2>
+      <h2 style={styles.heading}>{t("Choose a Deck")}</h2>
 
       {decks.length < 1 ? (
         <div style={styles.noDecksContainer}>
-          <p style={styles.text}>You don't have any decks yet.</p>
-          <button style={styles.button} onClick={() => setShowCreateForm(true)}>+ Create New Deck</button>
+          <p style={styles.text}>{t("You don't have any decks yet")}.</p>
+          <button style={styles.button} onClick={() => setShowCreateForm(true)}>+ {t("Create New Deck")}</button>
         </div>
       ) : (
         <>
@@ -35,7 +37,7 @@ export const DeckSelectionForm = ({selectedDeck, setSelectedDeck}:DeckSelectionF
           </div>
 
           <div style={styles.createMore}>
-            <button style={styles.button} onClick={() => setShowCreateForm(true)}>+ Create Another Deck</button>
+            <button style={styles.button} onClick={() => setShowCreateForm(true)}>+ {t("Create Another Deck")}</button>
           </div>
         </>
       )}
