@@ -6,6 +6,7 @@ import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
 import { NotificationsFilter } from "./NotificationsFilter";
 import type { NotificationSchema } from "../../schemas/Notification";
 import { toggleNotificationReadStatus } from "../../functions/toggleNotificationReadStatus";
+import { useTranslation } from "react-i18next";
 
 interface NotificationsPopUpWindowProps {
     showNotificationsPopUpWindow:boolean;
@@ -17,7 +18,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
     const { notificationsList, notificationsCount, setNotificationsList, setNotificationsCount, newNotificationsCount } = useSocialData();
     const [filteredNotifications, setFilteredNotifications] = useState<NotificationSchema[]>(notificationsList);
     const { fetchNotifications } = useSocialData();
-    
+    const { t } = useTranslation();
 
     useEffect(() => {
         setFilteredNotifications(notificationsList);
@@ -27,7 +28,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
         <div style={styles.overlay}>
             <div style={styles.notificationsContainer}>
                 <div style={styles.header}>
-                    <h2 style={styles.headerTitle}>Notifications</h2>
+                    <h2 style={styles.headerTitle}>{t("Notifications")}</h2>
                     {newNotificationsCount > 0 ? (
                         <span style={styles.notificationBadge}>{newNotificationsCount}</span>
                     ) : 0}
@@ -41,28 +42,28 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                             <div key={index} style={styles.notificationItem}>
                                 <div style={styles.notificationHeader}>
                                     <h3 style={styles.title}>{notification.title}</h3>
-                                    <span style={styles.timestamp}>{notification.category_label}</span>
+                                    <span style={styles.timestamp}>{t(notification.category_label)}</span>
                                     <span style={styles.timestamp}>{format(new Date(notification.created_at), "MMM dd, yyyy hh:mm a")}</span>
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
                                 <div style={styles.notificationDivider}></div>
-                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotifications();}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? "Mark as read" : "Mark as unread"}</button>
+                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotifications();}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? t("Mark as read") : t("Mark as unread")}</button>
                             </div>
                         ))
                     ) : (
                         <div style={styles.emptyState}>
-                            <p style={styles.emptyText}>Nothing new to be aware about.</p>
+                            <p style={styles.emptyText}>{t("The are no news")}</p>
                         </div>
                     )}
                     
-                    <button style={styles.hideWindowButton} onClick={() => {fetchAllNotifications(setNotificationsCount, setNotificationsList);}}>Show all</button>
+                    <button style={styles.hideWindowButton} onClick={() => {fetchAllNotifications(setNotificationsCount, setNotificationsList);}}>{t("Show all")}</button>
                 </div>
 
                 <button 
                     style={styles.hideWindowButton} 
                     onClick={() => {setShowNotificationsPopUpWindow(false);}}
                 >
-                    Close
+                    {t("Close")}
                 </button>
             </div>
         </div>

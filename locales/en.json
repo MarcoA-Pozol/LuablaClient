@@ -62,5 +62,11 @@
     "Reveal":"Reveal",
     "Correct":"Correct",
     "Incorrect":"Incorrect",
-    "Retry":"Retry"
+    "Retry":"Retry",
+    "Notifications":"Notifications",
+    "Mark as read":"Mark as read",
+    "Mark as unread":"Mark as unread",
+    "There are no news":"There are no news",
+    "Close":"Close",
+    "Show all":"Show all"
 }
