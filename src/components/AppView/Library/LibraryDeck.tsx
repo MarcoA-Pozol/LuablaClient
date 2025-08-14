@@ -11,6 +11,7 @@ import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
 import { useSocialData } from "../../../hooks/useSocialData";
 import { createNotification } from "../../../functions/createNotification";
+import { useTranslation } from "react-i18next";
 
 export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
@@ -19,10 +20,11 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
     const { setLibraryDecksList, setOwnedDecksList, setUserDecksList, libraryDecksList } = useDecksLists();
     const { languageToLearn } = useLanguages();
     const { fetchNotifications } = useSocialData();
+    const { t } = useTranslation();
 
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
-            <h3 style={styles.title}>{title}</h3>
+            <h3 style={styles.title}>{t(title)}</h3>
             <img style={styles.image} src={image ? (`http://localhost:8600${image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")}/>
             <p style={styles.description}>{description}</p>
             <div style={styles.tags}>
@@ -40,7 +42,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
                     await fetchNotifications();
                 }}
             >
-                Get
+                {t("Get")}
             </button>
             {temporaryMessage.show && <TemporaryMessage message={temporaryMessage.text} color={temporaryMessage.color}/>}
         </div>

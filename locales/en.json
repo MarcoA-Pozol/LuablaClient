@@ -56,5 +56,8 @@
     "Clean":"Clean",
     "Add":"Add",
     "Study":"Study",
-    "No decks found":"No decks found"
+    "No decks found":"No decks found",
+    "There are not more available content":"There are not more available content",
+    "Get":"Get"
+
 }
