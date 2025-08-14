@@ -3,24 +3,26 @@ import { FaUser, FaCertificate } from "react-icons/fa";
 import { useLearningDeckStyles } from "../../../styles/AppView/learningDeck";
 import type { LearningDeckProps } from "../../../types/AppView/LearningDeckProps";
 import { useAuth } from "../../../App";
+import { useTranslation } from "react-i18next";
 
 export const LearningDeck = ({index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:LearningDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
     const styles = useLearningDeckStyles(isDeckHovered)
     const { authUser } = useAuth();
+    const { t } = useTranslation();
 
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
-            <h3 style={styles.title}>{title}</h3>
+            <h3 style={styles.title}>{t(title)}</h3>
             <img style={styles.image} src={image ? (`http://localhost:8600${image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")}/>
-            <p style={styles.description}>{description}</p>
+            <p style={styles.description}>{t(description)}</p>
             <div style={styles.tags}>
                 <h4 style={styles.author}><FaUser/> {author}</h4>
                 <h4 style={styles.level}><FaCertificate/> {level}</h4>
                 <h4 style={styles.cardsQuantity}>❐ {cardsQuantity}</h4>
             </div>
-            {author === authUser.username && (<button style={styles.addCardsButton}>Add +</button>)}
-            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton} onClick={() => { setDeckToPracticeID(deckId); setDisplayedContainer("practice") }}>Study</button>)}
+            {author === authUser.username && (<button style={styles.addCardsButton}>{t("Add")} +</button>)}
+            {Number(cardsQuantity) > 0 && (<button style={styles.studyButton} onClick={() => { setDeckToPracticeID(deckId); setDisplayedContainer("practice") }}>{t("Study")}</button>)}
         </div>
     );
 }
