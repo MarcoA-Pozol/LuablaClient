@@ -1,3 +1,12 @@
 {
-    "Update profile":"更新资料"
+  "Update profile": "更新资料",
+  "Select language": "选择语言",
+  "Return": "返回",
+  "Go back": "返回",
+  "Filters": "筛选器",
+  "Category": "类别",
+  "All": "全部",
+  "Sort by": "排序方式",
+  "Latest First": "最新优先",
+  "Oldest First": "最旧优先"
 }

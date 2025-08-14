@@ -1,3 +1,12 @@
 {
-    "Update profile":"Profil aktualisieren"
+  "Update profile": "プロフィールを更新",
+  "Select language": "言語を選択",
+  "Return": "戻る",
+  "Go back": "戻る",
+  "Filters": "フィルター",
+  "Category": "カテゴリー",
+  "All": "すべて",
+  "Sort by": "並び替え",
+  "Latest First": "最新順",
+  "Oldest First": "古い順"
 }

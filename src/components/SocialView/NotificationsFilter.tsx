@@ -1,6 +1,7 @@
 import React, { useState, useEffect, type SetStateAction } from 'react';
 import axios from 'axios';
 import type { NotificationSchema } from "../../schemas/Notification";
+import { useTranslation } from "react-i18next";
 
 interface NotificationsFilterProps {
     setFilteredNotifications:React.Dispatch<SetStateAction<NotificationSchema[]>>;
@@ -12,6 +13,7 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
     const [notificationCategoryFilter, setNotificationCategoryFilter] = useState<string|"All">("All");
     const [notificationReadStatusFilter, setNotificationReadStatusFilter] = useState<string|"Read"|"Unread"|"All">("All");
     const [dateOrderFilter, setDateOrderFilter] = useState<string|"Oldest First"|"Latest First">("Latest First");
+    const { t } = useTranslation();
 
     // Fetch notification's categories
     useEffect(() => {
@@ -68,13 +70,13 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
 
     return (
         <div style={{backgroundColor: '#f5f5f5', padding: '12px 16px', borderRadius: '8px', marginBottom: '16px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap'}}>
-            <h3 style={{ margin: '0', color: '#333', fontSize: '16px', fontWeight: '600', marginRight: '8px'}}>Filters:</h3>
+            <h3 style={{ margin: '0', color: '#333', fontSize: '16px', fontWeight: '600', marginRight: '8px'}}>{t("Filters")}:</h3>
             
             {/* Category Filter */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <label style={{ fontSize: '12px', fontWeight: '500', color: '#555', whiteSpace: 'nowrap'}}>Category</label>
+                <label style={{ fontSize: '12px', fontWeight: '500', color: '#555', whiteSpace: 'nowrap'}}>{t("Category")}</label>
                 <select name="category" value={notificationCategoryFilter} onChange={handleCategoryChange} style={{ padding: '6px 8px', borderRadius: '4px', border: '1px solid #ddd', backgroundColor: 'white', fontSize: '12px', width: '80px'}}> 
-                    <option value="All">All</option>
+                    <option value="All">{t("All")}</option>
                     {notificationCategories.map(category => (
                         <option key={category} value={category}>{category}</option>
                     ))}
@@ -88,7 +90,7 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                     fontWeight: '500',
                     color: '#555',
                     whiteSpace: 'nowrap'
-                }}>Sort by</label>
+                }}>{t("Sort by")}</label>
                 <select
                     name="dateOrder"
                     value={dateOrderFilter}
@@ -102,8 +104,8 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                         width: '80px'
                     }}
                 >
-                    <option value="Latest First">Latest First</option>
-                    <option value="Oldest First">Oldest First</option>
+                    <option value="Latest First">{t("Latest First")}</option>
+                    <option value="Oldest First">{t("Oldest First")}</option>
                 </select>
             </div>
             
@@ -114,7 +116,7 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                     fontWeight: '500',
                     color: '#555',
                     whiteSpace: 'nowrap'
-                }}>Status</label>
+                }}>{t("Status")}</label>
                 <select
                     name="readStatus"
                     value={notificationReadStatusFilter}
@@ -128,9 +130,9 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
                         width: '80px'
                     }}
                 >
-                    <option value="All">All</option>
-                    <option value="Read">Read</option>
-                    <option value="Unread">Unread</option>
+                    <option value="All">{t("All")}</option>
+                    <option value="Read">{t("Read")}</option>
+                    <option value="Unread">{t("Unread")}</option>
                 </select>
             </div>
         </div>

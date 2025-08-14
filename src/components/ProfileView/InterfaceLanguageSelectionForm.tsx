@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import "../../../i18n";
 
 export const InterfaceLanguageSelectionForm = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
 
     const changeLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedLang = event.target.value;
@@ -12,7 +12,7 @@ export const InterfaceLanguageSelectionForm = () => {
     return (
         <>
             <label>
-                {t("Choose language")}
+                🌐
                 <select name="language-options" onChange={changeLanguage} defaultValue={i18n.language}>
                     <option value="en">en</option>
                     <option value="es">es</option>

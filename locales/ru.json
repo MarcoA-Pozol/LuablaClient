@@ -1,3 +1,12 @@
 {
-    "Update profile":"Profil aktualisieren"
+  "Update profile": "Обновить профиль",
+  "Select language": "Выбрать язык",
+  "Return": "Назад",
+  "Go back": "Назад",
+  "Filters": "Фильтры",
+  "Category": "Категория",
+  "All": "Все",
+  "Sort by": "Сортировать по",
+  "Latest First": "Сначала новые",
+  "Oldest First": "Сначала старые"
 }
