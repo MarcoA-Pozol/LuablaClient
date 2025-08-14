@@ -58,6 +58,9 @@
     "Study":"Study",
     "No decks found":"No decks found",
     "There are not more available content":"There are not more available content",
-    "Get":"Get"
-
+    "Get":"Get",
+    "Reveal":"Reveal",
+    "Correct":"Correct",
+    "Incorrect":"Incorrect",
+    "Retry":"Retry"
 }

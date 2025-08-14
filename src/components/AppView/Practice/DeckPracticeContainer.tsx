@@ -4,6 +4,7 @@ import { useLanguages } from "../../../hooks/useLanguages";
 import type { Flashcard } from "../../../schemas/Flashcard";
 import "../../../styles/AppView/deckPracticeContainer.css";
 import { shuffleArray } from "../../../utils/shuffleArray";
+import { useTranslation } from "react-i18next";
 
 interface DeckPracticeContainerProps {
   deckId: number;
@@ -17,6 +18,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
   const [failedFlashcards, setFailedFlashcards] = useState<Flashcard[]>([]);
   const [isMeaningRevealed, setIsMeaningRevealed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { t } = useTranslation();
 
   // Derived state for current card
   const currentCard = flashcardsQueue[currentIndex];
@@ -83,7 +85,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
         {/* Meaning Reveal */}
         {!isMeaningRevealed ? (
           <button onClick={handleReveal} className="reveal-button">
-            Reveal
+            {t("Reveal")}
           </button>
         ) : (
           <div className="meaning-section">
@@ -106,13 +108,13 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
               onClick={() => handleAnswer(false)} 
               className="incorrect-button"
             >
-              ✗ Incorrect
+              ✗ {t("Incorrect")}
             </button>
             <button 
               onClick={() => handleAnswer(true)} 
               className="correct-button"
             >
-              ✓ Correct
+              ✓ {t("Correct")}
             </button>
           </div>
         )}
@@ -121,7 +123,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
       <div className="progress">
         {currentIndex + 1} of {flashcardsQueue.length}
         {failedFlashcards.length > 0 && (
-          <span> | Retry cards: {failedFlashcards.length}</span>
+          <span> | {t("Retry")}: {failedFlashcards.length}</span>
         )}
       </div>
     </div>
