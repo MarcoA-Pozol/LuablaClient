@@ -1,6 +1,8 @@
 const fs = require('fs');
 const parser = require('@babel/parser');
 
+const lngs = ['en', 'es', 'zh', 'pt', 'ru', 'ko', 'jp', 'it', 'hi', 'fr', 'de'];
+
 module.exports = {
   input: [
     'src/**/*.{js,jsx,ts,tsx}',
@@ -15,7 +17,7 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     trans: false,
-    lngs: ['en', 'es', 'zh', 'pt', 'ru', 'ko', 'jp', 'it', 'hi', 'fr', 'de'],
+    lngs,
     defaultLng: 'en',
     defaultValue: '',
     keySeparator: false,
@@ -35,5 +37,23 @@ module.exports = {
         console.error(`Error parsing ${filename}:`, err.message);
       }
     }
+  },
+  transform: function (file, enc, done) {
+    const parserStream = this.parser;
+    const content = file.contents.toString(enc);
+
+    parserStream.parseFuncFromString(content, { list: ['t', 'i18next.t'] }, (key) => {
+      // English → key as value
+      parserStream.set(key, key);
+
+      // Other langs → empty string
+      lngs.forEach((lng) => {
+        if (lng !== 'en') {
+          parserStream.set(key, lng, key);
+        }
+      });
+    });
+
+    done();
   }
 };
