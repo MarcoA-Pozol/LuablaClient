@@ -1,12 +1,15 @@
 import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { InterfaceLanguageSelectionForm } from "../ProfileView/InterfaceLanguageSelectionForm";
+import { useTranslation } from "react-i18next";
 // Icons
 import { BiLogOut } from "react-icons/bi";
 import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
 import { useEffect, useState } from "react";
 
 export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const responsiveValue = function<T>(smallScreenValue: T, largeScreenValue: T, screenWidth: number): T {
@@ -101,7 +104,9 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
                 <h2 style={styles.logoText}>Luabla</h2>
             </div>
 
+
             <div style={styles.signUpOptions}>
+                <InterfaceLanguageSelectionForm/>
                 {authUser ? (
                     <>
                         <div style={{ ...styles.linkBase, backgroundColor: "transparent", border: "none" }}>
@@ -115,13 +120,13 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
                             onClick={() => navigate('/auth', { state: { isLoginVisible: false } })}
                             style={{ ...styles.linkBase, ...styles.signUp }}
                         >
-                            Sign-Up
+                            {t("Sign-Up")}
                         </div>
                         <div
                             onClick={() => navigate('/auth', { state: { isLoginVisible: true } })}
                             style={{ ...styles.linkBase, ...styles.signIn }}
                         >
-                            SignIn
+                            {t("Sign-In")}
                         </div>
                     </>
                 )}

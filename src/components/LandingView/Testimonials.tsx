@@ -2,24 +2,25 @@ import { useState, useEffect } from "react";
 import AmericanGirlFaceIMG from "../../assets/LandingView/american_girl_face_3.jpeg";
 import MexicanManFaceIMG from "../../assets/LandingView/mexican_man_face_3.jpg";
 import ChineseGirlFaceIMG from "../../assets/LandingView/chinese_girl_face_1.jpg";
-
+import { useTranslation } from "react-i18next";
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useTranslation();
   const testimonials = [
     {
       image: AmericanGirlFaceIMG,
-      text: "Luabla has transformed the way I learn languages...",
+      text: t("Luabla has transformed the way I learn languages..."),
       author: "Maria G., Spain"
     },
     {
         image: MexicanManFaceIMG,
-        text: "I never thought language learning could be this enjoyable. The speaking exercises are amazing!",
+        text: t("I never thought language learning could be this enjoyable. The speaking exercises are amazing!"),
         author: "Alex H., USA"
     },
     {
         image: ChineseGirlFaceIMG,
-        text: "Thanks to Luabla, I can now converse confidently with native speakers. Highly recommended!",
+        text: t("Thanks to Luabla, I can now converse confidently with native speakers. Highly recommended!"),
         author: "Chen W., China"
     }
   ];
@@ -42,7 +43,7 @@ const Testimonials = () => {
 
   return (
     <div className="testimonials-section">
-      <h2 className="testimonials-title">What Our Users Say</h2>
+      <h2 className="testimonials-title">{t("What Our Users Say")}</h2>
       <div className="testimonials-carousel">
         {testimonials.map((testimonial, index) => (
           <div key={index} className={`testimonial ${index === currentIndex ? 'active' : ''}`}>
