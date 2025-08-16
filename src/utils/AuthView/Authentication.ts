@@ -1,6 +1,6 @@
 import type { handleSignInProps, handleSignUpProps } from "../../types/AuthView/AuthenticationForms";
 
-export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleSignUpProps) => {
+export const handleSignUp = async ({event, navigate, axios, setAuthUser, temporaryMessage, t}:handleSignUpProps) => {
     event.preventDefault();
 
     // Get form data
@@ -10,7 +10,7 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleS
     const repeatPassword = formData.get("repeatPassword") as string;
 
     if (password !== repeatPassword) {
-        alert("Passwords must coincide");
+        temporaryMessage.display(t("Passwords must coincide"), "orangered");
         return;
     }
 
@@ -26,8 +26,11 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleS
         const data = response.data;
 
         if (response.status !== 201) {
-            console.error(`SignUp failed: ${data.error}`);
-            alert(`SignUp failed: ${data.error}`);
+            if (response.status === 400) {
+                temporaryMessage.display(t("Username in existance"), "orangered");
+            } else {
+                temporaryMessage.display(t("Server error")+":"+data.error, "red");
+            }
         }
 
         // SignIn after SignUp
@@ -42,18 +45,19 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser}:handleS
         }); 
         
         if (signInResponse.status === 200) {
+            temporaryMessage.display(t("Register was successfull!"), "royalblue");
             setAuthUser(response.data);
             navigate("/app");
             return;
-        }
+        } 
 
         navigate("/auth");
     } catch (error) {
-        alert(`SignUp failed: ${error}`)
+        temporaryMessage.display(t("This username is in use"), "orangered");
     }
 };
 
-export const handleSignIn = async({event, navigate, axios, setAuthUser, temporaryMessage}:handleSignInProps) => {
+export const handleSignIn = async({event, navigate, axios, setAuthUser, temporaryMessage, t}:handleSignInProps) => {
     event.preventDefault();
 
     // Get form data
@@ -74,18 +78,18 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser, temporar
         }); 
 
         if (response.status === 200) {
-            temporaryMessage.display("Welcome back!", "green");
+            temporaryMessage.display(t("Welcome back"), "green");
             setTimeout(() => {setAuthUser(response.data);navigate("/app");}, 800); 
-        } else {
-            temporaryMessage.display(`SignIn failed: ${response.data}`, "orangered");
-        }
+        } 
     } catch (error:any) {
         if (error.status === 404) {
-            temporaryMessage.display("User not found.", "orangered");
-        } else if (error.status === 401) {
-            temporaryMessage.display("Invalid password.", "orangered");
+            temporaryMessage.display(t("User not found"), "orangered");
+        } else if (error.status === 401 && error.data.error === "Invalid password") {
+            temporaryMessage.display(t("Invalid password"), "orangered");
+        } else if (error.status === 401 && error.data.erro !== "Invalid password") { 
+            temporaryMessage.display(t("Cookies for authentication are expired", "red"))
         } else {
-            temporaryMessage.display(`Unexpected error: ${error}`, "red");
+            temporaryMessage.display(t("Server is not available"), "red");
         }
     }
 }

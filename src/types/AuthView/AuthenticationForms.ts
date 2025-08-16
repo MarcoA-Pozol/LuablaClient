@@ -6,6 +6,8 @@ export interface handleSignUpProps {
     navigate: NavigateFunction;
     axios: AxiosInstance;
     setAuthUser: React.Dispatch<React.SetStateAction<any>>;
+    temporaryMessage: any;
+    t:any;
 }
 
 export interface handleSignInProps {
@@ -14,4 +16,5 @@ export interface handleSignInProps {
     axios: AxiosInstance;
     setAuthUser: React.Dispatch<React.SetStateAction<any>>;
     temporaryMessage: any;
+    t:any;
 }

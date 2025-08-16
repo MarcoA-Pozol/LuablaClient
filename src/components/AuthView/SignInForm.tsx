@@ -30,7 +30,7 @@ export const SignInForm = ({children, onClick}:SignInFormProps) => {
                         <img src={SignInFormIMG} alt="Learn Languages" style={styles.image}/>
                     </div>
 
-                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser, temporaryMessage})} style={styles.form} method="post">
+                    <form onSubmit={(event) => handleSignIn({event, navigate, axios, setAuthUser, temporaryMessage, t})} style={styles.form} method="post">
                         <h2 style={styles.formTitle}>{t("Sign In")}</h2>
                         <label style={styles.formLabel}>
                             <FaUser style={styles.inputIcon}/>
