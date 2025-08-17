@@ -13,6 +13,7 @@ import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import { useDecksLists } from "../hooks/useDecksLists";
 import { useLanguages } from "../hooks/useLanguages";
 import { useSocialData } from "../hooks/useSocialData";
+import { RandomFlashcardsPractice } from "../components/AppView/Practice/RandomFlashcardsPractice";
 
 export const AppView = () => {
     const { authUser } = useAuth();
@@ -45,6 +46,7 @@ export const AppView = () => {
                         {displayedContainer === "library" && (<LibraryContainer/>)}
                         {displayedContainer === "creation" && (<CreationContainer/>)}
                         {displayedContainer === "practice" && (<DeckPracticeContainer deckId={deckToPracticeID} setDisplayedContainer={setDisplayedContainer}/>)}
+                        {displayedContainer === "randomFlashcardsPractice" && <RandomFlashcardsPractice/>}
                     </AppContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
                 </div>
