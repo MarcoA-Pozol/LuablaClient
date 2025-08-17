@@ -11,6 +11,7 @@ export const RandomFlashcardsPractice = () => {
       const fetchRandomFlashcardsList = async(language:string) => {
         const response = await axios.get("http://localhost:8600/api/flashcards/randomList", {data:{language:language, quantity:5}, withCredentials:true});
         const data = response.data;
+        console.log(data);
         setFlashcardsList(data.flashcards)
       }
       fetchRandomFlashcardsList(languageToLearn);
@@ -20,7 +21,7 @@ export const RandomFlashcardsPractice = () => {
       <div>
         {flashcardsList.map(flashcard => (
           <div>
-            <h2>{flashcard.word}</h2>
+            <h2>{languageToLearn === "ZH" ? flashcard.hanzi : languageToLearn === "JP" ? flashcard.kana : languageToLearn === "KO" ? flashcard.hangul : languageToLearn === "RU" ? flashcard.cyrillic : flashcard.word}</h2>
             <h3>{flashcard.meaning}</h3>
           </div>
         ))}
