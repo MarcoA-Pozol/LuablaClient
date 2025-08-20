@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingView } from './pages/LandingView.tsx';
 import { AppView } from './pages/AppView.tsx';
+import { AdminView } from "./pages/AdminView.tsx";
 import { AuthView } from './pages/AuthView.tsx';
 import { ProfileView } from './pages/ProfileView.tsx';
 import { PageNotFoundView } from './pages/PageNotFoundView.tsx';
@@ -14,7 +15,8 @@ const AppRoutes = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<LandingView/>}/>
-                <Route path="/auth" element={<AuthView/>}></Route>
+                <Route path="/admin" element={<AdminView/>}/>
+                <Route path="/auth" element={<AuthView/>}/>
                 <Route path="/app" element={
                     <ProtectedRoute>
                         <LanguagesProvider>
