@@ -1,0 +1,62 @@
+.flashcard-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-family: monospace;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60vw;
+  border-left: 2px solid seagreen;
+  margin-left: 30vw;
+}
+
+.schemas-container {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.flashcard-title {
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+
+.flashcard-loading {
+  color: #666666;
+}
+
+.schema-card {
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #26115fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.schema-name {
+  margin: 0 0 10px 0;
+  color: #2a5d9f;
+}
+
+.schema-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schema-table thead tr {
+  background-color: rebeccapurple;
+}
+
+.schema-table td {
+  border: 1px solid white;
+  border-radius: 2px;
+  padding: 6px;
+  color: white;
+}
+
+.schema-table tbody tr {
+  background-color: darkslateblue;
+}
