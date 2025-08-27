@@ -15,7 +15,10 @@ const AppRoutes = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<LandingView/>}/>
-                <Route path="/admin" element={<AdminView/>}/>
+                <Route path="/admin" element={
+                    <ProtectedRoute>
+                        <AdminView/>
+                    </ProtectedRoute>}/>
                 <Route path="/auth" element={<AuthView/>}/>
                 <Route path="/app" element={
                     <ProtectedRoute>
