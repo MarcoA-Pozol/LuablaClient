@@ -12,6 +12,7 @@ import { useLanguages } from "../../../hooks/useLanguages";
 import { useSocialData } from "../../../hooks/useSocialData";
 import { createNotification } from "../../../functions/createNotification";
 import { useTranslation } from "react-i18next";
+import { useDefaultDeckImagePath } from "../../../hooks/useBaseMediaUrl";
 
 export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);
@@ -25,7 +26,7 @@ export const LibraryDeck = ({deckId, index, title, description, image, author, l
     return (
         <div key={index} style={styles.deck} onMouseEnter={() => {setIsDeckHovered(true)}} onMouseLeave={() => {setIsDeckHovered(false)}}>
             <h3 style={styles.title}>{t(title)}</h3>
-            <img style={styles.image} src={image ? (`http://localhost:8600${image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")}/>
+            <img style={styles.image} src={image ? (`http://localhost:8600${image}`) : (useDefaultDeckImagePath(languageToLearn))}/>
             <p style={styles.description}>{description}</p>
             <div style={styles.tags}>
                 <h4 style={styles.author}><FaUser/> {author}</h4>

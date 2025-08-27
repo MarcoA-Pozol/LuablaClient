@@ -4,6 +4,8 @@ import "../../../styles/AppView/deckSelectionForm.css";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useDeckSelectionFormStyles } from "../../../styles/AppView/deckSelectionForm";
 import { useTranslation } from "react-i18next";
+import { useDefaultDeckImagePath } from "../../../hooks/useBaseMediaUrl";
+import { useLanguages } from "../../../hooks/useLanguages";
 
 interface DeckSelectionFormProps {
   selectedDeck:any;
@@ -15,6 +17,7 @@ export const DeckSelectionForm = ({selectedDeck, setSelectedDeck}:DeckSelectionF
   const decks = userDecksList;
   const [showCreateForm, setShowCreateForm] = useState(false);
   const styles = useDeckSelectionFormStyles();
+  const {languageToLearn} = useLanguages();
 
   return (
     <div style={styles.container}>
@@ -30,7 +33,7 @@ export const DeckSelectionForm = ({selectedDeck, setSelectedDeck}:DeckSelectionF
           <div style={styles.decksList}>
             {decks.map((deck) => (
               <div onClick={() => {setSelectedDeck(deck.id)}} key={deck.id} style={styles.deckItem} className={selectedDeck === deck.id ? "selected-deck" : ""}>
-                <img src={deck.image ? (`http://localhost:8600${deck.image}`) : ("http://localhost:8600/media/deck_images/cat_1.jpg")} alt={deck.title} style={styles.deckImage} />
+                <img src={deck.image ? (`http://localhost:8600${deck.image}`) : (useDefaultDeckImagePath(languageToLearn))} alt={deck.title} style={styles.deckImage} />
                 <span style={styles.deckName}>{deck.title}</span>
               </div>
             ))}
