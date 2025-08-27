@@ -1,3 +1,4 @@
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import type { handleSignInProps, handleSignUpProps } from "../../types/AuthView/AuthenticationForms";
 
 export const handleSignUp = async ({event, navigate, axios, setAuthUser, temporaryMessage, t}:handleSignUpProps) => {
@@ -15,7 +16,7 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser, tempora
     }
 
     try {
-        const response = await axios.post("http://localhost:8600/api/auth/signUp", 
+        const response = await axios.post(useBaseApiUrl("/auth/signUp"), 
             formData,
         {
             headers: {
@@ -34,7 +35,7 @@ export const handleSignUp = async ({event, navigate, axios, setAuthUser, tempora
         }
 
         // SignIn after SignUp
-        const signInResponse = await axios.post("http://localhost:8600/api/auth/signIn", {
+        const signInResponse = await axios.post(useBaseApiUrl("/auth/signIn"), {
             input,
             password
         }, {
@@ -67,7 +68,7 @@ export const handleSignIn = async({event, navigate, axios, setAuthUser, temporar
 
     
     try {
-        const response = await axios.post("http://localhost:8600/api/auth/signIn", {
+        const response = await axios.post(useBaseApiUrl("/auth/signIn"), {
             input,
             password
         }, {

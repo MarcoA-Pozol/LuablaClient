@@ -7,6 +7,7 @@ import EnglishFlagIMG from "../../assets/AuthView/english_flag.png";
 import FrenchFlagIMG from "../../assets/AuthView/french_flag.png";
 import JapaneseFlagIMG from "../../assets/AuthView/japanese_flag.png";
 import ChineseFlagIMG from "../../assets/AuthView/chinese_flag.png";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 const languages = [
   {
@@ -85,7 +86,7 @@ export const PickLanguageForm = () => {
         if (!pickedLanguage) return; 
 
         try {
-            const response = await axios.put("http://localhost:8600/api/app/setLanguagePicked", {
+            const response = await axios.put(useBaseApiUrl("/app/setLanguagePicked"), {
                 'pickedLanguage': pickedLanguage
             }, {
                 withCredentials: true

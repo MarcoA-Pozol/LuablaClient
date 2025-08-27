@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, type SetStateAction, type ReactNode } from "react";
 import axios from "axios";
 import type { NotificationSchema } from "../schemas/Notification";
+import { useBaseApiUrl } from "../hooks/useBaseApiUrl";
 
 type SocialDataContextType = {
     notificationsList:NotificationSchema[];
@@ -24,7 +25,7 @@ const SocialDataProvider = ({children}:SocialDataProviderProps) => {
     const [newNotificationsCount, setNewNotificationsCount] = useState<number>(0);
 
     async function fetchNotifications() {
-        const response = await axios.get("http://localhost:8600/api/social/notifications", {
+        const response = await axios.get(useBaseApiUrl("/social/notifications"), {
             withCredentials:true,
             headers:{
                 "Content-Type":"application/json"

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { type Flashcard } from "../../../schemas/Flashcard";
 import axios from "axios";
 import { useLanguages } from "../../../hooks/useLanguages";
+import { useBaseApiUrl } from "../../../hooks/useBaseApiUrl";
 
 export const RandomFlashcardsPractice = () => {
     const [flashcardsList, setFlashcardsList] = useState<Flashcard[]|[]>([]);   
@@ -9,7 +10,7 @@ export const RandomFlashcardsPractice = () => {
 
     useEffect(() => {
       const fetchRandomFlashcardsList = async(language:string) => {
-        const response = await axios.get("http://localhost:8600/api/flashcards/randomList", {data:{language:language, quantity:5}, withCredentials:true});
+        const response = await axios.get(useBaseApiUrl("/flashcards/randomList"), {data:{language:language, quantity:5}, withCredentials:true});
         const data = response.data;
         console.log(data);
         setFlashcardsList(data.flashcards)

@@ -2,6 +2,7 @@ import React, { useState, useEffect, type SetStateAction } from 'react';
 import axios from 'axios';
 import type { NotificationSchema } from "../../schemas/Notification";
 import { useTranslation } from "react-i18next";
+import { useBaseApiUrl } from '../../hooks/useBaseApiUrl';
 
 interface NotificationsFilterProps {
     setFilteredNotifications:React.Dispatch<SetStateAction<NotificationSchema[]>>;
@@ -18,7 +19,7 @@ export const NotificationsFilter = ({setFilteredNotifications, notificationsList
     // Fetch notification's categories
     useEffect(() => {
         const fetchNotificationsCategoriesList = async (setNotificationCategories:React.Dispatch<SetStateAction<string[]>>) => {
-            const response = await axios.get("http://localhost:8600/api/social/notifications/categoriesList", {withCredentials:true});
+            const response = await axios.get(useBaseApiUrl("/social/notifications/categoriesList"), {withCredentials:true});
             const data = response.data;
 
             setNotificationCategories(data.categories);

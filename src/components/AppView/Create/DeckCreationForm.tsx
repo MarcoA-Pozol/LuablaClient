@@ -9,6 +9,7 @@ import { createNotification } from "../../../functions/createNotification";
 import { useDeckCreationFormStyles } from "../../../styles/AppView/deckCreationForm";
 import { useSocialData } from "../../../hooks/useSocialData";
 import { useTranslation } from "react-i18next";
+import { useBaseApiUrl } from "../../../hooks/useBaseApiUrl";
 
 interface DeckCreationFormProps {
   showCreateForm: boolean;
@@ -33,7 +34,7 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    handleObjectCreation(event, "http://localhost:8600/api/decks/deck", {}, { "Content-Type": "multipart/form-data" }, "deck");
+    handleObjectCreation(event, useBaseApiUrl("/api/decks/deck"), {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToLearn); 
     await createNotification("Deck created!", `You have created this deck (${data.get("title")}, for ${languageToLearn} language.)`, "CREATED_DECK"); 
     await fetchNotifications(); 

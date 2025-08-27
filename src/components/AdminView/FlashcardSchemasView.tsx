@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../../styles/AdminView/flashcardSchemasView.css";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 export const FlashcardSchemasView = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -9,7 +10,7 @@ export const FlashcardSchemasView = () => {
     useEffect(() => {
         const fetchFlashcardSchemas = async () => {
             try {
-                const response = await axios.get("http://localhost:8600/api/admin/getFlashcardSchemas", {withCredentials:true});
+                const response = await axios.get(useBaseApiUrl("/admin/getFlashcardSchemas"), {withCredentials:true});
                 const data = response.data;
                 setFlashcardModels(data.schema);
             } catch (error) {

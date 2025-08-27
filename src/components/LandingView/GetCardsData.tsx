@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 export const GetCardsData = () => {
     const [data, setData] = useState<string>("");
 
     const handleClick = async () => {
         try {
-            const response = await axios.get("http://localhost:8600/api/auth/protectedCardsList", {
+            const response = await axios.get(useBaseApiUrl("/auth/protectedCardsList"), {
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json"

@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { BiLogOut } from "react-icons/bi";
 import type { TopNavBarProps } from "../../types/LandingView/TopNavBar";
 import { useEffect, useState } from "react";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
     const { t } = useTranslation();
@@ -25,7 +26,7 @@ export const TopNavBar = ({authUser, setAuthUser}:TopNavBarProps) => {
 
     const logoutUser = async () => {
         try {
-            await axios.post("http://localhost:8600/api/auth/signOut", {}, {
+            await axios.post(useBaseApiUrl("/auth/signOut"), {}, {
                 withCredentials:true
             });
             setAuthUser(null);

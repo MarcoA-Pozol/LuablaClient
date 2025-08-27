@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/AdminView/schemasNavMenu.css";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 export const SchemasNavMenu = () => {
     const [dbSchemas, setDbSchemas] = useState<object[]>([]);
 
     useEffect(() => {
         const fetchDbSchemas = async () => {
-            const response = await axios.get("http://localhost:8600/api/admin/getDbSchemasList", {withCredentials:true});
+            const response = await axios.get(useBaseApiUrl("/admin/getDbSchemasList"), {withCredentials:true});
             const data = response.data;
             setDbSchemas(data.schemas);
         }

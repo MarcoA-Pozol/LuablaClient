@@ -2,11 +2,12 @@ import axios from "axios";
 import type React from "react";
 import type { SetStateAction } from "react";
 import type { Deck } from "../schemas/Deck";
+import { useBaseApiUrl } from "../hooks/useBaseApiUrl";
 
 export const fetchLibraryDecks = async (languageToLearn:string, setLibraryDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
 
     try {
-        const response = await axios.get("http://localhost:8600/api/decks/libraryDeck", {
+        const response = await axios.get(useBaseApiUrl("/decks/libraryDeck"), {
             params: {language:languageToLearn},
             withCredentials: true,
             headers: {
@@ -28,7 +29,7 @@ export const fetchLibraryDecks = async (languageToLearn:string, setLibraryDecksL
 export const fetchUserDecks = async (languageToLearn:string, setOwnedDecksList:React.Dispatch<SetStateAction<Deck[]>>, setUserDecksList:React.Dispatch<SetStateAction<Deck[]>>) => {
 
     try {
-        const response = await axios.get("http://localhost:8600/api/decks/deck", {
+        const response = await axios.get(useBaseApiUrl("/decks/deck"), {
             params: {language:languageToLearn},
             withCredentials: true,
             headers: {

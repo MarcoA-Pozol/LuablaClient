@@ -4,6 +4,7 @@ import { fetchUserDecks } from "../../../functions/fetchDecks";
 import { useDecksLists } from "../../../hooks/useDecksLists";
 import { useLanguages } from "../../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
+import { useBaseApiUrl } from "../../../hooks/useBaseApiUrl";
 
 interface FlashcardCreationFormProps {
   selectedDeck:any;
@@ -33,7 +34,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
       const form = event.currentTarget;
       handleObjectCreation(
         event,
-        "http://localhost:8600/api/flashcards/flashcard",
+        useBaseApiUrl("/flashcards/flashcard"),
         { deckId: selectedDeck, language: languageToLearn },
         { "Content-Type": "multipart/form-data" },
         "flashcard"
