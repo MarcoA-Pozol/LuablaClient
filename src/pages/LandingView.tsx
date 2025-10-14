@@ -4,6 +4,7 @@ import Testimonials from "../components/LandingView/Testimonials";
 import { TopNavBar } from "../components/LandingView/TopNavBar";
 import { Footer } from "../components/LandingView/Footer";
 import { useTranslation } from "react-i18next";
+import { MicListener } from "../components/LandingView/SpeechTest";
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";
@@ -23,6 +24,7 @@ export const LandingView = () => {
     return (
         <>
             <TopNavBar authUser={authUser} setAuthUser={setAuthUser}/>
+            <MicListener/>
 
             {authUser ? (
                 <div className="hero-section">
