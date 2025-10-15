@@ -38,7 +38,7 @@ export const MicListener: React.FC = () => {
     <div style={{
       padding: '2rem',
       fontFamily: 'Segoe UI, sans-serif',
-      backgroundColor: '#f0f8ff',
+      backgroundColor: '#100f31ff',
       borderRadius: '12px',
       maxWidth: '600px',
       margin: '2rem auto',

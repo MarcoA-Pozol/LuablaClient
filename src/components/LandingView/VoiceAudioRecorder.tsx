@@ -86,7 +86,7 @@ const styles: Record<string, any> = {
   container: {
     padding: "2rem",
     fontFamily: "Segoe UI, sans-serif",
-    backgroundColor: "#f9fbff",
+    backgroundColor: "#13063eff",
     borderRadius: "12px",
     maxWidth: "700px",
     margin: "2rem auto",
