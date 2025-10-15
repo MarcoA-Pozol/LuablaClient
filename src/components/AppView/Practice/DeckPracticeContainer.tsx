@@ -5,6 +5,7 @@ import type { Flashcard } from "../../../schemas/Flashcard";
 import "../../../styles/AppView/deckPracticeContainer.css";
 import { shuffleArray } from "../../../utils/shuffleArray";
 import { useTranslation } from "react-i18next";
+import { TextToSpeech } from "../General/TextToSpeach";
 
 interface DeckPracticeContainerProps {
   deckId: number;
@@ -80,7 +81,11 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
     <div className="practice-container">
       
       <div className="flashcard">
-        <h3 className="word-display">{languageToLearn === "ZH" ? currentCard.hanzi : languageToLearn === "JP" ? currentCard.kana : languageToLearn === "KO" ? currentCard.hangul : languageToLearn === "RU" ? currentCard.cyrillic : currentCard.word}</h3>
+        <h3 className="word-display">
+          <TextToSpeech text={ languageToLearn === "ZH" ? currentCard.hanzi ?? "" : languageToLearn === "JP" ? currentCard.kana ?? "" : languageToLearn === "KO" ? currentCard.hangul ?? "" : languageToLearn === "RU" ? currentCard.cyrillic ?? "" : currentCard.word ?? ""
+          }/>
+          {languageToLearn === "ZH" ? currentCard.hanzi : languageToLearn === "JP" ? currentCard.kana : languageToLearn === "KO" ? currentCard.hangul : languageToLearn === "RU" ? currentCard.cyrillic : currentCard.word}
+        </h3>
         
         {/* Meaning Reveal */}
         {!isMeaningRevealed ? (
@@ -96,7 +101,7 @@ export const DeckPracticeContainer = ({ deckId, setDisplayedContainer }: DeckPra
             {languageToLearn === "RU" && currentCard.transliteration !== "" && <p><strong>🔤</strong> {currentCard.transliteration}</p>}
             <p><strong>💡</strong> {currentCard.meaning}</p>
             {currentCard.example_phrase && (
-              <p style={{height:"100px", overflowY:"scroll"}}><strong>💬</strong> {currentCard.example_phrase}</p>
+              <p style={{height:"100px", overflowY:"scroll"}}><strong>💬</strong> {currentCard.example_phrase} <TextToSpeech text={currentCard.example_phrase}/></p>
             )}
           </div>
         )}
