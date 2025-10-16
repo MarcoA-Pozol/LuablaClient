@@ -9,7 +9,7 @@ export const ProfileView = () => {
 
     return (
         <> 
-            <p onClick={() => {navigate("/app")}} style={{color:"wheat", textAlign:"center", cursor:"pointer"}}>{t("Go back")}</p>
+            <p onClick={() => {navigate("/modules")}} style={{color:"wheat", textAlign:"center", cursor:"pointer"}}>{t("Go back")}</p>
             <ProfileInfoSection/>
             <InterfaceLanguageSelectionForm/>
         </>

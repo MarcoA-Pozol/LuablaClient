@@ -10,7 +10,6 @@ export const LearningContainer= ({ setDisplayedContainer, setDeckToPracticeID}:L
 
     return (
         <>
-            <button onClick={() => {setDisplayedContainer("randomFlashcardsPractice")}}>Random flashcards practice</button>
             <LearningDecksContainer setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>
         </>
     );
