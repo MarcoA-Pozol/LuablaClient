@@ -26,10 +26,6 @@ export const LandingView = () => {
     return (
         <>
             <TopNavBar authUser={authUser} setAuthUser={setAuthUser}/>
-            <MicListener/>
-            <VoiceAudioRecorder/>
-            <TextToSpeech/>
-
             {authUser ? (
                 <div className="hero-section">
                     <h1>{t("Welcome back")} <span className="highlight-text">{authUser.username}</span>!</h1>

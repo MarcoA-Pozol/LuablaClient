@@ -21,8 +21,6 @@ export const ModulesView = () => {
             { authUser.has_picked_language ? (
                 <div>
                     <TopNavBarApp authUser={authUser}/>
-
-                    <h1 style={styles.title}>Current Module: {deployedModule || 'None'}</h1>
                     <ModulesMenu setDeployedModule={setDeployedModule} />
                 </div>
             ): (
