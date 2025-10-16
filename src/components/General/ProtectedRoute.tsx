@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../App";
+import { useAuth } from "../../App";
 import { Navigate } from "react-router-dom";
 import type { ReactNode } from "react";
 

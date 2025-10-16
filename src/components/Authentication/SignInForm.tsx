@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import axios from "axios";
 import SignInFormIMG from "../../assets/AuthView/register_image.png";
 import { handleSignIn } from "../../utils/AuthView/Authentication";
-import { TemporaryMessage } from "../TemporaryMessage";
+import { TemporaryMessage } from "../General/TemporaryMessage";
 import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../App";

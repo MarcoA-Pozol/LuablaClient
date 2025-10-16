@@ -1,5 +1,5 @@
-import { FlashcardSchemasView } from "../components/AdminView/FlashcardSchemasView";
-import { SchemasNavMenu } from "../components/AdminView/SchemasNavMenu";
+import { FlashcardSchemasView } from "../components/Admin/FlashcardSchemasView";
+import { SchemasNavMenu } from "../components/Admin/SchemasNavMenu";
 
 export const AdminView = () => {
 

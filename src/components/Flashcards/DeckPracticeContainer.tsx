@@ -1,9 +1,9 @@
 import { useEffect, useState, type SetStateAction } from "react";
-import { fetchDeckFlashcards } from "../../../functions/fetchDeckFlashcards";
-import { useLanguages } from "../../../hooks/useLanguages";
-import type { Flashcard } from "../../../schemas/Flashcard";
-import "../../../styles/AppView/deckPracticeContainer.css";
-import { shuffleArray } from "../../../utils/shuffleArray";
+import { fetchDeckFlashcards } from "../../functions/fetchDeckFlashcards";
+import { useLanguages } from "../../hooks/useLanguages";
+import type { Flashcard } from "../../schemas/Flashcard";
+import "../../styles/AppView/deckPracticeContainer.css";
+import { shuffleArray } from "../../utils/shuffleArray";
 import { useTranslation } from "react-i18next";
 import { TextToSpeech } from "../General/TextToSpeach";
 

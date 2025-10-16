@@ -1,20 +1,20 @@
-import { LearningContainer } from "../components/AppView/Learn/LearningContainer";
-import { LibraryContainer } from "../components/AppView/Library/LibraryContainer";
-import { CreationContainer } from "../components/AppView/Create/CreationContainer";
-import { PickLanguageForm } from "../components/AuthView/PickLanguageForm";
-import { TopNavBarApp } from "../components/AppView/TopNavBarApp";
-import { AppContentContainer } from "../components/AppView/AppContentContainer";
-import { DeckPracticeContainer } from "../components/AppView/Practice/DeckPracticeContainer";
-import { BottomOptionsBar } from "../components/AppView/BottomOptionsBar";
+import { LearningContainer } from "../components/Flashcards/LearningContainer";
+import { LibraryContainer } from "../components/Flashcards/LibraryContainer";
+import { CreationContainer } from "../components/Flashcards/CreationContainer";
+import { PickLanguageForm } from "../components/Authentication/PickLanguageForm";
+import { TopNavBarApp } from "../components/Flashcards/TopNavBarApp";
+import { FlashcardsContentContainer } from "../components/Flashcards/FlashcardsContentContainer";
+import { DeckPracticeContainer } from "../components/Flashcards/DeckPracticeContainer";
+import { BottomOptionsBar } from "../components/Flashcards/BottomOptionsBar";
 import { useAuth } from "../App";
 import { useEffect, useState } from "react";
 import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
 import { useDecksLists } from "../hooks/useDecksLists";
 import { useLanguages } from "../hooks/useLanguages";
 import { useSocialData } from "../hooks/useSocialData";
-import { RandomFlashcardsPractice } from "../components/AppView/Practice/RandomFlashcardsPractice";
+import { RandomFlashcardsPractice } from "../components/Flashcards/RandomFlashcardsPractice";
 
-export const AppView = () => {
+export const FlashcardsView = () => {
     const { authUser } = useAuth();
     const { languageToLearn } = useLanguages();
     const [displayedContainer, setDisplayedContainer] = useState<string>("learning");
@@ -40,14 +40,14 @@ export const AppView = () => {
             { authUser.has_picked_language ? (
                 <div>
                     <TopNavBarApp authUser={authUser}/>
-                    <AppContentContainer>
+                    <FlashcardsContentContainer>
                         {displayedContainer === "learning" && (<LearningContainer setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
                         {displayedContainer === "practice" && (<LearningContainer setDisplayedContainer={setDisplayedContainer} setDeckToPracticeID={setDeckToPracticeID}/>)}
                         {displayedContainer === "library" && (<LibraryContainer/>)}
                         {displayedContainer === "creation" && (<CreationContainer/>)}
                         {displayedContainer === "practice" && (<DeckPracticeContainer deckId={deckToPracticeID} setDisplayedContainer={setDisplayedContainer}/>)}
                         {displayedContainer === "randomFlashcardsPractice" && <RandomFlashcardsPractice/>}
-                    </AppContentContainer>
+                    </FlashcardsContentContainer>
                     <BottomOptionsBar setDisplayedContainer={setDisplayedContainer}/>
                 </div>
             ): (

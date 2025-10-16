@@ -9,7 +9,7 @@ import { useAuth } from "../../App";
 import { useSignUpFormStyles } from "../../styles/AuthView/signUpForm";
 import { useTranslation } from "react-i18next";
 import { useTemporaryMessage } from "../../hooks/useTemporaryMessage";
-import { TemporaryMessage } from "../TemporaryMessage";
+import { TemporaryMessage } from "../General/TemporaryMessage";
 interface SignUpFormProps {
     children?: ReactNode;
     onClick: () => void;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { type Flashcard } from "../../../schemas/Flashcard";
+import { type Flashcard } from "../../schemas/Flashcard";
 import axios from "axios";
-import { useLanguages } from "../../../hooks/useLanguages";
-import { useBaseApiUrl } from "../../../hooks/useBaseApiUrl";
+import { useLanguages } from "../../hooks/useLanguages";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 export const RandomFlashcardsPractice = () => {
     const [flashcardsList, setFlashcardsList] = useState<Flashcard[]|[]>([]);   

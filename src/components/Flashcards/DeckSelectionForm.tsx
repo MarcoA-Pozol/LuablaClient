@@ -1,11 +1,11 @@
 import { useState, type SetStateAction } from "react";
 import { DeckCreationForm } from "./DeckCreationForm";
-import "../../../styles/AppView/deckSelectionForm.css";
-import { useDecksLists } from "../../../hooks/useDecksLists";
-import { useDeckSelectionFormStyles } from "../../../styles/AppView/deckSelectionForm";
+import "../../styles/AppView/deckSelectionForm.css";
+import { useDecksLists } from "../../hooks/useDecksLists";
+import { useDeckSelectionFormStyles } from "../../styles/AppView/deckSelectionForm";
 import { useTranslation } from "react-i18next";
-import { useDefaultDeckImagePath } from "../../../hooks/useBaseMediaUrl";
-import { useLanguages } from "../../../hooks/useLanguages";
+import { useDefaultDeckImagePath } from "../../hooks/useBaseMediaUrl";
+import { useLanguages } from "../../hooks/useLanguages";
 
 interface DeckSelectionFormProps {
   selectedDeck:any;

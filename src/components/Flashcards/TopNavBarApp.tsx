@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { NotificationsPopUpWindow } from "../SocialView/NotificationsPopUpWindow";
+import { NotificationsPopUpWindow } from "../Social/NotificationsPopUpWindow";
 import { useState } from "react";
 import PandaLogo from "../../assets/LandingView/panda-logo-1.png"
 import NotificationsIcon from "../../assets/AppView/notifications_icon.png";
 import "../../styles/AppView/topNavBarApp.css";
 import { useSocialData } from "../../hooks/useSocialData";
-import { InterfaceLanguageSelectionForm } from "../ProfileView/InterfaceLanguageSelectionForm";
+import { InterfaceLanguageSelectionForm } from "../Profile/InterfaceLanguageSelectionForm";
 import { useLanguages } from "../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 // Languages IMGs

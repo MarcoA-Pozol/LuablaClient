@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
-import { fetchUserDecks } from "../../../functions/fetchDecks";
-import { useDecksLists } from "../../../hooks/useDecksLists";
-import { useLanguages } from "../../../hooks/useLanguages";
+import { handleObjectCreation, clearFormFields } from "../../functions/handleObjectCreation";
+import { fetchUserDecks } from "../../functions/fetchDecks";
+import { useDecksLists } from "../../hooks/useDecksLists";
+import { useLanguages } from "../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
-import { useBaseApiUrl } from "../../../hooks/useBaseApiUrl";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 
 interface FlashcardCreationFormProps {
   selectedDeck:any;

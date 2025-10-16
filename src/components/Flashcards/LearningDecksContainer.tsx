@@ -1,8 +1,8 @@
 import { LearningDeck } from "./LearningDeck";
-import { useLearningDecksContainerStyles } from "../../../styles/AppView/learningDecksContainer";
-import type { LearningDecksContainerProps } from "../../../types/AppView/LearningDecksContainerProps";
-import { useDecksLists } from "../../../hooks/useDecksLists";
-import { useLanguages } from "../../../hooks/useLanguages";
+import { useLearningDecksContainerStyles } from "../../styles/AppView/learningDecksContainer";
+import type { LearningDecksContainerProps } from "../../types/AppView/LearningDecksContainerProps";
+import { useDecksLists } from "../../hooks/useDecksLists";
+import { useLanguages } from "../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 
 export const LearningDecksContainer = ({ setDisplayedContainer, setDeckToPracticeID}:LearningDecksContainerProps) => {

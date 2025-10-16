@@ -1,7 +1,7 @@
 import PandaLogoIMG from "../../assets/LandingView/panda-logo-1.png";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import { InterfaceLanguageSelectionForm } from "../ProfileView/InterfaceLanguageSelectionForm";
+import { InterfaceLanguageSelectionForm } from "../Profile/InterfaceLanguageSelectionForm";
 import { useTranslation } from "react-i18next";
 // Icons
 import { BiLogOut } from "react-icons/bi";

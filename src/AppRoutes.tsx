@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingView } from './pages/LandingView.tsx';
-import { AppView } from './pages/AppView.tsx';
+import { FlashcardsView } from './pages/FlashcardsView.tsx';
 import { ModulesView } from './pages/ModulesView.tsx';
 import { AdminView } from "./pages/AdminView.tsx";
 import { AuthView } from './pages/AuthView.tsx';
 import { ProfileView } from './pages/ProfileView.tsx';
 import { PageNotFoundView } from './pages/PageNotFoundView.tsx';
-import { ProtectedRoute } from "./components/ProtectedRoute.tsx";
+import { ProtectedRoute } from "./components/General/ProtectedRoute.tsx";
 import DecksListsProvider from "./contexts/DecksListsContext.tsx";
 import LanguagesProvider from "./contexts/LanguagesContext.tsx";
 import SocialDataProvider from "./contexts/SocialDataContext.tsx";
@@ -21,17 +21,39 @@ const AppRoutes = () => {
                         <AdminView/>
                     </ProtectedRoute>}/>
                 <Route path="/auth" element={<AuthView/>}/>
-                <Route path="/app" element={
+                <Route path="/flashcards" element={
                     <ProtectedRoute>
                         <LanguagesProvider>
                             <SocialDataProvider>
                                 <DecksListsProvider>
-                                    <AppView/>
+                                    <FlashcardsView/>
                                 </DecksListsProvider>
                             </SocialDataProvider>
                         </LanguagesProvider>
                     </ProtectedRoute>
                 }/>       
+                <Route path="/hub" element={
+                    <ProtectedRoute>
+                        <LanguagesProvider>
+                            <SocialDataProvider>
+                                <DecksListsProvider>
+                                    <FlashcardsView/>
+                                </DecksListsProvider>
+                            </SocialDataProvider>
+                        </LanguagesProvider>
+                    </ProtectedRoute>
+                }/>  
+                <Route path="/exams" element={
+                    <ProtectedRoute>
+                        <LanguagesProvider>
+                            <SocialDataProvider>
+                                <DecksListsProvider>
+                                    <FlashcardsView/>
+                                </DecksListsProvider>
+                            </SocialDataProvider>
+                        </LanguagesProvider>
+                    </ProtectedRoute>
+                }/>  
                 <Route path="/modules" element={
                     <ProtectedRoute>
                         <LanguagesProvider>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
-import { useLanguages } from "../../../hooks/useLanguages";
+import { useLanguages } from "../../hooks/useLanguages";
 import { FaMicrophone } from 'react-icons/fa';
 
 

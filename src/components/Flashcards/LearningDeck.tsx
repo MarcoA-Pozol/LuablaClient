@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
-import { useLearningDeckStyles } from "../../../styles/AppView/learningDeck";
-import type { LearningDeckProps } from "../../../types/AppView/LearningDeckProps";
-import { useAuth } from "../../../App";
+import { useLearningDeckStyles } from "../../styles/AppView/learningDeck";
+import type { LearningDeckProps } from "../../types/AppView/LearningDeckProps";
+import { useAuth } from "../../App";
 import { useTranslation } from "react-i18next";
-import { useDefaultDeckImagePath } from "../../../hooks/useBaseMediaUrl";
-import { useLanguages } from "../../../hooks/useLanguages";
+import { useDefaultDeckImagePath } from "../../hooks/useBaseMediaUrl";
+import { useLanguages } from "../../hooks/useLanguages";
 
 export const LearningDeck = ({index, deckId, title, description, image, author, level, cardsQuantity, setDisplayedContainer, setDeckToPracticeID}:LearningDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);

@@ -1,12 +1,9 @@
 import "../styles/LandingView/landingView.css";
 import { useNavigate } from "react-router-dom";
-import Testimonials from "../components/LandingView/Testimonials";
-import { TopNavBar } from "../components/LandingView/TopNavBar";
-import { Footer } from "../components/LandingView/Footer";
+import Testimonials from "../components/Landing/Testimonials";
+import { TopNavBar } from "../components/Landing/TopNavBar";
+import { Footer } from "../components/Landing/Footer";
 import { useTranslation } from "react-i18next";
-import { MicListener } from "../components/LandingView/SpeechTest";
-import { VoiceAudioRecorder } from "../components/LandingView/VoiceAudioRecorder";
-import { TextToSpeech } from "../components/LandingView/TextToSpeech";
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";

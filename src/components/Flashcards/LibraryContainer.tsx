@@ -1,5 +1,5 @@
-import { useDecksLists } from "../../../hooks/useDecksLists";
-import { useLanguages } from "../../../hooks/useLanguages";
+import { useDecksLists } from "../../hooks/useDecksLists";
+import { useLanguages } from "../../hooks/useLanguages";
 import { LibraryDeck } from "./LibraryDeck";
 import { useTranslation } from "react-i18next";
 

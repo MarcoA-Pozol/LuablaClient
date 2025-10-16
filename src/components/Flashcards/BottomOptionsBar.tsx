@@ -1,22 +1,24 @@
 import { useTranslation } from "react-i18next";
 import "../../styles/AppView/bottomOptionsBar.css";
-import { FaEye, FaBook, FaCommentDots, FaPencilAlt } from 'react-icons/fa';
+import { FaEye, FaBook, FaPencilAlt, FaBoxes } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
 
 export const BottomOptionsBar = ({setDisplayedContainer}:any) => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (
         <div className="bottom-options-bar">
             
-            <a onClick={() => {setDisplayedContainer("learning")}}>
+            <a onClick={() => {navigate('/modules')}}>
                 <li>
-                    <h4><FaEye style={{color: "rgb(120, 180, 240)"}}/> {t("Input")}</h4>
+                    <h4><FaBoxes style={{color: "rgb(120, 180, 240)"}}/> {t("Modules")}</h4>
                 </li>
             </a>
             
             <a onClick={() => {setDisplayedContainer("learning")}}>
                 <li>
-                    <h4><FaCommentDots style={{color: "rgba(120, 240, 150, 1)"}}/> {t("Output")}</h4>
+                    <h4><FaEye style={{color: "rgba(120, 240, 150, 1)"}}/> {t("Learn")}</h4>
                 </li>
             </a>
 

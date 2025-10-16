@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { FaUser, FaCertificate } from "react-icons/fa";
-import { handleAcquireDeck } from "../../../functions/handleAcquireDeck";
-import { useTemporaryMessage } from "../../../hooks/useTemporaryMessage";
-import { TemporaryMessage } from "../../TemporaryMessage";
-import { removeFromLibraryDecks } from "../../../utils/removeFromLibraryDecks";
-import { fetchUserDecks } from "../../../functions/fetchDecks";
-import type { LibraryDeckProps } from "../../../types/AppView/LibraryDeckProps";
-import { useLibraryDeckStyles } from "../../../styles/AppView/libraryDeck";
-import { useDecksLists } from "../../../hooks/useDecksLists";
-import { useLanguages } from "../../../hooks/useLanguages";
-import { useSocialData } from "../../../hooks/useSocialData";
-import { createNotification } from "../../../functions/createNotification";
+import { handleAcquireDeck } from "../../functions/handleAcquireDeck";
+import { useTemporaryMessage } from "../../hooks/useTemporaryMessage";
+import { TemporaryMessage } from "../General/TemporaryMessage";
+import { removeFromLibraryDecks } from "../../utils/removeFromLibraryDecks";
+import { fetchUserDecks } from "../../functions/fetchDecks";
+import type { LibraryDeckProps } from "../../types/AppView/LibraryDeckProps";
+import { useLibraryDeckStyles } from "../../styles/AppView/libraryDeck";
+import { useDecksLists } from "../../hooks/useDecksLists";
+import { useLanguages } from "../../hooks/useLanguages";
+import { useSocialData } from "../../hooks/useSocialData";
+import { createNotification } from "../../functions/createNotification";
 import { useTranslation } from "react-i18next";
-import { useDefaultDeckImagePath } from "../../../hooks/useBaseMediaUrl";
+import { useDefaultDeckImagePath } from "../../hooks/useBaseMediaUrl";
 
 export const LibraryDeck = ({deckId, index, title, description, image, author, level, cardsQuantity}:LibraryDeckProps) => {
     const [isDeckHovered, setIsDeckHovered] = useState<boolean>(false);

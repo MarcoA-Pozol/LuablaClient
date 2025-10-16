@@ -1,38 +1,32 @@
 import React from 'react';
-import { FaBookOpen, FaComments, FaGraduationCap } from 'react-icons/fa'; // Example Icons
+import { FaBookOpen, FaComments, FaGraduationCap } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-// Define the structure for a module
 type ModuleType = [string, string, 'Input' | 'Output', string, string];
 
-// Define a type for the module list using the icons imported above
 const modulesList: ModuleType[] = [
-    ["Flashcards & Vocabulary", "Master new words and phrases quickly using dynamic flashcards and practice vocabulary.", "Input", "FaBookOpen", "🎴"],
-    ["The Hub (Discussion Forum)", "Practice speaking and writing by sharing opinions, answering questions, and discussing topics with others.", "Output", "FaComments", "🗫"],
-    ["Tests & Exams", "Assess your progress, challenge your knowledge, and track your readiness for formal exams.", "Output", "FaGraduationCap", "📝"]
+    ["Flashcards", "Master new words and phrases quickly using dynamic flashcards and practice vocabulary.", "Input", "FaBookOpen", "/flashcards"],
+    ["The Hub", "Practice speaking and writing by sharing opinions, answering questions, and discussing topics with others.", "Output", "FaComments", "/hub"],
+    ["Tests & Exams", "Assess your progress, challenge your knowledge, and track your readiness for formal exams.", "Output", "FaGraduationCap", "/exams"]
 ];
 
-// Define the prop type for the setter function
-interface ModulesMenuProps {
-    setDeployedModule: (moduleName: string) => void;
-}
-
-// Map the string icon names to the actual components for easy rendering
 const iconMap: { [key: string]: React.ElementType } = {
     FaBookOpen,
     FaComments,
     FaGraduationCap
-    // Add any other icons you might use here
 };
 
-export const ModulesMenu: React.FC<ModulesMenuProps> = ({ setDeployedModule }) => {
-    
-    // Inline styles for the swanky, compact design
+export const ModulesMenu = () => {
+    const  { t } = useTranslation();
+    const navigate = useNavigate();
+
     const styles = {
         container: {
             display: 'flex',
             flexDirection: 'column' as 'column', 
-            gap: '70px',
-            padding: '20px',
+            gap: '60px',
+            padding: '40px',
             backgroundColor: 'white'
         },
         card: {
@@ -94,7 +88,7 @@ export const ModulesMenu: React.FC<ModulesMenuProps> = ({ setDeployedModule }) =
 
     return (
         <div style={styles.container}>
-            {modulesList.map(([title, description, type, iconName, emoji]) => {
+            {modulesList.map(([title, description, type, iconName, moduleUrl]) => {
                 const IconComponent = iconMap[iconName];
                 
                 return (
@@ -119,11 +113,11 @@ export const ModulesMenu: React.FC<ModulesMenuProps> = ({ setDeployedModule }) =
                             
                             <button
                                 style={styles.button as React.CSSProperties}
-                                onClick={() => setDeployedModule(title)}
+                                onClick={() => {navigate(moduleUrl)}}
                                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#381a60ff')}
                                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ca4444ff')}
                             >
-                                Go to Module
+                                {t("Use Module")}
                             </button>
                         </div>
                     </div>

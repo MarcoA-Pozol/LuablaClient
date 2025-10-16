@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { ProfileInfoSection } from "../components/ProfileView/ProfileInfoSection";
-import { InterfaceLanguageSelectionForm } from "../components/ProfileView/InterfaceLanguageSelectionForm";
+import { ProfileInfoSection } from "../components/Profile/ProfileInfoSection";
+import { InterfaceLanguageSelectionForm } from "../components/Profile/InterfaceLanguageSelectionForm";
 import { useTranslation } from "react-i18next";
 
 export const ProfileView = () => {

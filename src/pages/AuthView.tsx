@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { SignInForm } from "../components/AuthView/SignInForm";
-import { SignUpForm } from "../components/AuthView/SignUpForm";
-import { TopNavBar } from "../components/LandingView/TopNavBar";
+import { SignInForm } from "../components/Authentication/SignInForm";
+import { SignUpForm } from "../components/Authentication/SignUpForm";
+import { TopNavBar } from "../components/Landing/TopNavBar";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../App";
 import { useTranslation } from "react-i18next";
