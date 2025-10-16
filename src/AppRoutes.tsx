@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingView } from './pages/LandingView.tsx';
 import { AppView } from './pages/AppView.tsx';
+import { ModulesView } from './pages/ModulesView.tsx';
 import { AdminView } from "./pages/AdminView.tsx";
 import { AuthView } from './pages/AuthView.tsx';
 import { ProfileView } from './pages/ProfileView.tsx';
@@ -30,7 +31,18 @@ const AppRoutes = () => {
                             </SocialDataProvider>
                         </LanguagesProvider>
                     </ProtectedRoute>
-                }/>                
+                }/>       
+                <Route path="/modules" element={
+                    <ProtectedRoute>
+                        <LanguagesProvider>
+                            <SocialDataProvider>
+                                <DecksListsProvider>
+                                    <ModulesView/>
+                                </DecksListsProvider>
+                            </SocialDataProvider>
+                        </LanguagesProvider>
+                    </ProtectedRoute>
+                }/>            
                 <Route path="/profile" element={
                     <ProtectedRoute>
                         <LanguagesProvider>

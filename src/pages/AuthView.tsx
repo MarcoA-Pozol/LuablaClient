@@ -20,7 +20,7 @@ export const AuthView = () => {
     return (
         <>
             {authUser ? (
-                <Navigate to={"/app"}/>
+                <Navigate to={"/modules"}/>
             ):(
                 <>
                     <TopNavBar authUser={authUser} setAuthUser={setAuthUser} />
