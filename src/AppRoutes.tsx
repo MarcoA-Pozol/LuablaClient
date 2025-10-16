@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingView } from './pages/LandingView.tsx';
 import { FlashcardsView } from './pages/FlashcardsView.tsx';
+import { HubView } from "./pages/HubView.tsx";
+import { ExamsView } from "./pages/ExamsView.tsx";
 import { ModulesView } from './pages/ModulesView.tsx';
 import { AdminView } from "./pages/AdminView.tsx";
 import { AuthView } from './pages/AuthView.tsx';
@@ -37,7 +39,7 @@ const AppRoutes = () => {
                         <LanguagesProvider>
                             <SocialDataProvider>
                                 <DecksListsProvider>
-                                    <FlashcardsView/>
+                                    <HubView/>
                                 </DecksListsProvider>
                             </SocialDataProvider>
                         </LanguagesProvider>
@@ -48,7 +50,7 @@ const AppRoutes = () => {
                         <LanguagesProvider>
                             <SocialDataProvider>
                                 <DecksListsProvider>
-                                    <FlashcardsView/>
+                                    <ExamsView/>
                                 </DecksListsProvider>
                             </SocialDataProvider>
                         </LanguagesProvider>

@@ -1,5 +1,5 @@
 import { PickLanguageForm } from "../components/Authentication/PickLanguageForm";
-import { TopNavBarApp } from "../components/Flashcards/TopNavBarApp";
+import { TopNavBarApp } from "../components/General/TopNavBarApp";
 import { ModulesMenu } from "../components/Modules/ModulesMenu";
 import { useAuth } from "../App";
 

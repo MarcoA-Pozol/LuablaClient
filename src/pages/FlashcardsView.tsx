@@ -2,7 +2,7 @@ import { LearningContainer } from "../components/Flashcards/LearningContainer";
 import { LibraryContainer } from "../components/Flashcards/LibraryContainer";
 import { CreationContainer } from "../components/Flashcards/CreationContainer";
 import { PickLanguageForm } from "../components/Authentication/PickLanguageForm";
-import { TopNavBarApp } from "../components/Flashcards/TopNavBarApp";
+import { TopNavBarApp } from "../components/General/TopNavBarApp";
 import { FlashcardsContentContainer } from "../components/Flashcards/FlashcardsContentContainer";
 import { DeckPracticeContainer } from "../components/Flashcards/DeckPracticeContainer";
 import { BottomOptionsBar } from "../components/Flashcards/BottomOptionsBar";
