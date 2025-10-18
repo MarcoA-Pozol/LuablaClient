@@ -3,21 +3,24 @@ import { useAuth } from "../App";
 import { HubBottomNav } from "../components/Hub/HubBottomNav";
 import { useState } from "react";
 import { PickLanguageForm } from "../components/Authentication/PickLanguageForm";
-import { LibraryContainer } from "../components/Flashcards/LibraryContainer";
-import { CreationContainer } from "../components/Flashcards/CreationContainer";
+import { PostsContainer } from "../components/Hub/PostsContainer";
+import { TopicsContainer } from "../components/Hub/TopicsContainer";
+import { QuestionsContainer } from "../components/Hub/QuestionsContainer";
+
 
 export const HubView = () => {
     const { authUser } = useAuth();
-    const [displayedContainer, setDisplayedContainer] = useState<string>("forum");
+    const [displayedContainer, setDisplayedContainer] = useState<string>("posts");
 
     return (
         <>
             { authUser.has_picked_language ? (
                 <div>
                     <TopNavBarApp authUser={authUser}/>
-                    <div style={{backgroundColor:"#f9f9f9",color:"#333",margin:0,display:"flex",flexDirection:"column", minHeight:"100vh",padding:"20px"}}>
-                        {displayedContainer === "generalDiscussions" && (<LibraryContainer/>)}
-                        {displayedContainer === "topics" && (<CreationContainer/>)}
+                    <div style={styles.contentContainer}>
+                        {displayedContainer === "posts" && (<PostsContainer/>)}
+                        {displayedContainer === "topics" && (<TopicsContainer/>)}
+                        {displayedContainer === "questions" && (<QuestionsContainer/>)}
                     </div>
                     <HubBottomNav setDisplayedContainer={setDisplayedContainer}/>
                 </div>
@@ -29,3 +32,19 @@ export const HubView = () => {
         </>
     );
 }
+
+
+const styles: { [key: string]: React.CSSProperties } = {
+    contentContainer: {
+        backgroundColor: "white",
+        color: "#333",
+        margin: 0,
+        padding: "20px",
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        width: "100%",
+        gap: "50px",
+        minHeight:"100vh"
+    },
+};

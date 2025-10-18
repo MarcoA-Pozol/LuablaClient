@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import "../../styles/AppView/bottomOptionsBar.css";
-import { FaEye, FaBook, FaPencilAlt, FaBoxes } from 'react-icons/fa';
+import { FaTags, FaStream, FaBoxes, FaQuestionCircle } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 
 export const HubBottomNav = ({setDisplayedContainer}:any) => {
@@ -16,21 +16,21 @@ export const HubBottomNav = ({setDisplayedContainer}:any) => {
                 </li>
             </a>
             
-            <a onClick={() => {setDisplayedContainer("topics")}}>
+            <a onClick={() => {setDisplayedContainer("posts")}}>
                 <li>
-                    <h4><FaEye style={{color: "rgba(120, 240, 150, 1)"}}/> {t("Learn")}</h4>
+                    <h4><FaStream style={{color: "rgba(120, 240, 150, 1)"}}/> {t("Posts")}</h4>
                 </li>
             </a>
 
-            <a onClick={() => {setDisplayedContainer("library")}}>
+            <a onClick={() => {setDisplayedContainer("topics")}}>
                 <li>
-                    <h4><FaBook style={{color: "rgb(210, 160, 220)"}}/> {t("Library")}</h4>
+                    <h4><FaTags style={{color: "rgb(210, 160, 220)"}}/> {t("Topics")}</h4>
                 </li>
             </a>
             
-            <a onClick={() => {setDisplayedContainer("creation")}}>
+            <a onClick={() => {setDisplayedContainer("questions")}}>
                 <li>
-                    <h4><FaPencilAlt style={{color: "rgb(190, 190, 120)"}}/> {t("Create")}</h4>
+                    <h4><FaQuestionCircle style={{color: "rgb(190, 190, 120)"}}/> {t("Questions")}</h4>
                 </li>
             </a>
             
