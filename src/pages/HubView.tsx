@@ -36,7 +36,7 @@ export const HubView = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
     contentContainer: {
-        backgroundColor: "white",
+        backgroundColor: "rgba(29, 17, 67, 1)",
         color: "#333",
         margin: 0,
         padding: "20px",
