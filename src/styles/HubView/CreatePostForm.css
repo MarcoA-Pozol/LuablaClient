@@ -1,0 +1,122 @@
+.createpost-overlay {
+  position: fixed;
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.45); 
+  z-index: 1000;
+}
+
+.createpost-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001; 
+  pointer-events: none; 
+}
+
+.createpost-card {
+  pointer-events: auto;
+  width: 96%;
+  max-width: 720px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  padding: 1rem 1.25rem;
+  transform-origin: center;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.createpost-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.createpost-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.createpost-close {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.createpost-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+.field.inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.field input[type="text"],
+.field input[type="file"],
+.field textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+.btn {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn.primary {
+  background: #0b74ff;
+  color: white;
+}
+.btn.secondary {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.toggle-btn {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.form-error {
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.form-success {
+  color: #065f46;
+  background: #ecfdf5;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+@media (max-width: 520px) {
+  .createpost-card {
+    padding: 12px;
+    margin: 0 8px;
+  }
+}

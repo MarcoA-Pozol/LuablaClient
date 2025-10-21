@@ -8,9 +8,12 @@ import {
   FaClock,
 } from "react-icons/fa";
 import "../../styles/HubView/PostsContainer.css";
+import { CreatePostForm } from "./CreatePostForm";
 
 export const PostsContainer = () => {
   const { t } = useTranslation();
+
+  const [showCreatePostForm, setShowCreatePostForm] = useState(false);
 
   // Need to fetch post from server
   const posts = [
@@ -145,6 +148,11 @@ export const PostsContainer = () => {
       <p className="language-footer">
         {t("Don’t forget to respect other people's opinions while commenting")}
       </p>
+
+      <button onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
+      {showCreatePostForm === true &&
+        <CreatePostForm setShowCreatePostForm={setShowCreatePostForm}/>
+      }
     </div>
   );
 };
