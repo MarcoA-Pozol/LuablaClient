@@ -34,7 +34,7 @@ export const DeckCreationForm = ({showCreateForm, setShowCreateForm}: DeckCreati
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    handleObjectCreation(event, useBaseApiUrl("/api/decks/deck"), {}, { "Content-Type": "multipart/form-data" }, "deck");
+    handleObjectCreation(event, useBaseApiUrl("/decks/deck"), {}, { "Content-Type": "multipart/form-data" }, "deck");
     clearFormFields(form, languageToLearn); 
     await createNotification("Deck created!", `You have created this deck (${data.get("title")}, for ${languageToLearn} language.)`, "CREATED_DECK"); 
     await fetchNotifications(); 
