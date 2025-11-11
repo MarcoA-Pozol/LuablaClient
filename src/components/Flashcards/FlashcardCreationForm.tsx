@@ -5,7 +5,7 @@ import { useDecksLists } from "../../hooks/useDecksLists";
 import { useLanguages } from "../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
-import { fetchWordSentences } from "../../functions/handleFetchWordSentences";
+import { includeSentences } from "../../functions/FlashcardView/wordSentences";
 import { flashcardCreationFormStyle } from "../../styles/AppView/flashcardCreationForm";
 
 interface FlashcardCreationFormProps {
@@ -43,29 +43,6 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
 
     return () => clearTimeout(timeoutId); 
     };
-
-    const includeSentences = async () => {
-        const response = await fetchWordSentences(languageToLearn, "Dog");
-        let items;
-        let failedToFetchSentencesDefault = "Not example phrases were provided";
-
-        if (response?.data?.items) {
-          items = response.data.items;
-
-          if (typeof items === "string") {
-            try {
-              items = JSON.parse(items);
-            } catch (e) {
-              items = [failedToFetchSentencesDefault];
-            }
-          }
-
-        } else {
-          items = [failedToFetchSentencesDefault];
-        }
-
-        setSentencesList(items);
-    }
 
     return (
       <form ref={formRef} onSubmit={handleFlashcardCreation} style={styles.form} method="POST" encType="multipart/form-data">
@@ -191,7 +168,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
           />
         </label>
 
-        <button onClick={includeSentences}>{t("Generate Example Phrases")}</button>
+        <button onClick={() => includeSentences(formRef, setSentencesList, languageToLearn)}>{t("Generate Example Phrases")}</button>
 
         {/* If there are sentences in sentences list, show this container */}
         {sentencesList && (
@@ -201,6 +178,8 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
               name="sentences"
               style={styles.textarea}
               placeholder={t("Sentences")}
+              value={sentencesList.join("\n")}
+              onChange={(e) => setSentencesList(e.target.value.split("\n"))}
             />
           </label>
         )}
