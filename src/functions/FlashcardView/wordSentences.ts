@@ -36,4 +36,5 @@ export const includeSentences = async (
       }
 
       setSentencesList(items);
+      console.log(items)
     }

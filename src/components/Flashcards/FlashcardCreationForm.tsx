@@ -170,18 +170,27 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
 
         <button type="button" onClick={() => includeSentences(formRef, setSentencesList, languageToLearn)}>{t("Generate Example Phrases")}</button>
 
-        {/* If there are sentences in sentences list, show this container */}
-        {sentencesList && (
-          <label style={styles.label}>
-            💬
-            <textarea
-              name="sentences"
-              style={styles.textarea}
-              placeholder={t("Sentences")}
-              value={sentencesList.join("\n")}
-              onChange={(e) => setSentencesList(e.target.value.split("\n"))}
-            />
-          </label>
+        {sentencesList.length > 0 && (
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "10px" }}>
+            {sentencesList.slice(0, 3).map((sentence, index) => (
+              <div
+                key={index}
+                style={{
+                  flex: "1 1 30%", // each card takes ~30% of the row
+                  padding: "5px",
+                  backgroundColor: "#f0f8ff",
+                  borderRadius: "8px",
+                  border: "1px solid #87cefa",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+                  minWidth: "80px",
+                  textAlign: "center",
+                  fontSize: "0.8rem"
+                }}
+              >
+                {sentence}
+              </div>
+            ))}
+          </div>
         )}
 
         <div style={styles.buttonContainer}>
