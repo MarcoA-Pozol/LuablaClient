@@ -24,7 +24,6 @@ export const handleObjectCreation = async (event:React.FormEvent<HTMLFormElement
     } catch (error) {
         alert(`Creating ${objectToCreateName} failed: ${error}`);
     }
-
 }
 
 export const clearFormFields = (form: HTMLFormElement, language:string) => {

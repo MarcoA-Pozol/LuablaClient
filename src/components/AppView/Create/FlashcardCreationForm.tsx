@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { handleObjectCreation, clearFormFields } from "../../functions/handleObjectCreation";
-import { fetchUserDecks } from "../../functions/fetchDecks";
-import { useDecksLists } from "../../hooks/useDecksLists";
-import { useLanguages } from "../../hooks/useLanguages";
+import { handleObjectCreation, clearFormFields } from "../../../functions/handleObjectCreation";
+import { fetchUserDecks } from "../../../functions/fetchDecks";
+import { useDecksLists } from "../../../hooks/useDecksLists";
+import { useLanguages } from "../../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
-import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
-import { fetchWordSentences } from "../../functions/handleFetchWordSentences";
+import { useBaseApiUrl } from "../../../hooks/useBaseApiUrl";
 
 interface FlashcardCreationFormProps {
   selectedDeck:any;
@@ -16,7 +15,6 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     const formRef = useRef<HTMLFormElement | null>(null);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const { setUserDecksList, setOwnedDecksList } = useDecksLists();
-    const [ sentencesList, setSentencesList ] = useState<string[]>([]);
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -48,29 +46,6 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
 
     return () => clearTimeout(timeoutId); 
     };
-
-    const includeSentences = async () => {
-        const response = await fetchWordSentences(languageToLearn, "Dog");
-        let items;
-        let failedToFetchSentencesDefault = "Not example phrases were provided";
-
-        if (response?.data?.items) {
-          items = response.data.items;
-
-          if (typeof items === "string") {
-            try {
-              items = JSON.parse(items);
-            } catch (e) {
-              items = [failedToFetchSentencesDefault];
-            }
-          }
-
-        } else {
-          items = [failedToFetchSentencesDefault];
-        }
-
-        setSentencesList(items);
-    }
 
     // Style
     const styles: { [key: string]: React.CSSProperties } = {
@@ -258,19 +233,14 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
           />
         </label>
 
-        <button onClick={includeSentences}>{t("Generate Example Phrases")}</button>
-
-        {/* If there are sentences in sentences list, show this container */}
-        {sentencesList && (
-          <label style={styles.label}>
-            💬
-            <textarea
-              name="sentences"
-              style={styles.textarea}
-              placeholder={t("Sentences")}
-            />
-          </label>
-        )}
+        <label style={styles.label}>
+          💬
+          <textarea
+            name="examplePhrase"
+            style={styles.textarea}
+            placeholder={t("Example phrase")}
+          />
+        </label>
 
         <div style={styles.buttonContainer}>
           <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleClearForm}>
