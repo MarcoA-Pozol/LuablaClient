@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import { includeSentences } from "../../functions/FlashcardView/wordSentences";
 import { useFlashcardCreationFormStyles } from "../../styles/AppView/flashcardCreationForm";
+import { useAuth } from "../../App";
 
 interface FlashcardCreationFormProps {
   selectedDeck:any;
@@ -19,6 +20,8 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     const [ sentencesList, setSentencesList ] = useState<string[]>([]);
     const { t } = useTranslation();
     const styles = useFlashcardCreationFormStyles()
+    const { authUser }= useAuth();
+    const userNativeLanguage = authUser.native_language;
 
     const handleClearForm = () => {
     if (formRef.current) {
@@ -168,7 +171,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
           />
         </label>
 
-        <button type="button" onClick={() => includeSentences(formRef, setSentencesList, languageToLearn)}>{t("Generate Example Phrases")}</button>
+        <button type="button" onClick={() => includeSentences(formRef, setSentencesList, languageToLearn, userNativeLanguage)}>{t("Generate Example Phrases")}</button>
 
  {/* Editable sentence inputs */}
 {sentencesList.length > 0 && (

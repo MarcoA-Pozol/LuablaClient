@@ -3,7 +3,8 @@ import { fetchWordSentences } from "../handleFetchWordSentences";
 export const includeSentences = async (
     formRef:React.RefObject<HTMLFormElement | null>, 
     setSentencesList:React.Dispatch<React.SetStateAction<string[]>>, 
-    languageToLearn:string
+    languageToLearn:string,
+    userNativeLanguage:string
 ) => {
       let items;
       
@@ -16,7 +17,7 @@ export const includeSentences = async (
         return
       }
 
-      const response = await fetchWordSentences(languageToLearn, word);
+      const response = await fetchWordSentences(languageToLearn, userNativeLanguage, word);
       
       if (response?.data?.items) {
         items = response.data.items;

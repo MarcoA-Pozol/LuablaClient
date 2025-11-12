@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useBaseApiUrl } from "../hooks/useBaseApiUrl";
 
-export const fetchWordSentences = async (language:string, word:string) => {
+export const fetchWordSentences = async (language:string, userNativeLanguage:string, word:string) => {
 
     try {
         const response = await axios.post(useBaseApiUrl("/flashcards/getWordSentences"), 
-            {language:language, word:word},
+            {language:language, native_language:userNativeLanguage, word:word},
             {
                 
                 withCredentials: true,
