@@ -170,28 +170,45 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
 
         <button type="button" onClick={() => includeSentences(formRef, setSentencesList, languageToLearn)}>{t("Generate Example Phrases")}</button>
 
-        {sentencesList.length > 0 && (
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "10px" }}>
-            {sentencesList.slice(0, 3).map((sentence, index) => (
-              <div
-                key={index}
-                style={{
-                  flex: "1 1 30%", // each card takes ~30% of the row
-                  padding: "5px",
-                  backgroundColor: "#f0f8ff",
-                  borderRadius: "8px",
-                  border: "1px solid #87cefa",
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                  minWidth: "80px",
-                  textAlign: "center",
-                  fontSize: "0.8rem"
-                }}
-              >
-                {sentence}
-              </div>
-            ))}
-          </div>
-        )}
+ {/* Editable sentence inputs */}
+{sentencesList.length > 0 && (
+  <div style={{ marginTop: "10px", width: "100%" }}>
+    <h4 style={{ marginBottom: "8px" }}>{t("Example Sentences")}</h4>
+    {sentencesList.slice(0, 3).map((sentence, index) => (
+      <label key={index} style={{ display: "block", marginBottom: "8px" }}>
+        {t("Sentence")} {index + 1}:
+        <input
+          type="text"
+          name={`sentence_${index + 1}`}
+          value={sentence}
+          onChange={(e) => {
+            const updated = [...sentencesList];
+            updated[index] = e.target.value;
+            setSentencesList(updated);
+          }}
+          style={{
+            width: "100%",
+            padding: "6px",
+            marginTop: "4px",
+            borderRadius: "6px",
+            border: "1px solid #87cefa",
+            backgroundColor: "#f9fcff",
+            color: "#022879ff",
+            fontWeight: "bold"
+          }}
+          placeholder={t("Edit this sentence")}
+        />
+      </label>
+    ))}
+
+    {/* Hidden input to include sentences as a list in POST submission */}
+    <input
+      type="hidden"
+      name="sentences"
+      value={JSON.stringify(sentencesList)}
+    />
+  </div>
+)}
 
         <div style={styles.buttonContainer}>
           <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleClearForm}>
