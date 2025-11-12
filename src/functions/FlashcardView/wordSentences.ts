@@ -3,6 +3,7 @@ import { fetchWordSentences } from "../handleFetchWordSentences";
 export const includeSentences = async (
     formRef:React.RefObject<HTMLFormElement | null>, 
     setSentencesList:React.Dispatch<React.SetStateAction<string[]>>, 
+    setWordTranslation:React.Dispatch<React.SetStateAction<string>>,
     languageToLearn:string,
     userNativeLanguage:string
 ) => {
@@ -36,6 +37,7 @@ export const includeSentences = async (
         return;
       }
 
-      setSentencesList(items);
+      setSentencesList(items.sentences);
+      setWordTranslation(items.word_translation);
       console.log(items)
     }

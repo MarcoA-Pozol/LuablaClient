@@ -18,6 +18,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     const formRef = useRef<HTMLFormElement | null>(null);
     const { setUserDecksList, setOwnedDecksList } = useDecksLists();
     const [ sentencesList, setSentencesList ] = useState<string[]>([]);
+    const [ wordTranslation, setWordTranslation ] = useState<string>('');
     const { t } = useTranslation();
     const styles = useFlashcardCreationFormStyles()
     const { authUser }= useAuth();
@@ -168,10 +169,12 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
             type="text"
             style={styles.input}
             placeholder={t("Meaning")}
+            value={wordTranslation}
+            onChange={(e) => setWordTranslation(e.target.value)}
           />
         </label>
 
-        <button type="button" onClick={() => includeSentences(formRef, setSentencesList, languageToLearn, userNativeLanguage)}>{t("Generate Example Phrases")}</button>
+        <button type="button" onClick={() => includeSentences(formRef, setSentencesList, setWordTranslation, languageToLearn, userNativeLanguage)}>{t("Generate Example Phrases")}</button>
 
  {/* Editable sentence inputs */}
 {sentencesList.length > 0 && (
