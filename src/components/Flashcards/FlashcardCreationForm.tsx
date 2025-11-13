@@ -6,7 +6,7 @@ import { useLanguages } from "../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import { includeSentences } from "../../functions/FlashcardView/wordSentences";
-import { useFlashcardCreationFormStyles } from "../../styles/AppView/flashcardCreationForm";
+import "../../styles/AppView/flashcardCreationForm.css";
 import { useAuth } from "../../App";
 
 interface FlashcardCreationFormProps {
@@ -20,7 +20,6 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     const [ sentencesList, setSentencesList ] = useState<string[]>([]);
     const [ wordTranslation, setWordTranslation ] = useState<string>('');
     const { t } = useTranslation();
-    const styles = useFlashcardCreationFormStyles()
     const { authUser }= useAuth();
     const userNativeLanguage = authUser.native_language;
 
@@ -49,16 +48,16 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
     };
 
     return (
-      <form ref={formRef} onSubmit={handleFlashcardCreation} style={styles.form} method="POST" encType="multipart/form-data">
-        <h2 style={styles.heading}>{t(flashcardTypeName)} {t("Flashcard")}</h2>
+      <form ref={formRef} onSubmit={handleFlashcardCreation} className="flashcard-form" method="POST" encType="multipart/form-data">
+        <h2 className="flashcard-heading">{t(flashcardTypeName)} {t("Flashcard")}</h2>
 
         {languageToLearn !== "JP" && languageToLearn !== "ZH" && languageToLearn !== "KO" && languageToLearn !== "RU" && (
-          <label style={styles.label}>
+          <label className="flashcard-label">
             🏷️
             <input
               name="word"
               type="text"
-              style={styles.input}
+              className="flashcard-input"
               placeholder={t("Word")}
             />
           </label>
@@ -68,21 +67,21 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
         {/* Conditional fields */}
         {languageToLearn === "ZH" && (
           <>
-            <label style={styles.label}>
+            <label className="flashcard-label">
               汉
               <input
                 name="hanzi"
                 type="text"
-                style={styles.input}
+                className="flashcard-input"
                 placeholder={t("Hanzi")}
               />
             </label>
-            <label style={styles.label}>
+            <label className="flashcard-label">
               📣
               <input
                 name="pinyin"
                 type="text"
-                style={styles.input}
+                className="flashcard-input"
                 placeholder={t("Pinyin")}
               />
             </label>
@@ -90,48 +89,48 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
         )}
 
         {languageToLearn === "JP" && (
-          <label style={styles.label}>
+          <label className="flashcard-label">
             🉐
             <input
               name="kana"
               type="text"
-              style={styles.input}
+              className="flashcard-input"
               placeholder={t("Kana")}
             />
           </label>
         )}
 
         {languageToLearn === "KO" && (
-          <label style={styles.label}>
+          <label className="flashcard-label">
             한
             <input
               name="hangul"
               type="text"
-              style={styles.input}
+              className="flashcard-input"
               placeholder={t("Hangul")}
             />
           </label>
         )}
 
         {(languageToLearn === "JP" || languageToLearn === "KO") && (
-          <label style={styles.label}>
+          <label className="flashcard-label">
             🔤
             <input
               name="romaji"
               type="text"
-              style={styles.input}
+              className="flashcard-input"
               placeholder={t("Romaji")}
             />
           </label>
         )}
 
         {languageToLearn === "JP" && (
-          <label style={styles.label}>
+          <label className="flashcard-label">
             漢
             <input
               name="kanji"
               type="text"
-              style={styles.input}
+              className="flashcard-input"
               placeholder={t("Kanji (optional)")}
             />
           </label>
@@ -139,22 +138,22 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
 
         {languageToLearn === "RU" && (
           <>
-            <label style={styles.label}>
+            <label className="flashcard-label">
               🪆
               <input
                 name="cyrillic"
                 type="text"
-                style={styles.input}
+                className="flashcard-input"
                 placeholder={t("Cyrillic")}
                 />
             </label>
 
-            <label style={styles.label}>
+            <label className="flashcard-label">
               🔤
               <input
                 name="transliteration"
                 type="text"
-                style={styles.input}
+                className="flashcard-input"
                 placeholder={t("Transliteration")}
                 />
             </label>
@@ -162,29 +161,23 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
         )}
 
 
-        <label style={styles.label}>
+        <label className="flashcard-label">
           💡
           <input
             name="meaning"
             type="text"
-            style={styles.input}
+            className="flashcard-input"
             placeholder={t("Meaning")}
             value={wordTranslation}
             onChange={(e) => setWordTranslation(e.target.value)}
           />
         </label>
 
-        <button type="button" onClick={() => includeSentences(formRef, setSentencesList, setWordTranslation, languageToLearn, userNativeLanguage)}>{t("Generate Example Phrases")}</button>
-
- {/* Editable sentence inputs */}
 {sentencesList.length > 0 && (
   <div style={{ marginTop: "10px", width: "100%" }}>
     <h4 style={{ marginBottom: "8px" }}>{t("Example Sentences")}</h4>
     {sentencesList.slice(0, 3).map((sentence, index) => (
-      <label key={index} style={{ display: "block", marginBottom: "8px" }}>
-        {t("Sentence")} {index + 1}:
-        <input
-          type="text"
+        <textarea
           name={`sentence_${index + 1}`}
           value={sentence}
           onChange={(e) => {
@@ -192,22 +185,11 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
             updated[index] = e.target.value;
             setSentencesList(updated);
           }}
-          style={{
-            width: "100%",
-            padding: "6px",
-            marginTop: "4px",
-            borderRadius: "6px",
-            border: "1px solid #87cefa",
-            backgroundColor: "#f9fcff",
-            color: "#022879ff",
-            fontWeight: "bold"
-          }}
+          className="example-card"
           placeholder={t("Edit this sentence")}
         />
-      </label>
     ))}
 
-    {/* Hidden input to include sentences as a list in POST submission */}
     <input
       type="hidden"
       name="sentences"
@@ -216,11 +198,13 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
   </div>
 )}
 
-        <div style={styles.buttonContainer}>
-          <button type="button" style={{ ...styles.button, backgroundColor: "#ccc", color: "#333" }} onClick={handleClearForm}>
+        <button type="button" className="btn-ai-autocompletion" onClick={() => includeSentences(formRef, setSentencesList, setWordTranslation, languageToLearn, userNativeLanguage)}>{t("✨ Complete with AI 🤖")}</button>
+        
+        <div className="buttonRow">
+          <button type="button" className="btn-ghost" onClick={handleClearForm}>
             {t("Clean")}
           </button>
-          <button type="submit" style={styles.button}>
+          <button type="submit" className="btn-primary">
             {t("Add")}
           </button>
         </div>
