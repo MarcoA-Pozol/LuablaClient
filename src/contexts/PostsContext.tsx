@@ -1,8 +1,8 @@
 import { createContext, useState, useEffect } from "react";
-import { Post } from "../schemas/Post";
+import type { Post } from "../schemas/Post";
 import type { ReactNode, SetStateAction } from "react";
 import { useLanguages } from "../hooks/useLanguages";
-import { fetchPostsByLanguage } from "../requests/posts";
+import { getPostsByLanguage } from "../requests/posts";
 
 type PostsContextType = {
     postsList: Post[];
@@ -20,7 +20,7 @@ const PostsProvider = ({children}:PostsProviderProps) => {
     const [postsList, setPostsList] = useState<Post[]>([]);
 
     useEffect(() => {
-        setPostsList(fetchPostsByLanguage(languageToLearn));
+        getPostsByLanguage(languageToLearn, setPostsList);
     }, [languageToLearn]);
 
     return (

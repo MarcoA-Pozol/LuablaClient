@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
+import { fetchUserDecks, fetchLibraryDecks } from "../requests/decks";
 import type { Deck } from "../schemas/Deck";
 import type { ReactNode, SetStateAction } from "react";
 import { useLanguages } from "../hooks/useLanguages";
