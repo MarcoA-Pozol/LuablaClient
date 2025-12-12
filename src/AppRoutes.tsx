@@ -12,6 +12,7 @@ import { ProtectedRoute } from "./components/General/ProtectedRoute.tsx";
 import DecksListsProvider from "./contexts/DecksListsContext.tsx";
 import LanguagesProvider from "./contexts/LanguagesContext.tsx";
 import SocialDataProvider from "./contexts/SocialDataContext.tsx";
+import PostsProvider from "./contexts/PostsContext.tsx";
 
 const AppRoutes = () => {
     return (
@@ -39,7 +40,9 @@ const AppRoutes = () => {
                         <LanguagesProvider>
                             <SocialDataProvider>
                                 <DecksListsProvider>
-                                    <HubView/>
+                                    <PostsProvider>    
+                                        <HubView/>
+                                    </PostsProvider>    
                                 </DecksListsProvider>
                             </SocialDataProvider>
                         </LanguagesProvider>
