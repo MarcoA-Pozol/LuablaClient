@@ -6,7 +6,7 @@ import { useBaseApiUrl } from "../hooks/useBaseApiUrl";
 
 export const getPostsByLanguage = async (language:string, setPosts:React.Dispatch<SetStateAction<Post[]>>) => {
     try {
-        const response = await axios.get(useBaseApiUrl("post/all"), {
+        const response = await axios.get(useBaseApiUrl("/hub/posts/all"), {
             params: {language:language},
             withCredentials:true,
             headers:{
