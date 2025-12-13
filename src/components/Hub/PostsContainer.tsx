@@ -20,21 +20,21 @@ export const PostsContainer = () => {
       {postsList.map((post) => (
         <div key={post.id} className="post-card">
           <p className="author-label">
-            <FaClock /> {post.date}
+            <FaClock /> {post.created_at}
           </p>
 
-          <h2 className="post-topic">{post.topic}</h2>
+          <h2 className="post-topic">{post.title}</h2>
 
           <div className="post-author">
-            {post.author.avatar}
+            {post.author.profilePicture}
             <div>
-              <p className="author-name">{post.author.name}</p>
+              <p className="author-name">{post.author.username}</p>
               <p className="author-label">Author</p>
             </div>
           </div>
 
           <div className="post-answer">
-            <p>{post.answer}</p>
+            <p>{post.opinion}</p>
           </div>
 
           {/* Comments Section */}
@@ -62,8 +62,8 @@ export const PostsContainer = () => {
             <div className="comments-list">
               {post.comments.map((comment) => (
                 <div key={comment.id} className="comment-item">
-                  <p className="comment-user">{comment.user}</p>
-                  <p className="comment-content">{comment.content}</p>
+                  <p className="comment-user">{comment.author.username}</p>
+                  <p className="comment-content">{comment.opinion}</p>
                 </div>
               ))}
             </div>
