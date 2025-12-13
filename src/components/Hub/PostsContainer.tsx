@@ -88,7 +88,7 @@ export const PostsContainer = () => {
 
       <button onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
       {showCreatePostForm === true &&
-        <CreatePostForm setShowCreatePostForm={setShowCreatePostForm}/>
+        <CreatePostForm setShowCreatePostForm={setShowCreatePostForm} showCreatePostForm={showCreatePostForm}/>
       }
     </div>
   );
