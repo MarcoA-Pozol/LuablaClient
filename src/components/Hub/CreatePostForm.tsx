@@ -66,12 +66,6 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
     setShowCreatePostForm(false);
   };
 
-  // Toggle opinion mode
-  const toggleOpinionMode = (mode: "written" | "spoken" | "none") => {
-    // This would need to update a hidden input field in your form
-    return mode;
-  };
-
   return (
     <>
       {showCreatePostForm && (
@@ -83,92 +77,75 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
             encType="multipart/form-data"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="createpost-card">
-              <header className="createpost-header">
-                <h2>{t("Create New Post")}</h2>
-                <button
-                  className="createpost-close"
-                  type="button"
-                  title={t("Close")}
-                  onClick={() => setShowCreatePostForm(false)}
-                >
-                  ✕
-                </button>
-              </header>
+              <div className="createpost-card">
+                <header className="createpost-header">
+                  <h2>{t("Create New Post")}</h2>
+                  <button
+                    className="createpost-close"
+                    type="button"
+                    title={t("Close")}
+                    onClick={() => setShowCreatePostForm(false)}
+                  >
+                    ✕
+                  </button>
+                </header>
 
-              {/* Hidden field for opinion_type */}
-              <input type="hidden" name="opinion_type" value="none" />
+                {/* Hidden field for opinion_type */}
+                <input type="hidden" name="opinion_type" value="none" />
 
-              <label className="field">
-                <span>{t("Title")}</span>
-                <input
-                  type="text"
-                  name="title"
-                  placeholder={t("Title...")}
-                  required
-                  maxLength={150}
-                />
-              </label>
+                <label className="field">
+                  <span>{t("Title")}</span>
+                  <input
+                    type="text"
+                    name="title"
+                    placeholder={t("Title...")}
+                    required
+                    maxLength={150}
+                  />
+                </label>
 
-              <div className="field inline">
-                <label>{t("Opinion Format")}:</label>
-                <select 
-                  name="opinion_mode" 
-                  onChange={(e) => {
-                    const mode = e.target.value as "written" | "spoken" | "none";
-                    // Update the hidden opinion_type field
-                    const hiddenInput = document.querySelector('[name="opinion_type"]') as HTMLInputElement;
-                    if (hiddenInput) hiddenInput.value = mode;
-                  }}
-                >
-                  <option value="none">{t("No Opinion")}</option>
-                  <option value="written">{t("Written Opinion")}</option>
-                  <option value="spoken">{t("Spoken Opinion")}</option>
-                </select>
+                {/* Written opinion field - conditionally rendered in JS if needed */}
+                <label className="field">
+                  <span>{t("Your Opinion (Written)")}</span>
+                  <textarea
+                    name="opinion"
+                    placeholder={t("Write Your Opinion About The Post (Optional)...")}
+                    rows={4}
+                  />
+                </label>
+
+                {/* Audio recorder - you might want to conditionally show this */}
+                <div className="field">
+                  <span>{t("Your Opinion (Recorded)")}</span>
+                  <AudioRecorder
+                    onRecordingComplete={(blob) => {
+                      // Store the blob in recorderControls
+                      recorderControls.recordingBlob = blob;
+                    }}
+                    recorderControls={recorderControls}
+                    downloadOnSavePress={false}
+                    showVisualizer={true}
+                  />
+                </div>
+
+                <label className="field">
+                  <span>{t("Image (optional)")}</span>
+                  <input type="file" name="image" accept="image/*" />
+                </label>
+
+                <div className="form-actions">
+                  <button
+                    type="button"
+                    className="btn secondary"
+                    onClick={() => setShowCreatePostForm(false)}
+                  >
+                    {t("Cancel")}
+                  </button>
+                  <button type="submit" className="btn primary">
+                    {t("Publish")}
+                  </button>
+                </div>
               </div>
-
-              {/* Written opinion field - conditionally rendered in JS if needed */}
-              <label className="field">
-                <span>{t("Your Opinion (Written)")}</span>
-                <textarea
-                  name="opinion"
-                  placeholder={t("Write Your Opinion About The Post (Optional)...")}
-                  rows={4}
-                />
-              </label>
-
-              {/* Audio recorder - you might want to conditionally show this */}
-              <div className="field">
-                <span>{t("Your Opinion (Recorded)")}</span>
-                <AudioRecorder
-                  onRecordingComplete={(blob) => {
-                    // Store the blob in recorderControls
-                    recorderControls.recordingBlob = blob;
-                  }}
-                  recorderControls={recorderControls}
-                  downloadOnSavePress={false}
-                  showVisualizer={true}
-                />
-              </div>
-
-              <label className="field">
-                <span>{t("Image (optional)")}</span>
-                <input type="file" name="image" accept="image/*" />
-              </label>
-
-              <div className="form-actions">
-                <button
-                  type="button"
-                  className="btn secondary"
-                  onClick={() => setShowCreatePostForm(false)}
-                >
-                  {t("Cancel")}
-                </button>
-                <button type="submit" className="btn primary">
-                  {t("Create Post")}
-                </button>
-              </div>
-            </div>
           </form>
         </div>
       )}
