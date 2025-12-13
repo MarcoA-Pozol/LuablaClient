@@ -2,7 +2,7 @@ import type { SetStateAction } from "react";
 import type React from "react";
 import { cefrLevelsList, jlptLevelsList, hskLevelsList, topikLevelsList } from "../../datasets/AppView";
 import { handleObjectCreation, clearFormFields } from "../../functions/handleObjectCreation";
-import { fetchUserDecks } from "../../functions/fetchDecks";
+import { fetchUserDecks } from "../../requests/decks";
 import { useDecksLists } from "../../hooks/useDecksLists";
 import { useLanguages } from "../../hooks/useLanguages";
 import { createNotification } from "../../functions/createNotification";

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { handleObjectCreation, clearFormFields } from "../../functions/handleObjectCreation";
-import { fetchUserDecks } from "../../functions/fetchDecks";
+import { fetchUserDecks } from "../../requests/decks";
 import { useDecksLists } from "../../hooks/useDecksLists";
 import { useLanguages } from "../../hooks/useLanguages";
 import { useTranslation } from "react-i18next";

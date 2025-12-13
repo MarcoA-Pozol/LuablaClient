@@ -4,7 +4,7 @@ import { handleAcquireDeck } from "../../functions/handleAcquireDeck";
 import { useTemporaryMessage } from "../../hooks/useTemporaryMessage";
 import { TemporaryMessage } from "../General/TemporaryMessage";
 import { removeFromLibraryDecks } from "../../utils/removeFromLibraryDecks";
-import { fetchUserDecks } from "../../functions/fetchDecks";
+import { fetchUserDecks } from "../../requests/decks";
 import type { LibraryDeckProps } from "../../types/AppView/LibraryDeckProps";
 import { useLibraryDeckStyles } from "../../styles/AppView/libraryDeck";
 import { useDecksLists } from "../../hooks/useDecksLists";

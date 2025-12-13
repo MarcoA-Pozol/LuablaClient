@@ -8,7 +8,7 @@ import { DeckPracticeContainer } from "../components/Flashcards/DeckPracticeCont
 import { BottomOptionsBar } from "../components/Flashcards/BottomOptionsBar";
 import { useAuth } from "../App";
 import { useEffect, useState } from "react";
-import { fetchUserDecks, fetchLibraryDecks } from "../functions/fetchDecks";
+import { fetchUserDecks, fetchLibraryDecks } from "../requests/decks";
 import { useDecksLists } from "../hooks/useDecksLists";
 import { useLanguages } from "../hooks/useLanguages";
 import { useSocialData } from "../hooks/useSocialData";
