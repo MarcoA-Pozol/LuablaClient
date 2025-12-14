@@ -66,6 +66,11 @@
   font-style: italic;
 }
 
+#post-image {
+  width: 100%;
+  max-width: 680px;
+}
+
 .post-answer {
   background-color: #c0ddff;
   border: 1px solid #cfe1ff;

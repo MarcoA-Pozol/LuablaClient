@@ -37,6 +37,8 @@ export const PostsContainer = () => {
             <p>{post.opinion}</p>
           </div>
 
+          {post.image && <img id="post-image" src={`http://localhost:8600/${post.image}`} alt={post.image}/>  }
+
           {/* Comments Section */}
           <button
             onClick={() => toggleComments(post.id)}
