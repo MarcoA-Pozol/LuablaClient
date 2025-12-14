@@ -4,7 +4,7 @@ import { useBaseApiUrl } from "../hooks/useBaseApiUrl";
 export const fetchWordSentences = async (language:string, userNativeLanguage:string, word:string) => {
 
     try {
-        const response = await axios.post(useBaseApiUrl("/flashcards/completeWordData"), 
+        const response = await axios.post(useBaseApiUrl("/flashcards/completeWordWithAI"), 
             {language:language, native_language:userNativeLanguage, word:word},
             {
                 
