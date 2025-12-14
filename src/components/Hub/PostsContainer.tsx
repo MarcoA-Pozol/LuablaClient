@@ -26,7 +26,7 @@ export const PostsContainer = () => {
           <h2 className="post-topic">{post.title}</h2>
 
           <div className="post-author">
-            {post.author.profilePicture}
+            <img src={`http://localhost:8600/${post.author.profilePicture}`} alt={post.author.profilePicture}/>  
             <div>
               <p className="author-name">{post.author.username}</p>
               <p className="author-label">Author</p>

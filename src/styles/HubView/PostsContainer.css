@@ -41,6 +41,13 @@
   margin-bottom: 1rem;
 }
 
+.post-author img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .post-avatar {
   font-size: 2rem;
   color: #3b82f6;
