@@ -6,8 +6,7 @@ export const fetchWordSentences = async (language:string, userNativeLanguage:str
     try {
         const response = await axios.post(useBaseApiUrl("/flashcards/completeWordWithAI"), 
             {language:language, native_language:userNativeLanguage, word:word},
-            {
-                
+            { 
                 withCredentials: true,
                 headers: {
                     "Content-Type": "application/json"
