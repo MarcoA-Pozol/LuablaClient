@@ -35,7 +35,7 @@ export const FlashcardCreationForm = ({selectedDeck}:FlashcardCreationFormProps)
       handleObjectCreation(
         event,
         useBaseApiUrl("/flashcards/flashcard"),
-        { deckId: selectedDeck, language: languageToLearn},
+        { deckId: selectedDeck, language: languageToLearn },
         { "Content-Type": "multipart/form-data" },
         "flashcard"
       );
