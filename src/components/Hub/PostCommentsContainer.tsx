@@ -16,7 +16,7 @@ export const PostCommentsContainer = ({post, openComments}:PostCommentsContainer
             </div>
 
             {/* Add comment input */}
-            <AddPostCommentForm/>
+            <AddPostCommentForm post={post}/>
         </div>
     );
 }
