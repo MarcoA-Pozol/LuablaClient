@@ -1,7 +1,7 @@
 import type { PostCardI } from "../../interfaces/Post";
 import {FaChevronDown, FaChevronUp, FaCommentDots, FaClock,} from "react-icons/fa";
 import { useState } from "react";
-import { AddPostCommentForm } from "./AddPostCommentForm";
+import { PostCommentsContainer } from "./PostCommentsContainer";
 
 
 export const PostCard = ({post, post_key}:PostCardI) => {
@@ -50,19 +50,7 @@ export const PostCard = ({post, post_key}:PostCardI) => {
             )}
             </button>
 
-            <div className={`comments-container ${openComments[post.id] ? "open" : ""}`}>
-                <div className="comments-list">
-                    {post.comments.map((comment) => (
-                    <div key={comment.id} className="comment-item">
-                        <p className="comment-user">{comment.author.username}</p>
-                        <p className="comment-content">{comment.opinion}</p>
-                    </div>
-                    ))}
-                </div>
-
-                {/* Add comment input */}
-                <AddPostCommentForm/>
-            </div>
+            <PostCommentsContainer post={post} openComments={openComments}/>
         </div>
     );
 }
