@@ -1,12 +1,8 @@
-import type { Post } from "../../schemas/Post";
+import type { PostCardI } from "../../interfaces/Post";
 import {FaChevronDown, FaChevronUp, FaCommentDots, FaClock,} from "react-icons/fa";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-interface PostCardI {
-    post:Post;
-    post_key:number;
-}
 
 export const PostCard = ({post, post_key}:PostCardI) => {
     const { t } = useTranslation();

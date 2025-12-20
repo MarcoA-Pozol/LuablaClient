@@ -8,7 +8,7 @@ import { PostCard } from "./PostCard";
 export const PostsContainer = () => {
   const { t } = useTranslation();
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
-  const {postsList} = usePosts(); // id, topic, author (name, profile_image), opinion, record/audio, image, date, comments of the post(id, username, comment, audio, image)
+  const {postsList} = usePosts(); 
 
   return (
     <div className="posts-container">
