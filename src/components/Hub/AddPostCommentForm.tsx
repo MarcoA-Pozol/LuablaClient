@@ -30,8 +30,10 @@ export const AddPostCommentForm = ({post}:AddPostCommentFormI) => {
 
     return (
         <form onSubmit={handlePostCommentCreation} className="add-comment" method="POST" encType="multipart/form-data" onClick={(e) => e.stopPropagation()}>
-            <textarea placeholder={t("Write your comment here...")} className="comment-textarea" name="opinion"/>
+            <textarea placeholder={t("Write your comment here...")} className="comment-textarea" name="comment"/>
             
+            <input className="field" hidden={true} name="post_id" value={post.id} placeholder={`${post.id}`}></input>
+
             <label className="field">
                 <span>{t("Image (Optional)")}</span>
                 <input type="file" name="image" accept="image/*"></input>
