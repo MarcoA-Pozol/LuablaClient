@@ -10,7 +10,7 @@ export const AddPostCommentForm = () => {
             className="comment-textarea"
             ></textarea>
             <button className="comment-button">
-            {t("Post Comment")}
+            {t("Submit")}
             </button>
         </div>
     );
