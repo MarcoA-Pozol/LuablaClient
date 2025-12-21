@@ -11,7 +11,7 @@ export const PostCommentsContainer = ({post, openComments}:PostCommentsContainer
                 <div key={comment.id} className="comment-item">
                     <p className="comment-user">{comment.author.username}</p>
                     <p className="comment-content">{comment.comment}</p>
-                    <p className="comment-image">{comment.image}</p>
+                    <img src={`http://localhost:8600/${comment.image}`} className="comment-image" alt={comment.image}/>
                     <p className="comment-created-at">{comment.created_at}</p>
                 </div>
                 ))}
