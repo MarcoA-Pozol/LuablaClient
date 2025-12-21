@@ -13,7 +13,7 @@ export type CommentAuthor = {
 export type PostComment = {
     id: number;
     author: CommentAuthor;
-    opinion: string;
+    comment: string;
     speech: any;
     image: any;
     created_at: any;

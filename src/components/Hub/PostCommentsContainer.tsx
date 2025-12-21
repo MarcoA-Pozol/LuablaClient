@@ -10,7 +10,9 @@ export const PostCommentsContainer = ({post, openComments}:PostCommentsContainer
                 {post.comments.map((comment) => (
                 <div key={comment.id} className="comment-item">
                     <p className="comment-user">{comment.author.username}</p>
-                    <p className="comment-content">{comment.opinion}</p>
+                    <p className="comment-content">{comment.comment}</p>
+                    <p className="comment-image">{comment.image}</p>
+                    <p className="comment-created-at">{comment.created_at}</p>
                 </div>
                 ))}
             </div>
