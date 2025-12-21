@@ -1,7 +1,6 @@
 import type { PostCommentsContainerI } from "../../interfaces/Post";
 import { AddPostCommentForm } from "./AddPostCommentForm";
-
-
+import { timeAgo } from "../../functions/timeAgo";
 
 export const PostCommentsContainer = ({post, openComments}:PostCommentsContainerI) => {
     return (
@@ -12,7 +11,7 @@ export const PostCommentsContainer = ({post, openComments}:PostCommentsContainer
                     <p className="comment-user">{comment.author.username}</p>
                     <p className="comment-content">{comment.comment}</p>
                     {comment.image && <img src={`http://localhost:8600/${comment.image}`} className="comment-image" alt={comment.image}/>}
-                    <p className="comment-created-at">{comment.created_at}</p>
+                    <p className="comment-created-at">{timeAgo(comment.created_at)}</p>
                 </div>
                 ))}
             </div>
