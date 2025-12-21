@@ -67,8 +67,12 @@
 }
 
 #post-image {
-  width: 100%;
-  max-width: 680px;
+  width: 60%;
+  height: auto;
+  display: flex;
+  margin-inline: auto;
+  border-radius: 20px;
+  border: 2px solid #2563eb;
 }
 
 .post-answer {
