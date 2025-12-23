@@ -2,6 +2,7 @@ import type { PostCardI } from "../../interfaces/Post";
 import {FaChevronDown, FaChevronUp, FaCommentDots, FaClock,} from "react-icons/fa";
 import { useState } from "react";
 import { PostCommentsContainer } from "./PostCommentsContainer";
+import { timeAgo } from "../../functions/timeAgo";
 
 
 export const PostCard = ({post, post_key}:PostCardI) => {
@@ -14,7 +15,7 @@ export const PostCard = ({post, post_key}:PostCardI) => {
     return (
         <div key={post_key} className="post-card">
             <p className="author-label">
-                <FaClock /> {post.created_at}
+                <FaClock /> {timeAgo(post.created_at)}
             </p>
 
             <h2 className="post-topic">{post.title}</h2>

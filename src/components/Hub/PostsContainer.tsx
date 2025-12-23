@@ -12,18 +12,24 @@ export const PostsContainer = () => {
 
   return (
     <div className="posts-container">
-      {postsList.map((post) => (
-        <PostCard post={post} post_key={post.id}/>
-      ))}
+      <div className="create-post-button">
+        <button onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
+        {showCreatePostForm === true &&
+          <CreatePostForm setShowCreatePostForm={setShowCreatePostForm} showCreatePostForm={showCreatePostForm}/>
+        }
+      </div>
+      
+      <div className="posts-list">
+        {postsList.map((post) => (
+          <PostCard post={post} post_key={post.id}/>
+        ))}
+
+      </div>
 
       <p className="language-footer">
         {t("Don’t forget to respect other people's opinions while commenting")}
       </p>
 
-      <button onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
-      {showCreatePostForm === true &&
-        <CreatePostForm setShowCreatePostForm={setShowCreatePostForm} showCreatePostForm={showCreatePostForm}/>
-      }
     </div>
   );
 };
