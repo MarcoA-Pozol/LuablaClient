@@ -12,8 +12,8 @@ export const PostsContainer = () => {
 
   return (
     <div className="posts-container">
-      <div className="create-post-button">
-        <button onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
+      <div >
+        <button className="create-post-button" onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
         {showCreatePostForm === true &&
           <CreatePostForm setShowCreatePostForm={setShowCreatePostForm} showCreatePostForm={showCreatePostForm}/>
         }
