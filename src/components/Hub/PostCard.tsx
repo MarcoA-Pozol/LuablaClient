@@ -15,18 +15,19 @@ export const PostCard = ({post, post_key}:PostCardI) => {
     return (
         <div key={post_key} className="post-card">
             <p className="author-label">
-                <FaClock /> {timeAgo(post.created_at)}
+                <div className="post-author">
+                    <img src={`http://localhost:8600/${post.author.profilePicture}`} alt={post.author.profilePicture}/>  
+                    <p className="author-name">{post.author.username}</p>
+                </div>
+                <h2 style={{color:"#555"}}> • </h2>
+                <div className="datetime-label">
+                    <FaClock/> 
+                    {timeAgo(post.created_at)}
+                </div>
             </p>
+            <hr id="short-hr"></hr>
 
             <h2 className="post-topic">{post.title}</h2>
-
-            <div className="post-author">
-                <img src={`http://localhost:8600/${post.author.profilePicture}`} alt={post.author.profilePicture}/>  
-                <div>
-                    <p className="author-name">{post.author.username}</p>
-                    <p className="author-label">Author</p>
-                </div>
-            </div>
 
             <div className="post-answer">
                 <p>{post.opinion}</p>
