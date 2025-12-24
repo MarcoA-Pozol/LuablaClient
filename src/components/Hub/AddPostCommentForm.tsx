@@ -54,6 +54,7 @@ const handlePostCommentCreation = async (event: React.FormEvent<HTMLFormElement>
         // Notify post's comment author & post's author
         // For the auth user (person who commented)
         await createNotification(
+        authUser.username,
         `Comment added to "${post.title}"`,
         `You commented on ${post.author.username}'s post.`,
         "POST_COMMENT"
@@ -61,6 +62,7 @@ const handlePostCommentCreation = async (event: React.FormEvent<HTMLFormElement>
 
         // For the post author
         await createNotification(
+        post.author.username,
         `New comment on your post`,
         `${authUser?.username ?? 'Someone'} commented on your post "${post.title}": "${newComment.comment.toString().slice(0, 100)}${newComment.comment.toString().length > 100 ? '...' : ''}"`,
         "POST_COMMENT"
