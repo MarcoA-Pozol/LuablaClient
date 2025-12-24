@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 // import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import { createNotification } from "../../functions/createNotification";
 import { useAuth } from "../../App";
-import type { Post } from "../../schemas/Post";
+import type { Post, PostComment } from "../../schemas/Post";
 import { handleObjectCreation } from "../../functions/handleObjectCreation";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import { usePosts } from "../../hooks/usePosts";
+import { useSocialData } from "../../hooks/useSocialData";
 
 interface AddPostCommentFormI {
     post:Post;
@@ -16,13 +17,14 @@ export const AddPostCommentForm = ({post}:AddPostCommentFormI) => {
     const { t } = useTranslation();
     const {authUser} = useAuth();
     const { setPostsList } = usePosts(); 
+    const { fetchNotifications } = useSocialData();
+    
 
 const handlePostCommentCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Form & its data
     const form = event.currentTarget;
-    const data = new FormData(form);
 
     // Send POST request
     try {
@@ -34,7 +36,7 @@ const handlePostCommentCreation = async (event: React.FormEvent<HTMLFormElement>
             "post comment"
         );
 
-        const newComment = responseData.item;
+        const newComment = responseData.item as PostComment;
         
         // Add new comment to the existing list of comments
         // Use 'p' or 'currentPost' to avoid shadowing the outer 'post' prop
@@ -50,10 +52,22 @@ const handlePostCommentCreation = async (event: React.FormEvent<HTMLFormElement>
         );
 
         // Notify post's comment author & post's author
-        await createNotification(post.title, "You commented on an user post.", "POST_COMMENT");
-        await createNotification(post.title, `${authUser?.name ?? 'Someone'} commented on your post: ${data.get("comment")}`, "POST_COMMENT");
+        // For the auth user (person who commented)
+        await createNotification(
+        `Comment added to "${post.title}"`,
+        `You commented on ${post.author.username}'s post.`,
+        "POST_COMMENT"
+        );
+
+        // For the post author
+        await createNotification(
+        `New comment on your post`,
+        `${authUser?.username ?? 'Someone'} commented on your post "${post.title}": "${newComment.comment.toString().slice(0, 100)}${newComment.comment.toString().length > 100 ? '...' : ''}"`,
+        "POST_COMMENT"
+        );
+        fetchNotifications();
         
-        // Optional: Clear the form after successful submission
+        // Clear the form
         form.reset();
         
     } catch (error) {
