@@ -21,7 +21,7 @@ export const PostsContainer = () => {
       
       <div className="posts-list">
         {postsList.map((post) => (
-          <PostCard post={post} post_key={post.id}/>
+          <PostCard post={post}/>
         ))}
 
       </div>

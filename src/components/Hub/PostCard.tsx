@@ -5,7 +5,7 @@ import { PostCommentsContainer } from "./PostCommentsContainer";
 import { timeAgo } from "../../functions/timeAgo";
 
 
-export const PostCard = ({post, post_key}:PostCardI) => {
+export const PostCard = ({post}:PostCardI) => {
     const [openComments, setOpenComments] = useState<{ [key: number]: boolean }>({});
     
     const toggleComments = (postId: number) => {
@@ -13,16 +13,19 @@ export const PostCard = ({post, post_key}:PostCardI) => {
     };
 
     return (
-        <div key={post_key} className="post-card">
+        <div className="post-card">
             <p className="author-label">
                 <div className="post-author">
-                    <img src={`http://localhost:8600/${post.author.profilePicture}`} alt={post.author.profilePicture}/>  
+                    <img src={`http://localhost:8600/${post.author.profile_picture}`} alt={post.author.profile_picture}/>  
                     <p className="author-name">{post.author.username}</p>
                 </div>
                 <h2 style={{color:"#555"}}> • </h2>
                 <div className="datetime-label">
                     <FaClock/> 
                     {timeAgo(post.created_at)}
+                </div>
+                <div>
+                    {post.id}
                 </div>
             </p>
             <hr id="short-hr"></hr>

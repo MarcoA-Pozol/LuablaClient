@@ -6,6 +6,9 @@ import { useTranslation } from "react-i18next";
 import { handleObjectCreation, clearFormFields } from "../../functions/handleObjectCreation";
 import { createNotification } from "../../functions/createNotification";
 import { useLanguages } from "../../hooks/useLanguages";
+import { usePosts } from "../../hooks/usePosts";
+import { useSocialData } from "../../hooks/useSocialData";
+import type { Post } from "../../schemas/Post";
 
 type CreatePostFormProps = {
   showCreatePostForm: boolean;
@@ -18,6 +21,8 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
 }) => {
   const { t } = useTranslation();
   const { languageToLearn } = useLanguages();
+  const { fetchNotifications } = useSocialData();
+  const {setPostsList} = usePosts();
   
   // Audio recorder controls
   const recorderControls = useAudioRecorder();
@@ -43,14 +48,20 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
     const opinionMode = opinionElement?.value || "none";
     data.append("opinion_type", opinionMode);
     
-    // Submit the form
-    handleObjectCreation(
-      event, 
-      useBaseApiUrl("/hub/post"), 
-      {}, 
-      { "Content-Type": "multipart/form-data" }, 
+    // Submit the form, get the created post and add it to the list
+    const responseData = await handleObjectCreation(
+      event,
+      useBaseApiUrl("/hub/post"),
+      {},
+      { "Content-Type": "multipart/form-data" },
       "post"
     );
+
+    if (!responseData) {
+      return;
+    }
+
+    const newPost = responseData.item as Post
     
     // Clear form fields
     clearFormFields(form, languageToLearn);
@@ -61,7 +72,19 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
       `You published a new post.\nTitle:${data.get("title")}\nLanguage:${languageToLearn}`, 
       "CREATED_POST"
     );
-    
+
+    fetchNotifications();
+
+    // Update postsList after creation
+    // By locally adding the new post to the existing posts list (Better performance - less consistency)
+    setPostsList(prev => [newPost, ...prev]);
+
+    // By fetching entire posts list (Better consistency - less performance)
+    // setTimeout(() => {
+    //   getPostsByLanguage(languageToLearn, setPostsList);
+    // }, 500);
+
+
     // Close form after submission
     setShowCreatePostForm(false);
   };

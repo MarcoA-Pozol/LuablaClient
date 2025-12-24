@@ -16,12 +16,11 @@ export const handleObjectCreation = async (event:React.FormEvent<HTMLFormElement
 
         if (response.status !== 201) {
           alert (`Error while trying to create a${objectToCreateName.startsWith("a") ? "n" : objectToCreateName.startsWith("e") ? "n" : objectToCreateName.startsWith("i") ? "n" : objectToCreateName.startsWith("o") ? "n" : objectToCreateName.startsWith("u") ? "n" : ""}: ${responseData.error}`);
-          return response;
+          return responseData;
         } else {
           alert(`Object created: ${objectToCreateName}`);
-          return response;
+          return responseData;
         }
-
 
     } catch (error) {
         alert(`Creating ${objectToCreateName} failed: ${error}`);

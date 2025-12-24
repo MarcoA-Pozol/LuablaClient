@@ -1,16 +1,35 @@
 import { TopNavBarApp } from "../components/General/TopNavBarApp";
 import { useAuth } from "../App";
 import { HubBottomNav } from "../components/Hub/HubBottomNav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PickLanguageForm } from "../components/Authentication/PickLanguageForm";
 import { PostsContainer } from "../components/Hub/PostsContainer";
 import { TopicsContainer } from "../components/Hub/TopicsContainer";
 import { QuestionsContainer } from "../components/Hub/QuestionsContainer";
+import { getPostsByLanguage } from "../requests/posts";
+import { useSocialData } from "../hooks/useSocialData";
+import { useLanguages } from "../hooks/useLanguages";
+import { usePosts } from "../hooks/usePosts";
 
 
 export const HubView = () => {
     const { authUser } = useAuth();
     const [displayedContainer, setDisplayedContainer] = useState<string>("posts");
+    const {fetchNotifications} =useSocialData();
+    const {languageToLearn} = useLanguages();
+    const {setPostsList} = usePosts();
+
+    useEffect(() => {
+        window.scrollTo({top:0, behavior: "smooth"});
+    }, [displayedContainer]);
+
+    useEffect(() => {
+        fetchNotifications();
+    }, [])
+
+    useEffect(() => {
+        getPostsByLanguage(languageToLearn, setPostsList);
+    }, [languageToLearn])
 
     return (
         <>

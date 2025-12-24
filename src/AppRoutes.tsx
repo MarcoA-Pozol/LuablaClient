@@ -39,11 +39,9 @@ const AppRoutes = () => {
                     <ProtectedRoute>
                         <LanguagesProvider>
                             <SocialDataProvider>
-                                <DecksListsProvider>
-                                    <PostsProvider>    
-                                        <HubView/>
-                                    </PostsProvider>    
-                                </DecksListsProvider>
+                                <PostsProvider>    
+                                    <HubView/>
+                                </PostsProvider>    
                             </SocialDataProvider>
                         </LanguagesProvider>
                     </ProtectedRoute>

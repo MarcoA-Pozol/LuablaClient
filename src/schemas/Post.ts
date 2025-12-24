@@ -1,13 +1,13 @@
 export type PostAuthor = {
     id: number;
     username: string;
-    profilePicture: any;
+    profile_picture: any;
 }
 
 export type CommentAuthor = {
     id: number;
     username: string;
-    profilePicture: string;
+    profile_picture: string;
 }
 
 export type PostComment = {
