@@ -47,7 +47,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
                                 <div style={styles.notificationDivider}></div>
-                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotifications();}} style={{color:"white", backgroundColor:notification.read_status === "Unread" ? "blue" : "darkgray"}}>{notification.read_status === "Unread" ? t("Mark as read") : t("Mark as unread")}</button>
+                                <button onClick={async() => {await toggleNotificationReadStatus(notification.id); fetchNotifications();}} style={notification.read_status === "Unread" ? styles.statusButton : styles.statusButtonUnread}>{notification.read_status === "Unread" ? t("Mark as read") : t("Mark as unread")}</button>
                             </div>
                         ))
                     ) : (
