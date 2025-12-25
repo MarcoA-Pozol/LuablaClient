@@ -1,12 +1,12 @@
 import { useSocialData } from "../../hooks/useSocialData";
 import { useState, type SetStateAction, useEffect } from "react";
 import { useNotificationsPopUpWindowStyles } from "../../styles/SocialView/notificationsPopUpWindow";
-import { format } from "date-fns";
 import { fetchAllNotifications } from "../../functions/fetchAllNotifications";
 import { NotificationsFilter } from "./NotificationsFilter";
 import type { NotificationSchema } from "../../schemas/Notification";
 import { toggleNotificationReadStatus } from "../../functions/toggleNotificationReadStatus";
 import { useTranslation } from "react-i18next";
+import { timeAgo } from "../../functions/timeAgo";
 
 interface NotificationsPopUpWindowProps {
     showNotificationsPopUpWindow:boolean;
@@ -43,7 +43,7 @@ export const NotificationsPopUpWindow = ({showNotificationsPopUpWindow, setShowN
                                 <div style={styles.notificationHeader}>
                                     <h3 style={styles.title}>{notification.title}</h3>
                                     <span style={styles.timestamp}>{t(notification.category_label)}</span>
-                                    <span style={styles.timestamp}>{format(new Date(notification.created_at), "MMM dd, yyyy hh:mm a")}</span>
+                                    <span style={styles.timestamp}>{timeAgo(notification.created_at)}</span>
                                 </div>
                                 <p style={styles.description}>{notification.description}</p>
                                 <div style={styles.notificationDivider}></div>
