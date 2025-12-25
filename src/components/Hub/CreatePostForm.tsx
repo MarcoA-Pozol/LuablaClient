@@ -9,6 +9,7 @@ import { useLanguages } from "../../hooks/useLanguages";
 import { usePosts } from "../../hooks/usePosts";
 import { useSocialData } from "../../hooks/useSocialData";
 import type { Post } from "../../schemas/Post";
+import { useAuth } from "../../App";
 
 type CreatePostFormProps = {
   showCreatePostForm: boolean;
@@ -23,6 +24,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
   const { languageToLearn } = useLanguages();
   const { fetchNotifications } = useSocialData();
   const {setPostsList} = usePosts();
+  const {authUser} = useAuth();
   
   // Audio recorder controls
   const recorderControls = useAudioRecorder();
@@ -68,6 +70,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
     
     // Create notification
     await createNotification(
+      authUser.username,
       "Published Post!", 
       `You published a new post.\nTitle:${data.get("title")}\nLanguage:${languageToLearn}`, 
       "CREATED_POST"

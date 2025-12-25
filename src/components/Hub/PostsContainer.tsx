@@ -4,11 +4,28 @@ import "../../styles/HubView/PostsContainer.css";
 import { CreatePostForm } from "./CreatePostForm";
 import { usePosts } from "../../hooks/usePosts";
 import { PostCard } from "./PostCard";
+import axios from "axios";
+import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
+import type { Post } from "../../schemas/Post";
 
 export const PostsContainer = () => {
   const { t } = useTranslation();
   const [showCreatePostForm, setShowCreatePostForm] = useState(false);
-  const {postsList} = usePosts(); 
+  const {postsList, setPostsList} = usePosts(); 
+  const [postsPage, setPostsPage] = useState<number>(0);
+
+  const fetchMorePosts = async () => {
+    const nextPage = postsPage + 1;
+    setPostsPage(nextPage);
+    const response = await axios.get(useBaseApiUrl(`/hub/posts?page=${nextPage}`));
+    const data = response.data.items as Post[];
+    if (!data || data.length === 0) {
+      return;
+    }
+
+    // Append fetched posts to the existing postsList
+    setPostsList(prev => [...prev, ...data]);
+  }
 
   return (
     <div className="posts-container">
@@ -24,6 +41,9 @@ export const PostsContainer = () => {
           <PostCard post={post}/>
         ))}
 
+        <button id="see-more-posts" onClick={() => fetchMorePosts()}>
+          See more...
+        </button>
       </div>
 
       <p className="language-footer">
