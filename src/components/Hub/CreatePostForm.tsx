@@ -33,7 +33,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    
+
     // Get audio blob if exists
     let audioBlob: Blob | null = null;
     if (recorderControls.recordingBlob) {
@@ -118,6 +118,9 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
 
                 {/* Hidden field for opinion_type */}
                 <input type="hidden" name="opinion_type" value="none" />
+
+                <input type="hidden" name="language" value={languageToLearn} />
+
 
                 <label className="field">
                   <span>{t("Title")}</span>

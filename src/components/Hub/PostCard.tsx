@@ -24,9 +24,6 @@ export const PostCard = ({post}:PostCardI) => {
                     <FaClock/> 
                     {timeAgo(post.created_at)}
                 </div>
-                <div>
-                    {post.id}
-                </div>
             </p>
             <hr id="short-hr"></hr>
 
