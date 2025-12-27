@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/HubView/CreatePostForm.css";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import { useTranslation } from "react-i18next";
-import { handleObjectCreation, clearFormFields } from "../../functions/handleObjectCreation";
+import { clearFormFields } from "../../functions/handleObjectCreation";
+import axios from "axios";
 import { createNotification } from "../../functions/createNotification";
 import { useLanguages } from "../../hooks/useLanguages";
 import { usePosts } from "../../hooks/usePosts";
@@ -25,45 +26,53 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
   const { fetchNotifications } = useSocialData();
   const {setPostsList} = usePosts();
   const {authUser} = useAuth();
-  
+  const [audioRecord, setAudioRecord] = useState<Blob | null>(null);
 
-  const handlePostCreation = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
+const handlePostCreation = async (
+  event: React.FormEvent<HTMLFormElement>
+) => {
+  event.preventDefault();
 
-    // Submit the form, get the created post and add it to the list
-    const responseData = await handleObjectCreation(
-      event,
+  const form = event.currentTarget;
+  const data = new FormData(form);
+
+  if (audioRecord) {
+    data.append("speech", audioRecord, "speech.webm");
+  }
+
+  try {
+    const response = await axios.post(
       useBaseApiUrl("/hub/post"),
-      {},
-      { "Content-Type": "multipart/form-data" },
-      "post"
+      data,
+      {
+        withCredentials:true
+      }
     );
 
-    if (!responseData) {
-      return;
-    }
+    const responseData = response.data;
+    if (!responseData) return;
 
-    const newPost = responseData.item as Post
-    
-    // Clear form fields
+    const newPost = responseData.item as Post;
+
     clearFormFields(form, languageToLearn);
-    
-    // Create notification
+
     await createNotification(
       authUser.username,
-      "Published Post!", 
-      `You published a new post.\nTitle:${data.get("title")}\nLanguage:${languageToLearn}`, 
+      "Published Post!",
+      `You published a new post.\nTitle:${data.get("title")}\nLanguage:${languageToLearn}`,
       "CREATED_POST"
     );
 
     fetchNotifications();
+    setPostsList(prev => [newPost, ...prev]);
+    setShowCreatePostForm(false);
 
-    setPostsList(prev => [newPost, ...prev]); // Update postsList after creation by locally adding the new post to the existing posts list (Better performance - less consistency)
+  } catch (error) {
+    console.error("Error creating post:", error);
+    // aquí luego puedes meter toast / alert
+  }
+};
 
-    setShowCreatePostForm(false); // Close form after submission
-  };
 
   return (
     <>
@@ -73,7 +82,6 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
             onSubmit={handlePostCreation}
             className="createpost-modal"
             method="POST"
-            encType="multipart/form-data"
             onClick={(e) => e.stopPropagation()}
           >
               <div className="createpost-card">
@@ -113,7 +121,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
                   />
                 </label>
 
-                <AudioRecorder/>
+                <AudioRecorder audioSetter={setAudioRecord}/>
 
                 <label className="field">
                   <span>{t("Image (optional)")}</span>

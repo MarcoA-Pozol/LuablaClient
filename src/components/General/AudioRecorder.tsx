@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 
-const AudioRecorder = () => {
+interface AudioRecorderI {
+    audioSetter: (audio: Blob | null) => void;
+}
+
+const AudioRecorder = ({audioSetter}:AudioRecorderI) => {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const [audioURL, setAudioURL] = useState<string | null>(null);
@@ -18,11 +22,12 @@ const AudioRecorder = () => {
     };
 
     mediaRecorder.onstop = () => {
-      const audioBlob = new Blob(audioChunksRef.current, {
+      const blob = new Blob(audioChunksRef.current, {
         type: "audio/webm",
       });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      setAudioURL(audioUrl);
+
+      setAudioURL(URL.createObjectURL(blob));
+      audioSetter(blob);
     };
 
     mediaRecorder.start();
@@ -39,9 +44,9 @@ const AudioRecorder = () => {
       <h2>Grabador de Audio</h2>
 
       {!isRecording ? (
-        <button onClick={startRecording}>Grabar</button>
+        <button type="button" onClick={startRecording}>Grabar</button>
       ) : (
-        <button onClick={stopRecording}>Detener</button>
+        <button type="button" onClick={stopRecording}>Detener</button>
       )}
 
       {audioURL && (
