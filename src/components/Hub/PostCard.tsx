@@ -33,7 +33,7 @@ export const PostCard = ({post}:PostCardI) => {
                 <p>{post.opinion}</p>
             </div>
 
-            {post.speech && <audio controls src={post.speech}/>}
+            {post.speech && <audio controls src={`http://localhost:8600/${post.speech}`}/>}
 
             {post.image && <img id="post-image" src={`http://localhost:8600/${post.image}`} alt={post.image}/>  }
 
