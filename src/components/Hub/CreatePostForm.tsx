@@ -1,5 +1,4 @@
 import React from "react";
-import { AudioRecorder, useAudioRecorder } from "react-audio-voice-recorder";
 import "../../styles/HubView/CreatePostForm.css";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import { useTranslation } from "react-i18next";
@@ -10,6 +9,7 @@ import { usePosts } from "../../hooks/usePosts";
 import { useSocialData } from "../../hooks/useSocialData";
 import type { Post } from "../../schemas/Post";
 import { useAuth } from "../../App";
+import AudioRecorder from "../General/AudioRecorder";
 
 type CreatePostFormProps = {
   showCreatePostForm: boolean;
@@ -26,30 +26,12 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
   const {setPostsList} = usePosts();
   const {authUser} = useAuth();
   
-  // Audio recorder controls
-  const recorderControls = useAudioRecorder();
 
   const handlePostCreation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
 
-    // Get audio blob if exists
-    let audioBlob: Blob | null = null;
-    if (recorderControls.recordingBlob) {
-      audioBlob = recorderControls.recordingBlob;
-      // Convert blob to File for FormData
-      const audioFile = new File([audioBlob], `voicepost_${Date.now()}.webm`, {
-        type: audioBlob.type || "audio/webm",
-      });
-      data.append("speech", audioFile);
-    }
-    
-    // Get opinion mode from form
-    const opinionElement = form.querySelector('[name="opinion_type"]') as HTMLInputElement;
-    const opinionMode = opinionElement?.value || "none";
-    data.append("opinion_type", opinionMode);
-    
     // Submit the form, get the created post and add it to the list
     const responseData = await handleObjectCreation(
       event,
@@ -78,18 +60,9 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
 
     fetchNotifications();
 
-    // Update postsList after creation
-    // By locally adding the new post to the existing posts list (Better performance - less consistency)
-    setPostsList(prev => [newPost, ...prev]);
+    setPostsList(prev => [newPost, ...prev]); // Update postsList after creation by locally adding the new post to the existing posts list (Better performance - less consistency)
 
-    // By fetching entire posts list (Better consistency - less performance)
-    // setTimeout(() => {
-    //   getPostsByLanguage(languageToLearn, setPostsList);
-    // }, 500);
-
-
-    // Close form after submission
-    setShowCreatePostForm(false);
+    setShowCreatePostForm(false); // Close form after submission
   };
 
   return (
@@ -116,9 +89,6 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
                   </button>
                 </header>
 
-                {/* Hidden field for opinion_type */}
-                <input type="hidden" name="opinion_type" value="none" />
-
                 <input type="hidden" name="language" value={languageToLearn} />
 
 
@@ -143,19 +113,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({
                   />
                 </label>
 
-                {/* Audio recorder - you might want to conditionally show this */}
-                <div className="field">
-                  <span>{t("Your Opinion (Recorded)")}</span>
-                  <AudioRecorder
-                    onRecordingComplete={(blob) => {
-                      // Store the blob in recorderControls
-                      recorderControls.recordingBlob = blob;
-                    }}
-                    recorderControls={recorderControls}
-                    downloadOnSavePress={false}
-                    showVisualizer={true}
-                  />
-                </div>
+                <AudioRecorder/>
 
                 <label className="field">
                   <span>{t("Image (optional)")}</span>
