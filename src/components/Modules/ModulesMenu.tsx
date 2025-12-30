@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBookOpen, FaComments, FaGraduationCap } from 'react-icons/fa';
+import { FaBookOpen, FaComments } from 'react-icons/fa';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
@@ -8,13 +8,11 @@ type ModuleType = [string, string, 'Input' | 'Output', string, string];
 const modulesList: ModuleType[] = [
     ["Flashcards", "Master new words and phrases quickly using dynamic flashcards and practice vocabulary.", "Input", "FaBookOpen", "/flashcards"],
     ["The Hub", "Practice speaking and writing by sharing opinions, answering questions, and discussing topics with others.", "Output", "FaComments", "/hub"],
-    ["Tests & Exams", "Assess your progress, challenge your knowledge, and track your readiness for formal exams.", "Output", "FaGraduationCap", "/exams"]
 ];
 
 const iconMap: { [key: string]: React.ElementType } = {
     FaBookOpen,
     FaComments,
-    FaGraduationCap
 };
 
 export const ModulesMenu = () => {
