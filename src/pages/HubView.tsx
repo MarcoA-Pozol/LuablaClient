@@ -4,13 +4,10 @@ import { HubBottomNav } from "../components/Hub/HubBottomNav";
 import { useState, useEffect } from "react";
 import { PickLanguageForm } from "../components/Authentication/PickLanguageForm";
 import { PostsContainer } from "../components/Hub/PostsContainer";
-import { TopicsContainer } from "../components/Hub/TopicsContainer";
-import { QuestionsContainer } from "../components/Hub/QuestionsContainer";
 import { getPostsByLanguage } from "../requests/posts";
 import { useSocialData } from "../hooks/useSocialData";
 import { useLanguages } from "../hooks/useLanguages";
 import { usePosts } from "../hooks/usePosts";
-
 
 export const HubView = () => {
     const { authUser } = useAuth();
@@ -38,8 +35,6 @@ export const HubView = () => {
                     <TopNavBarApp authUser={authUser}/>
                     <div style={styles.contentContainer}>
                         {displayedContainer === "posts" && (<PostsContainer/>)}
-                        {displayedContainer === "topics" && (<TopicsContainer/>)}
-                        {displayedContainer === "questions" && (<QuestionsContainer/>)}
                     </div>
                     <HubBottomNav setDisplayedContainer={setDisplayedContainer}/>
                 </div>
