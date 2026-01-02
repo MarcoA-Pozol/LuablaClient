@@ -4,7 +4,6 @@ import Testimonials from "../components/Landing/Testimonials";
 import { TopNavBar } from "../components/Landing/TopNavBar";
 import { Footer } from "../components/Landing/Footer";
 import { useTranslation } from "react-i18next";
-import { TestTailwind } from "../components/General/TailwindTest";
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
 import SpeakIMG from "../assets/LandingView/speak.jpg";
@@ -37,8 +36,6 @@ export const LandingView = () => {
                     <a onClick={() => navigateToAuth(false)}><button className="explore-btn">{t("Explore Now")}</button></a>
                 </div>
             )}
-
-            <TestTailwind/>
 
             <section id="why-luabla" className="why-luabla-section">
                 <div className="why-luabla-content">
