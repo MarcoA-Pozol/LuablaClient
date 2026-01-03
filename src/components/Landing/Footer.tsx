@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import FacebookIMG from "../../assets/LandingView/facebook.png";
 import TwitterIMG from "../../assets/LandingView/x.png";
 import InstagramIMG from "../../assets/LandingView/instagram.png";
+import { NeoFaceSVG } from "../General/Svgs";
 
 export const Footer = () => {
     const { t } = useTranslation();
@@ -48,10 +49,7 @@ export const Footer = () => {
                     
                     <div className="flex items-center gap-3 order-2 md:order-1">
                         <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center">
-                            <div className="w-4 h-4 bg-white rounded-full relative">
-                                <div className="absolute top-1 left-1 w-1 h-1 bg-zinc-900 rounded-full"></div>
-                                <div className="absolute top-1 right-1 w-1 h-1 bg-zinc-900 rounded-full"></div>
-                            </div>
+                            <NeoFaceSVG size={20}/>
                         </div>
                         <span className="text-xs font-medium tracking-wide">
                             {t("Developed by")}{" "}

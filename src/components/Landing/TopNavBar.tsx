@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { NeoFaceSVG } from "../General/Svgs";
 
 interface TopNavBarProps {
     authUser: any; 
@@ -39,12 +40,7 @@ export const TopNavBar = ({ authUser, setAuthUser }: TopNavBarProps) => {
                 >
                     <div className="relative">
                         <div className="absolute inset-0 bg-indigo-500 blur-md opacity-0 group-hover:opacity-40 transition-opacity"></div>
-                        <svg viewBox="0 0 100 100" className="w-10 h-10 drop-shadow-md">
-                            <circle cx="50" cy="50" r="45" fill="white" />
-                            <circle cx="30" cy="40" r="10" fill="#18181b" />
-                            <circle cx="70" cy="40" r="10" fill="#18181b" />
-                            <circle cx="50" cy="60" r="8" fill="#18181b" />
-                        </svg>
+                        <NeoFaceSVG size={42}/>
                     </div>
                     <span className="text-2xl font-black tracking-tighter text-white">
                         LUA<span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-violet-400">BLA</span>

@@ -4,6 +4,7 @@ import { TopNavBar } from "../components/Landing/TopNavBar";
 import { Footer } from "../components/Landing/Footer";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../App";
+import { NeoFaceSVG } from "../components/General/Svgs";
 
 // Images
 import BeingHappyIMG from "../assets/LandingView/being_happy_2.jpg";
@@ -78,21 +79,7 @@ export const LandingView = () => {
 
                     <div className="relative flex justify-center items-center animate-fade-in-right">
                         <div className="absolute w-[80%] h-[80%] bg-indigo-500/10 rounded-full blur-3xl animate-pulse"></div>
-                        <svg viewBox="0 0 200 200" className="w-full max-w-125 drop-shadow-[0_0_50px_rgba(99,102,241,0.3)] animate-float">
-                            {/* Panda Head */}
-                            <circle cx="100" cy="100" r="80" fill="white" />
-                            {/* Ears */}
-                            <circle cx="40" cy="40" r="25" fill="#18181b" />
-                            <circle cx="160" cy="40" r="25" fill="#18181b" />
-                            {/* Eyes Patches */}
-                            <ellipse cx="70" cy="90" rx="20" ry="25" fill="#18181b" />
-                            <ellipse cx="130" cy="90" rx="20" ry="25" fill="#18181b" />
-                            {/* Eyes Glow */}
-                            <circle cx="75" cy="85" r="5" fill="#818cf8" className="animate-pulse" />
-                            <circle cx="125" cy="85" r="5" fill="#a78bfa" className="animate-pulse" />
-                            {/* Bamboo Stick SVG */}
-                            <rect x="140" y="110" width="10" height="60" rx="5" fill="#4ade80" transform="rotate(-20 140 110)" />
-                        </svg>
+                        <NeoFaceSVG/>
                     </div>
                 </div>
             </section>
