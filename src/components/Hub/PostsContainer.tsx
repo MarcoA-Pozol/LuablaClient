@@ -8,6 +8,7 @@ import axios from "axios";
 import { useBaseApiUrl } from "../../hooks/useBaseApiUrl";
 import type { Post } from "../../schemas/Post";
 import { useLanguages } from "../../hooks/useLanguages";
+import { EmptyPostsState } from "./EmptyPostsState";
 
 export const PostsContainer = () => {
   const { t } = useTranslation();
@@ -37,17 +38,20 @@ export const PostsContainer = () => {
 
   return (
     <div className="posts-container">
-      <button className="create-post-button" onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
-
       {showCreatePostForm === true &&
         <CreatePostForm setShowCreatePostForm={setShowCreatePostForm} showCreatePostForm={showCreatePostForm}/>
       }
       
-      {postsList.map((post) => (
-        <PostCard post={post}/>
-      ))}
+      {postsList.length < 1 ? 
+          <EmptyPostsState setShowCreatePostForm={setShowCreatePostForm}/>
+        : 
+          <>
+            <button className="create-post-button" onClick={() => {setShowCreatePostForm(true)}}>Create Post +</button>
+            {postsList.map((post) => <PostCard post={post}/>)}
+            {postsPaginationMessage == true ? <button id="see-more-posts" onClick={() => fetchMorePosts()}>{t("See more...")}</button> : <p>There are no more pages</p>}
+          </>
+      }
 
-      {postsPaginationMessage == true ? <button id="see-more-posts" onClick={() => fetchMorePosts()}>{t("See more...")}</button> : <p>There are no more pages</p>}
     </div>
   );
 };
