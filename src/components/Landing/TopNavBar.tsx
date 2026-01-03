@@ -19,10 +19,12 @@ export const TopNavBar = ({ authUser, setAuthUser }: TopNavBarProps) => {
         navigate('/');
     };
 
-    // I need to fix this: the language is not being applied to the UI
     const toggleLang = () => {
-        const newLang = i18n.language === 'es' ? 'en' : 'es';
-        i18n.changeLanguage(newLang);
+        const languages = ['es', 'en', 'fr', 'zh', 'pt', 'de', 'jp', 'ru', 'hi'];
+        const currentIndex = languages.indexOf(i18n.language);
+        const nextIndex = (currentIndex + 1) % languages.length;
+        const nextLang = languages[nextIndex];
+        i18n.changeLanguage(nextLang);
     };
 
     return (
