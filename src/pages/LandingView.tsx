@@ -65,12 +65,12 @@ export const LandingView = () => {
                         <div className="flex flex-wrap gap-5">
                             <button 
                                 onClick={() => navigateToAuth(false)}
-                                className="group relative px-8 py-4 bg-indigo-600 rounded-2xl font-bold overflow-hidden transition-all hover:scale-105 active:scale-95"
+                                className="cursor-pointer group relative px-8 py-4 bg-indigo-600 rounded-2xl font-bold overflow-hidden transition-all hover:scale-105 active:scale-95"
                             >
                                 <div className="absolute inset-0 bg-linear-to-r from-violet-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <span className="relative z-10">{authUser ? t("Resume Path") : t("Start Journey")}</span>
                             </button>
-                            <button className="px-8 py-4 border border-zinc-800 rounded-2xl font-bold hover:bg-white/5 transition-colors">
+                            <button className="cursor-pointer px-8 py-4 border border-zinc-800 rounded-2xl font-bold hover:bg-white/5 transition-colors">
                                 {t("Meet Neo 🐼")}
                             </button>
                         </div>
